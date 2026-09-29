@@ -1,11 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
-import { getProduct } from "@/lib/catalog";
+import { getBundle, getSellable } from "@/lib/catalog";
 import { verifyCheckout } from "@/lib/orders";
-import { JOB_PACK_SLUG, JOB_PACK_UNLOCKS, PRO_SLUG } from "@/lib/stripe-map";
 import { useSkrivklart } from "@/lib/store";
 
 export const Route = createFileRoute("/tack")({
@@ -28,10 +27,13 @@ type Status =
 
 function destination(slug: string) {
   if (slug === "myndighetsbrev") return { to: "/brev" as const };
-  if (slug === JOB_PACK_SLUG) {
-    return { to: "/dokument/$slug" as const, params: { slug: JOB_PACK_UNLOCKS[0] } };
+  const bundle = getBundle(slug);
+  if (bundle) {
+    const first = bundle.includes === "all" ? null : bundle.includes[0];
+    if (!first) return { to: "/dokument" as const };
+    if (first === "myndighetsbrev") return { to: "/brev" as const };
+    return { to: "/dokument/$slug" as const, params: { slug: first } };
   }
-  if (slug === PRO_SLUG) return { to: "/dokument" as const };
   return { to: "/dokument/$slug" as const, params: { slug } };
 }
 
@@ -39,8 +41,7 @@ function TackPage() {
   const { session_id } = Route.useSearch();
   const navigate = useNavigate();
   const unlock = useSkrivklart((s) => s.unlock);
-  const unlockPro = useSkrivklart((s) => s.unlockPro);
-  const unlockJobPack = useSkrivklart((s) => s.unlockJobPack);
+  const unlockBundle = useSkrivklart((s) => s.unlockBundle);
   const [status, setStatus] = useState<Status>({ state: "checking" });
   const started = useRef(false);
 
@@ -54,11 +55,11 @@ function TackPage() {
     const run = async (attempt: number): Promise<void> => {
       const res = await verifyCheckout({ data: { sessionId: session_id } }).catch(() => null);
       if (res?.ok) {
-        if (res.slug === PRO_SLUG) unlockPro(res.pass, res.until);
-        else if (res.slug === JOB_PACK_SLUG) unlockJobPack(res.pass, res.until);
+        if (res.isBundle) unlockBundle(res.slug, res.pass, res.until);
         else unlock(res.slug, res.pass);
         setStatus({ state: "done", slug: res.slug });
-        if (res.slug !== PRO_SLUG) {
+        // Single documents go straight back to the draft, which then writes the full text.
+        if (!res.isBundle) {
           setTimeout(() => void navigate({ ...destination(res.slug), replace: true }), 1400);
         }
         return;
@@ -71,17 +72,18 @@ function TackPage() {
       setStatus({ state: "failed", error: res?.error ?? "Kunde inte bekräfta betalningen." });
     };
     void run(0);
-  }, [session_id, unlock, unlockPro, unlockJobPack, navigate]);
+  }, [session_id, unlock, unlockBundle, navigate]);
 
   const slug = status.state === "done" ? status.slug : null;
-  const product = slug && slug !== PRO_SLUG && slug !== JOB_PACK_SLUG ? getProduct(slug) : null;
+  const item = slug ? getSellable(slug) : null;
+  const bundle = slug ? getBundle(slug) : null;
 
   return (
     <SiteFrame>
       <div className="mx-auto max-w-xl px-4 py-20 text-center sm:px-6">
         {status.state === "checking" ? (
           <>
-            <Loader2 className="mx-auto size-6 animate-spin text-pine" />
+            <Loader2 className="mx-auto size-7 animate-spin text-pine" />
             <h1 className="mt-4 font-display text-3xl tracking-tight">Bekräftar betalningen…</h1>
             <p className="mt-3 text-muted">Det tar bara några sekunder.</p>
           </>
@@ -103,21 +105,16 @@ function TackPage() {
           </>
         ) : (
           <>
-            <h1 className="font-display text-4xl tracking-tight">Tack!</h1>
+            <CheckCircle2 className="mx-auto size-10 text-pine" />
+            <h1 className="mt-4 font-display text-4xl tracking-tight">Tack!</h1>
             <p className="mt-4 text-muted">
-              {slug === PRO_SLUG
-                ? "Pro är aktivt i den här webbläsaren. Alla dokument är olåsta."
-                : slug === JOB_PACK_SLUG
-                  ? "Jobbpaketet är olåst: personligt brev, CV och LinkedIn. Vi skickar dig vidare…"
-                  : product
-                    ? `${product.name} är olåst. Vi skickar dig tillbaka till texten…`
-                    : "Betalningen är klar."}
+              {bundle
+                ? `${bundle.name} är olåst i den här webbläsaren i ${bundle.days} dagar.`
+                : `${item?.name ?? "Dokumentet"} är olåst. Vi skickar dig tillbaka till texten…`}
             </p>
             <div className="mt-8">
-              <Button asChild>
-                <Link {...destination(slug!)}>
-                  {slug === PRO_SLUG ? "Välj dokument" : "Öppna dokumentet"}
-                </Link>
+              <Button asChild size="lg">
+                <Link {...destination(slug!)}>{bundle ? "Börja skriva" : "Öppna dokumentet"}</Link>
               </Button>
             </div>
           </>

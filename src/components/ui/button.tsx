@@ -9,6 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-pine text-pine-fg hover:opacity-90",
+        accent: "bg-clay text-clay-fg shadow-[0_10px_24px_-12px_rgba(180,71,43,0.7)] hover:brightness-110",
         solid: "bg-ink text-paper hover:opacity-90",
         outline: "border border-line bg-paper text-ink hover:bg-bg-elevated",
         ghost: "text-ink hover:bg-bg-elevated",
@@ -18,6 +19,7 @@ const buttonVariants = cva(
         sm: "h-9 rounded-md px-3 text-sm",
         md: "h-11 rounded-lg px-4 text-sm",
         lg: "h-12 rounded-xl px-5 text-base",
+        xl: "h-14 rounded-2xl px-7 text-lg font-semibold",
         icon: "size-11 rounded-lg",
       },
     },

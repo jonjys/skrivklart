@@ -11,10 +11,10 @@ export const Route = createFileRoute("/dokument/")({
   component: DokumentIndex,
   head: () => ({
     meta: [
-      { title: "Dokument | Skrivklart" },
+      { title: "Alla dokument – underhåll, Försäkringskassan, skulder, skola | Skrivklart" },
       {
         name: "description",
-        content: "Personligt brev, överklagande, samboavtal, hyresansökan och fler. Utkast gratis, 79–199 kr för hela texten.",
+        content: "Avtal om underhållsbidrag och umgänge, överklagande till FK, avbetalningsplan, brev till skola och socialtjänsten, CV och fler. Gratis utkast, 59 eller 99 kr för hela texten.",
       },
     ],
   }),
@@ -33,7 +33,7 @@ function DokumentIndex() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <h1 className="font-display text-4xl tracking-tight sm:text-5xl">Dokument</h1>
         <p className="mt-3 max-w-xl text-muted">
-          Välj typ. Fyll i det du vet. Utkastet är gratis – hela texten kostar 79–199 kr.
+          Välj vad det gäller. Fyll i det du vet. Utkastet är gratis – hela texten kostar 59 eller 99 kr.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-2">

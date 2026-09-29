@@ -1,4 +1,4 @@
-import { JOB_PACK_SLUG, JOB_PACK_UNLOCKS, PRO_SLUG } from "./stripe-map";
+import { bundleCovers, getBundle } from "./catalog";
 
 /**
  * Stateless unlock passes. After Stripe confirms a Checkout Session the server
@@ -55,7 +55,7 @@ export async function issuePass(slug: string, days: number) {
   return `${body}.${b64url(new Uint8Array(sig))}`;
 }
 
-/** True when `pass` pays for `slug` (directly, via Pro, or via the job pack). */
+/** True when `pass` pays for `slug`, directly or through a bundle. */
 export async function passCovers(pass: string | undefined, slug: string) {
   const secret = stripeKey();
   if (!secret) return true;
@@ -72,8 +72,9 @@ export async function passCovers(pass: string | undefined, slug: string) {
     if (!ok) return false;
     const claim = JSON.parse(dec.decode(fromB64url(body))) as { s?: string; e?: number };
     if (typeof claim.e !== "number" || claim.e < Date.now()) return false;
-    if (claim.s === slug || claim.s === PRO_SLUG) return true;
-    return claim.s === JOB_PACK_SLUG && (JOB_PACK_UNLOCKS as readonly string[]).includes(slug);
+    if (claim.s === slug) return true;
+    const bundle = claim.s ? getBundle(claim.s) : undefined;
+    return Boolean(bundle && bundleCovers(bundle, slug));
   } catch {
     return false;
   }

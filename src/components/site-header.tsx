@@ -20,7 +20,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-bg/90 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6">
-        <Link to="/" className="font-display text-xl italic tracking-tight text-ink">
+        <Link to="/" className="font-display text-2xl font-bold italic tracking-tight text-ink">
           Skrivklart
         </Link>
 
@@ -29,13 +29,13 @@ export function SiteHeader() {
             <Link
               key={item.to}
               to={item.to}
-              className="text-sm font-medium text-muted transition-opacity duration-150 hover:text-ink"
+              className="text-sm font-semibold text-ink/70 transition-colors duration-150 hover:text-ink"
             >
               {t(lang, item.key)}
             </Link>
           ))}
           <LangPicker />
-          <Button asChild size="sm">
+          <Button asChild size="sm" variant="accent">
             <Link to="/dokument">{t(lang, "nav_write")}</Link>
           </Button>
         </nav>
@@ -66,7 +66,7 @@ export function SiteHeader() {
                 {t(lang, item.key)}
               </Link>
             ))}
-            <Button asChild className="mt-2 w-full">
+            <Button asChild className="mt-2 w-full" variant="accent">
               <Link to="/dokument" onClick={() => setOpen(false)}>
                 {t(lang, "nav_write")}
               </Link>

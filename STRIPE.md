@@ -2,5 +2,9 @@
 
 Account: AI Commerce OS (acct_1U1ToQBEo0Yzuylw)
 
-Payment links in src/lib/stripe-map.ts
-Prices in SEK. Pro is 249 kr/month.
+Checkout Sessions use inline `price_data`: prices live in `src/lib/catalog.ts`
+(`PRODUCTS[].priceKr`, `BUNDLES[].priceKr`). No Price objects or Payment Links
+to keep in sync. All purchases are one-time payments in SEK.
+
+Unlocks are verified server side (`verifyCheckout` in `src/lib/orders.ts`) and
+stored as signed passes (`src/lib/pass.ts`).

@@ -1,22 +1,22 @@
 # Skrivklart
 
-Svenska dokument, färdiga. Du fyller i fakta — Skrivklart skriver texten.
+Du bär allt. Vi skriver breven. Brev och avtal för ensamstående mammor – och alla som sköter allt själva.
 
 **Live: [skrivklart.se](https://www.skrivklart.se)**
 
-Samboavtal, överklagande till FK, hyresansökan, myndighetsbrev, offert med mera. 79–199 kr. Utkastet är gratis. Inget konto.
+Avtal om underhållsbidrag, boende och umgänge, överklagande till Försäkringskassan, avbetalningsplan, brev till skola och socialtjänsten med mera. Utkastet är gratis. Inget konto.
 
 Detta är **inte** juridisk rådgivning.
 
-## Produkten
+## Priser
 
-- 20 dokumenttyper (avtal, bostad, jobb, myndighet)
-- Myndighetsbrev: klistra in FK/Skatteverket/Kronofogden, få det på vanlig svenska
-- Jobbpaket: personligt brev + CV + LinkedIn, 199 kr
-- Pro 249 kr/mån
-- 13 korta guider
-- Stripe Checkout (SEK)
-- Svenska / English / العربية i menyn — dokumentet skrivs på svenska
+- Kortare brev: 59 kr
+- Avtal och överklaganden: 99 kr
+- Mammapaketet (7 dokument): 149 kr
+- Jobbpaketet (brev + CV + LinkedIn): 129 kr
+- Allt i 30 dagar: 199 kr, engångsbetalning
+
+Priserna bor i `src/lib/catalog.ts`.
 
 ## Stack
 

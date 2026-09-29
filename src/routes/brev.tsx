@@ -24,7 +24,7 @@ export const Route = createFileRoute("/brev")({
       {
         name: "description",
         content:
-          "Klistra in brevet från FK, Skatteverket eller Kronofogden. Få det på vanlig svenska, med datum och vad du ska göra. 79 kr.",
+          "Klistra in brevet från FK, Skatteverket eller Kronofogden. Få det på vanlig svenska, med datum och vad du ska göra. 59 kr.",
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/brev` }],

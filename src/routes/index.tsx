@@ -1,72 +1,90 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check } from "lucide-react";
-import { DocCard } from "@/components/doc-card";
+import {
+  ArrowRight,
+  CalendarHeart,
+  Check,
+  Coins,
+  Home as HomeIcon,
+  HeartHandshake,
+  Landmark,
+  MailQuestion,
+  Receipt,
+  School,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
+import { BuyBundleButton } from "@/components/buy-bundle-button";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
-import { getStats } from "@/lib/ai";
-import { PRODUCTS } from "@/lib/catalog";
+import {
+  ALL_ACCESS_SLUG,
+  bundleValueKr,
+  getBundle,
+  getProduct,
+  MAMMA_SLUG,
+  PRODUCTS,
+} from "@/lib/catalog";
 import { GUIDES } from "@/lib/guides";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { HOME_COPY, SITUATIONS } from "@/lib/home-copy";
+import { useI18n } from "@/lib/i18n";
 import { merchantReturnPolicy, productImages, productOffer } from "@/lib/schema";
-import { t, useI18n } from "@/lib/i18n";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { sek } from "@/lib/utils";
 
+const SV = HOME_COPY.sv;
+
 export const Route = createFileRoute("/")({
-  loader: () => getStats(),
   component: Home,
   head: () => ({
     meta: [
-      { title: "Skrivklart — samboavtal, överklagande, hyresansökan" },
-      { name: "description", content: SITE_DESCRIPTION },
+      { title: SV.title },
+      { name: "description", content: SV.description },
+      { property: "og:title", content: SV.title },
+      { property: "og:description", content: SV.description },
     ],
-    links: [{ rel: "canonical", href: SITE_URL }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
 });
 
-const STEPS = [
-  { n: "01", t: "step1_t", d: "step1_d" },
-  { n: "02", t: "step2_t", d: "step2_d" },
-  { n: "03", t: "step3_t", d: "step3_d" },
-] as const;
+const ICONS: Record<(typeof SITUATIONS)[number]["icon"], LucideIcon> = {
+  coins: Coins,
+  landmark: Landmark,
+  receipt: Receipt,
+  mail: MailQuestion,
+  calendar: CalendarHeart,
+  school: School,
+  hand: HeartHandshake,
+  home: HomeIcon,
+};
 
-const FAQ_KEYS = [
-  ["faq1_q", "faq1_a"],
-  ["faq2_q", "faq2_a"],
-  ["faq3_q", "faq3_a"],
-  ["faq4_q", "faq4_a"],
-] as const;
+const mamma = getBundle(MAMMA_SLUG)!;
+const allAccess = getBundle(ALL_ACCESS_SLUG)!;
+const mammaDocs = (mamma.includes as readonly string[])
+  .map((slug) => getProduct(slug))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
-const FAQ = [
-  {
-    q: "Är det juridisk rådgivning?",
-    a: "Nej. Skrivklart skriver utkast. Du läser, ändrar och ansvarar för det du skickar. För komplicerade fall: anlita en jurist.",
-  },
-  {
-    q: "Vem ser det jag skriver?",
-    a: "Utkastet stannar i din webbläsare. Vi sparar inte innehållet i dokumentet. Betalningen går via Stripe.",
-  },
-  {
-    q: "Tänk om texten är dålig?",
-    a: "Läs utkastet först — det är gratis. Skriv om den kortare eller formellare efter köp. Ingen återbetalning när hela texten är upplåst.",
-  },
-  {
-    q: "Behöver jag konto?",
-    a: "Nej. Inget konto, ingen prenumeration för ett enstaka dokument.",
-  },
-];
+const HOME_GUIDES = [
+  "underhallsbidrag-avtal",
+  "pappan-betalar-inte-underhall",
+  "avbetalningsplan-inkasso",
+]
+  .map((slug) => GUIDES.find((g) => g.slug === slug))
+  .filter((g): g is NonNullable<typeof g> => Boolean(g));
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
       name: SITE_NAME,
       url: SITE_URL,
       inLanguage: "sv-SE",
-      description: SITE_DESCRIPTION,
+      description: SV.description,
     },
     {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#org`,
       name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/profil.jpg`,
@@ -75,18 +93,27 @@ const jsonLd = {
       hasMerchantReturnPolicy: merchantReturnPolicy,
     },
     {
-      "@type": "SoftwareApplication",
-      name: SITE_NAME,
-      url: SITE_URL,
+      "@type": "OfferCatalog",
+      name: "Dokument från Skrivklart",
+      itemListElement: PRODUCTS.map((p) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: p.name, description: p.short },
+        price: String(p.priceKr),
+        priceCurrency: "SEK",
+        url: `${SITE_URL}/dokument/${p.slug}`,
+      })),
+    },
+    {
+      "@type": "Product",
+      name: `${SITE_NAME} ${mamma.name}`,
+      description: mamma.short,
       image: productImages,
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web",
-      offers: productOffer(79, SITE_URL),
-      description: SITE_DESCRIPTION,
+      brand: { "@type": "Brand", name: SITE_NAME },
+      offers: productOffer(mamma.priceKr, `${SITE_URL}/priser`),
     },
     {
       "@type": "FAQPage",
-      mainEntity: FAQ.map((item) => ({
+      mainEntity: SV.faq.map((item) => ({
         "@type": "Question",
         name: item.q,
         acceptedAnswer: { "@type": "Answer", text: item.a },
@@ -96,164 +123,351 @@ const jsonLd = {
 };
 
 function Home() {
-  const stats = Route.useLoaderData();
-  const featuredSlugs = [
-    "samboavtal",
-    "overklagande",
-    "myndighetsbrev",
-    "hyresansokan",
-    "personligt-brev",
-    "reklamation",
-  ];
-  const featured = featuredSlugs
-    .map((slug) => PRODUCTS.find((p) => p.slug === slug))
-    .filter((p): p is (typeof PRODUCTS)[number] => Boolean(p));
   const lang = useI18n((s) => s.lang);
+  const c = HOME_COPY[lang];
 
   return (
     <SiteFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:px-6 sm:pt-20 sm:pb-24">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">{t(lang, "kicker")}</p>
-        <h1 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1.08] tracking-tight text-ink sm:text-6xl">
-          {t(lang, "hero")}
-        </h1>
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-          {t(lang, "hero_sub")}{" "}
-          <span dir="ltr" className="inline-block tabular-nums">
-            {sek(79)}–{sek(199)}
-          </span>
-          . {t(lang, "no_account")}
-        </p>
-        <p className="mt-3 text-sm text-subtle">{t(lang, "hero_meta")}</p>
-        <p className="mt-2 text-xs text-subtle">{t(lang, "lang_note")}</p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="lg">
-            <Link to="/dokument">
-              {t(lang, "cta_doc")}
-              <ArrowRight className="size-4 rtl:-scale-x-100" />
-            </Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link to="/brev">{t(lang, "cta_brev")}</Link>
-          </Button>
-        </div>
-        {stats.full > 0 ? (
-          <p className="mt-6 text-sm tabular-nums text-subtle">
-            {stats.full} {t(lang, "stats_week")}
-          </p>
-        ) : (
-          <p className="mt-6 text-sm text-subtle">{t(lang, "draft_pay")}</p>
-        )}
-      </section>
 
-      <section className="border-y border-line bg-bg-elevated">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3 md:py-16">
-          {STEPS.map((s) => (
-            <div key={s.n}>
-              <p className="font-display text-sm text-moss">{s.n}</p>
-              <h2 className="mt-2 font-display text-2xl tracking-tight">{t(lang, s.t)}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{t(lang, s.d)}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">{t(lang, "docs_h")}</h2>
-          <Link to="/dokument" className="hidden text-sm font-medium text-pine sm:inline">
-            {t(lang, "all_docs")}
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p) => (
-            <DocCard key={p.slug} product={p} />
-          ))}
-        </div>
-        <Button asChild variant="outline" className="mt-6 sm:hidden">
-          <Link to="/dokument">{t(lang, "all_docs")}</Link>
-        </Button>
-      </section>
-
-      <section className="border-y border-line bg-ink text-paper">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-14">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-pine-deep text-pine-fg">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 -right-40 size-[36rem] rounded-full bg-clay/25 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-48 -left-24 size-[28rem] rounded-full bg-sun/10 blur-3xl"
+        />
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 pt-14 pb-16 sm:px-6 sm:pt-20 sm:pb-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
-            <p className="text-xs font-medium tracking-[0.18em] text-paper/60 uppercase">{t(lang, "job_kicker")}</p>
-            <h2 className="mt-2 font-display text-3xl tracking-tight">{t(lang, "job_h")}</h2>
-            <p className="mt-2 max-w-lg text-sm leading-relaxed text-paper/75">
-              {t(lang, "job_p")}{" "}
-              <span dir="ltr" className="inline-block tabular-nums">
-                {sek(199)}
-              </span>
+            <p className="inline-flex items-center gap-2 rounded-full bg-pine-fg/10 px-3 py-1.5 text-xs font-semibold tracking-wide text-pine-fg/90">
+              <Sparkles className="size-3.5 text-sun" />
+              {c.kicker}
             </p>
-          </div>
-          <Button asChild size="lg" variant="outline" className="border-paper/20 bg-paper text-ink hover:bg-bg-elevated">
-            <Link to="/priser">{t(lang, "job_cta")}</Link>
-          </Button>
-        </div>
-      </section>
-
-      <section className="border-y border-line bg-paper">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center">
-          <div>
-            <h2 className="font-display text-3xl tracking-tight sm:text-4xl">{t(lang, "not_mall")}</h2>
-            <ul className="mt-6 space-y-3">
-              {(["bullet1", "bullet2", "bullet3", "bullet4"] as const).map((key) => (
-                <li key={key} className="flex gap-3 text-sm leading-relaxed text-muted">
-                  <Check className="mt-0.5 size-4 shrink-0 text-pine" />
-                  {t(lang, key)}
+            <h1 className="mt-6 font-display text-[2.9rem] leading-[0.98] tracking-tight sm:text-7xl lg:text-[5.4rem]">
+              {c.hero_a}
+              <br />
+              <span className="text-sun">{c.hero_b}</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-pine-fg/80 sm:text-xl">
+              {c.hero_sub}
+            </p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {c.chips.map((chip) => (
+                <li
+                  key={chip}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-pine-fg/20 px-3 py-1.5 text-sm font-medium"
+                >
+                  <Check className="size-3.5 text-sun" />
+                  {chip}
                 </li>
               ))}
             </ul>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Button asChild size="xl" variant="accent">
+                <a href="#situationer">
+                  {c.cta_primary}
+                  <ArrowRight className="size-5 rtl:-scale-x-100" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="xl"
+                variant="outline"
+                className="border-pine-fg/25 bg-transparent text-pine-fg hover:bg-pine-fg/10"
+              >
+                <Link to="/brev">{c.cta_secondary}</Link>
+              </Button>
+            </div>
           </div>
-          <blockquote className="rounded-xl border border-line bg-bg p-6 sm:p-8" dir="ltr" lang="sv">
-            <p className="font-serif text-lg leading-relaxed text-ink">
-              Stockholm den [datum]
-              <br />
-              <br />
-              Jag söker tjänsten som kundtjänstmedarbetare hos er. De senaste tre åren har jag
-              tagit 40–60 samtal om dagen på ett elbolag – de flesta från folk som redan är arga
-              när de ringer.
-            </p>
-            <p className="mt-4 text-sm text-subtle">{t(lang, "excerpt_label")}</p>
-          </blockquote>
+
+          <HeroCard badge={c.card_badge} />
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="font-display text-3xl tracking-tight">{t(lang, "guides_h")}</h2>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {GUIDES.slice(0, 3).map((g) => (
-            <Link
-              key={g.slug}
-              to="/guider/$slug"
-              params={{ slug: g.slug }}
-              className="rounded-xl border border-line bg-paper p-5 transition-transform duration-200 hover:-translate-y-0.5"
-            >
-              <p className="text-xs text-subtle">{g.minutes} min</p>
-              <h3 className="mt-2 font-display text-xl tracking-tight">{g.title}</h3>
-              <p className="mt-2 text-sm text-muted">{g.excerpt}</p>
+      {/* Situations */}
+      <section id="situationer" className="scroll-mt-16 mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <div className="max-w-2xl">
+          <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{c.sit_h}</h2>
+          <p className="mt-3 text-lg text-muted">{c.sit_sub}</p>
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {SITUATIONS.map((s) => {
+            const Icon = ICONS[s.icon];
+            const product = getProduct(s.to);
+            const copy = c.sit[s.id];
+            const isBrev = s.to === "myndighetsbrev";
+            return (
+              <Link
+                key={s.id}
+                to={isBrev ? "/brev" : "/dokument/$slug"}
+                params={isBrev ? undefined : { slug: s.to }}
+                className="group flex flex-col rounded-2xl border-2 border-line bg-paper p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-pine hover:shadow-[var(--shadow-lift)]"
+              >
+                <span className="inline-flex size-11 items-center justify-center rounded-xl bg-blush text-clay">
+                  <Icon className="size-5" />
+                </span>
+                <h3 className="mt-4 font-display text-xl leading-tight tracking-tight">{copy.t}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{copy.d}</p>
+                <p className="mt-4 flex items-center justify-between text-sm font-semibold">
+                  <span className="tabular-nums text-pine">
+                    {product ? `${sek(product.priceKr)}` : null}
+                  </span>
+                  <ArrowRight className="size-4 text-subtle transition-transform duration-200 group-hover:translate-x-1 rtl:-scale-x-100" />
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Mammapaketet */}
+      <section id="mammapaket" className="bg-blush">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="text-xs font-bold tracking-[0.2em] text-clay uppercase">{c.pack_kicker}</p>
+            <h2 className="mt-3 font-display text-5xl tracking-tight sm:text-6xl">{c.pack_h}</h2>
+            <p className="mt-4 max-w-lg text-lg leading-relaxed text-ink/80">{c.pack_p}</p>
+            <div className="mt-8 flex items-end gap-4">
+              <p className="font-display text-6xl font-bold tracking-tight tabular-nums">
+                {mamma.priceKr}
+                <span className="ml-1 text-2xl font-semibold">kr</span>
+              </p>
+              <p className="pb-2 text-sm text-muted">
+                {c.pack_worth}{" "}
+                <span className="tabular-nums line-through">{sek(bundleValueKr(mamma))}</span>
+              </p>
+            </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <BuyBundleButton slug={MAMMA_SLUG} size="xl" variant="accent">
+                {c.pack_cta}
+              </BuyBundleButton>
+              <Button asChild size="xl" variant="ghost">
+                <Link to="/priser">{c.pack_more}</Link>
+              </Button>
+            </div>
+          </div>
+          <ul className="grid gap-2 rounded-3xl bg-paper p-4 shadow-[var(--shadow-lift)] sm:p-6">
+            {mammaDocs.map((p) => (
+              <li
+                key={p.slug}
+                className="flex items-center justify-between gap-3 rounded-xl px-3 py-3 odd:bg-bg-elevated"
+              >
+                <span className="flex items-center gap-3">
+                  <Check className="size-4 shrink-0 text-clay" />
+                  <span className="font-medium" lang="sv">
+                    {p.name}
+                  </span>
+                </span>
+                <span className="text-sm tabular-nums text-subtle line-through">{sek(p.priceKr)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Steps */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{c.steps_h}</h2>
+        <ol className="mt-10 grid gap-6 md:grid-cols-3">
+          {c.steps.map((step, i) => (
+            <li key={step.t} className="relative rounded-2xl border border-line bg-paper p-6">
+              <span className="font-display text-6xl leading-none font-bold text-clay/90">{i + 1}</span>
+              <h3 className="mt-4 font-display text-2xl tracking-tight">{step.t}</h3>
+              <p className="mt-2 leading-relaxed text-muted">{step.d}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Prices */}
+      <section className="bg-ink text-paper">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{c.prices_h}</h2>
+              <p className="mt-3 text-lg text-paper/70">{c.prices_sub}</p>
+            </div>
+            <Link to="/priser" className="text-sm font-semibold text-sun hover:underline">
+              {c.see_prices} →
             </Link>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-4">
+            <PriceTile kr={59} label={c.per_doc} t={c.price_59.t} d={c.price_59.d} />
+            <PriceTile kr={99} label={c.per_doc} t={c.price_99.t} d={c.price_99.d} />
+            <PriceTile kr={mamma.priceKr} label={c.one_time} t={c.pack_h} d={mamma.short} highlight />
+            <PriceTile kr={allAccess.priceKr} label={c.one_time} t={c.price_all.t} d={c.price_all.d} />
+          </div>
+        </div>
+      </section>
+
+      {/* Sample */}
+      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{c.sample_h}</h2>
+          <ul className="mt-8 space-y-4">
+            {c.sample_points.map((point) => (
+              <li key={point} className="flex gap-3 text-lg leading-snug">
+                <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-pine text-pine-fg">
+                  <Check className="size-3.5" />
+                </span>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <figure className="rotate-[-1deg] rounded-2xl border border-line bg-paper p-6 shadow-[var(--shadow-lift)] sm:p-8" dir="ltr" lang="sv">
+          <p className="font-serif text-lg font-semibold">Avtal om underhållsbidrag</p>
+          <div className="mt-4 space-y-3 font-serif leading-relaxed text-ink/90">
+            <p>
+              <strong>§ 1 Parter.</strong> Mellan [Förälder A], nedan kallad betalningsskyldig, och
+              [Förälder B] har följande avtal träffats om underhåll för Elsa, född 2017.
+            </p>
+            <p>
+              <strong>§ 2 Belopp.</strong> Betalningsskyldig betalar 2 000 kr per månad senast den
+              25:e varje månad, med början den 1 november 2026.
+            </p>
+            <p>
+              <strong>§ 3 Giltighet.</strong> Underhållet gäller till dess att barnet fyller 18 år,
+              eller längre om barnet då går i skolan …
+            </p>
+          </div>
+          <figcaption className="mt-5 text-sm text-subtle">{c.sample_label}</figcaption>
+        </figure>
+      </section>
+
+      {/* Guides */}
+      {HOME_GUIDES.length ? (
+        <section className="border-t border-line bg-bg-elevated">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+            <div className="flex items-end justify-between gap-4">
+              <h2 className="font-display text-3xl tracking-tight sm:text-4xl">{c.guides_h}</h2>
+              <Link to="/guider" className="text-sm font-semibold text-pine hover:underline">
+                {c.all_guides} →
+              </Link>
+            </div>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {HOME_GUIDES.map((g) => (
+                <Link
+                  key={g.slug}
+                  to="/guider/$slug"
+                  params={{ slug: g.slug }}
+                  lang="sv"
+                  className="rounded-2xl border border-line bg-paper p-6 transition-transform duration-200 hover:-translate-y-0.5"
+                >
+                  <p className="text-xs font-semibold text-clay">{g.minutes} min</p>
+                  <h3 className="mt-2 font-display text-xl tracking-tight">{g.title}</h3>
+                  <p className="mt-2 text-sm text-muted">{g.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+        <h2 className="font-display text-4xl tracking-tight">{c.faq_h}</h2>
+        <div className="mt-8 divide-y divide-line border-y border-line">
+          {c.faq.map((item) => (
+            <details key={item.q} className="group py-5">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                {item.q}
+                <span className="text-2xl leading-none text-clay transition-transform duration-200 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 leading-relaxed text-muted">{item.a}</p>
+            </details>
           ))}
         </div>
       </section>
 
-      <section className="border-t border-line bg-bg-elevated">
-        <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-          <h2 className="font-display text-3xl tracking-tight">{t(lang, "faq_h")}</h2>
-          <div className="mt-8 divide-y divide-line">
-            {FAQ_KEYS.map(([q, a]) => (
-              <details key={q} className="group py-4">
-                <summary className="cursor-pointer list-none font-medium text-ink [&::-webkit-details-marker]:hidden">
-                  {t(lang, q)}
-                </summary>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{t(lang, a)}</p>
-              </details>
-            ))}
-          </div>
+      {/* Final CTA */}
+      <section className="px-4 pb-16 sm:px-6">
+        <div className="mx-auto max-w-6xl rounded-3xl bg-clay px-6 py-12 text-clay-fg sm:px-12 sm:py-16">
+          <h2 className="max-w-2xl font-display text-4xl tracking-tight sm:text-5xl">{c.final_h}</h2>
+          <p className="mt-3 text-lg text-clay-fg/85">{c.final_p}</p>
+          <Button asChild size="xl" className="mt-8 bg-paper text-ink hover:bg-bg-elevated">
+            <a href="#situationer">
+              {c.final_cta}
+              <ArrowRight className="size-5 rtl:-scale-x-100" />
+            </a>
+          </Button>
         </div>
       </section>
     </SiteFrame>
+  );
+}
+
+function PriceTile({
+  kr,
+  label,
+  t,
+  d,
+  highlight,
+}: {
+  kr: number;
+  label: string;
+  t: string;
+  d: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={
+        highlight
+          ? "rounded-2xl bg-sun p-6 text-ink"
+          : "rounded-2xl border border-paper/15 bg-paper/5 p-6"
+      }
+    >
+      <p className="font-display text-5xl font-bold tracking-tight tabular-nums">
+        {kr}
+        <span className="ml-1 text-xl font-semibold">kr</span>
+      </p>
+      <p className={highlight ? "mt-1 text-sm text-ink/70" : "mt-1 text-sm text-paper/60"}>{label}</p>
+      <h3 className="mt-5 font-display text-xl tracking-tight">{t}</h3>
+      <p className={highlight ? "mt-2 text-sm text-ink/75" : "mt-2 text-sm text-paper/70"}>{d}</p>
+    </div>
+  );
+}
+
+function HeroCard({ badge }: { badge: string }) {
+  return (
+    <div className="relative mx-auto hidden w-full max-w-md lg:mx-0 lg:block" dir="ltr" lang="sv" aria-hidden>
+      <div className="absolute inset-0 translate-x-4 translate-y-4 rotate-3 rounded-3xl bg-pine-fg/10" />
+      <div className="relative rotate-[-2deg] rounded-3xl bg-paper p-6 text-ink shadow-[var(--shadow-lift)] sm:p-8">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-xs font-semibold tracking-wide text-muted uppercase">Dokument</p>
+          <span className="rounded-full bg-blush px-3 py-1 text-xs font-bold text-clay">{badge}</span>
+        </div>
+        <p className="mt-4 font-serif text-2xl font-semibold tracking-tight">Avtal om underhållsbidrag</p>
+        <div className="mt-5 space-y-2.5 font-serif text-[0.95rem] leading-relaxed text-ink/85">
+          <p>
+            <strong>§ 2</strong> Betalningsskyldig betalar <strong>2 000 kr</strong> per barn och
+            månad, senast den 25:e.
+          </p>
+          <div className="h-2.5 w-11/12 rounded bg-line" />
+          <div className="h-2.5 w-full rounded bg-line" />
+          <div className="h-2.5 w-3/4 rounded bg-line" />
+        </div>
+        <div className="mt-6 grid grid-cols-2 gap-4 border-t border-line pt-5 text-xs text-subtle">
+          <div>
+            <div className="h-6 border-b border-ink/40 font-serif text-base text-ink/80 italic">Anna</div>
+            Förälder B
+          </div>
+          <div>
+            <div className="h-6 border-b border-ink/40" />
+            Vittne 1
+          </div>
+        </div>
+      </div>
+      <div className="absolute -bottom-5 -left-3 rotate-[4deg] rounded-2xl bg-sun px-4 py-3 text-ink shadow-[var(--shadow-lift)]">
+        <p className="text-xs font-semibold">Överklagande · FK</p>
+        <p className="font-display text-lg font-bold">99 kr</p>
+      </div>
+    </div>
   );
 }

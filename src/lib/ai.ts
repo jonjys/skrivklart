@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getProduct } from "./catalog";
+import { BUNDLES, getProduct, PRODUCTS } from "./catalog";
 import { getSql } from "./db";
 import { LOCKED_ERROR, passCovers } from "./pass";
 import { fallbackDocument } from "./templates";
@@ -159,7 +159,7 @@ export const askSupport = createServerFn({ method: "POST" })
         {
           role: "system",
           content:
-            "Du är Rådgivaren på Skrivklart. Kort, svensk, saklig. Hjälp kunden välja dokument (personligt brev, CV, LinkedIn, uppsägning, överklagande, samboavtal, hyresansökan, reklamation, ARN-anmälan, skuldebrev, NDA, konsultavtal, anställningsavtal, fullmakt, klagomål, andrahandskontrakt, myndighetsbrev). Priser 79–199 kr, Jobbpaket 199 kr (brev+CV+LinkedIn), Pro 249 kr/mån. Inte juridisk rådgivning. Inga emojis. Max 120 ord.",
+            `Du är Rådgivaren på Skrivklart. Varm, kort, svensk, saklig. Många som skriver är ensamstående föräldrar – var respektfull och konkret. Hjälp kunden välja dokument. Dokument och priser: ${PRODUCTS.map((p) => `${p.name} ${p.priceKr} kr`).join(", ")}. Paket: ${BUNDLES.map((b) => `${b.name} ${b.priceKr} kr (${b.short})`).join("; ")}. Inga prenumerationer. Utkastet är alltid gratis. Inte juridisk rådgivning. Inga emojis. Max 120 ord.`,
         },
         ...trimmed,
       ],
@@ -176,26 +176,34 @@ export const askSupport = createServerFn({ method: "POST" })
   });
 
 function routeSupport(q: string) {
-  if (/försäkringskassa|csn|a-kassa|överklag/.test(q))
-    return "Det låter som ett överklagande. 199 kr. Du fyller i beslutet och vad som är fel – vi skriver det kallt och precist. Inte juridisk rådgivning.";
-  if (/arn|nämnd/.test(q))
-    return "ARN-anmälan, 149 kr. När företaget redan sagt nej. Ta reklamation först om du inte skickat en.";
-  if (/reklam|fel på|pengarna tillbaka/.test(q))
-    return "Reklamation, 79 kr. Krav, frist, ordernummer. Om de tiger: ARN efter det.";
-  if (/sambo|bodeln/.test(q))
-    return "Samboavtal, 149 kr. Vem äger bostad och bohag. Utkast – visa jurist om ni har hus eller barn.";
-  if (/hyra|lägenhet|värd/.test(q))
-    return "Hyresansökan 89 kr, eller andrahandskontrakt 149 kr om ni redan är överens.";
-  if (/cv|linkedin|personligt brev|ansök/.test(q))
-    return "Jobb: personligt brev 89 kr, CV 89 kr, LinkedIn 79 kr. Eller Jobbpaket 199 kr för alla tre.";
-  if (/säg upp|sluta|uppsäg/.test(q))
-    return "Uppsägningsbrev, 89 kr. Kort, datum, begäran om arbetsgivarintyg.";
-  if (/nda|sekretess/.test(q)) return "Sekretessavtal, 99 kr. Svenska, inte en amerikansk mall.";
-  if (/konsult|uppdrag|f-skatt/.test(q)) return "Konsultavtal, 149 kr. Uppdrag, arvode, IP, uppsägning.";
-  if (/anställningsavtal|anställa/.test(q)) return "Anställningsavtal, 149 kr. Tjänst, lön, form.";
-  if (/fullmakt/.test(q)) return "Fullmakt, 79 kr. En sida: vem, vad, hur länge.";
-  if (/lån|skuld/.test(q)) return "Skuldebrev, 99 kr. Belopp, ränta, datum. Båda skriver under.";
-  return "Säg vilket dokument: jobb, bostad, myndighet eller avtal. Priser 79–199 kr, Jobbpaket 199 kr, Pro 249 kr/mån. Inget konto. Inte juridisk rådgivning.";
+  const pick = (slug: string, line: string) => {
+    const p = getProduct(slug);
+    return p ? `${p.name}, ${p.priceKr} kr. ${line}` : line;
+  };
+  if (/underhåll|underhall|betalar inte|pappan/.test(q))
+    return pick("underhallsavtal", "Bevittnat av två personer kan det drivas in via Kronofogden. Ingår i Mammapaketet, 149 kr för sju dokument.");
+  if (/umgänge|umgange|varannan|vårdnad|boende/.test(q))
+    return pick("umgangesavtal", "Schema, lov och hämtning. Socialnämnden kan godkänna avtalet.");
+  if (/inkasso|avbetal|skuld|kronofogd/.test(q))
+    return pick("avbetalningsplan", "Ett konkret förslag innan det går vidare. Budget- och skuldrådgivningen i kommunen är gratis.");
+  if (/skola|förskola|forskola|rektor|ledighet/.test(q))
+    return pick("skola-forskola", "Ledighet, stöd, oro eller kränkning.");
+  if (/socialtjänst|socialtjanst|bistånd|bistand|soc\b/.test(q))
+    return pick("socialtjansten", "Be alltid om ett skriftligt beslut.");
+  if (/försäkringskassa|bostadsbidrag|csn|a-kassa|överklag/.test(q))
+    return pick("overklagande", "Du fyller i beslutet och vad som är fel – vi skriver det sakligt och precist.");
+  if (/brev|förstår inte|forstar inte/.test(q))
+    return pick("myndighetsbrev", "Klistra in brevet på sidan Brev så får du det på vanlig svenska.");
+  if (/arn|nämnd/.test(q)) return pick("arn-anmalan", "När företaget redan sagt nej.");
+  if (/reklam|fel på|pengarna tillbaka/.test(q)) return pick("reklamation", "Krav, frist, ordernummer.");
+  if (/sambo|bodeln/.test(q)) return pick("samboavtal", "Vem äger bostad och bohag.");
+  if (/hyra|lägenhet|värd/.test(q)) return pick("hyresansokan", "Eller andrahandskontrakt om ni redan är överens.");
+  if (/cv|linkedin|personligt brev|ansök|jobb/.test(q))
+    return "Jobbpaketet: personligt brev, CV och LinkedIn för 129 kr.";
+  if (/säg upp|sluta|uppsäg/.test(q)) return pick("uppsagning", "Kort, datum, begäran om arbetsgivarintyg.");
+  if (/fullmakt/.test(q)) return pick("fullmakt", "En sida: vem, vad, hur länge.");
+  if (/lån|skuldebrev/.test(q)) return pick("skuldebrev", "Belopp, ränta, datum.");
+  return "Berätta vad det gäller: barn och underhåll, Försäkringskassan, skulder, skolan eller bostad. Kortare brev 59 kr, avtal 99 kr, Mammapaketet 149 kr. Inget konto. Inte juridisk rådgivning.";
 }
 
 export const getStats = createServerFn({ method: "GET" }).handler(async () => {
