@@ -14,6 +14,7 @@ import { Route as BrevRouteImport } from './routes/brev'
 import { Route as IntegritetRouteImport } from './routes/integritet'
 import { Route as OmRouteImport } from './routes/om'
 import { Route as PriserRouteImport } from './routes/priser'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as TackRouteImport } from './routes/tack'
 import { Route as VillkorRouteImport } from './routes/villkor'
@@ -46,6 +47,11 @@ const OmRoute = OmRouteImport.update({
 const PriserRoute = PriserRouteImport.update({
   id: '/priser',
   path: '/priser',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SupportRoute = SupportRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/integritet': typeof IntegritetRoute
   '/om': typeof OmRoute
   '/priser': typeof PriserRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/support': typeof SupportRoute
   '/tack': typeof TackRoute
   '/villkor': typeof VillkorRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/integritet': typeof IntegritetRoute
   '/om': typeof OmRoute
   '/priser': typeof PriserRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/support': typeof SupportRoute
   '/tack': typeof TackRoute
   '/villkor': typeof VillkorRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/integritet': typeof IntegritetRoute
   '/om': typeof OmRoute
   '/priser': typeof PriserRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/support': typeof SupportRoute
   '/tack': typeof TackRoute
   '/villkor': typeof VillkorRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/integritet'
     | '/om'
     | '/priser'
+    | '/sitemap.xml'
     | '/support'
     | '/tack'
     | '/villkor'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/integritet'
     | '/om'
     | '/priser'
+    | '/sitemap.xml'
     | '/support'
     | '/tack'
     | '/villkor'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/integritet'
     | '/om'
     | '/priser'
+    | '/sitemap.xml'
     | '/support'
     | '/tack'
     | '/villkor'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   IntegritetRoute: typeof IntegritetRoute
   OmRoute: typeof OmRoute
   PriserRoute: typeof PriserRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SupportRoute: typeof SupportRoute
   TackRoute: typeof TackRoute
   VillkorRoute: typeof VillkorRoute
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/priser'
       fullPath: '/priser'
       preLoaderRoute: typeof PriserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/support': {
@@ -301,6 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   IntegritetRoute: IntegritetRoute,
   OmRoute: OmRoute,
   PriserRoute: PriserRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SupportRoute: SupportRoute,
   TackRoute: TackRoute,
   VillkorRoute: VillkorRoute,

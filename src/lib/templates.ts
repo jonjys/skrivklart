@@ -59,6 +59,16 @@ function write(slug: string, a: Record<string, string>): string {
       return offert(a);
     case "betalningspaminelse":
       return paminelse(a);
+    case "underhallsavtal":
+      return underhall(a);
+    case "umgangesavtal":
+      return umgange(a);
+    case "avbetalningsplan":
+      return avbetalning(a);
+    case "skola-forskola":
+      return skola(a);
+    case "socialtjansten":
+      return socialtjansten(a);
     default:
       return "Kunde inte skriva det dokumentet just nu.";
   }
@@ -503,4 +513,176 @@ Om beloppet redan är betalt: bortse från brevet.
 
 Med vänlig hälsning
 ${val(a, "avsandare", "[firma]")}`;
+}
+
+function underhall(a: Record<string, string>) {
+  return `AVTAL OM UNDERHÅLLSBIDRAG
+
+§ 1 Parter
+Betalningsskyldig förälder och mottagande förälder:
+${val(a, "foraldrar", "[Förälder A, personnummer] och [Förälder B, personnummer]")}
+
+§ 2 Barn
+Avtalet gäller underhåll för:
+${val(a, "barn", "[barnets namn, födelsedatum]")}
+
+§ 3 Belopp
+Betalningsskyldig förälder betalar ${val(a, "belopp", "[belopp] kr per barn och månad")}.
+
+§ 4 Betalning
+${val(a, "betalning", "Beloppet betalas i förskott senast den [dag] varje månad till [kontonummer].")}
+
+§ 5 Giltighet
+Underhållet betalas från och med ${val(a, "start", "[datum]")} till dess att barnet fyller 18 år. Går barnet i skolan efter 18 års ålder betalas underhåll så länge skolgången pågår, dock längst till dess att barnet fyller 21 år.
+
+§ 6 Övrigt
+${val(a, "ovrigt", "[t.ex. indexuppräkning, delning av kostnader för fritidsaktiviteter]")}
+
+§ 7 Ändringar
+Ändringar av detta avtal ska göras skriftligt och undertecknas av båda föräldrarna.
+
+Detta avtal har upprättats i två likalydande exemplar, av vilka parterna tagit var sitt.
+
+[Ort] den [datum]
+
+______________________________          ______________________________
+Betalningsskyldig förälder               Mottagande förälder
+[Namnförtydligande]                      [Namnförtydligande]
+
+Underskriften av den betalningsskyldiga föräldern bevittnas av:
+
+______________________________          ______________________________
+Vittne 1                                 Vittne 2
+[Namnförtydligande, adress]              [Namnförtydligande, adress]`;
+}
+
+function umgange(a: Record<string, string>) {
+  const boendeMap: Record<string, string> = {
+    "hos-mig": "Barnet/barnen bor stadigvarande hos [Förälder A] och har umgänge med [Förälder B] enligt nedan.",
+    vaxelvis: "Barnet/barnen bor växelvis hos båda föräldrarna enligt nedan.",
+    "hos-andra": "Barnet/barnen bor stadigvarande hos [Förälder B] och har umgänge med [Förälder A] enligt nedan.",
+  };
+  return `ÖVERENSKOMMELSE OM BOENDE OCH UMGÄNGE
+
+1. Parter
+[Förälder A, personnummer] och [Förälder B, personnummer].
+
+2. Barn
+${val(a, "barn", "[barnets namn, födelsedatum]")}
+
+3. Boende
+${boendeMap[a.boende] ?? "[var barnet bor]"}
+
+4. Vardagsschema
+${val(a, "schema", "[veckor, dagar och tider]")}
+
+5. Lov och högtider
+${val(a, "lov", "[jul, nyår, påsk, sommarlov, födelsedagar]")}
+
+6. Hämtning, lämning och kontakt
+${val(a, "praktiskt", "[vem hämtar och lämnar, var, och hur barnet håller kontakt med den andra föräldern]")}
+
+7. Ändringar
+Ändringar i schemat meddelas skriftligt i god tid, senast [antal] dagar i förväg. Tillfälliga byten görs i samförstånd och med barnets bästa i första hand.
+
+8. Om vi inte är överens
+Vi ska i första hand försöka lösa oenigheter genom samtal. Därefter kan vi vända oss till kommunens samarbetssamtal.
+
+9. Godkännande
+Föräldrarna kan gemensamt be socialnämnden att godkänna denna överenskommelse. Ett godkänt avtal gäller på samma sätt som en dom.
+
+[Ort] den [datum]
+
+______________________________          ______________________________
+[Förälder A]                             [Förälder B]`;
+}
+
+function avbetalning(a: Record<string, string>) {
+  return `Till: ${val(a, "mottagare", "[företag/inkassobolag]")}
+Ärende: ${val(a, "arende", "[ärendenummer, fakturanummer, belopp]")}
+Datum: [datum]
+
+Begäran om avbetalningsplan
+
+Jag har tagit emot ert krav och vill lösa ärendet. Jag har i dag inte möjlighet att betala hela beloppet på en gång.
+${a.varfor?.trim() ? `\n${a.varfor.trim()}\n` : ""}
+Jag föreslår följande avbetalningsplan: ${val(a, "forslag", "[belopp] kr per månad från och med [datum]")}, tills skulden är betald.
+
+Jag ber er
+- bekräfta avbetalningsplanen skriftligt,
+- inte lägga på nya avgifter så länge jag betalar enligt planen, och
+- avvakta med att ansöka om betalningsföreläggande hos Kronofogden medan planen följs.
+
+Jag ser fram emot ert svar senast [datum].
+
+Med vänlig hälsning
+[Namn]
+[Adress]
+[Telefon]
+[E-post]`;
+}
+
+function skola(a: Record<string, string>) {
+  const amne: Record<string, string> = {
+    ledighet: "Ansökan om ledighet",
+    stod: "Begäran om extra stöd",
+    oro: "Oro för mitt barn – begäran om utredning och åtgärder",
+    omsorg: "Schema och omsorgstid",
+    annat: "Fråga från vårdnadshavare",
+  };
+  const barn = val(a, "barn", "[barnets namn, klass]");
+  const begaran: Record<string, string> = {
+    ledighet: "Jag ansöker om ledighet för [barnet] under perioden [datum–datum]. Skolarbetet tar vi igen genom [plan].",
+    stod: "Jag ber skolan utreda om [barnet] behöver extra anpassningar eller särskilt stöd, och föreslår att vi ses på ett möte.",
+    oro: "Jag ber skolan utreda det som hänt och återkomma med vilka åtgärder ni vidtar och när.",
+    omsorg: "Jag ber att få bekräftat att schemat enligt ovan fungerar från och med [datum].",
+    annat: "Jag ber om ert svar på ovanstående.",
+  };
+  return `Ämne: ${amne[a.arende] ?? "Fråga från vårdnadshavare"} – ${barn}
+
+Hej,
+
+Jag skriver till ${val(a, "mottagare", "[skola, rektor/mentor]")} som vårdnadshavare till ${barn}.
+
+${val(a, "beskrivning", "[vad som hänt eller vad du behöver, med datum]")}
+
+${begaran[a.arende] ?? begaran.annat}
+
+Jag är tacksam för ett svar senast [datum].
+
+Med vänliga hälsningar
+[Namn]
+[Telefon]`;
+}
+
+function socialtjansten(a: Record<string, string>) {
+  const rubrik: Record<string, string> = {
+    bistand: "Ansökan om ekonomiskt bistånd",
+    komplettering: "Komplettering till ansökan om ekonomiskt bistånd",
+    mote: "Begäran om möte",
+    akut: "Ansökan om ekonomiskt bistånd – akut behov",
+  };
+  const bilagor = a.bilagor?.trim();
+  return `Till: Socialtjänsten i [kommun]
+Diarienummer: [om du har]
+Datum: [datum]
+
+${rubrik[a.arende] ?? "Ansökan om ekonomiskt bistånd"}
+
+Min situation
+${val(a, "lage", "[hushållet, inkomster, vad som hänt]")}
+
+Vad jag söker
+${val(a, "behov", "[belopp och vad det avser]")}
+${a.arende === "akut" ? "\nBehovet är akut eftersom [t.ex. hyran förfaller den (datum)]. Jag ber er därför hantera ansökan skyndsamt.\n" : ""}
+Bilagor
+${bilagor ? bilagor : "[hyresavi, kontoutdrag, beslut från Försäkringskassan]"}
+
+Jag ber om ett skriftligt beslut.
+
+Med vänlig hälsning
+[Namn]
+[Personnummer]
+[Adress]
+[Telefon]`;
 }

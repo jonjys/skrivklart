@@ -18,8 +18,9 @@ function VillkorPage() {
             granska, komplettera och skicka.
           </p>
           <p>
-            Betalning sker via Stripe. Per-dokument ger tillgång till det valda dokumentet i din
-            webbläsare. Pro ger obegränsad upplåsning i 30 dagar från köp i den här webbläsaren.
+            Betalning sker via Stripe. Ett enskilt dokument låses upp i din webbläsare. Ett
+            paket låser upp de dokument som ingår under den tid som anges vid köpet (30 eller 60
+            dagar) i den här webbläsaren. Alla köp är engångsbetalningar, inga prenumerationer.
           </p>
           <p>
             Utkastet är gratis. Där ser du om texten duger innan du betalar. När du betalar

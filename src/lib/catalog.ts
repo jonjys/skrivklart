@@ -10,7 +10,7 @@ export type Field = {
   options?: { value: string; label: string }[];
 };
 
-export type Category = "jobb" | "bostad" | "myndighet" | "avtal";
+export type Category = "familj" | "ekonomi" | "myndighet" | "bostad" | "jobb" | "avtal";
 
 export type DocProduct = {
   slug: string;
@@ -25,10 +25,12 @@ export type DocProduct = {
 };
 
 export const CATEGORIES: { id: Category; label: string }[] = [
-  { id: "jobb", label: "Jobb" },
+  { id: "familj", label: "Barn & familj" },
+  { id: "ekonomi", label: "Ekonomi & skulder" },
+  { id: "myndighet", label: "Myndigheter" },
   { id: "bostad", label: "Bostad" },
-  { id: "myndighet", label: "Myndighet" },
-  { id: "avtal", label: "Avtal" },
+  { id: "jobb", label: "Jobb" },
+  { id: "avtal", label: "Avtal & firma" },
 ];
 
 const TONE: Field = {
@@ -46,12 +48,260 @@ const TONE: Field = {
 
 export const PRODUCTS: DocProduct[] = [
   {
+    slug: "underhallsavtal",
+    name: "Avtal om underhållsbidrag",
+    short: "Belopp, datum och index – på papper, så att det går att driva in.",
+    pitch:
+      "Ett skriftligt avtal om underhåll för barnet. Bevittnat av två personer kan det drivas in via Kronofogden om pengarna uteblir.",
+    priceKr: 99,
+    category: "familj",
+    outcome: "Ett komplett avtal om underhållsbidrag med underskrifts- och vittnesrader.",
+    fields: [
+      {
+        id: "barn",
+        label: "Barnet/barnen",
+        type: "textarea",
+        placeholder: "Förnamn och födelseår. T.ex. Elsa, 2017 och Noah, 2020.",
+        required: true,
+      },
+      {
+        id: "foraldrar",
+        label: "Föräldrarna",
+        type: "textarea",
+        placeholder: "Vem betalar och vem tar emot. Namn eller 'Förälder A / Förälder B'.",
+        required: true,
+      },
+      {
+        id: "belopp",
+        label: "Belopp per barn och månad",
+        type: "text",
+        placeholder: "T.ex. 2 000 kr per barn och månad",
+        required: true,
+        hint: "Osäker på beloppet? Försäkringskassan har en räknare för underhållsbidrag.",
+      },
+      {
+        id: "betalning",
+        label: "När och hur det betalas",
+        type: "text",
+        placeholder: "T.ex. senast den 25:e varje månad till konto [clearing + nr]",
+        required: true,
+      },
+      {
+        id: "start",
+        label: "Från vilket datum",
+        type: "text",
+        placeholder: "T.ex. 1 november 2026",
+        required: true,
+      },
+      {
+        id: "ovrigt",
+        label: "Övrigt ni kommit överens om",
+        type: "textarea",
+        placeholder: "Indexuppräkning, delning av fritidsaktiviteter, glasögon, tandställning…",
+      },
+    ],
+    extraPrompt:
+      "Skriv ett avtal om underhållsbidrag enligt föräldrabalkens 7 kap. Numrerade paragrafer: parter, barn, belopp per barn och månad, betalningsdag och betalningssätt, startdatum, att underhållet gäller till barnet fyller 18 år (eller längre om barnet går i skolan, upp till 21 år), indexuppräkning om det anges, övrigt. Avsluta med ort och datum, underskrift för båda föräldrarna, och två vittnesrader med namnförtydligande. Platshållare i [hakparentes]. Påminn inte i avtalet om juridisk rådgivning.",
+  },
+  {
+    slug: "umgangesavtal",
+    name: "Avtal om boende och umgänge",
+    short: "Vilka veckor, vilka lov, vem hämtar. Skrivet så att det håller.",
+    pitch:
+      "Ett tydligt schema minskar bråken. Vill ni att avtalet ska gälla som en dom kan socialnämnden godkänna det.",
+    priceKr: 99,
+    category: "familj",
+    outcome: "Överenskommelse om boende och umgänge, redo att skriva under.",
+    fields: [
+      {
+        id: "barn",
+        label: "Barnet/barnen",
+        type: "textarea",
+        placeholder: "Förnamn och födelseår.",
+        required: true,
+      },
+      {
+        id: "boende",
+        label: "Var barnen bor",
+        type: "select",
+        placeholder: "Välj",
+        required: true,
+        options: [
+          { value: "hos-mig", label: "Bor hos mig, umgänge hos den andra" },
+          { value: "vaxelvis", label: "Växelvis boende" },
+          { value: "hos-andra", label: "Bor hos den andra föräldern" },
+        ],
+      },
+      {
+        id: "schema",
+        label: "Vardagsschema",
+        type: "textarea",
+        placeholder: "T.ex. varannan helg fredag 16 till söndag 18, plus onsdagar efter skolan.",
+        required: true,
+      },
+      {
+        id: "lov",
+        label: "Lov och högtider",
+        type: "textarea",
+        placeholder: "Jul, sommar, födelsedagar. T.ex. jul varannat år, två veckor var på sommaren.",
+      },
+      {
+        id: "praktiskt",
+        label: "Hämtning, lämning och kontakt",
+        type: "textarea",
+        placeholder: "Vem hämtar var, hur ni meddelar ändringar, telefontider.",
+      },
+    ],
+    extraPrompt:
+      "Skriv en överenskommelse om boende och umgänge mellan två föräldrar. Barnets bästa först. Numrerade punkter: parter, barn, boende, vardagsumgänge, lov och högtider, hämtning och lämning, kommunikation och ändringar, hur oenigheter hanteras (samarbetssamtal via kommunen). Lägg sist en rad om att föräldrarna kan be socialnämnden godkänna avtalet så att det gäller som en dom. Underskrifter för båda. Platshållare i [hakparentes]. Varm men saklig ton.",
+  },
+  {
+    slug: "avbetalningsplan",
+    name: "Begäran om avbetalningsplan",
+    short: "Till inkasso eller fordringsägare när du inte kan betala allt på en gång.",
+    pitch:
+      "Ett lugnt, konkret förslag: vad du kan betala varje månad och från när. Innan skulden hamnar hos Kronofogden.",
+    priceKr: 59,
+    category: "ekonomi",
+    outcome: "Ett brev med ett tydligt förslag på avbetalning.",
+    fields: [
+      {
+        id: "mottagare",
+        label: "Till vem",
+        type: "text",
+        placeholder: "Företaget eller inkassobolaget",
+        required: true,
+      },
+      {
+        id: "arende",
+        label: "Skulden",
+        type: "textarea",
+        placeholder: "Ärende-/fakturanummer, vad det gäller, belopp.",
+        required: true,
+      },
+      {
+        id: "forslag",
+        label: "Ditt förslag",
+        type: "text",
+        placeholder: "T.ex. 500 kr i månaden från 27 november",
+        required: true,
+      },
+      {
+        id: "varfor",
+        label: "Kort om varför",
+        type: "textarea",
+        placeholder: "T.ex. ensam med två barn, inkomsten räcker inte till hela beloppet nu.",
+      },
+      TONE,
+    ],
+    extraPrompt:
+      "Skriv en saklig begäran om avbetalningsplan på svenska. Referens till ärendet, erkänn skulden bara om kunden skriver det, konkret förslag på månadsbelopp och startdatum, be om skriftlig bekräftelse och att inga nya avgifter läggs på under planen, be dem vänta med att gå vidare till Kronofogden. Kort bakgrund utan att tigga. Kontaktuppgifter som [platshållare].",
+  },
+  {
+    slug: "skola-forskola",
+    name: "Brev till skola eller förskola",
+    short: "Ledighet, stöd, oro eller schema. Tydligt och vänligt.",
+    pitch:
+      "Mejlet till rektorn eller förskolechefen som blir läst och besvarat – inte parkerat.",
+    priceKr: 59,
+    category: "familj",
+    outcome: "Ett färdigt brev eller mejl till skolan eller förskolan.",
+    fields: [
+      {
+        id: "arende",
+        label: "Vad gäller det",
+        type: "select",
+        placeholder: "Välj",
+        required: true,
+        options: [
+          { value: "ledighet", label: "Ansökan om ledighet" },
+          { value: "stod", label: "Begäran om extra stöd" },
+          { value: "oro", label: "Oro, konflikt eller kränkning" },
+          { value: "omsorg", label: "Schema och omsorgstid" },
+          { value: "annat", label: "Annat" },
+        ],
+      },
+      {
+        id: "mottagare",
+        label: "Till",
+        type: "text",
+        placeholder: "Skolans namn, rektor/mentor/förskolechef",
+        required: true,
+      },
+      {
+        id: "barn",
+        label: "Barnet",
+        type: "text",
+        placeholder: "Förnamn och klass/avdelning",
+        required: true,
+      },
+      {
+        id: "beskrivning",
+        label: "Vad som hänt eller vad du behöver",
+        type: "textarea",
+        placeholder: "Datum, vad du sett, vad barnet sagt, vad du vill ha hjälp med.",
+        required: true,
+      },
+      TONE,
+    ],
+    extraPrompt:
+      "Skriv ett brev från en förälder till skola eller förskola. Vänligt, konkret, respektfullt men tydligt. Ämnesrad först. Beskriv läget i datumordning, vad föräldern begär och ett datum för svar. Vid kränkning: be skolan utreda och återkomma med vilka åtgärder de vidtar. Vid stöd: be om ett möte och att skolan utreder behovet. Vid ledighet: datum, skäl och hur skolarbetet tas igen. Platshållare i [hakparentes].",
+  },
+  {
+    slug: "socialtjansten",
+    name: "Brev till socialtjänsten",
+    short: "Ansökan, komplettering eller begäran om möte – med fakta i ordning.",
+    pitch:
+      "När du behöver hjälp och vill bli tagen på allvar. Tydligt vad du söker, vad du bifogar och vad som är bråttom.",
+    priceKr: 59,
+    category: "ekonomi",
+    outcome: "Ett sakligt brev till socialtjänsten.",
+    fields: [
+      {
+        id: "arende",
+        label: "Vad gäller det",
+        type: "select",
+        placeholder: "Välj",
+        required: true,
+        options: [
+          { value: "bistand", label: "Ansökan om ekonomiskt bistånd" },
+          { value: "komplettering", label: "Komplettering till min ansökan" },
+          { value: "mote", label: "Begäran om möte" },
+          { value: "akut", label: "Akut behov (hyra, mat, el)" },
+        ],
+      },
+      {
+        id: "lage",
+        label: "Ditt läge",
+        type: "textarea",
+        placeholder: "Hushållet, inkomster, vad som hänt. Diarienummer om du har.",
+        required: true,
+      },
+      {
+        id: "behov",
+        label: "Vad du söker",
+        type: "textarea",
+        placeholder: "Belopp och vad det avser, t.ex. hyra för december 7 400 kr.",
+        required: true,
+      },
+      {
+        id: "bilagor",
+        label: "Bilagor",
+        type: "text",
+        placeholder: "T.ex. hyresavi, kontoutdrag, beslut från FK",
+      },
+      TONE,
+    ],
+    extraPrompt:
+      "Skriv ett brev till socialtjänsten på enkel, saklig svenska. Rubrik, diarienummer som [platshållare], hushållets situation, vad som söks med belopp, varför det är bråttom om det är akut, lista med bilagor, be om skriftligt beslut så att det går att överklaga. Värdigt, inte ursäktande. Platshållare i [hakparentes].",
+  },
+  {
     slug: "personligt-brev",
     name: "Personligt brev",
     short: "Ansökan som låter som du, inte som en mall.",
     pitch:
       "De flesta personliga brev luktar ChatGPT och mall. Det här blir ett brev en rekryterare faktiskt läser färdigt.",
-    priceKr: 89,
+    priceKr: 99,
     category: "jobb",
     outcome: "Ett komplett personligt brev, klart att klistra in.",
     fields: [
@@ -93,7 +343,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "CV-profil",
     short: "Profiltexten längst upp som avgör om de läser resten.",
     pitch: "En skarp profil på 5–7 rader plus omskrivna punktlistor till tre senaste rollerna.",
-    priceKr: 89,
+    priceKr: 99,
     category: "jobb",
     outcome: "Profiltext + tre bearbetade erfarenhetspunkter.",
     fields: [
@@ -128,7 +378,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "LinkedIn-text",
     short: "Om-sektion som inte låter som en pressrelease.",
     pitch: "Rubrik, om-text och tre erfarenhetsrader redo att klistra in.",
-    priceKr: 79,
+    priceKr: 59,
     category: "jobb",
     outcome: "LinkedIn-rubrik + om-text.",
     fields: [
@@ -163,7 +413,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Uppsägningsbrev",
     short: "Säg upp jobbet utan att bränna bron – eller rummet.",
     pitch: "Kort, sakligt, datum. Det HR faktiskt behöver. Inte ett avskedsbrev till chefen.",
-    priceKr: 89,
+    priceKr: 59,
     category: "jobb",
     outcome: "Uppsägningsbrev redo att skicka.",
     fields: [
@@ -205,7 +455,7 @@ export const PRODUCTS: DocProduct[] = [
     short: "Brevet som gör att värden ringer dig först.",
     pitch:
       "Stockholmsvärdar drunknar i 'vi är skötsamma'. Det här brevet är konkret, lugnt och svårt att sålla bort.",
-    priceKr: 89,
+    priceKr: 59,
     category: "bostad",
     outcome: "Komplett ansökningsbrev till hyresvärd.",
     fields: [
@@ -247,7 +497,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Andrahandskontrakt",
     short: "Utkast till andrahandsuthyrning som båda kan skriva under.",
     pitch: "Hyra ut eller hyra? Ett begripligt kontrakt med hyra, period, skick och uppsägning.",
-    priceKr: 149,
+    priceKr: 99,
     category: "bostad",
     outcome: "Avtalsutkast med numrerade paragrafer.",
     fields: [
@@ -289,7 +539,7 @@ export const PRODUCTS: DocProduct[] = [
     short: "Svaret till Försäkringskassan, CSN, Skatteverket eller a-kassan.",
     pitch:
       "Du är arg och trött. Texten ska vara kall, precis och svår att avfärda. Inte ett känslobrev.",
-    priceKr: 199,
+    priceKr: 99,
     category: "myndighet",
     outcome: "Ett komplett överklagande redo att skickas.",
     fields: [
@@ -340,7 +590,7 @@ export const PRODUCTS: DocProduct[] = [
     short: "Vad FK, Skatteverket eller Kronofogden egentligen säger.",
     pitch:
       "Klistra in brevet. Du får det på vanlig svenska, med datum och vad du ska göra. Sen kan du skriva svaret.",
-    priceKr: 79,
+    priceKr: 59,
     category: "myndighet",
     outcome: "En tolkning du kan agera på, plus länk till överklagande.",
     fields: [
@@ -361,7 +611,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Reklamation",
     short: "Kräv pengarna eller bytet – utan att låta knäpp.",
     pitch: "Konsumentköplagen på din sida, i ett brev företaget inte kan ignorera.",
-    priceKr: 79,
+    priceKr: 59,
     category: "myndighet",
     outcome: "Reklamationsbrev med tydligt krav.",
     fields: [
@@ -409,7 +659,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Klagomål",
     short: "Formellt klagomål till bolag, nämnd eller kommun.",
     pitch: "När chatten sagt 'vi kan inte göra mer' och du vill ha det på pränt.",
-    priceKr: 89,
+    priceKr: 59,
     category: "myndighet",
     outcome: "Klagomålsbrev med kronologi och yrkande.",
     fields: [
@@ -444,7 +694,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "ARN-anmälan",
     short: "När företaget sagt nej och du vill ha det prövat.",
     pitch: "Strukturen ARN förväntar sig: parter, avtal, vad som hänt, yrkande, bilagor.",
-    priceKr: 149,
+    priceKr: 99,
     category: "myndighet",
     outcome: "Utkast till anmälan till Allmänna reklamationsnämnden.",
     fields: [
@@ -487,7 +737,7 @@ export const PRODUCTS: DocProduct[] = [
     short: "Vem äger vad om det tar slut. Innan det tar slut.",
     pitch:
       "Billigare än en kväll hos jurist. Ni fyller i, läser, skriver under. Inte juridisk rådgivning – ett skarpt utkast.",
-    priceKr: 149,
+    priceKr: 99,
     category: "avtal",
     outcome: "Samboavtal med bohag, bostad och bodelning.",
     fields: [
@@ -597,7 +847,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Konsultavtal",
     short: "Uppdrag, arvode, IP och uppsägning – ett utkast du kan skicka.",
     pitch: "Sluta starta jobb på en Slack-rad. Det här är avtalet du skickar innan du börjar.",
-    priceKr: 149,
+    priceKr: 99,
     category: "avtal",
     outcome: "Konsultavtal för enskild / AB.",
     fields: [
@@ -638,7 +888,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Anställningsavtal",
     short: "Tjänst, lön, form – ett utkast ni båda kan läsa högt.",
     pitch: "För den som anställer utan HR-avdelning. Inte ett 18-sidigt byråpaket.",
-    priceKr: 149,
+    priceKr: 99,
     category: "avtal",
     outcome: "Anställningsavtal med de punkter som måste med.",
     fields: [
@@ -693,7 +943,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Fullmakt",
     short: "Någon får göra en sak åt dig. På papper.",
     pitch: "Bank, flytt, Skatteverket, lägenhetsköp. En sida, två vittnen om du vill.",
-    priceKr: 79,
+    priceKr: 59,
     category: "avtal",
     outcome: "Fullmakt redo att skrivas under.",
     fields: [
@@ -736,7 +986,7 @@ export const PRODUCTS: DocProduct[] = [
     short: "Ett anbud kunden kan säga ja till. Inte ett kalkylark.",
     pitch:
       "Hantverkare och konsult: jobb, pris, vad som ingår. En sida att skicka. Inte ett helt offert-system.",
-    priceKr: 89,
+    priceKr: 99,
     category: "avtal",
     outcome: "Offert / anbud redo att skicka.",
     fields: [
@@ -778,7 +1028,7 @@ export const PRODUCTS: DocProduct[] = [
     name: "Betalningspåminnelse",
     short: "Första påminnelsen. Saklig, med belopp och datum.",
     pitch: "Kunden har inte betalat. Ett brev, inte Kronofogden ännu.",
-    priceKr: 79,
+    priceKr: 59,
     category: "avtal",
     outcome: "Påminnelse redo att skicka.",
     fields: [
@@ -817,7 +1067,73 @@ export const PRODUCTS: DocProduct[] = [
   },
 ];
 
-export const PRO_PRICE_KR = 249;
+export type Bundle = {
+  slug: string;
+  name: string;
+  short: string;
+  priceKr: number;
+  /** Document slugs the bundle unlocks, or "all". */
+  includes: readonly string[] | "all";
+  days: number;
+};
+
+export const MAMMA_SLUG = "mammapaket";
+export const JOB_PACK_SLUG = "jobbpaket";
+export const ALL_ACCESS_SLUG = "pro";
+
+export const BUNDLES: Bundle[] = [
+  {
+    slug: MAMMA_SLUG,
+    name: "Mammapaketet",
+    short: "Sju dokument för dig som sköter allt själv.",
+    priceKr: 149,
+    includes: [
+      "underhallsavtal",
+      "umgangesavtal",
+      "overklagande",
+      "myndighetsbrev",
+      "avbetalningsplan",
+      "skola-forskola",
+      "socialtjansten",
+    ],
+    days: 60,
+  },
+  {
+    slug: JOB_PACK_SLUG,
+    name: "Jobbpaketet",
+    short: "Personligt brev, CV-profil och LinkedIn-text.",
+    priceKr: 129,
+    includes: ["personligt-brev", "cv-text", "linkedin-profil"],
+    days: 30,
+  },
+  {
+    slug: ALL_ACCESS_SLUG,
+    name: "Allt i 30 dagar",
+    short: "Alla dokument, så många du vill. En betalning, ingen prenumeration.",
+    priceKr: 199,
+    includes: "all",
+    days: 30,
+  },
+];
+
+export function getBundle(slug: string) {
+  return BUNDLES.find((b) => b.slug === slug);
+}
+
+export function bundleCovers(bundle: Bundle, docSlug: string) {
+  return bundle.includes === "all" || bundle.includes.includes(docSlug);
+}
+
+/** What the bundle's documents would cost one by one. */
+export function bundleValueKr(bundle: Bundle) {
+  const docs = bundle.includes === "all" ? PRODUCTS : PRODUCTS.filter((p) => bundle.includes.includes(p.slug));
+  return docs.reduce((sum, p) => sum + p.priceKr, 0);
+}
+
+/** A document or a bundle — anything that can be bought. */
+export function getSellable(slug: string): { slug: string; name: string; priceKr: number } | undefined {
+  return getProduct(slug) ?? getBundle(slug);
+}
 
 export function getProduct(slug: string) {
   return PRODUCTS.find((p) => p.slug === slug);

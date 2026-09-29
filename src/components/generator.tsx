@@ -12,9 +12,8 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { generateDocument, recordEvent, rewriteDocument } from "@/lib/ai";
-import type { DocProduct } from "@/lib/catalog";
+import { BUNDLES, bundleValueKr, type DocProduct } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout";
-import { JOB_PACK_PRICE_KR, JOB_PACK_UNLOCKS } from "@/lib/stripe-map";
 import { useSkrivklart } from "@/lib/store";
 import { sek } from "@/lib/utils";
 import { Button } from "./ui/button";
@@ -45,7 +44,6 @@ export function Generator({ product }: { product: DocProduct }) {
   const unlock = useSkrivklart((s) => s.unlock);
   const relock = useSkrivklart((s) => s.relock);
   const pass = useSkrivklart((s) => s.passFor(product.slug));
-  const hasPro = useSkrivklart((s) => s.hasPro());
   const unlocked = pass !== undefined;
 
   const answers = draft?.answers ?? {};
@@ -57,7 +55,7 @@ export function Generator({ product }: { product: DocProduct }) {
   const [error, setError] = useState<string | null>(null);
   const docRef = useRef<HTMLElement>(null);
   const autoFull = useRef(false);
-  const inJobPack = (JOB_PACK_UNLOCKS as readonly string[]).includes(product.slug);
+  const upsell = BUNDLES.find((b) => b.includes !== "all" && b.includes.includes(product.slug));
 
   const missing = useMemo(() => {
     return product.fields.filter((f) => f.required && !answers[f.id]?.trim());
@@ -240,9 +238,9 @@ export function Generator({ product }: { product: DocProduct }) {
           {preview ? "Skriv nytt utkast" : "Skriv gratis utkast"}
         </Button>
         <p className="text-xs text-subtle">
-          Utkastet är gratis och kräver ingen betalning. Hela dokumentet kostar{" "}
-          {sek(product.priceKr)}
-          {hasPro ? " — Pro är aktivt, du betalar inte." : "."}
+          {unlocked
+            ? "Olåst – du har redan betalat för det här dokumentet."
+            : `Utkastet är gratis och kräver ingen betalning. Hela dokumentet kostar ${sek(product.priceKr)}.`}
         </p>
       </form>
 
@@ -325,14 +323,25 @@ export function Generator({ product }: { product: DocProduct }) {
                 <ShieldCheck className="size-3.5" />
                 Säker kortbetalning via Stripe. Tillbaka hit direkt efteråt.
               </p>
-              {inJobPack ? (
-                <p className="mt-4 border-t border-line pt-4 text-sm text-muted">
-                  Söker du jobb?{" "}
-                  <Link to="/priser" className="font-medium text-pine underline-offset-2 hover:underline">
-                    Jobbpaketet
-                  </Link>{" "}
-                  ger personligt brev, CV och LinkedIn för {sek(JOB_PACK_PRICE_KR)}.
-                </p>
+              {upsell ? (
+                <div className="mt-4 rounded-lg border border-line bg-paper p-4 text-sm">
+                  <p className="font-medium text-ink">
+                    Behöver du fler?{" "}
+                    <span className="text-muted">
+                      {upsell.name}: {upsell.includes.length} dokument för {sek(upsell.priceKr)}
+                    </span>
+                  </p>
+                  <p className="mt-1 text-muted">
+                    Värt {sek(bundleValueKr(upsell))} styckvis.{" "}
+                    <Link
+                      to="/priser"
+                      hash={upsell.slug}
+                      className="font-medium text-pine underline underline-offset-2"
+                    >
+                      Se paketet
+                    </Link>
+                  </p>
+                </div>
               ) : null}
               <p className="mt-4 text-[0.7rem] leading-relaxed text-subtle">
                 Digitalt innehåll som levereras direkt. Genom att låsa upp samtycker du till att

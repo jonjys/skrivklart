@@ -1,5 +1,5 @@
 export const SITE_NAME = "Skrivklart";
 export const SITE_URL = "https://www.skrivklart.se";
-export const SITE_TAGLINE = "Samboavtal efter bråket.";
+export const SITE_TAGLINE = "Du bär allt. Vi skriver breven.";
 export const SITE_DESCRIPTION =
-  "Samboavtal, överklagande till FK, hyresansökan och fler svenska dokument. 79–199 kr. Utkast gratis. Inget konto.";
+  "Avtal om underhållsbidrag, överklagande till Försäkringskassan, avbetalningsplan och brev till skola och socialtjänsten. Gratis utkast, hela texten från 59 kr. Inget konto.";

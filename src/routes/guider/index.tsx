@@ -6,12 +6,14 @@ export const Route = createFileRoute("/guider/")({
   component: GuiderIndex,
   head: () => ({
     meta: [
-      { title: "Guider | Skrivklart" },
+      { title: "Guider – underhållsbidrag, Försäkringskassan, inkasso och skola | Skrivklart" },
       {
         name: "description",
-        content: "Korta guider: överklaga Försäkringskassan, samboavtal, hyresansökan, CV utan floskler.",
+        content:
+          "Korta guider på vanlig svenska: avtal om underhållsbidrag, när pappan inte betalar, avbetalningsplan hos inkasso, omprövning hos Försäkringskassan och brev till skolan.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://www.skrivklart.se/guider" }],
   }),
 });
 
