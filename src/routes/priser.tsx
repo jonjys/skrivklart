@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
 import { PRODUCTS, PRO_PRICE_KR } from "@/lib/catalog";
-import { createOrder, markPaid } from "@/lib/orders";
-import { JOB_PACK_SLUG, STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
+import { startCheckout } from "@/lib/checkout";
+import { JOB_PACK_SLUG, PRO_SLUG } from "@/lib/stripe-map";
 import { useSkrivklart } from "@/lib/store";
-import { isLocalHost, sek } from "@/lib/utils";
+import { sek } from "@/lib/utils";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -27,44 +27,25 @@ function PriserPage() {
   const unlockPro = useSkrivklart((s) => s.unlockPro);
   const unlockJobPack = useSkrivklart((s) => s.unlockJobPack);
   const hasPro = useSkrivklart((s) => s.hasPro());
-  const [busy, setBusy] = useState(false);
-  const [waiting, setWaiting] = useState(false);
+  const [busy, setBusy] = useState<string | null>(null);
 
-  async function checkout(slug: string, onLocalPaid: () => void) {
-    setBusy(true);
-    const order = await createOrder({
-      data: { slug, origin: window.location.origin },
-    });
-    const link = STRIPE_PAYMENT_LINKS[slug];
-    if (link && !isLocalHost() && order.ok) {
-      sessionStorage.setItem("skrivklart:pending", JSON.stringify({ token: order.token, slug }));
-      if (order.checkoutUrl) {
-        window.location.href = order.checkoutUrl;
-        return;
-      }
-      window.open(link, "_blank", "noopener,noreferrer");
-      setBusy(false);
-      setWaiting(true);
+  async function checkout(slug: string) {
+    setBusy(slug);
+    const result = await startCheckout(slug);
+    if (result.kind === "redirect") return;
+    setBusy(null);
+    if (result.kind === "error") {
+      toast.error(result.error);
       return;
     }
-    await new Promise((r) => setTimeout(r, 700));
-    if (order.ok) await markPaid({ data: { token: order.token } });
-    onLocalPaid();
-    setBusy(false);
-  }
-
-  async function buyPro() {
-    await checkout("pro", () => {
-      unlockPro();
-      toast.success("Pro är aktivt i 30 dagar.");
-    });
-  }
-
-  async function buyPack() {
-    await checkout(JOB_PACK_SLUG, () => {
-      unlockJobPack();
+    const until = Date.now() + 30 * 24 * 60 * 60 * 1000;
+    if (slug === PRO_SLUG) {
+      unlockPro(result.pass, until);
+      toast.success("Pro är aktivt.");
+    } else {
+      unlockJobPack(result.pass, until);
       toast.success("Jobbpaketet är olåst.");
-    });
+    }
   }
 
   return (
@@ -84,7 +65,7 @@ function PriserPage() {
                 "Utkast gratis",
                 "Hela texten när du betalar",
                 "Kopiera, ladda ner, skriv ut",
-                "Ingen återbetalning efter upplåsning",
+                "Omskrivning kortare eller formellare ingår",
               ].map((t) => (
                 <li key={t} className="flex gap-2">
                   <Check className="size-4 shrink-0 text-pine" />
@@ -113,29 +94,17 @@ function PriserPage() {
                 </li>
               ))}
             </ul>
-            {waiting && !hasPro ? (
-              <Button
-                type="button"
-                variant="outline"
-                className="mt-8 w-full border-paper/20 bg-paper text-ink hover:bg-bg-elevated"
-                onClick={() => {
-                  unlockPro();
-                  toast.success("Pro är aktivt i 30 dagar.");
-                }}
-              >
-                Jag har betalat
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                variant="outline"
-                className="mt-8 w-full border-paper/20 bg-paper text-ink hover:bg-bg-elevated"
-                onClick={() => void buyPro()}
-                disabled={busy || hasPro}
-              >
-                {hasPro ? "Pro är aktivt" : "Starta Pro"}
-              </Button>
-            )}
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-8 w-full border-paper/20 bg-paper text-ink hover:bg-bg-elevated"
+              onClick={() => void checkout(PRO_SLUG)}
+              disabled={busy !== null || hasPro}
+            >
+              {busy === PRO_SLUG ? <Loader2 className="size-4 animate-spin" /> : null}
+              {hasPro ? "Pro är aktivt" : "Starta Pro"}
+            </Button>
+            <p className="mt-3 text-center text-xs text-paper/60">Månadsvis. Säg upp via support när du vill.</p>
           </div>
         </div>
 
@@ -152,9 +121,10 @@ function PriserPage() {
             <Button
               type="button"
               className="w-full md:w-auto"
-              onClick={() => void buyPack()}
-              disabled={busy}
+              onClick={() => void checkout(JOB_PACK_SLUG)}
+              disabled={busy !== null}
             >
+              {busy === JOB_PACK_SLUG ? <Loader2 className="size-4 animate-spin" /> : null}
               Köp jobbpaketet
             </Button>
           </div>

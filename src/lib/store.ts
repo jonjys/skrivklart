@@ -8,19 +8,25 @@ export type Draft = {
   preview: string;
   full: string;
   unlocked: boolean;
+  /** Signed unlock pass from the server (see lib/pass.ts). */
+  pass?: string;
 };
 
 type State = {
   drafts: Record<string, Draft>;
   proUntil: number | null;
+  proPass: string | null;
   packUntil: number | null;
+  packPass: string | null;
   setAnswers: (slug: string, answers: Record<string, string>) => void;
   setPreview: (slug: string, preview: string) => void;
   setFull: (slug: string, full: string) => void;
-  unlock: (slug: string) => void;
-  unlockPro: () => void;
-  unlockJobPack: () => void;
+  unlock: (slug: string, pass: string) => void;
+  relock: (slug: string) => void;
+  unlockPro: (pass: string, until: number) => void;
+  unlockJobPack: (pass: string, until: number) => void;
   isUnlocked: (slug: string) => boolean;
+  passFor: (slug: string) => string | undefined;
   hasPro: () => boolean;
 };
 
@@ -32,65 +38,76 @@ const empty = (slug: string): Draft => ({
   unlocked: false,
 });
 
+const inPack = (slug: string) => (JOB_PACK_UNLOCKS as readonly string[]).includes(slug);
+
 export const useSkrivklart = create<State>()(
   persist(
     (set, get) => ({
       drafts: {},
       proUntil: null,
+      proPass: null,
       packUntil: null,
+      packPass: null,
       setAnswers: (slug, answers) =>
         set((s) => ({
-          drafts: {
-            ...s.drafts,
-            [slug]: { ...(s.drafts[slug] ?? empty(slug)), answers },
-          },
+          drafts: { ...s.drafts, [slug]: { ...(s.drafts[slug] ?? empty(slug)), answers } },
         })),
       setPreview: (slug, preview) =>
         set((s) => ({
-          drafts: {
-            ...s.drafts,
-            [slug]: { ...(s.drafts[slug] ?? empty(slug)), preview },
-          },
+          drafts: { ...s.drafts, [slug]: { ...(s.drafts[slug] ?? empty(slug)), preview } },
         })),
       setFull: (slug, full) =>
         set((s) => ({
-          drafts: {
-            ...s.drafts,
-            [slug]: { ...(s.drafts[slug] ?? empty(slug)), full },
-          },
+          drafts: { ...s.drafts, [slug]: { ...(s.drafts[slug] ?? empty(slug)), full } },
         })),
-      unlock: (slug) =>
+      unlock: (slug, pass) =>
         set((s) => ({
           drafts: {
             ...s.drafts,
-            [slug]: { ...(s.drafts[slug] ?? empty(slug)), unlocked: true },
+            [slug]: { ...(s.drafts[slug] ?? empty(slug)), unlocked: true, pass },
           },
         })),
-      unlockPro: () => set({ proUntil: Date.now() + 30 * 24 * 60 * 60 * 1000 }),
-      unlockJobPack: () => {
-        const drafts = { ...get().drafts };
-        for (const slug of JOB_PACK_UNLOCKS) {
-          drafts[slug] = { ...(drafts[slug] ?? empty(slug)), unlocked: true };
-        }
-        set({ drafts, packUntil: Date.now() + 30 * 24 * 60 * 60 * 1000 });
-      },
-      isUnlocked: (slug) => {
+      // The server rejected whichever pass passFor handed out: drop exactly that one.
+      relock: (slug) => {
         const s = get();
-        if (s.proUntil && s.proUntil > Date.now()) return true;
-        if (
-          s.packUntil &&
-          s.packUntil > Date.now() &&
-          (JOB_PACK_UNLOCKS as readonly string[]).includes(slug)
-        ) {
-          return true;
-        }
-        return Boolean(s.drafts[slug]?.unlocked);
+        const bad = s.passFor(slug);
+        if (bad && bad === s.proPass) return set({ proPass: null, proUntil: null });
+        if (bad && bad === s.packPass) return set({ packPass: null, packUntil: null });
+        set({
+          drafts: {
+            ...s.drafts,
+            [slug]: { ...(s.drafts[slug] ?? empty(slug)), unlocked: false, pass: undefined },
+          },
+        });
+      },
+      unlockPro: (pass, until) => set({ proPass: pass, proUntil: until }),
+      unlockJobPack: (pass, until) => set({ packPass: pass, packUntil: until }),
+      isUnlocked: (slug) => get().passFor(slug) !== undefined,
+      passFor: (slug) => {
+        const s = get();
+        const now = Date.now();
+        if (s.proPass && s.proUntil && s.proUntil > now) return s.proPass;
+        if (s.packPass && s.packUntil && s.packUntil > now && inPack(slug)) return s.packPass;
+        const d = s.drafts[slug];
+        return d?.unlocked && d.pass ? d.pass : undefined;
       },
       hasPro: () => {
-        const until = get().proUntil;
-        return Boolean(until && until > Date.now());
+        const s = get();
+        return Boolean(s.proPass && s.proUntil && s.proUntil > Date.now());
       },
     }),
-    { name: "skrivklart-v1" },
+    {
+      name: "skrivklart-v1",
+      version: 2,
+      // v1 unlocked on the client alone; those unlocks carry no pass, so drop them.
+      migrate: (persisted) => {
+        const old = (persisted ?? {}) as { drafts?: Record<string, Draft> };
+        const drafts: Record<string, Draft> = {};
+        for (const [slug, d] of Object.entries(old.drafts ?? {})) {
+          drafts[slug] = { ...d, unlocked: false, full: "", pass: undefined };
+        }
+        return { drafts, proUntil: null, proPass: null, packUntil: null, packPass: null } as State;
+      },
+    },
   ),
 );

@@ -5,15 +5,14 @@ import { toast } from "sonner";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { analyzeBrev, type BrevAnalysis } from "@/lib/brev";
+import { analyzeBrev, unlockBrev, type BrevAnalysis } from "@/lib/brev";
 import { getProduct } from "@/lib/catalog";
-import { createOrder } from "@/lib/orders";
+import { startCheckout } from "@/lib/checkout";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import { productJsonLd } from "@/lib/schema";
-import { STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
 import { useSkrivklart } from "@/lib/store";
 import { t, useI18n } from "@/lib/i18n";
-import { isLocalHost, sek } from "@/lib/utils";
+import { sek } from "@/lib/utils";
 
 const SLUG = "myndighetsbrev";
 
@@ -41,61 +40,84 @@ function levelLabel(level: BrevAnalysis["riskLevel"], lang: "sv" | "en" | "ar") 
 function BrevPage() {
   const product = getProduct(SLUG)!;
   const lang = useI18n((s) => s.lang);
-  const unlocked = useSkrivklart((s) => s.isUnlocked(SLUG));
+  const pass = useSkrivklart((s) => s.passFor(SLUG));
   const unlock = useSkrivklart((s) => s.unlock);
+  const relock = useSkrivklart((s) => s.relock);
+  const unlocked = pass !== undefined;
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [paying, setPaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState<BrevAnalysis | null>(null);
+  const [sealed, setSealed] = useState<string | null>(null);
   const [full, setFull] = useState<BrevAnalysis | null>(null);
 
   useEffect(() => {
     const raw = sessionStorage.getItem("skrivklart:brev");
     if (!raw) return;
     try {
-      const parsed = JSON.parse(raw) as { preview: BrevAnalysis; full: BrevAnalysis; text: string };
+      const parsed = JSON.parse(raw) as { preview: BrevAnalysis; sealed?: string; text: string };
       setPreview(parsed.preview);
-      setFull(parsed.full);
+      setSealed(parsed.sealed ?? null);
       setText(parsed.text);
     } catch {
       /* ignore */
     }
   }, []);
 
+  // Paid (or back from Stripe): let the server open the full analysis.
+  useEffect(() => {
+    if (!unlocked || !sealed || full) return;
+    let stale = false;
+    void unlockBrev({ data: { sealed, pass } })
+      .then((res) => {
+        if (stale) return;
+        if (res.ok) setFull(res.full);
+        else {
+          if (res.error.startsWith("Betalningen")) relock(SLUG);
+          setError(res.error);
+        }
+      })
+      .catch(() => !stale && setError("Nätverksfel. Ladda om sidan."));
+    return () => {
+      stale = true;
+    };
+  }, [unlocked, sealed, full, pass, relock]);
+
   const shown = unlocked && full ? full : preview;
 
   async function analyze() {
     setError(null);
     setBusy(true);
-    const res = await analyzeBrev({ data: { text, lang } });
+    const res = await analyzeBrev({ data: { text, lang } }).catch(() => null);
     setBusy(false);
+    if (!res) {
+      setError("Nätverksfel. Försök igen.");
+      return;
+    }
     if (!res.ok) {
       setError(res.error);
       return;
     }
     setPreview(res.preview);
-    setFull(res.full);
-    sessionStorage.setItem("skrivklart:brev", JSON.stringify({ preview: res.preview, full: res.full, text }));
+    setSealed(res.sealed);
+    setFull(null);
+    sessionStorage.setItem(
+      "skrivklart:brev",
+      JSON.stringify({ preview: res.preview, sealed: res.sealed, text }),
+    );
   }
 
   async function pay() {
     setPaying(true);
-    const order = await createOrder({ data: { slug: SLUG, origin: window.location.origin } });
-    const link = STRIPE_PAYMENT_LINKS[SLUG];
-    if (link && !isLocalHost() && order.ok) {
-      sessionStorage.setItem("skrivklart:pending", JSON.stringify({ token: order.token, slug: SLUG }));
-      if (order.checkoutUrl) {
-        window.location.href = order.checkoutUrl;
-        return;
-      }
-      window.open(link, "_blank", "noopener,noreferrer");
-      setPaying(false);
-      toast("Betala i Stripe-fliken. Kom tillbaka hit.");
+    const result = await startCheckout(SLUG);
+    if (result.kind === "redirect") return;
+    setPaying(false);
+    if (result.kind === "error") {
+      toast.error(result.error);
       return;
     }
-    unlock(SLUG);
-    setPaying(false);
+    unlock(SLUG, result.pass);
     toast.success("Upplåst.");
   }
 
@@ -200,6 +222,12 @@ function BrevPage() {
                   </Button>
                 </div>
               </>
+            ) : unlocked && sealed && !error ? (
+              <p className="flex items-center gap-2 text-sm text-muted">
+                <Loader2 className="size-4 animate-spin" /> Öppnar hela analysen…
+              </p>
+            ) : unlocked ? (
+              <p className="text-sm text-muted">Du har redan låst upp. Tryck på knappen ovan igen.</p>
             ) : (
               <div className="rounded-xl border border-line bg-bg-elevated p-6">
                 <p className="flex items-center gap-2 font-display text-xl">

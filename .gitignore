@@ -19,3 +19,4 @@ artifacts
 .grok/status
 .grok/*.png
 .grok/*.html
+!.env.example

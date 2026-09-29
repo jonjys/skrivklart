@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getProduct } from "./catalog";
 import { getSql } from "./db";
+import { LOCKED_ERROR, passCovers } from "./pass";
 import { fallbackDocument } from "./templates";
 
 const SYSTEM = `Du är Skrivklart, en svensk dokumentförfattare. Du skriver färdiga texter som mottagaren kan skicka eller skriva under efter att ha fyllt i [platshållare].
@@ -68,10 +69,20 @@ async function chat(
 }
 
 export const generateDocument = createServerFn({ method: "POST" })
-  .validator((input: { slug: string; answers: Record<string, string>; mode: "preview" | "full" }) => input)
+  .validator(
+    (input: {
+      slug: string;
+      answers: Record<string, string>;
+      mode: "preview" | "full";
+      pass?: string;
+    }) => input,
+  )
   .handler(async ({ data }) => {
     const product = getProduct(data.slug);
     if (!product) return { ok: false as const, error: "Okänt dokument." };
+    if (data.mode === "full" && !(await passCovers(data.pass, data.slug))) {
+      return { ok: false as const, error: LOCKED_ERROR, locked: true as const };
+    }
 
     const cap = data.mode === "full" ? 80 : 120;
     const used = await countToday(data.mode === "full" ? "generate_full" : "generate_preview");
@@ -108,10 +119,13 @@ export const generateDocument = createServerFn({ method: "POST" })
   });
 
 export const rewriteDocument = createServerFn({ method: "POST" })
-  .validator((input: { slug: string; text: string; instruction: string }) => input)
+  .validator((input: { slug: string; text: string; instruction: string; pass?: string }) => input)
   .handler(async ({ data }) => {
     const product = getProduct(data.slug);
     if (!product) return { ok: false as const, error: "Okänt dokument." };
+    if (!(await passCovers(data.pass, data.slug))) {
+      return { ok: false as const, error: LOCKED_ERROR, locked: true as const };
+    }
     const used = await countToday("rewrite");
     if (used >= 80) return { ok: false as const, error: "Kö just nu. Försök om en stund." };
 
