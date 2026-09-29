@@ -3,7 +3,7 @@
 // Contract with SandboxInternal.CapturePreviewThumbnail: exit 0 only after the
 // PNG is written; the service treats any non-zero exit as a gated skip and does
 // not download the file.
-import { chromium } from "playwright";
+import { loadPlaywright } from "./load-playwright.mjs";
 import { checkedOutputPath, checkedUrl } from "./browser-guard.mjs";
 
 // The service always passes a loopback URL and a /tmp path; the checks keep that
@@ -15,6 +15,7 @@ const outPng = checkedOutputPath(process.argv[3] || "/tmp/preview-thumbnail.png"
 ]);
 const timeoutMs = Number(process.env.PREVIEW_THUMBNAIL_TIMEOUT_MS || 45000);
 
+const { chromium } = await loadPlaywright();
 const browser = await chromium.launch({
   headless: true,
   args: ["--no-sandbox", "--disable-dev-shm-usage"],

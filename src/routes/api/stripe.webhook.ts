@@ -6,20 +6,19 @@ export const Route = createFileRoute("/api/stripe/webhook")({
     handlers: {
       POST: async ({ request }) => {
         const secret = process.env.STRIPE_WEBHOOK_SECRET;
-        const key = process.env.STRIPE_SECRET_KEY;
+        if (!secret) return new Response("webhook not configured", { status: 503 });
         const raw = await request.text();
+
+        const sig = request.headers.get("stripe-signature") ?? "";
+        if (!(await verifyStripeSignature(raw, sig, secret))) {
+          return new Response("bad signature", { status: 400 });
+        }
 
         let event: { type?: string; data?: { object?: Record<string, unknown> } };
         try {
           event = JSON.parse(raw) as typeof event;
         } catch {
           return new Response("invalid json", { status: 400 });
-        }
-
-        if (secret && key) {
-          const sig = request.headers.get("stripe-signature") ?? "";
-          const ok = await verifyStripeSignature(raw, sig, secret);
-          if (!ok) return new Response("bad signature", { status: 400 });
         }
 
         const type = event.type ?? "";
@@ -68,14 +67,17 @@ export const Route = createFileRoute("/api/stripe/webhook")({
 });
 
 async function verifyStripeSignature(payload: string, header: string, secret: string) {
-  const parts = Object.fromEntries(
-    header.split(",").map((p) => {
-      const [k, ...rest] = p.split("=");
-      return [k.trim(), rest.join("=")];
-    }),
-  ) as { t?: string; v1?: string };
-  if (!parts.t || !parts.v1) return false;
-  const signed = `${parts.t}.${payload}`;
+  let t = "";
+  const v1: string[] = [];
+  for (const part of header.split(",")) {
+    const [k, ...rest] = part.split("=");
+    const v = rest.join("=");
+    if (k?.trim() === "t") t = v;
+    else if (k?.trim() === "v1") v1.push(v);
+  }
+  if (!t || !v1.length) return false;
+  // Reject replays older than five minutes, as Stripe's own libraries do.
+  if (Math.abs(Date.now() / 1000 - Number(t)) > 300) return false;
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(secret),
@@ -83,7 +85,14 @@ async function verifyStripeSignature(payload: string, header: string, secret: st
     false,
     ["sign"],
   );
-  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(signed));
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`${t}.${payload}`));
   const hex = [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
-  return hex === parts.v1;
+  return v1.some((candidate) => safeEqual(candidate, hex));
+}
+
+function safeEqual(a: string, b: string) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
 }

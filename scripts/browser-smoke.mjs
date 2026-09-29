@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { mkdirSync, readFileSync, realpathSync, statSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
-import { chromium } from "playwright";
+import { loadPlaywright } from "./load-playwright.mjs";
 import { checkedOutputPath, checkedUrl } from "./browser-guard.mjs";
 import { computeBrandWarnings } from "./brand-check.mjs";
 import {
@@ -19,6 +19,8 @@ import {
   normalizedBodyTextHash,
   parseSmokeArgs,
 } from "./browser-smoke-verdict.mjs";
+
+const { chromium } = await loadPlaywright();
 
 const args = parseSmokeArgs(process.argv.slice(2), process.env);
 if (args.error) {

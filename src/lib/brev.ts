@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { Lang } from "./i18n";
 import { langName } from "./i18n";
+import { LOCKED_ERROR, passCovers, seal, unseal } from "./pass";
 
 export type BrevRiskLevel = "LOW" | "IMPORTANT" | "CRITICAL";
 
@@ -201,5 +202,17 @@ export const analyzeBrev = createServerFn({ method: "POST" })
       consequences: "",
       deadlines: full.deadlines.slice(0, 1),
     };
-    return { ok: true as const, preview, full };
+    // The full analysis leaves the server encrypted; unlockBrev opens it after payment.
+    return { ok: true as const, preview, sealed: await seal(full) };
+  });
+
+export const unlockBrev = createServerFn({ method: "POST" })
+  .validator((input: { sealed: string; pass?: string }) => input)
+  .handler(async ({ data }) => {
+    if (!(await passCovers(data.pass, "myndighetsbrev"))) {
+      return { ok: false as const, error: LOCKED_ERROR };
+    }
+    const full = await unseal<BrevAnalysis>(data.sealed);
+    if (!full) return { ok: false as const, error: "Analysen gick ut. Klistra in brevet igen." };
+    return { ok: true as const, full };
   });
