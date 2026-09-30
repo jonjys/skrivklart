@@ -1077,15 +1077,15 @@ export type Bundle = {
   days: number;
 };
 
-export const MAMMA_SLUG = "mammapaket";
+export const FAMILY_SLUG = "familjepaket";
 export const JOB_PACK_SLUG = "jobbpaket";
 export const ALL_ACCESS_SLUG = "pro";
 
 export const BUNDLES: Bundle[] = [
   {
-    slug: MAMMA_SLUG,
-    name: "Mammapaketet",
-    short: "Sju dokument för dig som sköter allt själv.",
+    slug: FAMILY_SLUG,
+    name: "Familjepaketet",
+    short: "Sju dokument för barn, pengar och myndigheter. Ett köp.",
     priceKr: 149,
     includes: [
       "underhallsavtal",

@@ -3,14 +3,14 @@ import { Check } from "lucide-react";
 import { BuyBundleButton } from "@/components/buy-bundle-button";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
-import { BUNDLES, bundleValueKr, CATEGORIES, getProduct, MAMMA_SLUG, PRODUCTS } from "@/lib/catalog";
+import { BUNDLES, bundleValueKr, CATEGORIES, getProduct, FAMILY_SLUG, PRODUCTS } from "@/lib/catalog";
 import { productOffer } from "@/lib/schema";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { cn, sek } from "@/lib/utils";
 
 const TITLE = "Priser – dokument från 59 kr, paket från 129 kr | Skrivklart";
 const DESCRIPTION =
-  "Kortare brev 59 kr, avtal och överklaganden 99 kr. Mammapaketet med sju dokument 149 kr. Allt i 30 dagar 199 kr. Ingen prenumeration, utkast gratis.";
+  "Kortare brev 59 kr, avtal och överklaganden 99 kr. Familjepaketet med sju dokument 149 kr. Allt i 30 dagar 199 kr. Ingen prenumeration, utkast gratis.";
 
 export const Route = createFileRoute("/priser")({
   component: PriserPage,
@@ -73,7 +73,7 @@ function PriserPage() {
         <h2 className="mt-16 font-display text-4xl tracking-tight">Paket – köp flera, betala mindre</h2>
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
           {BUNDLES.map((b) => {
-            const featured = b.slug === MAMMA_SLUG;
+            const featured = b.slug === FAMILY_SLUG;
             const docs =
               b.includes === "all"
                 ? null

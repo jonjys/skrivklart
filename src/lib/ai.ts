@@ -181,7 +181,7 @@ function routeSupport(q: string) {
     return p ? `${p.name}, ${p.priceKr} kr. ${line}` : line;
   };
   if (/underhåll|underhall|betalar inte|pappan/.test(q))
-    return pick("underhallsavtal", "Bevittnat av två personer kan det drivas in via Kronofogden. Ingår i Mammapaketet, 149 kr för sju dokument.");
+    return pick("underhallsavtal", "Bevittnat av två personer kan det drivas in via Kronofogden. Ingår i Familjepaketet, 149 kr för sju dokument.");
   if (/umgänge|umgange|varannan|vårdnad|boende/.test(q))
     return pick("umgangesavtal", "Schema, lov och hämtning. Socialnämnden kan godkänna avtalet.");
   if (/inkasso|avbetal|skuld|kronofogd/.test(q))
@@ -203,7 +203,7 @@ function routeSupport(q: string) {
   if (/säg upp|sluta|uppsäg/.test(q)) return pick("uppsagning", "Kort, datum, begäran om arbetsgivarintyg.");
   if (/fullmakt/.test(q)) return pick("fullmakt", "En sida: vem, vad, hur länge.");
   if (/lån|skuldebrev/.test(q)) return pick("skuldebrev", "Belopp, ränta, datum.");
-  return "Berätta vad det gäller: barn och underhåll, Försäkringskassan, skulder, skolan eller bostad. Kortare brev 59 kr, avtal 99 kr, Mammapaketet 149 kr. Inget konto. Inte juridisk rådgivning.";
+  return "Berätta vad det gäller: barn och underhåll, Försäkringskassan, skulder, skolan eller bostad. Kortare brev 59 kr, avtal 99 kr, Familjepaketet 149 kr. Inget konto. Inte juridisk rådgivning.";
 }
 
 export const getStats = createServerFn({ method: "GET" }).handler(async () => {

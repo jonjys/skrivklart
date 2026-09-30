@@ -15,6 +15,7 @@ import { generateDocument, recordEvent, rewriteDocument } from "@/lib/ai";
 import { BUNDLES, bundleValueKr, type DocProduct } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout";
 import { useSkrivklart } from "@/lib/store";
+import { PAY_METHODS } from "@/lib/site";
 import { sek } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -321,7 +322,7 @@ export function Generator({ product }: { product: DocProduct }) {
               </Button>
               <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-subtle">
                 <ShieldCheck className="size-3.5" />
-                Säker kortbetalning via Stripe. Tillbaka hit direkt efteråt.
+                {PAY_METHODS.join(" · ")} via Stripe. Tillbaka hit direkt efteråt.
               </p>
               {upsell ? (
                 <div className="mt-4 rounded-lg border border-line bg-paper p-4 text-sm">
