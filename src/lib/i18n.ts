@@ -29,7 +29,7 @@ const dict = {
     about: "Om",
     terms: "Villkor",
     privacy: "Integritet",
-    brev_kicker: "Brevklar, inbyggt",
+    brev_kicker: "Myndighetsbrev på vanlig svenska",
     brev_h1: "Vad betyder det här brevet?",
     brev_lead:
       "FK, Skatteverket, Kronofogden, CSN. Klistra in texten. Du får det på vanlig svenska, med datum och nästa steg.",
@@ -103,7 +103,7 @@ const dict = {
     about: "About",
     terms: "Terms",
     privacy: "Privacy",
-    brev_kicker: "Brevklar, built in",
+    brev_kicker: "Government letters in plain language",
     brev_h1: "What does this letter mean?",
     brev_lead:
       "Försäkringskassan, Skatteverket, Kronofogden, CSN. Paste the text. Get it in plain language, with dates and next steps.",
@@ -176,7 +176,7 @@ const dict = {
     about: "عنّا",
     terms: "شروط",
     privacy: "خصوصية",
-    brev_kicker: "بريفكلار مدمج",
+    brev_kicker: "رسائل الجهات الرسمية بلغة واضحة",
     brev_h1: "ماذا يقول هذا الخطاب؟",
     brev_lead:
       "صندوق التأمين، مصلحة الضرائب، Kronofogden، CSN. الصق النص. يصلك بلغة واضحة مع التواريخ وما يجب فعله.",

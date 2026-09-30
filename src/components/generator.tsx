@@ -174,7 +174,7 @@ export function Generator({ product }: { product: DocProduct }) {
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start">
       <form
-        className="flex flex-col gap-4 rounded-xl border border-line bg-paper p-5 shadow-[var(--shadow-soft)]"
+        className="flex flex-col gap-4 rounded-2xl border-2 border-line bg-paper p-5 shadow-[var(--shadow-soft)]"
         onSubmit={(e) => {
           e.preventDefault();
           void write("preview");
@@ -234,7 +234,7 @@ export function Generator({ product }: { product: DocProduct }) {
           </p>
         ) : null}
 
-        <Button type="submit" size="lg" disabled={busy !== null} className="w-full">
+        <Button type="submit" size="xl" variant="accent" disabled={busy !== null} className="w-full">
           {busy === "preview" ? <Loader2 className="size-4 animate-spin" /> : null}
           {preview ? "Skriv nytt utkast" : "Skriv gratis utkast"}
         </Button>
@@ -248,7 +248,7 @@ export function Generator({ product }: { product: DocProduct }) {
       <div className="relative">
         <article
           ref={docRef}
-          className="min-h-80 scroll-mt-4 rounded-xl border border-line bg-paper p-6 shadow-[var(--shadow-soft)] sm:p-8"
+          className="min-h-80 scroll-mt-20 rounded-2xl border-2 border-line bg-paper p-6 shadow-[var(--shadow-soft)] sm:p-8"
         >
           <p className="text-xs font-medium tracking-wide text-muted uppercase">Dokument</p>
           {shown ? (
@@ -312,7 +312,8 @@ export function Generator({ product }: { product: DocProduct }) {
               </ul>
               <Button
                 type="button"
-                size="lg"
+                size="xl"
+                variant="accent"
                 className="mt-5 w-full"
                 onClick={() => void pay()}
                 disabled={busy !== null}

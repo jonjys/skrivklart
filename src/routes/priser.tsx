@@ -1,11 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { BuyBundleButton } from "@/components/buy-bundle-button";
+import { HeroChip, PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
-import { BUNDLES, bundleValueKr, CATEGORIES, getProduct, FAMILY_SLUG, PRODUCTS } from "@/lib/catalog";
+import {
+  BUNDLES,
+  bundleValueKr,
+  CATEGORIES,
+  getProduct,
+  FAMILY_SLUG,
+  PRODUCTS,
+} from "@/lib/catalog";
 import { productOffer } from "@/lib/schema";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { PAY_METHODS, SITE_NAME, SITE_URL } from "@/lib/site";
 import { cn, sek } from "@/lib/utils";
 
 const TITLE = "Priser – dokument från 59 kr, paket från 129 kr | Skrivklart";
@@ -40,14 +48,23 @@ const jsonLd = {
 function PriserPage() {
   return (
     <SiteFrame>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-        <h1 className="font-display text-5xl tracking-tight sm:text-6xl">Priser</h1>
-        <p className="mt-4 max-w-xl text-lg text-muted">
-          Utkastet är alltid gratis. Du betalar bara för hela texten – en gång, ingen prenumeration.
-        </p>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PageHero
+        kicker="Inga prenumerationer"
+        title="Priser som"
+        accent="går att betala."
+        sub="Utkastet är alltid gratis. Du betalar bara för hela texten – en gång."
+      >
+        <div className="flex flex-wrap gap-2">
+          <HeroChip strong>Från 59 kr</HeroChip>
+          <HeroChip>Betala med {PAY_METHODS.join(", ")}</HeroChip>
+        </div>
+      </PageHero>
+      <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
+        <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border-2 border-line bg-paper p-6 sm:p-8">
             <p className="font-display text-5xl font-bold tracking-tight">
               59<span className="ml-1 text-xl">kr</span>
@@ -70,7 +87,9 @@ function PriserPage() {
           </div>
         </div>
 
-        <h2 className="mt-16 font-display text-4xl tracking-tight">Paket – köp flera, betala mindre</h2>
+        <h2 className="mt-16 font-display text-4xl tracking-tight">
+          Paket – köp flera, betala mindre
+        </h2>
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
           {BUNDLES.map((b) => {
             const featured = b.slug === FAMILY_SLUG;
@@ -84,7 +103,9 @@ function PriserPage() {
                 id={b.slug}
                 className={cn(
                   "flex scroll-mt-20 flex-col rounded-3xl p-6 sm:p-8",
-                  featured ? "bg-pine-deep text-pine-fg shadow-[var(--shadow-lift)]" : "border-2 border-line bg-paper",
+                  featured
+                    ? "bg-pine-deep text-pine-fg shadow-[var(--shadow-lift)]"
+                    : "border-2 border-line bg-paper",
                 )}
               >
                 {featured ? (
@@ -93,7 +114,9 @@ function PriserPage() {
                   </p>
                 ) : null}
                 <h3 className="font-display text-3xl tracking-tight">{b.name}</h3>
-                <p className={cn("mt-2 text-sm", featured ? "text-pine-fg/75" : "text-muted")}>{b.short}</p>
+                <p className={cn("mt-2 text-sm", featured ? "text-pine-fg/75" : "text-muted")}>
+                  {b.short}
+                </p>
                 <div className="mt-6 flex items-end gap-3">
                   <p className="font-display text-5xl font-bold tracking-tight tabular-nums">
                     {b.priceKr}
@@ -107,18 +130,25 @@ function PriserPage() {
                   {docs
                     ? docs.map((p) => (
                         <li key={p.slug} className="flex gap-2">
-                          <Check className={cn("mt-0.5 size-4 shrink-0", featured ? "text-sun" : "text-pine")} />
+                          <Check
+                            className={cn(
+                              "mt-0.5 size-4 shrink-0",
+                              featured ? "text-sun" : "text-pine",
+                            )}
+                          />
                           {p.name}
                         </li>
                       ))
-                    : [`Alla ${PRODUCTS.length} dokumenttyper`, "Obegränsat antal dokument", "Omskrivningar ingår"].map(
-                        (line) => (
-                          <li key={line} className="flex gap-2">
-                            <Check className="mt-0.5 size-4 shrink-0 text-pine" />
-                            {line}
-                          </li>
-                        ),
-                      )}
+                    : [
+                        `Alla ${PRODUCTS.length} dokumenttyper`,
+                        "Obegränsat antal dokument",
+                        "Omskrivningar ingår",
+                      ].map((line) => (
+                        <li key={line} className="flex gap-2">
+                          <Check className="mt-0.5 size-4 shrink-0 text-pine" />
+                          {line}
+                        </li>
+                      ))}
                   <li className={cn("pt-2 text-xs", featured ? "text-pine-fg/60" : "text-subtle")}>
                     Olåst i {b.days} dagar i den här webbläsaren. Engångsbetalning.
                   </li>
@@ -143,7 +173,9 @@ function PriserPage() {
             if (!docs.length) return null;
             return (
               <div key={cat.id} className="mt-6">
-                <h3 className="text-xs font-bold tracking-[0.18em] text-clay uppercase">{cat.label}</h3>
+                <h3 className="text-xs font-bold tracking-[0.18em] text-clay uppercase">
+                  {cat.label}
+                </h3>
                 <div className="mt-2 divide-y divide-line border-y border-line">
                   {docs.map((p) => (
                     <Link
@@ -164,7 +196,9 @@ function PriserPage() {
 
         <div className="mt-16 rounded-2xl bg-blush p-6 sm:p-8">
           <p className="font-display text-2xl tracking-tight">Osäker på vad du behöver?</p>
-          <p className="mt-2 text-muted">Skriv utkastet först. Det är gratis, och du ser direkt om texten passar.</p>
+          <p className="mt-2 text-muted">
+            Skriv utkastet först. Det är gratis, och du ser direkt om texten passar.
+          </p>
           <Button asChild className="mt-4" variant="accent" size="lg">
             <Link to="/dokument">Se alla dokument</Link>
           </Button>

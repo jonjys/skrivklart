@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
 import { getProduct } from "@/lib/catalog";
@@ -30,11 +31,17 @@ export const Route = createFileRoute("/guider/$slug")({
   component: GuidePage,
   notFoundComponent: () => (
     <SiteFrame>
-      <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <h1 className="font-display text-3xl">Guiden finns inte</h1>
-        <Link to="/guider" className="mt-4 inline-block text-pine">
-          Till guiderna
-        </Link>
+      <div className="bg-pine-deep px-4 py-16 sm:py-24">
+        <div className="mx-auto max-w-xl rounded-3xl bg-paper p-8 text-center shadow-[var(--shadow-lift)] sm:p-10">
+          <h1 className="font-display text-3xl tracking-tight">Guiden finns inte</h1>
+          <p className="mt-3 text-muted">Länken kan vara gammal. Välj direkt i listan i stället.</p>
+          <Link
+            to="/guider"
+            className="mt-6 inline-flex h-12 items-center rounded-xl bg-clay px-5 font-semibold text-clay-fg"
+          >
+            Till guiderna
+          </Link>
+        </div>
       </div>
     </SiteFrame>
   ),
@@ -61,18 +68,24 @@ function GuidePage() {
 
   return (
     <SiteFrame>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <article className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
-        <p className="text-sm text-muted">
-          <Link to="/guider" className="hover:text-ink">
-            Guider
-          </Link>
-          <span className="mx-2 text-subtle">/</span>
-          {guide.minutes} min
-        </p>
-        <h1 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">{guide.title}</h1>
-        <p className="mt-4 text-lg text-muted">{guide.excerpt}</p>
-        <div className="mt-8 space-y-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PageHero
+        kicker={
+          <>
+            <Link to="/guider" className="hover:underline">
+              Guider
+            </Link>
+            <span className="text-pine-fg/60"> · {guide.minutes} min läsning</span>
+          </>
+        }
+        title={guide.title}
+        sub={guide.excerpt}
+      />
+      <article className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-14">
+        <div className="space-y-5">
           {guide.body.map((p) => (
             <p key={p} className="text-lg leading-relaxed text-ink">
               {p}
@@ -81,7 +94,9 @@ function GuidePage() {
         </div>
         {product ? (
           <div className="mt-12 rounded-2xl bg-pine-deep p-6 text-pine-fg sm:p-8">
-            <p className="text-xs font-bold tracking-[0.18em] text-sun uppercase">Skriv det direkt</p>
+            <p className="text-xs font-bold tracking-[0.18em] text-sun uppercase">
+              Skriv det direkt
+            </p>
             <p className="mt-2 font-display text-3xl tracking-tight">{product.name}</p>
             <p className="mt-2 text-pine-fg/80">
               {product.short} Gratis utkast, {sek(product.priceKr)} för hela texten.

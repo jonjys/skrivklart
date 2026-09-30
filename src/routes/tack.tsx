@@ -13,17 +13,12 @@ export const Route = createFileRoute("/tack")({
     session_id: typeof search.session_id === "string" ? search.session_id : undefined,
   }),
   head: () => ({
-    meta: [
-      { title: "Tack — Skrivklart" },
-      { name: "robots", content: "noindex, nofollow" },
-    ],
+    meta: [{ title: "Tack — Skrivklart" }, { name: "robots", content: "noindex, nofollow" }],
   }),
 });
 
 type Status =
-  | { state: "checking" }
-  | { state: "done"; slug: string }
-  | { state: "failed"; error: string };
+  { state: "checking" } | { state: "done"; slug: string } | { state: "failed"; error: string };
 
 function destination(slug: string) {
   if (slug === "myndighetsbrev") return { to: "/brev" as const };
@@ -80,45 +75,49 @@ function TackPage() {
 
   return (
     <SiteFrame>
-      <div className="mx-auto max-w-xl px-4 py-20 text-center sm:px-6">
-        {status.state === "checking" ? (
-          <>
-            <Loader2 className="mx-auto size-7 animate-spin text-pine" />
-            <h1 className="mt-4 font-display text-3xl tracking-tight">Bekräftar betalningen…</h1>
-            <p className="mt-3 text-muted">Det tar bara några sekunder.</p>
-          </>
-        ) : status.state === "failed" ? (
-          <>
-            <h1 className="font-display text-3xl tracking-tight">Något gick snett</h1>
-            <p className="mt-4 text-muted">{status.error}</p>
-            <p className="mt-2 text-sm text-subtle">
-              Har du betalat? Ladda om sidan, eller skriv till oss via support så löser vi det.
-            </p>
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Button type="button" onClick={() => window.location.reload()}>
-                Försök igen
-              </Button>
-              <Button asChild variant="outline">
-                <Link to="/support">Support</Link>
-              </Button>
-            </div>
-          </>
-        ) : (
-          <>
-            <CheckCircle2 className="mx-auto size-10 text-pine" />
-            <h1 className="mt-4 font-display text-4xl tracking-tight">Tack!</h1>
-            <p className="mt-4 text-muted">
-              {bundle
-                ? `${bundle.name} är olåst i den här webbläsaren i ${bundle.days} dagar.`
-                : `${item?.name ?? "Dokumentet"} är olåst. Vi skickar dig tillbaka till texten…`}
-            </p>
-            <div className="mt-8">
-              <Button asChild size="lg">
-                <Link {...destination(slug!)}>{bundle ? "Börja skriva" : "Öppna dokumentet"}</Link>
-              </Button>
-            </div>
-          </>
-        )}
+      <div className="bg-pine-deep px-4 py-14 sm:py-24">
+        <div className="mx-auto max-w-xl rounded-3xl bg-paper p-8 text-center shadow-[var(--shadow-lift)] sm:p-10">
+          {status.state === "checking" ? (
+            <>
+              <Loader2 className="mx-auto size-7 animate-spin text-pine" />
+              <h1 className="mt-4 font-display text-3xl tracking-tight">Bekräftar betalningen…</h1>
+              <p className="mt-3 text-muted">Det tar bara några sekunder.</p>
+            </>
+          ) : status.state === "failed" ? (
+            <>
+              <h1 className="font-display text-3xl tracking-tight">Något gick snett</h1>
+              <p className="mt-4 text-muted">{status.error}</p>
+              <p className="mt-2 text-sm text-subtle">
+                Har du betalat? Ladda om sidan, eller skriv till oss via support så löser vi det.
+              </p>
+              <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                <Button type="button" onClick={() => window.location.reload()}>
+                  Försök igen
+                </Button>
+                <Button asChild variant="outline">
+                  <Link to="/support">Support</Link>
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="mx-auto size-10 text-pine" />
+              <h1 className="mt-4 font-display text-4xl tracking-tight">Tack!</h1>
+              <p className="mt-4 text-muted">
+                {bundle
+                  ? `${bundle.name} är olåst i den här webbläsaren i ${bundle.days} dagar.`
+                  : `${item?.name ?? "Dokumentet"} är olåst. Vi skickar dig tillbaka till texten…`}
+              </p>
+              <div className="mt-8">
+                <Button asChild size="lg">
+                  <Link {...destination(slug!)}>
+                    {bundle ? "Börja skriva" : "Öppna dokumentet"}
+                  </Link>
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </SiteFrame>
   );

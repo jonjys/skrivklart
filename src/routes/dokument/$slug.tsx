@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Check } from "lucide-react";
 import { Generator } from "@/components/generator";
+import { HeroChip, PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
 import { BUNDLES, CATEGORIES, getProduct } from "@/lib/catalog";
 import { recordEvent } from "@/lib/ai";
@@ -37,11 +38,17 @@ export const Route = createFileRoute("/dokument/$slug")({
   component: DokumentPage,
   notFoundComponent: () => (
     <SiteFrame>
-      <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <h1 className="font-display text-3xl">Dokumentet finns inte</h1>
-        <Link to="/dokument" className="mt-4 inline-block text-pine">
-          Till katalogen
-        </Link>
+      <div className="bg-pine-deep px-4 py-16 sm:py-24">
+        <div className="mx-auto max-w-xl rounded-3xl bg-paper p-8 text-center shadow-[var(--shadow-lift)] sm:p-10">
+          <h1 className="font-display text-3xl tracking-tight">Dokumentet finns inte</h1>
+          <p className="mt-3 text-muted">Länken kan vara gammal. Välj direkt i listan i stället.</p>
+          <Link
+            to="/dokument"
+            className="mt-6 inline-flex h-12 items-center rounded-xl bg-clay px-5 font-semibold text-clay-fg"
+          >
+            Till alla dokument
+          </Link>
+        </div>
       </div>
     </SiteFrame>
   ),
@@ -88,43 +95,38 @@ function DokumentPage() {
           ]),
         }}
       />
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-        <nav aria-label="Brödsmulor" className="text-sm text-muted">
-          <Link to="/dokument" className="hover:text-ink">
-            Dokument
-          </Link>
-          {category ? (
-            <>
-              <span className="mx-2 text-subtle">/</span>
-              {category.label}
-            </>
-          ) : null}
-        </nav>
-        <h1 className="mt-3 font-display text-4xl tracking-tight sm:text-6xl">{product.name}</h1>
-        <p className="mt-4 max-w-2xl text-lg text-muted">{product.pitch}</p>
-        <ul className="mt-5 flex flex-wrap gap-2 text-sm">
-          <li className="rounded-full bg-pine px-3 py-1.5 font-semibold text-pine-fg tabular-nums">
-            {sek(product.priceKr)} för hela texten
-          </li>
+      <PageHero
+        wide
+        kicker={
+          <nav aria-label="Brödsmulor">
+            <Link to="/dokument" className="hover:underline">
+              Dokument
+            </Link>
+            {category ? <span className="text-pine-fg/60"> / {category.label}</span> : null}
+          </nav>
+        }
+        title={product.name}
+        sub={product.pitch}
+      >
+        <div className="flex flex-wrap gap-2">
+          <HeroChip strong>{sek(product.priceKr)} för hela texten</HeroChip>
           {["Gratis utkast", "Inget konto", "Klart på en minut"].map((chip) => (
-            <li key={chip} className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5">
-              <Check className="size-3.5 text-pine" />
+            <HeroChip key={chip}>
+              <Check className="size-3.5 text-sun" />
               {chip}
-            </li>
+            </HeroChip>
           ))}
           {bundle ? (
-            <li>
-              <Link
-                to="/priser"
-                hash={bundle.slug}
-                className="inline-flex rounded-full bg-blush px-3 py-1.5 font-semibold text-clay hover:underline"
-              >
+            <Link to="/priser" hash={bundle.slug} className="hover:opacity-90">
+              <HeroChip>
                 Ingår i {bundle.name}, {sek(bundle.priceKr)}
-              </Link>
-            </li>
+              </HeroChip>
+            </Link>
           ) : null}
-        </ul>
-        <div className="mt-10">
+        </div>
+      </PageHero>
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+        <div>
           <Generator product={product} />
         </div>
 
