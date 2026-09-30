@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Loader2, Lock } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -137,36 +138,47 @@ function BrevPage() {
           ),
         }}
       />
-      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">{t(lang, "brev_kicker")}</p>
-        <h1 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">{t(lang, "brev_h1")}</h1>
-        <p className="mt-4 max-w-xl text-lg text-muted">
-          {t(lang, "brev_lead")} {sek(product.priceKr)}.
-        </p>
-        <p className="mt-2 text-xs text-subtle">{t(lang, "lang_note")}</p>
-
-        <label className="mt-10 block text-sm font-medium text-ink" htmlFor="brev-text">
-          {t(lang, "brev_label")}
-        </label>
-        <Textarea
-          id="brev-text"
-          className="mt-2 min-h-48"
-          placeholder={t(lang, "brev_ph")}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        {error ? <p className="mt-2 text-sm text-danger">{error}</p> : null}
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Button onClick={() => void analyze()} disabled={busy || text.trim().length < 12}>
-            {busy ? <Loader2 className="size-4 animate-spin" /> : null}
-            {t(lang, "brev_go")}
-          </Button>
-          <p className="self-center text-sm text-subtle">{t(lang, "brev_free")}</p>
+      <PageHero
+        kicker={t(lang, "brev_kicker")}
+        title={t(lang, "brev_h1")}
+        sub={
+          <>
+            {t(lang, "brev_lead")} {sek(product.priceKr)}.
+          </>
+        }
+      >
+        <p className="text-sm text-pine-fg/60">{t(lang, "lang_note")}</p>
+      </PageHero>
+      <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-12">
+        <div className="rounded-2xl border-2 border-line bg-paper p-5 shadow-[var(--shadow-soft)] sm:p-6">
+          <label className="block text-sm font-semibold text-ink" htmlFor="brev-text">
+            {t(lang, "brev_label")}
+          </label>
+          <Textarea
+            id="brev-text"
+            className="mt-2 min-h-48"
+            placeholder={t(lang, "brev_ph")}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          {error ? <p className="mt-2 text-sm text-danger">{error}</p> : null}
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button
+              size="xl"
+              variant="accent"
+              onClick={() => void analyze()}
+              disabled={busy || text.trim().length < 12}
+            >
+              {busy ? <Loader2 className="size-4 animate-spin" /> : null}
+              {t(lang, "brev_go")}
+            </Button>
+            <p className="text-sm text-subtle">{t(lang, "brev_free")}</p>
+          </div>
         </div>
 
         {shown ? (
           <div className="mt-12 space-y-6">
-            <div className="rounded-xl border border-line bg-paper p-6">
+            <div className="rounded-2xl border-2 border-line bg-paper p-6">
               <p className="text-sm text-muted">
                 {shown.senderName ?? t(lang, "unknown_sender")}
                 {shown.documentType ? ` · ${shown.documentType}` : ""}
@@ -181,11 +193,15 @@ function BrevPage() {
               <>
                 <section>
                   <h2 className="font-display text-2xl tracking-tight">{t(lang, "brev_plain")}</h2>
-                  <p className="mt-3 whitespace-pre-wrap leading-relaxed text-ink">{full.plainLanguage}</p>
+                  <p className="mt-3 whitespace-pre-wrap leading-relaxed text-ink">
+                    {full.plainLanguage}
+                  </p>
                 </section>
                 {full.deadlines.length ? (
                   <section>
-                    <h2 className="font-display text-2xl tracking-tight">{t(lang, "brev_dates")}</h2>
+                    <h2 className="font-display text-2xl tracking-tight">
+                      {t(lang, "brev_dates")}
+                    </h2>
                     <ul className="mt-3 space-y-1 text-sm text-ink">
                       {full.deadlines.map((d) => (
                         <li key={d.description + (d.dueDate ?? "")}>
@@ -227,9 +243,11 @@ function BrevPage() {
                 <Loader2 className="size-4 animate-spin" /> Öppnar hela analysen…
               </p>
             ) : unlocked ? (
-              <p className="text-sm text-muted">Du har redan låst upp. Tryck på knappen ovan igen.</p>
+              <p className="text-sm text-muted">
+                Du har redan låst upp. Tryck på knappen ovan igen.
+              </p>
             ) : (
-              <div className="rounded-xl border border-line bg-bg-elevated p-6">
+              <div className="rounded-2xl border-2 border-clay/30 bg-blush p-6">
                 <p className="flex items-center gap-2 font-display text-xl">
                   <Lock className="size-4" />
                   {t(lang, "brev_lock")}
@@ -237,7 +255,13 @@ function BrevPage() {
                 <p className="mt-2 text-sm text-muted">
                   {t(lang, "brev_lock_sub")} {sek(product.priceKr)}.
                 </p>
-                <Button className="mt-4" onClick={() => void pay()} disabled={paying}>
+                <Button
+                  className="mt-4"
+                  size="lg"
+                  variant="accent"
+                  onClick={() => void pay()}
+                  disabled={paying}
+                >
                   {paying ? <Loader2 className="size-4 animate-spin" /> : null}
                   {t(lang, "brev_unlock")} {sek(product.priceKr)}
                 </Button>

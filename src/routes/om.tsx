@@ -1,16 +1,33 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
 
 export const Route = createFileRoute("/om")({
   component: OmPage,
+  head: () => ({
+    meta: [
+      { title: "Om Skrivklart – brev och avtal för dig som sköter allt själv" },
+      {
+        name: "description",
+        content:
+          "Skrivklart skriver utkast till brev och avtal på svenska: underhållsbidrag, Försäkringskassan, skulder, skola. Gratis utkast, från 59 kr.",
+      },
+    ],
+    links: [{ rel: "canonical", href: "https://www.skrivklart.se/om" }],
+  }),
 });
 
 function OmPage() {
   return (
     <SiteFrame>
-      <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
-        <h1 className="font-display text-4xl tracking-tight">Om Skrivklart</h1>
-        <div className="mt-6 space-y-4 text-base leading-relaxed text-muted">
+      <PageHero
+        size="sm"
+        kicker="Om oss"
+        title="Skrivklart"
+        sub="Brev och avtal för dig som sköter allt själv – skrivna på en minut, till ett pris som går att betala."
+      />
+      <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-14">
+        <div className="space-y-4 rounded-2xl border-2 border-line bg-paper p-6 text-base leading-relaxed text-ink/85 sm:p-8">
           <p>
             De flesta fastnar inte för att de inte kan skriva. De fastnar för att texten ska vara
             formell, svensk och omöjlig att ångra – och blanketten sitter i kroppen.
