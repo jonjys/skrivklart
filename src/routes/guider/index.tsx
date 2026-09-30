@@ -10,7 +10,7 @@ export const Route = createFileRoute("/guider/")({
       {
         name: "description",
         content:
-          "Korta guider på vanlig svenska: avtal om underhållsbidrag, när pappan inte betalar, avbetalningsplan hos inkasso, omprövning hos Försäkringskassan och brev till skolan.",
+          "Korta guider på vanlig svenska: avtal om underhållsbidrag, när den andra föräldern inte betalar, avbetalningsplan hos inkasso, omprövning hos Försäkringskassan och brev till skolan.",
       },
     ],
     links: [{ rel: "canonical", href: "https://www.skrivklart.se/guider" }],

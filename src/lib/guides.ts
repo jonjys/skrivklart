@@ -25,7 +25,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "pappan-betalar-inte-underhall",
-    title: "Pappan betalar inte underhåll – vad gör jag nu?",
+    title: "Den andra föräldern betalar inte underhåll – vad gör jag nu?",
     excerpt:
       "Tre vägar när pengarna uteblir: underhållsstöd från Försäkringskassan, Kronofogden eller ett nytt avtal.",
     productSlug: "underhallsavtal",
