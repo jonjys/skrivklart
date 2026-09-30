@@ -15,7 +15,7 @@ import { generateDocument, recordEvent, rewriteDocument } from "@/lib/ai";
 import { BUNDLES, bundleValueKr, type DocProduct } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout";
 import { useSkrivklart } from "@/lib/store";
-import { PAY_METHODS } from "@/lib/site";
+import { usePayMethods } from "@/lib/pay-methods";
 import { sek } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -38,6 +38,7 @@ function escapeHtml(text: string) {
 }
 
 export function Generator({ product }: { product: DocProduct }) {
+  const payMethods = usePayMethods();
   const draft = useSkrivklart((s) => s.drafts[product.slug]);
   const setAnswers = useSkrivklart((s) => s.setAnswers);
   const setPreview = useSkrivklart((s) => s.setPreview);
@@ -323,7 +324,7 @@ export function Generator({ product }: { product: DocProduct }) {
               </Button>
               <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-subtle">
                 <ShieldCheck className="size-3.5" />
-                {PAY_METHODS.join(" · ")} via Stripe. Tillbaka hit direkt efteråt.
+                {payMethods.join(" · ")} via Stripe. Tillbaka hit direkt efteråt.
               </p>
               {upsell ? (
                 <div className="mt-4 rounded-lg border border-line bg-paper p-4 text-sm">

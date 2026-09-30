@@ -18,7 +18,8 @@ import { bundleValueKr, FAMILY_SLUG, getBundle, getProduct, PRODUCTS } from "@/l
 import { HOME_COPY, SITUATIONS } from "@/lib/home-copy";
 import { useI18n } from "@/lib/i18n";
 import { merchantReturnPolicy, productImages, productOffer } from "@/lib/schema";
-import { PAY_METHODS, SITE_NAME, SITE_URL } from "@/lib/site";
+import { usePayMethods } from "@/lib/pay-methods";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { sek } from "@/lib/utils";
 
 const SV = HOME_COPY.sv;
@@ -104,6 +105,7 @@ const jsonLd = {
 };
 
 function Home() {
+  const payMethods = usePayMethods();
   const lang = useI18n((s) => s.lang);
   const c = HOME_COPY[lang];
 
@@ -163,7 +165,7 @@ function Home() {
               </li>
             ))}
             <li className="text-pine-fg/60">
-              {c.pay_with} {PAY_METHODS.join(", ")}
+              {c.pay_with} {payMethods.join(", ")}
             </li>
           </ul>
         </div>

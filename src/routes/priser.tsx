@@ -13,7 +13,8 @@ import {
   PRODUCTS,
 } from "@/lib/catalog";
 import { productOffer } from "@/lib/schema";
-import { PAY_METHODS, SITE_NAME, SITE_URL } from "@/lib/site";
+import { usePayMethods } from "@/lib/pay-methods";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { cn, sek } from "@/lib/utils";
 
 const TITLE = "Priser – dokument från 59 kr, paket från 129 kr | Skrivklart";
@@ -46,6 +47,7 @@ const jsonLd = {
 };
 
 function PriserPage() {
+  const payMethods = usePayMethods();
   return (
     <SiteFrame>
       <script
@@ -60,7 +62,7 @@ function PriserPage() {
       >
         <div className="flex flex-wrap gap-2">
           <HeroChip strong>Från 59 kr</HeroChip>
-          <HeroChip>Betala med {PAY_METHODS.join(", ")}</HeroChip>
+          <HeroChip>Betala med {payMethods.join(", ")}</HeroChip>
         </div>
       </PageHero>
       <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
