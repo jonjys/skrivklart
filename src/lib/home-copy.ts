@@ -47,7 +47,7 @@ const sv: HomeCopy = {
   hero_sub: "Välj vad det gäller, svara på några frågor och få ett färdigt brev. Gratis att läsa.",
   pick: "Vad behöver du hjälp med?",
   sit: {
-    underhall: "Pappan betalar inte underhåll",
+    underhall: "Den andra föräldern betalar inte underhåll",
     fk: "Avslag från Försäkringskassan",
     skuld: "Räkningar jag inte hinner betala",
     brev: "Ett brev jag inte förstår",
@@ -93,7 +93,7 @@ const en: HomeCopy = {
   hero_sub: "Pick your situation, answer a few questions, get a finished letter in Swedish. Free to read.",
   pick: "What do you need help with?",
   sit: {
-    underhall: "The father isn't paying support",
+    underhall: "The other parent isn't paying support",
     fk: "Rejected by Försäkringskassan",
     skuld: "Bills I can't pay in time",
     brev: "A letter I don't understand",
@@ -127,7 +127,7 @@ const ar: HomeCopy = {
   hero_sub: "اختاري موضوعك، أجيبي عن بضعة أسئلة، واحصلي على رسالة جاهزة بالسويدية. القراءة مجانية.",
   pick: "بماذا تحتاجين المساعدة؟",
   sit: {
-    underhall: "الأب لا يدفع النفقة",
+    underhall: "الوالد الآخر لا يدفع النفقة",
     fk: "رفض من صندوق التأمين الاجتماعي",
     skuld: "فواتير لا أستطيع دفعها في وقتها",
     brev: "رسالة لا أفهمها",
