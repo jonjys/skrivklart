@@ -12,7 +12,7 @@ Detta är **inte** juridisk rådgivning.
 
 - Kortare brev: 59 kr
 - Avtal och överklaganden: 99 kr
-- Mammapaketet (7 dokument): 149 kr
+- Familjepaketet (7 dokument): 149 kr
 - Jobbpaketet (brev + CV + LinkedIn): 129 kr
 - Allt i 30 dagar: 199 kr, engångsbetalning
 
