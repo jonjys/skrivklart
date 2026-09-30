@@ -39,6 +39,13 @@ async function stripeCheckoutUrl(opts: {
   body.set("metadata[token]", opts.token);
   body.set("payment_intent_data[description]", `Skrivklart – ${opts.name}`);
   body.set("allow_promotion_codes", "true");
+  // The Stripe account is shared (Nytto Labs); show Skrivklart's own name and colours.
+  body.set("branding_settings[display_name]", "Skrivklart");
+  body.set("branding_settings[background_color]", "#f3efe6");
+  body.set("branding_settings[button_color]", "#b4472b");
+  body.set("branding_settings[border_style]", "rounded");
+  body.set("branding_settings[icon][type]", "url");
+  body.set("branding_settings[icon][url]", "https://www.skrivklart.se/profil.png");
   body.set("locale", "sv");
   const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
