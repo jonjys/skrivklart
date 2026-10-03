@@ -16,6 +16,7 @@ import { BUNDLES, bundleValueKr, type DocProduct } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout";
 import { useSkrivklart } from "@/lib/store";
 import { usePayMethods } from "@/lib/pay-methods";
+import { LAUNCH_CODE, launchCodeActive } from "@/lib/site";
 import { sek } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -326,6 +327,11 @@ export function Generator({ product }: { product: DocProduct }) {
                 <ShieldCheck className="size-3.5" />
                 {payMethods.join(" · ")} via Stripe. Tillbaka hit direkt efteråt.
               </p>
+              {launchCodeActive() ? (
+                <p className="mt-2 text-center text-sm font-semibold text-clay">
+                  Skriv koden {LAUNCH_CODE.code} i kassan – halva priset {LAUNCH_CODE.label}.
+                </p>
+              ) : null}
               {upsell ? (
                 <div className="mt-4 rounded-lg border border-line bg-paper p-4 text-sm">
                   <p className="font-medium text-ink">
