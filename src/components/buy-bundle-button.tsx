@@ -1,5 +1,5 @@
 import { Loader2 } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { getBundle } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout";
@@ -12,7 +12,10 @@ export function BuyBundleButton({
   ...props
 }: { slug: string; children: ReactNode } & Omit<ButtonProps, "onClick">) {
   const unlockBundle = useSkrivklart((s) => s.unlockBundle);
-  const owned = useSkrivklart((s) => s.hasBundle(slug));
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const storedOwned = useSkrivklart((s) => s.hasBundle(slug));
+  const owned = mounted && storedOwned;
   const [busy, setBusy] = useState(false);
   const bundle = getBundle(slug);
 
