@@ -40,13 +40,19 @@ function escapeHtml(text: string) {
 
 export function Generator({ product }: { product: DocProduct }) {
   const payMethods = usePayMethods();
-  const draft = useSkrivklart((s) => s.drafts[product.slug]);
+  // Saved drafts and unlocks live in localStorage, which the server can't see.
+  // Render them only after mount so the server HTML and first client render match.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const storedDraft = useSkrivklart((s) => s.drafts[product.slug]);
+  const draft = mounted ? storedDraft : undefined;
   const setAnswers = useSkrivklart((s) => s.setAnswers);
   const setPreview = useSkrivklart((s) => s.setPreview);
   const setFull = useSkrivklart((s) => s.setFull);
   const unlock = useSkrivklart((s) => s.unlock);
   const relock = useSkrivklart((s) => s.relock);
-  const pass = useSkrivklart((s) => s.passFor(product.slug));
+  const storedPass = useSkrivklart((s) => s.passFor(product.slug));
+  const pass = mounted ? storedPass : undefined;
   const unlocked = pass !== undefined;
 
   const answers = draft?.answers ?? {};

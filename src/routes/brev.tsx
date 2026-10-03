@@ -41,7 +41,10 @@ function levelLabel(level: BrevAnalysis["riskLevel"], lang: "sv" | "en" | "ar") 
 function BrevPage() {
   const product = getProduct(SLUG)!;
   const lang = useI18n((s) => s.lang);
-  const pass = useSkrivklart((s) => s.passFor(SLUG));
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const storedPass = useSkrivklart((s) => s.passFor(SLUG));
+  const pass = mounted ? storedPass : undefined;
   const unlock = useSkrivklart((s) => s.unlock);
   const relock = useSkrivklart((s) => s.relock);
   const unlocked = pass !== undefined;
