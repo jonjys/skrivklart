@@ -4,7 +4,7 @@ import { GUIDES } from "@/lib/guides";
 import { SITE_URL } from "@/lib/site";
 
 /** Generated from the catalog and guides so new pages are never missing. */
-const LASTMOD = "2026-09-29";
+const LASTMOD = "2026-10-08";
 
 const STATIC: [path: string, priority: string, freq: string][] = [
   ["/", "1.0", "weekly"],
