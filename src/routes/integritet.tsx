@@ -41,6 +41,13 @@ function IntegritetPage() {
             reklamprofil, inga tredjepartspixlar i skrivläget.
           </p>
           <p>Supportchatten skickar dina meddelanden till samma AI för att kunna svara.</p>
+          <p>
+            Vi räknar sidvisningar med Vercel Web Analytics. Det sätter inga cookies och följer dig
+            inte mellan sajter. Vi skickar bara sidans adress utan frågeparametrar, så inga
+            formuläruppgifter eller orderreferenser följer med. Vercel sparar hänvisande sajt, land,
+            enhetstyp och webbläsare som samlad statistik. Har du Do Not Track eller Global Privacy
+            Control påslaget skickas ingenting.
+          </p>
         </div>
       </article>
     </SiteFrame>

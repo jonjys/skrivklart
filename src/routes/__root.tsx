@@ -2,6 +2,7 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-r
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Toaster } from "sonner";
+import { WebAnalytics } from "@/components/web-analytics";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import appCss from "../styles.css?url";
 
@@ -54,6 +55,7 @@ export const Route = createRootRoute({
           <Outlet />
         </AuthProvider>
         <Toaster position="top-center" richColors={false} />
+        <WebAnalytics />
         <Scripts />
       </body>
     </html>
