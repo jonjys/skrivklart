@@ -194,6 +194,39 @@ export const GUIDES: Guide[] = [
   },
 
   {
+    slug: "samboavtal-hus",
+    title: "Samboavtal när ni har hus – vad som gäller och vad ni ska skriva",
+    excerpt: "Ett hus ni köpt för att bo i tillsammans delas lika vid separation, oavsett vem som betalade. Om ni inte avtalar bort det.",
+    productSlug: "samboavtal",
+    minutes: 4,
+    body: [
+      "Ett hus som ni har köpt för att bo i tillsammans räknas som samboegendom enligt sambolagen. Det gäller även om bara den ena står på lagfarten och betalade kontantinsatsen.",
+      "Om ni separerar och någon av er begär bodelning delas husets värde lika, efter avdrag för lånen som hör till huset. Det är den vanligaste överraskningen för den som tog med sig pengarna in i köpet.",
+      "Ägde den ena huset innan ni flyttade ihop, och köptes det inte för att ni skulle bo där tillsammans, är det normalt inte samboegendom. Fritidshus räknas inte heller som samboegendom.",
+      "Köper ni huset tillsammans men betalar olika mycket: skriv era ägarandelar i köpekontraktet, till exempel 60/40. Skriv sedan ett samboavtal om att huset inte ska ingå i en bodelning, så att ägarandelarna gäller om ni flyttar isär.",
+      "I avtalet: husets adress och fastighetsbeteckning, vem som äger vilken andel, och att huset inte ska ingå i bodelning enligt sambolagen. Ort, datum och båda era underskrifter. Avtalet behöver inte registreras.",
+      "Utan avtal kan den av er som bäst behöver bostaden få ta över den vid en bodelning, mot att den andra löses ut. Med ett samboavtal bestämmer ni det själva i förväg.",
+      "Vid stora belopp eller om ni är osäkra på vem som äger vad: låt en jurist läsa igenom. Skrivklart ger ett skarpt utkast, inte juridisk rådgivning.",
+    ],
+  },
+  {
+    slug: "separation-utan-samboavtal",
+    title: "Separation utan samboavtal – det här händer med bostaden och bohaget",
+    excerpt: "Vad som delas, vad som inte gör det, och varför fristen på ett år är viktig.",
+    productSlug: "samboavtal",
+    minutes: 4,
+    body: [
+      "Har ni inget samboavtal gäller sambolagen. Den delar bara samboegendom: den gemensamma bostaden och det bohag som ni skaffat för att använda tillsammans.",
+      "Det som inte delas är bland annat bil, sparpengar, aktier, fritidshus och saker som bara den ena använder. Där behåller var och en sitt.",
+      "Bodelning sker bara om någon av er begär det, och det måste göras senast ett år efter att ni flyttat isär. Begär ingen av er bodelning inom ett år behåller var och en det den äger.",
+      "Vid bodelning räknas värdet på samboegendomen ihop, skulderna som hör till den dras av, och resten delas lika. Det spelar ingen roll vem som betalade.",
+      "Den som bäst behöver bostaden kan få ta över den, mot att den andra får sin del i pengar eller annan egendom. Det kan gälla även en hyresrätt som ni skaffat för att bo i tillsammans.",
+      "Är ni överens: skriv ner hur ni delar i ett bodelningsavtal, med datum och båda era underskrifter. Är ni inte överens kan tingsrätten utse en bodelningsförrättare.",
+      "Vill ni slippa allt det här nästa gång, eller bor ni ihop nu? Ett samboavtal bestämmer i förväg vad som ska gälla. Utkast, inte juridisk rådgivning.",
+    ],
+  },
+
+  {
     slug: "hyresansokan-stockholm",
     title: "Hyresansökan i Stockholm som inte hamnar i högen",
     excerpt: "Värdar drunknar i 'vi är skötsamma'. Ge dem risk, inkomst och datum.",

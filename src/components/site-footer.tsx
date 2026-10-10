@@ -12,6 +12,12 @@ export function SiteFooter() {
           <p className="mt-2 max-w-xs text-xs text-subtle">{t(lang, "lang_note")}</p>
         </div>
         <div className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
+          <Link to="/dokument/$slug" params={{ slug: "samboavtal" }} className="text-muted hover:text-ink">
+            Samboavtal
+          </Link>
+          <Link to="/dokument/$slug" params={{ slug: "underhallsavtal" }} className="text-muted hover:text-ink">
+            Underhållsbidrag
+          </Link>
           <Link to="/brev" className="text-muted hover:text-ink">
             {t(lang, "nav_brev")}
           </Link>
