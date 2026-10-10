@@ -18,6 +18,9 @@ export function SiteFooter() {
           <Link to="/dokument/$slug" params={{ slug: "underhallsavtal" }} className="text-muted hover:text-ink">
             Underhållsbidrag
           </Link>
+          <Link to="/samboavtal-koll" className="text-muted hover:text-ink">
+            Behöver vi samboavtal?
+          </Link>
           <Link to="/brev" className="text-muted hover:text-ink">
             {t(lang, "nav_brev")}
           </Link>

@@ -113,7 +113,7 @@ export function heuristicBrev(ocrText: string): BrevAnalysis {
   });
 }
 
-function parseJson(text: string): unknown {
+export function parseJson(text: string): unknown {
   const trimmed = text.trim();
   const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
   const candidate = fenced ? fenced[1] : trimmed;

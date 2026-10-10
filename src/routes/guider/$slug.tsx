@@ -106,6 +106,11 @@ function GuidePage() {
                 Skriv {product.name.toLowerCase()}
               </Link>
             </Button>
+            {product.slug === "samboavtal" ? (
+              <Link to="/samboavtal-koll" className="mt-4 block text-sm text-pine-fg/80 underline hover:text-pine-fg">
+                Osäkra? Gör den gratis samboavtal-kollen först
+              </Link>
+            ) : null}
           </div>
         ) : null}
       </article>

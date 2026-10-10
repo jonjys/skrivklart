@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Generator } from "@/components/generator";
 import { HeroChip, PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
@@ -142,6 +142,18 @@ function DokumentPage() {
         </div>
       </PageHero>
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+        {product.slug === "samboavtal" ? (
+          <Link
+            to="/samboavtal-koll"
+            className="mb-6 flex items-center justify-between gap-4 rounded-2xl border-2 border-sun bg-sun/15 px-5 py-4 transition-colors hover:bg-sun/25"
+          >
+            <span>
+              <span className="block font-semibold">Osäkra på om ni behöver samboavtal?</span>
+              <span className="block text-sm text-muted">Gör den gratis samboavtal-kollen – fem frågor, svar direkt.</span>
+            </span>
+            <ArrowRight className="size-5 shrink-0 text-clay" />
+          </Link>
+        ) : null}
         <div>
           <Generator product={product} />
         </div>

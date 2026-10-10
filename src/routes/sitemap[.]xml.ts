@@ -4,12 +4,13 @@ import { GUIDES } from "@/lib/guides";
 import { SITE_URL } from "@/lib/site";
 
 /** Generated from the catalog and guides so new pages are never missing. */
-const LASTMOD = "2026-10-08";
+const LASTMOD = "2026-10-10";
 
 const STATIC: [path: string, priority: string, freq: string][] = [
   ["/", "1.0", "weekly"],
   ["/priser", "0.9", "weekly"],
   ["/brev", "0.9", "weekly"],
+  ["/samboavtal-koll", "0.9", "monthly"],
   ["/dokument", "0.9", "weekly"],
   ["/guider", "0.8", "weekly"],
   ["/support", "0.4", "monthly"],
