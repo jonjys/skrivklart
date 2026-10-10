@@ -2,6 +2,7 @@ import type { Lang } from "./i18n";
 
 /** Situations on the home page, each pointing at the document that solves it. */
 export const SITUATIONS = [
+  { id: "sambo", to: "samboavtal", icon: "home" },
   { id: "underhall", to: "underhallsavtal", icon: "coins" },
   { id: "fk", to: "overklagande", icon: "landmark" },
   { id: "skuld", to: "avbetalningsplan", icon: "receipt" },
@@ -9,7 +10,6 @@ export const SITUATIONS = [
   { id: "umgange", to: "umgangesavtal", icon: "calendar" },
   { id: "skola", to: "skola-forskola", icon: "school" },
   { id: "soc", to: "socialtjansten", icon: "hand" },
-  { id: "bostad", to: "hyresansokan", icon: "home" },
 ] as const;
 
 export type SituationId = (typeof SITUATIONS)[number]["id"];
@@ -54,7 +54,7 @@ const sv: HomeCopy = {
     umgange: "Schema för barnen",
     skola: "Något med skolan eller förskolan",
     soc: "Hjälp från socialtjänsten",
-    bostad: "Jag söker lägenhet",
+    sambo: "Vi har flyttat ihop – samboavtal",
   },
   trust: ["Gratis utkast", "Från 59 kr", "Inget konto"],
   pay_with: "Betala med",
@@ -100,7 +100,7 @@ const en: HomeCopy = {
     umgange: "A schedule for the kids",
     skola: "Something with school or preschool",
     soc: "Help from social services",
-    bostad: "I'm looking for an apartment",
+    sambo: "We moved in together – cohabitation agreement",
   },
   trust: ["Free draft", "From SEK 59", "No account"],
   pay_with: "Pay with",
@@ -134,7 +134,7 @@ const ar: HomeCopy = {
     umgange: "جدول للأطفال",
     skola: "أمر يخص المدرسة أو الروضة",
     soc: "مساعدة من الخدمات الاجتماعية",
-    bostad: "أبحث عن شقة",
+    sambo: "انتقلنا للعيش معاً – اتفاق المساكنة",
   },
   trust: ["مسودة مجانية", "من 59 كرونة", "بدون حساب"],
   pay_with: "ادفعي بـ",
