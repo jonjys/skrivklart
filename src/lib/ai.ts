@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { BUNDLES, getProduct, PRODUCTS } from "./catalog";
 import { getSql } from "./db";
+import { complete, type LlmEffort, type LlmMessage } from "./llm";
 import { LOCKED_ERROR, passCovers } from "./pass";
 import { fallbackDocument } from "./templates";
 
@@ -42,29 +43,13 @@ async function track(name: string, slug?: string) {
 }
 
 async function chat(
-  messages: { role: "system" | "user" | "assistant"; content: string }[],
+  system: string,
+  messages: LlmMessage[],
   maxTokens: number,
+  effort: LlmEffort = "low",
 ) {
-  const apiKey = process.env.XAI_API_KEY;
-  if (!apiKey) return { ok: false as const, error: "AI är inte tillgänglig just nu." };
-
-  const res = await fetch("https://api.x.ai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: "grok-4.5",
-      messages,
-      max_tokens: maxTokens,
-      temperature: 0.4,
-    }),
-  });
-  if (!res.ok) return { ok: false as const, error: "Kunde inte skriva just nu. Försök igen." };
-  const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-  const text = body.choices?.[0]?.message?.content?.trim() ?? "";
-  if (!text) return { ok: false as const, error: "Tomt svar. Försök igen." };
+  const text = await complete({ system, messages, maxTokens, effort });
+  if (!text) return { ok: false as const, error: "Kunde inte skriva just nu. Försök igen." };
   return { ok: true as const, text };
 }
 
@@ -98,14 +83,15 @@ export const generateDocument = createServerFn({ method: "POST" })
         : "Skriv HELA dokumentet, komplett och redo att använda.";
 
     const result = await chat(
+      SYSTEM,
       [
-        { role: "system", content: SYSTEM },
         {
           role: "user",
           content: `${product.extraPrompt}\n\n${modeLine}\n\nTyp: ${product.name}\nUppgifter från kunden:\n${facts || "(inga)"}`,
         },
       ],
       data.mode === "full" ? 2200 : 500,
+      data.mode === "full" ? "medium" : "low",
     );
 
     if (result.ok) {
@@ -130,14 +116,15 @@ export const rewriteDocument = createServerFn({ method: "POST" })
     if (used >= 80) return { ok: false as const, error: "Kö just nu. Försök om en stund." };
 
     const result = await chat(
+      SYSTEM,
       [
-        { role: "system", content: SYSTEM },
         {
           role: "user",
           content: `Skriv om dokumentet enligt instruktionen. Behåll sakuppgifter. Returnera bara den nya texten.\n\nInstruktion: ${data.instruction}\n\nDokument:\n${data.text.slice(0, 8000)}`,
         },
       ],
       2200,
+      "medium",
     );
     if (result.ok) await track("rewrite", data.slug);
     return result;
@@ -155,14 +142,8 @@ export const askSupport = createServerFn({ method: "POST" })
     }));
 
     const result = await chat(
-      [
-        {
-          role: "system",
-          content:
-            `Du är Rådgivaren på Skrivklart. Varm, kort, svensk, saklig. Många som skriver är ensamstående föräldrar – var respektfull och konkret. Hjälp kunden välja dokument. Dokument och priser: ${PRODUCTS.map((p) => `${p.name} ${p.priceKr} kr`).join(", ")}. Paket: ${BUNDLES.map((b) => `${b.name} ${b.priceKr} kr (${b.short})`).join("; ")}. Inga prenumerationer. Utkastet är alltid gratis. Inte juridisk rådgivning. Inga emojis. Max 120 ord.`,
-        },
-        ...trimmed,
-      ],
+      `Du är Rådgivaren på Skrivklart. Varm, kort, svensk, saklig. Många som skriver är ensamstående föräldrar – var respektfull och konkret. Hjälp kunden välja dokument. Dokument och priser: ${PRODUCTS.map((p) => `${p.name} ${p.priceKr} kr`).join(", ")}. Paket: ${BUNDLES.map((b) => `${b.name} ${b.priceKr} kr (${b.short})`).join("; ")}. Inga prenumerationer. Utkastet är alltid gratis. Inte juridisk rådgivning. Inga emojis. Max 120 ord.`,
+      trimmed,
       350,
     );
     if (result.ok) {
