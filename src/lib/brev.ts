@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { Lang } from "./i18n";
 import { langName } from "./i18n";
+import { complete } from "./llm";
 import { LOCKED_ERROR, passCovers, seal, unseal } from "./pass";
 
 export type BrevRiskLevel = "LOW" | "IMPORTANT" | "CRITICAL";
@@ -127,34 +128,16 @@ function parseJson(text: string): unknown {
 }
 
 async function chatJson(letter: string, lang: Lang): Promise<BrevAnalysis | null> {
-  const apiKey = process.env.XAI_API_KEY;
-  if (!apiKey) return null;
   const spoken = langName(lang);
-  const res = await fetch("https://api.x.ai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: "grok-4.5",
-      temperature: 0.2,
-      max_tokens: 1400,
-      messages: [
-        {
-          role: "system",
-          content:
-            "Du är Skrivklart. Du översätter svenska myndighetsbrev till begriplig text. Svara BARA med JSON, inget annat. Inte juridisk rådgivning. Hitta inte på diarienummer eller lagrum. Nycklar: senderName (string|null), documentType (string|null), summary (string, max 2 meningar), plainLanguage (string, 4–8 meningar), actionPlan (array av {step}), consequences (string), deadlines (array av {description, dueDate YYYY-MM-DD eller null}), amounts (string[]), referenceNumbers (string[]), breakdown ({legal, financial, deadline} 0–100). VIKTIGT: summary, plainLanguage, actionPlan.step, consequences och deadlines.description ska vara på " +
-            spoken +
-            ".",
-        },
-        { role: "user", content: letter.slice(0, 12000) },
-      ],
-    }),
+  const raw = await complete({
+    system:
+      "Du är Skrivklart. Du översätter svenska myndighetsbrev till begriplig text. Svara BARA med ett JSON-objekt, inget annat, ingen kodblocksmarkering. Inte juridisk rådgivning. Hitta inte på diarienummer eller lagrum. Nycklar: senderName (string|null), documentType (string|null), summary (string, max 2 meningar), plainLanguage (string, 4–8 meningar), actionPlan (array av {step}), consequences (string), deadlines (array av {description, dueDate YYYY-MM-DD eller null}), amounts (string[]), referenceNumbers (string[]), breakdown ({legal, financial, deadline} 0–100). VIKTIGT: summary, plainLanguage, actionPlan.step, consequences och deadlines.description ska vara på " +
+      spoken +
+      ".",
+    messages: [{ role: "user", content: letter.slice(0, 12000) }],
+    maxTokens: 1400,
+    effort: "low",
   });
-  if (!res.ok) return null;
-  const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-  const raw = body.choices?.[0]?.message?.content?.trim();
   if (!raw) return null;
   try {
     const j = parseJson(raw) as Record<string, unknown>;
