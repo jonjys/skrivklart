@@ -17,7 +17,7 @@ Regler:
 - Dokumentet ska kunna kopieras rakt av.
 - Inte juridisk rådgivning inne i texten.`;
 
-async function countToday(name: string) {
+export async function countToday(name: string) {
   try {
     const sql = await getSql();
     const rows = await sql<{ n: number }>`
@@ -30,7 +30,7 @@ async function countToday(name: string) {
   }
 }
 
-async function track(name: string, slug?: string) {
+export async function track(name: string, slug?: string) {
   try {
     const sql = await getSql();
     await sql`
