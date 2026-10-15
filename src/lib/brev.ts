@@ -225,6 +225,10 @@ export const unlockBrev = createServerFn({ method: "POST" })
       return { ok: false as const, error: LOCKED_ERROR };
     }
     const full = await unseal<BrevAnalysis>(data.sealed, "brev");
+    // Only a letter analysis opens here, never anything else that was sealed.
+    if (full && (typeof full.summary !== "string" || typeof full.riskLevel !== "string" || "t" in full)) {
+      return { ok: false as const, error: "Analysen gick ut. Klistra in brevet igen." };
+    }
     if (!full) return { ok: false as const, error: "Analysen gick ut. Klistra in brevet igen." };
     return { ok: true as const, full };
   });

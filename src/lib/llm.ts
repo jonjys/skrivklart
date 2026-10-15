@@ -96,11 +96,12 @@ export async function complete(opts: {
   effort?: LlmEffort;
   /** Per-provider deadline. Keep the sum well under the function's maxDuration. */
   timeoutMs?: number;
+  /** False skips the xAI fallback, for calls that must finish quickly. */
+  fallback?: boolean;
 }): Promise<string | null> {
   const effort = opts.effort ?? "low";
   const timeoutMs = opts.timeoutMs ?? 60_000;
-  return (
-    (await viaClaude(opts.system, opts.messages, opts.maxTokens, effort, timeoutMs)) ??
-    (await viaXai(opts.system, opts.messages, opts.maxTokens, Math.min(timeoutMs, 45_000)))
-  );
+  const claude = await viaClaude(opts.system, opts.messages, opts.maxTokens, effort, timeoutMs);
+  if (claude || opts.fallback === false) return claude;
+  return viaXai(opts.system, opts.messages, opts.maxTokens, Math.min(timeoutMs, 45_000));
 }

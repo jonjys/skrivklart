@@ -165,16 +165,25 @@ export function Generator({ product }: { product: DocProduct }) {
   }
 
   async function rewrite(instruction: RewriteKind) {
-    const sealed = draft?.sealed;
-    // Texts unlocked before sealing existed have no sealed copy; send the text itself.
-    const legacyText = sealed ? undefined : full;
-    if (!sealed && !legacyText) {
-      toast.error("Skriv ett nytt utkast först, så kan det skrivas om.");
-      return;
-    }
+    let sealed = draft?.sealed;
     setBusy("rewrite");
+    if (!sealed) {
+      // Texts unlocked before sealing existed: write the document once on the server
+      // (paid, from the saved answers) so there is a server copy to rewrite.
+      const fresh = await generateDocument({
+        data: { slug: product.slug, answers, mode: "full", pass },
+      }).catch(() => null);
+      if (fresh?.ok && "sealed" in fresh && fresh.sealed) {
+        sealed = fresh.sealed;
+        setFull(product.slug, fresh.text, fresh.sealed);
+      } else {
+        setBusy(null);
+        toast.error("Skriv ett nytt utkast först, så kan det skrivas om.");
+        return;
+      }
+    }
     const res = await rewriteDocument({
-      data: { slug: product.slug, sealed, legacyText, instruction, pass },
+      data: { slug: product.slug, sealed, instruction, pass },
     }).catch(() => ({ ok: false as const, error: "Nätverksfel. Försök igen." }));
     setBusy(null);
     if (res.ok) {

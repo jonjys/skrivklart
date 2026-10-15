@@ -38,8 +38,9 @@ async function chat(
   maxTokens: number,
   effort: LlmEffort = "low",
   timeoutMs?: number,
+  fallback = true,
 ) {
-  const text = await complete({ system, messages, maxTokens, effort, timeoutMs });
+  const text = await complete({ system, messages, maxTokens, effort, timeoutMs, fallback });
   if (!text) return { ok: false as const, error: "Kunde inte skriva just nu. Försök igen." };
   return { ok: true as const, text };
 }
@@ -94,15 +95,24 @@ ${factsOf(product, answers) || "(inga)"}
 </uppgifter>`;
 }
 
-/** Writes the full document: Claude, then xAI, then the offline template. */
-async function writeFull(product: DocProduct, answers: Record<string, string>, useAi: boolean) {
+/**
+ * Writes the full document: Claude, then xAI, then the offline template. `quick` gives
+ * Claude alone a short deadline, for a buyer who is already waiting on a paid page.
+ */
+async function writeFull(
+  product: DocProduct,
+  answers: Record<string, string>,
+  useAi: boolean,
+  quick = false,
+) {
   if (useAi) {
     const res = await chat(
       SYSTEM,
       [{ role: "user", content: documentPrompt(product, answers) }],
       3000,
       "low",
-      75_000,
+      quick ? 25_000 : 75_000,
+      !quick,
     );
     if (res.ok) return { text: res.text, ai: true };
   }
@@ -178,7 +188,12 @@ export const unlockDocument = createServerFn({ method: "POST" })
     const product = getProduct(data.slug);
     if (!doc.ai && product && doc.a) {
       const { allow } = await import("./limits.server");
-      const better = await writeFull(product, cleanAnswers(product, doc.a), allow("full", passId(data.pass)));
+      const better = await writeFull(
+        product,
+        cleanAnswers(product, doc.a),
+        allow("full", passId(data.pass)),
+        true,
+      );
       if (better.ai) {
         return {
           ok: true as const,
@@ -199,17 +214,9 @@ export type RewriteKind = keyof typeof REWRITES;
 
 export const rewriteDocument = createServerFn({ method: "POST" })
   .validator(
-    (input: {
-      slug: string;
-      sealed?: string;
-      /** Full text unlocked before texts were sealed; only for pass holders, capped. */
-      legacyText?: string;
-      instruction: RewriteKind;
-      pass?: string;
-    }) => ({
+    (input: { slug: string; sealed: string; instruction: RewriteKind; pass?: string }) => ({
     slug: String(input?.slug ?? "").slice(0, 60),
     sealed: String(input?.sealed ?? "").slice(0, 200_000),
-    legacyText: typeof input?.legacyText === "string" ? input.legacyText : "",
     instruction: input?.instruction === "formellare" ? ("formellare" as const) : ("kortare" as const),
     pass: typeof input?.pass === "string" ? input.pass.slice(0, 600) : undefined,
   }),
@@ -220,19 +227,12 @@ export const rewriteDocument = createServerFn({ method: "POST" })
     if (!(await passCovers(data.pass, data.slug))) {
       return { ok: false as const, error: LOCKED_ERROR, locked: true as const };
     }
-    // Normally only text the server wrote for this document can be rewritten. Texts unlocked
-    // before sealing existed come from the client, but only for a paying pass and capped.
+    // Only text the server wrote for this document can be rewritten.
     const sealedDoc = data.sealed ? await unseal<Sealed>(data.sealed, "doc") : null;
-    let current: { t: string; a: Record<string, string> } | null = null;
-    if (sealedDoc && sealedDoc.s === data.slug && typeof sealedDoc.t === "string") {
-      current = { t: sealedDoc.t, a: sealedDoc.a ?? {} };
-    } else if (!data.sealed && data.legacyText.trim() && data.legacyText.length <= 12_000) {
-      current = { t: data.legacyText, a: {} };
-    }
-    if (!current) {
+    if (!sealedDoc || sealedDoc.s !== data.slug || typeof sealedDoc.t !== "string") {
       return { ok: false as const, error: "Skriv ett nytt utkast först, så kan det skrivas om." };
     }
-    const doc = current;
+    const doc = { t: sealedDoc.t, a: sealedDoc.a ?? {} };
     const { allow } = await import("./limits.server");
     if (!allow("rewrite", passId(data.pass))) {
       return {
@@ -303,7 +303,11 @@ function routeSupport(q: string) {
     const p = getProduct(slug);
     return p ? `${p.name}, ${p.priceKr} kr. ${line}` : line;
   };
-  if (/kvitto|återbetal|har betalat|betalade|dragits|fick inte (texten|dokumentet|avtalet|brevet)|köpt/.test(q))
+  if (
+    /kvitto|återbetal|(jag|har|vi) betalat (för|men)|dragits från|fick inte (texten|dokumentet|avtalet|brevet)|betalningen (gick|fungerade|syns)|skrivklart.*(betal|köp)/.test(
+      q,
+    )
+  )
     return "Gäller det ett köp? Skriv till oss i kontaktformuläret på supportsidan (skrivklart.se/support#kontakt), så svarar en människa.";
   if (/underhåll|underhall|betalar inte|pappan|mamman/.test(q))
     return pick(

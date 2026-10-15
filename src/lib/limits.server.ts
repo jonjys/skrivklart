@@ -26,10 +26,11 @@ function sweep(now: number) {
   if ((g.__skrivklartSwept__ ?? 0) > now - 60_000 && buckets.size < MAX_BUCKETS) return;
   g.__skrivklartSwept__ = now;
   for (const [k, b] of buckets) if (b.reset <= now) buckets.delete(k);
-  // Still too many live buckets: drop the oldest. Limits loosen, memory stays bounded.
+  // Still too many live buckets: drop the oldest per-visitor ones. The global counters are
+  // the backstop on AI spend and are never evicted.
   for (const k of buckets.keys()) {
     if (buckets.size <= MAX_BUCKETS * 0.8) break;
-    buckets.delete(k);
+    if (!k.endsWith(":global")) buckets.delete(k);
   }
 }
 
@@ -92,7 +93,11 @@ export function consume(name: LimitName, key?: string) {
 export function refund(name: LimitName, key?: string) {
   for (const [k] of keys(name, key || clientIp())) {
     const b = buckets.get(k);
-    if (b && b.n > 0) b.n -= 1;
+    if (!b) continue;
+    b.n -= 1;
+    // An empty per-visitor bucket is dropped, so refunded calls leave nothing behind.
+    if (b.n <= 0 && !k.endsWith(":global")) buckets.delete(k);
+    else if (b.n < 0) b.n = 0;
   }
 }
 
