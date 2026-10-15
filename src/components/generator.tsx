@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import {
   Check,
   Copy,
@@ -11,11 +10,18 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { generateDocument, recordEvent, rewriteDocument } from "@/lib/ai";
+import {
+  generateDocument,
+  recordEvent,
+  rewriteDocument,
+  unlockDocument,
+  type RewriteKind,
+} from "@/lib/ai";
 import { BUNDLES, bundleValueKr, type DocProduct } from "@/lib/catalog";
 import { startCheckout } from "@/lib/checkout";
 import { useSkrivklart } from "@/lib/store";
 import { usePayMethods } from "@/lib/pay-methods";
+import { BuyBundleButton } from "./buy-bundle-button";
 import { LAUNCH_CODE, launchCodeActive } from "@/lib/site";
 import { sek } from "@/lib/utils";
 import { Button } from "./ui/button";
@@ -58,6 +64,8 @@ export function Generator({ product }: { product: DocProduct }) {
   const answers = draft?.answers ?? {};
   const preview = draft?.preview ?? "";
   const full = draft?.full ?? "";
+  const outline = draft?.outline ?? [];
+  const restWords = draft?.restWords ?? 0;
   const shown = unlocked && full ? full : preview;
 
   const [busy, setBusy] = useState<"preview" | "full" | "pay" | "rewrite" | null>(null);
@@ -67,7 +75,7 @@ export function Generator({ product }: { product: DocProduct }) {
   const upsell = BUNDLES.find((b) => b.includes !== "all" && b.includes.includes(product.slug));
 
   const missing = useMemo(() => {
-    return product.fields.filter((f) => f.required && !answers[f.id]?.trim());
+    return product.fields.filter((f) => f.required && !(answers[f.id]?.trim() || f.defaultValue));
   }, [product.fields, answers]);
 
   function patch(id: string, value: string) {
@@ -97,22 +105,46 @@ export function Generator({ product }: { product: DocProduct }) {
       setError(res.error);
       return;
     }
-    if (mode === "preview") {
-      setPreview(product.slug, res.text);
+    if ("outline" in res) {
+      setPreview(product.slug, res.text, {
+        sealed: res.sealed,
+        outline: res.outline,
+        restWords: res.restWords,
+      });
       if (window.matchMedia("(max-width: 1023px)").matches) {
         requestAnimationFrame(() => docRef.current?.scrollIntoView({ behavior: "smooth" }));
       }
-      if (unlocked) void write("full");
+      if (unlocked) void reveal(res.sealed);
     } else {
-      setFull(product.slug, res.text);
+      setFull(product.slug, res.text, res.sealed);
     }
   }
 
-  // Back from Stripe with a draft and a fresh unlock: write the full text right away.
+  /** Opens the full text the preview already wrote. Older drafts without one are written anew. */
+  async function reveal(sealedText?: string) {
+    const sealed = sealedText ?? draft?.sealed;
+    if (!sealed) return write("full");
+    setError(null);
+    setBusy("full");
+    const res = await unlockDocument({ data: { slug: product.slug, sealed, pass } }).catch(() => null);
+    setBusy(null);
+    if (!res) {
+      setError("Nätverksfel. Försök igen.");
+      return;
+    }
+    if (!res.ok) {
+      if ("locked" in res && res.locked) relock(product.slug);
+      setError(res.error);
+      return;
+    }
+    setFull(product.slug, res.text, sealed);
+  }
+
+  // Back from Stripe with a draft and a fresh unlock: open the full text right away.
   useEffect(() => {
     if (unlocked && preview && !full && !autoFull.current && busy === null) {
       autoFull.current = true;
-      void write("full");
+      void reveal();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [unlocked, preview, full]);
@@ -131,16 +163,19 @@ export function Generator({ product }: { product: DocProduct }) {
     toast.success("Dokumentet är olåst.");
   }
 
-  async function rewrite(instruction: string) {
-    const text = full || preview;
-    if (!text) return;
+  async function rewrite(instruction: RewriteKind) {
+    const sealed = draft?.sealed;
+    if (!sealed) {
+      toast.error("Skriv ett nytt utkast först, så kan det skrivas om.");
+      return;
+    }
     setBusy("rewrite");
     const res = await rewriteDocument({
-      data: { slug: product.slug, text, instruction, pass },
+      data: { slug: product.slug, sealed, instruction, pass },
     }).catch(() => ({ ok: false as const, error: "Nätverksfel. Försök igen." }));
     setBusy(null);
     if (res.ok) {
-      setFull(product.slug, res.text);
+      setFull(product.slug, res.text, res.sealed);
       toast.success("Omskrivet.");
     } else {
       if ("locked" in res && res.locked) relock(product.slug);
@@ -180,7 +215,7 @@ export function Generator({ product }: { product: DocProduct }) {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start">
       <form
         className="flex flex-col gap-4 rounded-2xl border-2 border-line bg-paper p-5 shadow-[var(--shadow-soft)]"
         onSubmit={(e) => {
@@ -211,12 +246,12 @@ export function Generator({ product }: { product: DocProduct }) {
             ) : field.type === "select" ? (
               <select
                 id={field.id}
-                value={answers[field.id] ?? ""}
+                value={answers[field.id] ?? field.defaultValue ?? ""}
                 onChange={(e) => patch(field.id, e.target.value)}
                 required={field.required}
                 className="h-11 w-full rounded-lg border border-line bg-paper px-3 text-base text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine"
               >
-                <option value="">{field.placeholder}</option>
+                {field.defaultValue ? null : <option value="">{field.placeholder}</option>}
                 {field.options?.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
@@ -266,7 +301,8 @@ export function Generator({ product }: { product: DocProduct }) {
           ) : busy === "preview" ? (
             <div className="mt-6 space-y-3" aria-live="polite">
               <p className="flex items-center gap-2 text-sm text-muted">
-                <Loader2 className="size-4 animate-spin" /> Skriver ditt utkast…
+                <Loader2 className="size-4 animate-spin" /> Skriver hela texten åt dig – det tar
+                oftast 20–40 sekunder.
               </p>
               {[92, 100, 84, 96, 70].map((w) => (
                 <div key={w} className="h-3 animate-pulse rounded bg-line" style={{ width: `${w}%` }} />
@@ -282,18 +318,33 @@ export function Generator({ product }: { product: DocProduct }) {
           )}
 
           {preview && !unlocked ? (
-            <div data-print-hide className="relative mt-2">
-              {/* The locked rest, suggested but unreadable. */}
-              <div aria-hidden className="pointer-events-none space-y-2.5 select-none blur-[3px]">
-                {[98, 91, 100, 86, 95, 60, 0, 97, 89, 100, 74].map((w, i) =>
-                  w ? (
-                    <div key={i} className="h-3 rounded bg-line/80" style={{ width: `${w}%` }} />
-                  ) : (
-                    <div key={i} className="h-3" />
-                  ),
-                )}
-              </div>
-              <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-paper/0 via-paper/70 to-paper" />
+            <div
+              data-print-hide
+              className="mt-4 rounded-xl border border-dashed border-line bg-bg-elevated/60 p-4"
+            >
+              <p className="text-sm font-semibold text-ink">
+                Det här står i resten
+                {restWords > 20 ? (
+                  <span className="font-normal text-muted">
+                    {" "}
+                    – ca {Math.round(restWords / 10) * 10} ord till
+                  </span>
+                ) : null}
+              </p>
+              {outline.length ? (
+                <ul className="mt-2 space-y-1.5 text-sm text-muted">
+                  {outline.map((h) => (
+                    <li key={h} className="flex gap-2">
+                      <Lock className="mt-0.5 size-3.5 shrink-0 text-subtle" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-1 text-sm text-muted">
+                  Resten av texten, avslutningen och raderna för underskrift.
+                </p>
+              )}
             </div>
           ) : null}
 
@@ -307,8 +358,7 @@ export function Generator({ product }: { product: DocProduct }) {
                 Resten av texten är skriven
               </p>
               <p className="mt-1 text-sm text-muted">
-                Lås upp hela {product.name.toLowerCase()} för {sek(product.priceKr)} — en gång,
-                ingen prenumeration.
+                Få hela texten för {sek(product.priceKr)} – en gång, ingen prenumeration.
               </p>
               <ul className="mt-4 space-y-2">
                 {INCLUDED.map((item) => (
@@ -322,7 +372,7 @@ export function Generator({ product }: { product: DocProduct }) {
                 type="button"
                 size="xl"
                 variant="accent"
-                className="mt-5 w-full"
+                className="mt-5 h-auto min-h-14 w-full py-3 text-center whitespace-normal"
                 onClick={() => void pay()}
                 disabled={busy !== null}
               >
@@ -347,15 +397,18 @@ export function Generator({ product }: { product: DocProduct }) {
                     </span>
                   </p>
                   <p className="mt-1 text-muted">
-                    Värt {sek(bundleValueKr(upsell))} styckvis.{" "}
-                    <Link
-                      to="/priser"
-                      hash={upsell.slug}
-                      className="font-medium text-pine underline underline-offset-2"
-                    >
-                      Se paketet
-                    </Link>
+                    Värt {sek(bundleValueKr(upsell))} styckvis. Det här dokumentet ingår, och du
+                    kommer tillbaka hit efter betalningen.
                   </p>
+                  <BuyBundleButton
+                    slug={upsell.slug}
+                    returnTo={product.slug}
+                    variant="outline"
+                    size="sm"
+                    className="mt-3 h-auto w-full py-2 whitespace-normal"
+                  >
+                    Köp {upsell.name} · {sek(upsell.priceKr)}
+                  </BuyBundleButton>
                 </div>
               ) : null}
               <p className="mt-4 text-[0.7rem] leading-relaxed text-subtle">
@@ -371,10 +424,10 @@ export function Generator({ product }: { product: DocProduct }) {
                 type="button"
                 className="w-full"
                 disabled={busy !== null}
-                onClick={() => void write("full")}
+                onClick={() => void reveal()}
               >
                 {busy === "full" ? <Loader2 className="size-4 animate-spin" /> : null}
-                {busy === "full" ? "Skriver hela dokumentet…" : "Skriv hela dokumentet"}
+                {busy === "full" ? "Öppnar hela dokumentet…" : "Visa hela dokumentet"}
               </Button>
             </div>
           ) : null}
@@ -411,7 +464,7 @@ export function Generator({ product }: { product: DocProduct }) {
                   variant="ghost"
                   size="sm"
                   disabled={busy !== null}
-                  onClick={() => void rewrite("Gör texten kortare, behåll innehållet.")}
+                  onClick={() => void rewrite("kortare")}
                 >
                   {busy === "rewrite" ? (
                     <Loader2 className="size-3.5 animate-spin" />
@@ -425,7 +478,7 @@ export function Generator({ product }: { product: DocProduct }) {
                   variant="ghost"
                   size="sm"
                   disabled={busy !== null}
-                  onClick={() => void rewrite("Gör tonen mer formell och saklig.")}
+                  onClick={() => void rewrite("formellare")}
                 >
                   Formellare
                 </Button>

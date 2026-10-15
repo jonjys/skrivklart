@@ -10,7 +10,15 @@ export type Draft = {
   unlocked: boolean;
   /** Signed unlock pass from the server (see lib/pass.ts). */
   pass?: string;
+  /** The full text, encrypted by the server; opened after payment and used for rewrites. */
+  sealed?: string;
+  /** Section headings in the locked part of the preview. */
+  outline?: string[];
+  /** Words left after the free part. */
+  restWords?: number;
 };
+
+export type PreviewMeta = Pick<Draft, "sealed" | "outline" | "restWords">;
 
 type BundleUnlock = { pass: string; until: number };
 
@@ -18,8 +26,8 @@ type State = {
   drafts: Record<string, Draft>;
   bundles: Record<string, BundleUnlock>;
   setAnswers: (slug: string, answers: Record<string, string>) => void;
-  setPreview: (slug: string, preview: string) => void;
-  setFull: (slug: string, full: string) => void;
+  setPreview: (slug: string, preview: string, meta?: PreviewMeta) => void;
+  setFull: (slug: string, full: string, sealed?: string) => void;
   unlock: (slug: string, pass: string) => void;
   unlockBundle: (slug: string, pass: string, until: number) => void;
   relock: (slug: string) => void;
@@ -46,14 +54,26 @@ export const useSkrivklart = create<State>()(
         set((s) => ({
           drafts: { ...s.drafts, [slug]: { ...(s.drafts[slug] ?? empty(slug)), answers } },
         })),
-      setPreview: (slug, preview) =>
+      // A new preview replaces the old document entirely, including any unlocked full text.
+      setPreview: (slug, preview, meta) =>
         set((s) => ({
-          drafts: { ...s.drafts, [slug]: { ...(s.drafts[slug] ?? empty(slug)), preview } },
+          drafts: {
+            ...s.drafts,
+            [slug]: {
+              ...(s.drafts[slug] ?? empty(slug)),
+              preview,
+              full: "",
+              sealed: meta?.sealed,
+              outline: meta?.outline,
+              restWords: meta?.restWords,
+            },
+          },
         })),
-      setFull: (slug, full) =>
-        set((s) => ({
-          drafts: { ...s.drafts, [slug]: { ...(s.drafts[slug] ?? empty(slug)), full } },
-        })),
+      setFull: (slug, full, sealed) =>
+        set((s) => {
+          const d = s.drafts[slug] ?? empty(slug);
+          return { drafts: { ...s.drafts, [slug]: { ...d, full, sealed: sealed ?? d.sealed } } };
+        }),
       unlock: (slug, pass) =>
         set((s) => ({
           drafts: {

@@ -102,9 +102,9 @@ function SamboKollPage() {
   }
 
   function toAgreement() {
-    const prefill = samboPrefill(full);
+    const prefill = samboPrefill(full, result?.include ?? []);
     setAnswers("samboavtal", { ...(existing ?? {}), ...prefill });
-    void navigate({ to: "/dokument/$slug", params: { slug: "samboavtal" } });
+    void navigate({ to: "/dokument/$slug", params: { slug: "samboavtal" }, hash: "skriv" });
   }
 
   return (
@@ -239,7 +239,8 @@ function SamboKollPage() {
               <ArrowRight className="size-5" />
             </Button>
             <p className="mt-3 text-center text-sm text-subtle">
-              Gratis utkast med era svar ifyllda. Hela avtalet {sek(product.priceKr)}, inget konto.
+              Era svar och punkterna ovan följer med. Utkastet är gratis, hela avtalet{" "}
+              {sek(product.priceKr)}, inget konto.
             </p>
             <button
               type="button"

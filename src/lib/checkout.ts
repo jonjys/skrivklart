@@ -8,12 +8,13 @@ export type CheckoutResult =
 
 /**
  * Sends the buyer to Stripe Checkout. Unlocking happens on /tack once the
- * server has confirmed the session. Without Stripe configured (local
+ * server has confirmed the session. `returnTo` is the document a bundle buyer
+ * was writing, so /tack can send them back to it. Without Stripe configured (local
  * preview) the server returns a pass directly.
  */
-export async function startCheckout(slug: string): Promise<CheckoutResult> {
+export async function startCheckout(slug: string, returnTo?: string): Promise<CheckoutResult> {
   try {
-    const order = await createOrder({ data: { slug, origin: window.location.origin } });
+    const order = await createOrder({ data: { slug, origin: window.location.origin, returnTo } });
     void recordEvent({ data: { name: "checkout", slug } });
     if (!order.ok) return { kind: "error", error: order.error };
     if (order.checkoutUrl) {

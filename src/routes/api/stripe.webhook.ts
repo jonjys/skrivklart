@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { getSellable } from "@/lib/catalog";
 import { getSql } from "@/lib/db";
 
 export const Route = createFileRoute("/api/stripe/webhook")({
@@ -58,6 +59,28 @@ export const Route = createFileRoute("/api/stripe/webhook")({
           } catch {
             /* db optional */
           }
+        }
+
+        // Tell the owner about every completed sale (payment_intent events would double it).
+        const paid =
+          type === "checkout.session.async_payment_succeeded" ||
+          (type === "checkout.session.completed" && obj.payment_status === "paid");
+        if (paid) {
+          const item = getSellable(slug);
+          const kr = typeof obj.amount_total === "number" ? Math.round(obj.amount_total / 100) : null;
+          const { notifyOwner } = await import("@/lib/notify.server");
+          await notifyOwner({
+            subject: `Ny försäljning: ${item?.name ?? slug}${kr !== null ? ` – ${kr} kr` : ""}`,
+            text: [
+              `Någon har just köpt ${item?.name ?? slug} på skrivklart.se.`,
+              kr !== null ? `Belopp: ${kr} kr` : "",
+              `Tid: ${new Date().toLocaleString("sv-SE", { timeZone: "Europe/Stockholm" })}`,
+              "",
+              "Detaljer finns i Stripe.",
+            ]
+              .filter((l, i) => l || i > 2)
+              .join("\n"),
+          });
         }
 
         return Response.json({ received: true });

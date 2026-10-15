@@ -8,6 +8,8 @@ export type Field = {
   hint?: string;
   required?: boolean;
   options?: { value: string; label: string }[];
+  /** Preselected value; the field then needs no answer from the visitor. */
+  defaultValue?: string;
 };
 
 export type Category = "familj" | "ekonomi" | "myndighet" | "bostad" | "jobb" | "avtal";
@@ -38,7 +40,7 @@ const TONE: Field = {
   label: "Ton",
   type: "select",
   placeholder: "Välj ton",
-  required: true,
+  defaultValue: "saklig",
   options: [
     { value: "saklig", label: "Saklig och rak" },
     { value: "varm", label: "Varm men professionell" },

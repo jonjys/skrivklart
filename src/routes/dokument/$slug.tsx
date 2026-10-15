@@ -154,7 +154,7 @@ function DokumentPage() {
             <ArrowRight className="size-5 shrink-0 text-clay" />
           </Link>
         ) : null}
-        <div>
+        <div id="skriv" className="scroll-mt-20">
           <Generator product={product} />
         </div>
 

@@ -3,7 +3,7 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
-import { getBundle, getSellable } from "@/lib/catalog";
+import { getBundle, getProduct, getSellable } from "@/lib/catalog";
 import { verifyCheckout } from "@/lib/orders";
 import { useSkrivklart } from "@/lib/store";
 
@@ -11,6 +11,7 @@ export const Route = createFileRoute("/tack")({
   component: TackPage,
   validateSearch: (search: Record<string, unknown>) => ({
     session_id: typeof search.session_id === "string" ? search.session_id : undefined,
+    doc: typeof search.doc === "string" ? search.doc : undefined,
   }),
   head: () => ({
     meta: [{ title: "Tack — Skrivklart" }, { name: "robots", content: "noindex, nofollow" }],
@@ -18,9 +19,13 @@ export const Route = createFileRoute("/tack")({
 });
 
 type Status =
-  { state: "checking" } | { state: "done"; slug: string } | { state: "failed"; error: string };
+  | { state: "checking" }
+  | { state: "done"; slug: string; doc?: string }
+  | { state: "failed"; error: string };
 
-function destination(slug: string) {
+function destination(slug: string, doc?: string) {
+  // A bundle bought from a document page goes back to that document.
+  if (doc && getProduct(doc)) return destination(doc);
   if (slug === "myndighetsbrev") return { to: "/brev" as const };
   const bundle = getBundle(slug);
   if (bundle) {
@@ -33,7 +38,7 @@ function destination(slug: string) {
 }
 
 function TackPage() {
-  const { session_id } = Route.useSearch();
+  const { session_id, doc: docParam } = Route.useSearch();
   const navigate = useNavigate();
   const unlock = useSkrivklart((s) => s.unlock);
   const unlockBundle = useSkrivklart((s) => s.unlockBundle);
@@ -52,10 +57,12 @@ function TackPage() {
       if (res?.ok) {
         if (res.isBundle) unlockBundle(res.slug, res.pass, res.until);
         else unlock(res.slug, res.pass);
-        setStatus({ state: "done", slug: res.slug });
-        // Single documents go straight back to the draft, which then writes the full text.
-        if (!res.isBundle) {
-          setTimeout(() => void navigate({ ...destination(res.slug), replace: true }), 1400);
+        const doc = res.doc ?? (res.isBundle ? docParam : undefined);
+        setStatus({ state: "done", slug: res.slug, doc });
+        // Back to the draft, which then opens the full text. A bundle bought on its own
+        // (no draft to return to) stays here with a button instead.
+        if (!res.isBundle || doc) {
+          setTimeout(() => void navigate({ ...destination(res.slug, doc), replace: true }), 1400);
         }
         return;
       }
@@ -67,9 +74,10 @@ function TackPage() {
       setStatus({ state: "failed", error: res?.error ?? "Kunde inte bekräfta betalningen." });
     };
     void run(0);
-  }, [session_id, unlock, unlockBundle, navigate]);
+  }, [session_id, docParam, unlock, unlockBundle, navigate]);
 
   const slug = status.state === "done" ? status.slug : null;
+  const doneDoc = status.state === "done" ? status.doc : undefined;
   const item = slug ? getSellable(slug) : null;
   const bundle = slug ? getBundle(slug) : null;
 
@@ -88,14 +96,17 @@ function TackPage() {
               <h1 className="font-display text-3xl tracking-tight">Något gick snett</h1>
               <p className="mt-4 text-muted">{status.error}</p>
               <p className="mt-2 text-sm text-subtle">
-                Har du betalat? Ladda om sidan, eller skriv till oss via support så löser vi det.
+                Har du betalat? Ladda om sidan. Fungerar det ändå inte, skriv till oss i
+                kontaktformuläret så löser en människa det.
               </p>
               <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
                 <Button type="button" onClick={() => window.location.reload()}>
                   Försök igen
                 </Button>
                 <Button asChild variant="outline">
-                  <Link to="/support">Support</Link>
+                  <Link to="/support" hash="kontakt">
+                    Kontakta oss
+                  </Link>
                 </Button>
               </div>
             </>
@@ -105,13 +116,13 @@ function TackPage() {
               <h1 className="mt-4 font-display text-4xl tracking-tight">Tack!</h1>
               <p className="mt-4 text-muted">
                 {bundle
-                  ? `${bundle.name} är olåst i den här webbläsaren i ${bundle.days} dagar.`
+                  ? `${bundle.name} är olåst i den här webbläsaren i ${bundle.days} dagar.${doneDoc ? " Vi skickar dig tillbaka till texten…" : ""}`
                   : `${item?.name ?? "Dokumentet"} är olåst. Vi skickar dig tillbaka till texten…`}
               </p>
               <div className="mt-8">
                 <Button asChild size="lg">
-                  <Link {...destination(slug!)}>
-                    {bundle ? "Börja skriva" : "Öppna dokumentet"}
+                  <Link {...destination(slug!, doneDoc)}>
+                    {bundle && !doneDoc ? "Börja skriva" : "Öppna dokumentet"}
                   </Link>
                 </Button>
               </div>

@@ -55,14 +55,22 @@ function BrevPage() {
   const [preview, setPreview] = useState<BrevAnalysis | null>(null);
   const [sealed, setSealed] = useState<string | null>(null);
   const [full, setFull] = useState<BrevAnalysis | null>(null);
+  // False when the AI was unavailable: the keyword reading is shown free and nothing is sold.
+  const [aiOk, setAiOk] = useState(true);
 
   useEffect(() => {
     const raw = sessionStorage.getItem("skrivklart:brev");
     if (!raw) return;
     try {
-      const parsed = JSON.parse(raw) as { preview: BrevAnalysis; sealed?: string; text: string };
+      const parsed = JSON.parse(raw) as {
+        preview: BrevAnalysis;
+        sealed?: string | null;
+        text: string;
+        ai?: boolean;
+      };
       setPreview(parsed.preview);
       setSealed(parsed.sealed ?? null);
+      setAiOk(parsed.ai !== false);
       setText(parsed.text);
     } catch {
       /* ignore */
@@ -105,10 +113,11 @@ function BrevPage() {
     }
     setPreview(res.preview);
     setSealed(res.sealed);
+    setAiOk(res.ai);
     setFull(null);
     sessionStorage.setItem(
       "skrivklart:brev",
-      JSON.stringify({ preview: res.preview, sealed: res.sealed, text }),
+      JSON.stringify({ preview: res.preview, sealed: res.sealed, text, ai: res.ai }),
     );
   }
 
@@ -192,7 +201,24 @@ function BrevPage() {
               </p>
             </div>
 
-            {unlocked && full ? (
+            {!aiOk ? (
+              <div className="rounded-2xl border-2 border-line bg-bg-elevated p-6">
+                <p className="font-semibold text-ink">
+                  Vi kunde inte göra en full tolkning just nu.
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  Ovan är en grov läsning av nyckelord, gratis. Försök igen om en stund för hela
+                  analysen. Du betalar ingenting förrän den fungerar.
+                </p>
+                {shown.actionPlan.length ? (
+                  <ol className="mt-4 list-decimal space-y-1.5 pl-5 text-sm text-ink">
+                    {shown.actionPlan.map((s) => (
+                      <li key={s.step}>{s.step}</li>
+                    ))}
+                  </ol>
+                ) : null}
+              </div>
+            ) : unlocked && full ? (
               <>
                 <section>
                   <h2 className="font-display text-2xl tracking-tight">{t(lang, "brev_plain")}</h2>
