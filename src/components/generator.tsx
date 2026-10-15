@@ -92,7 +92,8 @@ export function Generator({ product }: { product: DocProduct }) {
     let res: Awaited<ReturnType<typeof generateDocument>>;
     try {
       res = await generateDocument({
-        data: { slug: product.slug, answers, mode, pass: mode === "full" ? pass : undefined },
+        // The pass rides along on previews too, so customers draw on their own limit.
+        data: { slug: product.slug, answers, mode, pass },
       });
     } catch {
       setBusy(null);
@@ -137,7 +138,7 @@ export function Generator({ product }: { product: DocProduct }) {
       setError(res.error);
       return;
     }
-    setFull(product.slug, res.text, sealed);
+    setFull(product.slug, res.text, res.sealed ?? sealed);
   }
 
   // Back from Stripe with a draft and a fresh unlock: open the full text right away.
@@ -165,13 +166,15 @@ export function Generator({ product }: { product: DocProduct }) {
 
   async function rewrite(instruction: RewriteKind) {
     const sealed = draft?.sealed;
-    if (!sealed) {
+    // Texts unlocked before sealing existed have no sealed copy; send the text itself.
+    const legacyText = sealed ? undefined : full;
+    if (!sealed && !legacyText) {
       toast.error("Skriv ett nytt utkast först, så kan det skrivas om.");
       return;
     }
     setBusy("rewrite");
     const res = await rewriteDocument({
-      data: { slug: product.slug, sealed, instruction, pass },
+      data: { slug: product.slug, sealed, legacyText, instruction, pass },
     }).catch(() => ({ ok: false as const, error: "Nätverksfel. Försök igen." }));
     setBusy(null);
     if (res.ok) {

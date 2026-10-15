@@ -210,6 +210,24 @@ function BrevPage() {
                   Ovan är en grov läsning av nyckelord, gratis. Försök igen om en stund för hela
                   analysen. Du betalar ingenting förrän den fungerar.
                 </p>
+                {shown.deadlines.length ? (
+                  <ul className="mt-4 space-y-1 text-sm text-ink">
+                    {shown.deadlines.map((d) => (
+                      <li key={d.description + (d.dueDate ?? "")}>
+                        {d.description}
+                        {d.dueDate ? ` — ${d.dueDate}` : ""}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                {shown.amounts.length ? (
+                  <p className="mt-2 text-sm text-ink">Belopp i brevet: {shown.amounts.join(", ")}</p>
+                ) : null}
+                {shown.referenceNumbers.length ? (
+                  <p className="mt-1 text-sm text-ink">
+                    Referens: {shown.referenceNumbers.join(", ")}
+                  </p>
+                ) : null}
                 {shown.actionPlan.length ? (
                   <ol className="mt-4 list-decimal space-y-1.5 pl-5 text-sm text-ink">
                     {shown.actionPlan.map((s) => (

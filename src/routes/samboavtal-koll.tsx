@@ -103,7 +103,11 @@ function SamboKollPage() {
 
   function toAgreement() {
     const prefill = samboPrefill(full, result?.include ?? []);
-    setAnswers("samboavtal", { ...(existing ?? {}), ...prefill });
+    // Names and tone the visitor already typed win over the placeholders.
+    const keep = Object.fromEntries(
+      ["parter", "ton"].flatMap((k) => (existing?.[k]?.trim() ? [[k, existing[k]]] : [])),
+    );
+    setAnswers("samboavtal", { ...(existing ?? {}), ...prefill, ...keep });
     void navigate({ to: "/dokument/$slug", params: { slug: "samboavtal" }, hash: "skriv" });
   }
 

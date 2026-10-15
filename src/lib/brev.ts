@@ -212,7 +212,7 @@ export const analyzeBrev = createServerFn({ method: "POST" })
     // The full analysis leaves the server encrypted; unlockBrev opens it after payment.
     // A keyword reading is never sold: without the AI there is nothing to unlock.
     if (!ai) return { ok: true as const, preview: full, sealed: null, ai: false as const };
-    return { ok: true as const, preview, sealed: await seal(full), ai: true as const };
+    return { ok: true as const, preview, sealed: await seal(full, "brev"), ai: true as const };
   });
 
 export const unlockBrev = createServerFn({ method: "POST" })
@@ -224,7 +224,7 @@ export const unlockBrev = createServerFn({ method: "POST" })
     if (!(await passCovers(data.pass, "myndighetsbrev"))) {
       return { ok: false as const, error: LOCKED_ERROR };
     }
-    const full = await unseal<BrevAnalysis>(data.sealed);
+    const full = await unseal<BrevAnalysis>(data.sealed, "brev");
     if (!full) return { ok: false as const, error: "Analysen gick ut. Klistra in brevet igen." };
     return { ok: true as const, full };
   });

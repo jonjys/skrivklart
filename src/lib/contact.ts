@@ -14,7 +14,8 @@ export const sendContact = createServerFn({ method: "POST" })
       return { ok: false as const, error: "Skriv en e-postadress som vi kan svara till." };
     }
     if (data.message.length < 5) return { ok: false as const, error: "Skriv några ord om vad det gäller." };
-    const { allow } = await import("./limits.server");
+    // Counted before the send so a burst cannot slip past; refunded if it fails.
+    const { allow, refund } = await import("./limits.server");
     if (!allow("contact")) {
       return { ok: false as const, error: "Du har skickat flera meddelanden nyss. Vi svarar på dem först." };
     }
@@ -25,6 +26,7 @@ export const sendContact = createServerFn({ method: "POST" })
       text: `${data.message}\n\n— ${data.email}${data.ref ? `\nGäller: ${data.ref}` : ""}`,
     });
     if (!sent) {
+      refund("contact");
       return {
         ok: false as const,
         error: "Meddelandet gick inte iväg just nu. Försök igen om en stund.",

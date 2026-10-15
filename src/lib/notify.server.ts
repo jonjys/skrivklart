@@ -7,7 +7,13 @@ export function notifyConfigured() {
   return Boolean(process.env.RESEND_API_KEY && process.env.NOTIFY_FROM && process.env.NOTIFY_EMAIL);
 }
 
-export async function notifyOwner(opts: { subject: string; text: string; replyTo?: string }) {
+export async function notifyOwner(opts: {
+  subject: string;
+  text: string;
+  replyTo?: string;
+  /** Same key within 24 h sends once, across instances (Resend dedupes it). */
+  idempotencyKey?: string;
+}) {
   const key = process.env.RESEND_API_KEY;
   const from = process.env.NOTIFY_FROM;
   const to = process.env.NOTIFY_EMAIL;
@@ -15,7 +21,11 @@ export async function notifyOwner(opts: { subject: string; text: string; replyTo
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+        ...(opts.idempotencyKey ? { "Idempotency-Key": opts.idempotencyKey.slice(0, 256) } : {}),
+      },
       body: JSON.stringify({
         from,
         to: to.split(",").map((a) => a.trim()).filter(Boolean),

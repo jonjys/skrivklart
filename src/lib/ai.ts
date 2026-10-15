@@ -2,7 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { BUNDLES, getProduct, PRODUCTS, type DocProduct } from "./catalog";
 import { getSql } from "./db";
 import { complete, type LlmEffort, type LlmMessage } from "./llm";
-import { LOCKED_ERROR, passCovers, seal, unseal } from "./pass";
+import { LOCKED_ERROR, passCovers, passId, seal, unseal } from "./pass";
+import { clip, outlineOf, words } from "./preview";
 import { fallbackDocument } from "./templates";
 
 const SYSTEM = `Du är Skrivklart, en svensk dokumentförfattare. Du skriver färdiga texter som mottagaren kan skicka eller skriva under efter att ha fyllt i [platshållare].
@@ -73,51 +74,12 @@ function factsOf(product: DocProduct, answers: Record<string, string>) {
     .join("\n");
 }
 
-function words(text: string) {
-  return text.split(/\s+/).filter(Boolean).length;
-}
+/** A sealed document: slug, text, whether the model wrote it, and the answers it was built from. */
+type Sealed = { s: string; t: string; ai: boolean; a: Record<string, string> };
 
-/**
- * The free part of a document: whole paragraphs up to ~160 words and never more than
- * 40 % of the text, cut on a sentence boundary when one paragraph is longer than that.
- */
-export function clip(full: string, maxWords = 160) {
-  const budget = Math.max(25, Math.min(maxWords, Math.floor(words(full) * 0.4)));
-  const out: string[] = [];
-  let n = 0;
-  for (const para of full.split(/\n{2,}/)) {
-    const w = words(para);
-    if (n + w <= budget) {
-      out.push(para);
-      n += w;
-      continue;
-    }
-    if (!out.length || n < budget * 0.6) {
-      const sentences = para.match(/[^.!?\n]+[.!?]?\s*/g) ?? [para];
-      let part = "";
-      for (const s of sentences) {
-        if (n + words(part + s) > budget) break;
-        part += s;
-      }
-      if (part.trim()) out.push(part.trim());
-    }
-    break;
-  }
-  return `${out.join("\n\n").trim()}\n\n…`;
+function sealDoc(product: DocProduct, text: string, ai: boolean, answers: Record<string, string>) {
+  return seal({ s: product.slug, t: text, ai, a: answers } satisfies Sealed, "doc");
 }
-
-/** Section headings left after the free part, so the paywall can show what is in the rest. */
-function outlineOf(full: string, shown: string) {
-  const seen = new Set(shown.split("\n").map((l) => l.trim()));
-  return full
-    .split("\n")
-    .map((l) => l.trim())
-    .filter((l) => l.length > 2 && l.length <= 70 && !seen.has(l))
-    .filter((l) => /^(§\s*\d+|\d{1,2}[.)]\s+\p{Lu})/u.test(l) || /^[\p{Lu}\d\s–-]{4,}$/u.test(l))
-    .slice(0, 10);
-}
-
-type Sealed = { s: string; t: string };
 
 function documentPrompt(product: DocProduct, answers: Record<string, string>) {
   return `${product.extraPrompt}
@@ -166,24 +128,24 @@ export const generateDocument = createServerFn({ method: "POST" })
     if (!product) return { ok: false as const, error: "Okänt dokument." };
     const answers = cleanAnswers(product, data.rawAnswers);
     const { allow } = await import("./limits.server");
+    const paid = Boolean(data.pass) && (await passCovers(data.pass, data.slug));
 
     if (data.mode === "full") {
-      if (!(await passCovers(data.pass, data.slug))) {
-        return { ok: false as const, error: LOCKED_ERROR, locked: true as const };
-      }
+      if (!paid) return { ok: false as const, error: LOCKED_ERROR, locked: true as const };
       // A paying customer always gets a document; over the limit it is the template.
-      const doc = await writeFull(product, answers, allow("full", data.pass));
+      const doc = await writeFull(product, answers, allow("full", passId(data.pass)));
       await track("generate_full", data.slug);
-      return {
-        ok: true as const,
-        text: doc.text,
-        sealed: await seal({ s: product.slug, t: doc.text } satisfies Sealed),
-      };
+      return { ok: true as const, text: doc.text, sealed: await sealDoc(product, doc.text, doc.ai, answers) };
     }
 
     // Free preview: write the whole document once, show the start, and seal the rest.
     // After payment the sealed text opens instantly, and it is the text the buyer saw.
-    const doc = await writeFull(product, answers, allow("preview"));
+    // Customers who already paid draw on their own pass, not the anonymous IP bucket.
+    const doc = await writeFull(
+      product,
+      answers,
+      paid ? allow("full", passId(data.pass)) : allow("preview"),
+    );
     const text = clip(doc.text);
     await track("generate_preview", data.slug);
     return {
@@ -191,7 +153,7 @@ export const generateDocument = createServerFn({ method: "POST" })
       text,
       outline: outlineOf(doc.text, text),
       restWords: Math.max(0, words(doc.text) - words(text)),
-      sealed: await seal({ s: product.slug, t: doc.text } satisfies Sealed),
+      sealed: await sealDoc(product, doc.text, doc.ai, answers),
       ai: doc.ai,
     };
   });
@@ -207,12 +169,25 @@ export const unlockDocument = createServerFn({ method: "POST" })
     if (!(await passCovers(data.pass, data.slug))) {
       return { ok: false as const, error: LOCKED_ERROR, locked: true as const };
     }
-    const doc = await unseal<Sealed>(data.sealed);
+    const doc = await unseal<Sealed>(data.sealed, "doc");
     if (!doc || doc.s !== data.slug || typeof doc.t !== "string") {
       return { ok: false as const, error: "Utkastet gick inte att öppna. Skriv ett nytt utkast." };
     }
     await track("unlock", data.slug);
-    return { ok: true as const, text: doc.t };
+    // The preview was the offline template (model down or limit hit): try the model once more.
+    const product = getProduct(data.slug);
+    if (!doc.ai && product && doc.a) {
+      const { allow } = await import("./limits.server");
+      const better = await writeFull(product, cleanAnswers(product, doc.a), allow("full", passId(data.pass)));
+      if (better.ai) {
+        return {
+          ok: true as const,
+          text: better.text,
+          sealed: await sealDoc(product, better.text, true, doc.a),
+        };
+      }
+    }
+    return { ok: true as const, text: doc.t, sealed: data.sealed };
   });
 
 const REWRITES = {
@@ -223,25 +198,43 @@ const REWRITES = {
 export type RewriteKind = keyof typeof REWRITES;
 
 export const rewriteDocument = createServerFn({ method: "POST" })
-  .validator((input: { slug: string; sealed: string; instruction: RewriteKind; pass?: string }) => ({
+  .validator(
+    (input: {
+      slug: string;
+      sealed?: string;
+      /** Full text unlocked before texts were sealed; only for pass holders, capped. */
+      legacyText?: string;
+      instruction: RewriteKind;
+      pass?: string;
+    }) => ({
     slug: String(input?.slug ?? "").slice(0, 60),
     sealed: String(input?.sealed ?? "").slice(0, 200_000),
+    legacyText: typeof input?.legacyText === "string" ? input.legacyText : "",
     instruction: input?.instruction === "formellare" ? ("formellare" as const) : ("kortare" as const),
     pass: typeof input?.pass === "string" ? input.pass.slice(0, 600) : undefined,
-  }))
+  }),
+  )
   .handler(async ({ data }) => {
     const product = getProduct(data.slug);
     if (!product) return { ok: false as const, error: "Okänt dokument." };
     if (!(await passCovers(data.pass, data.slug))) {
       return { ok: false as const, error: LOCKED_ERROR, locked: true as const };
     }
-    // Only text the server wrote for this document can be rewritten.
-    const doc = await unseal<Sealed>(data.sealed);
-    if (!doc || doc.s !== data.slug || typeof doc.t !== "string") {
+    // Normally only text the server wrote for this document can be rewritten. Texts unlocked
+    // before sealing existed come from the client, but only for a paying pass and capped.
+    const sealedDoc = data.sealed ? await unseal<Sealed>(data.sealed, "doc") : null;
+    let current: { t: string; a: Record<string, string> } | null = null;
+    if (sealedDoc && sealedDoc.s === data.slug && typeof sealedDoc.t === "string") {
+      current = { t: sealedDoc.t, a: sealedDoc.a ?? {} };
+    } else if (!data.sealed && data.legacyText.trim() && data.legacyText.length <= 12_000) {
+      current = { t: data.legacyText, a: {} };
+    }
+    if (!current) {
       return { ok: false as const, error: "Skriv ett nytt utkast först, så kan det skrivas om." };
     }
+    const doc = current;
     const { allow } = await import("./limits.server");
-    if (!allow("rewrite", data.pass)) {
+    if (!allow("rewrite", passId(data.pass))) {
       return {
         ok: false as const,
         error: "Du har skrivit om många gånger nu. Försök igen om en stund.",
@@ -265,7 +258,7 @@ export const rewriteDocument = createServerFn({ method: "POST" })
     return {
       ok: true as const,
       text: result.text,
-      sealed: await seal({ s: product.slug, t: result.text } satisfies Sealed),
+      sealed: await sealDoc(product, result.text, true, doc.a),
     };
   });
 
@@ -310,8 +303,8 @@ function routeSupport(q: string) {
     const p = getProduct(slug);
     return p ? `${p.name}, ${p.priceKr} kr. ${line}` : line;
   };
-  if (/betal|kvitto|pengar tillbaka|återbetal|fick inte/.test(q))
-    return "Gäller det en betalning? Skriv till oss i kontaktformuläret längre ner på den här sidan, så svarar en människa.";
+  if (/kvitto|återbetal|har betalat|betalade|dragits|fick inte (texten|dokumentet|avtalet|brevet)|köpt/.test(q))
+    return "Gäller det ett köp? Skriv till oss i kontaktformuläret på supportsidan (skrivklart.se/support#kontakt), så svarar en människa.";
   if (/underhåll|underhall|betalar inte|pappan|mamman/.test(q))
     return pick(
       "underhallsavtal",

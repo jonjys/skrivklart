@@ -58,8 +58,13 @@ async function hmacKey(secret: string) {
   );
 }
 
-async function aesKey(secret: string) {
-  const raw = await crypto.subtle.digest("SHA-256", enc.encode(`skrivklart-seal:${secret}`));
+/** What a sealed value is for. Each purpose has its own key, so one cannot be opened as another. */
+export type SealPurpose = "brev" | "doc";
+
+async function aesKey(secret: string, purpose: SealPurpose) {
+  // "brev" keeps the original derivation so letters sealed before purposes existed still open.
+  const label = purpose === "brev" ? `skrivklart-seal:${secret}` : `skrivklart-seal:${purpose}:${secret}`;
+  const raw = await crypto.subtle.digest("SHA-256", enc.encode(label));
   return crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["encrypt", "decrypt"]);
 }
 
@@ -76,8 +81,11 @@ export async function issuePass(slug: string, expiresAt: number) {
 export async function passCovers(pass: string | undefined, slug: string) {
   if (!stripeKey()) return true;
   if (!pass) return false;
-  const [body, sig] = pass.split(".");
-  if (!body || !sig) return false;
+  const parts = pass.split(".");
+  // Exactly body.signature in base64url: no extra segments, padding or whitespace, so one
+  // purchase has one spelling (rate limits key on it).
+  if (parts.length !== 2 || !/^[\w-]+$/.test(parts[0]) || !/^[\w-]+$/.test(parts[1])) return false;
+  const [body, sig] = parts;
   try {
     let ok = false;
     for (const secret of readingSecrets()) {
@@ -95,17 +103,22 @@ export async function passCovers(pass: string | undefined, slug: string) {
   }
 }
 
+/** Stable id of a pass for rate limits: the signed body, which no one can vary. */
+export function passId(pass: string | undefined) {
+  return pass?.split(".")[0] ?? "";
+}
+
 /** Encrypt a value so the browser can hold it without reading it. */
-export async function seal(value: unknown) {
+export async function seal(value: unknown, purpose: SealPurpose) {
   const json = enc.encode(JSON.stringify(value));
   const secret = signingSecret();
   if (!secret || !stripeKey()) return `dev.${b64url(json)}`;
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await aesKey(secret), json);
+  const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await aesKey(secret, purpose), json);
   return `${b64url(iv)}.${b64url(new Uint8Array(ct))}`;
 }
 
-export async function unseal<T>(sealed: string): Promise<T | null> {
+export async function unseal<T>(sealed: string, purpose: SealPurpose): Promise<T | null> {
   const [a, b] = sealed.split(".");
   if (!a || !b) return null;
   if (!stripeKey()) {
@@ -119,7 +132,7 @@ export async function unseal<T>(sealed: string): Promise<T | null> {
     try {
       const pt = await crypto.subtle.decrypt(
         { name: "AES-GCM", iv: fromB64url(a) },
-        await aesKey(secret),
+        await aesKey(secret, purpose),
         fromB64url(b),
       );
       return JSON.parse(dec.decode(pt)) as T;
