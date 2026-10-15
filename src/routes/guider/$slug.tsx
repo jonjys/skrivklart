@@ -1,29 +1,46 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
 import { getProduct } from "@/lib/catalog";
-import { getGuide } from "@/lib/guides";
+import { GUIDE_REDIRECTS, GUIDES, getGuide, guideMinutes } from "@/lib/guides";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { siteImage } from "@/lib/schema";
 import { sek } from "@/lib/utils";
 
+function swedishDate(iso: string) {
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("sv-SE", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Europe/Stockholm",
+  });
+}
+
 export const Route = createFileRoute("/guider/$slug")({
   loader: ({ params }) => {
+    const moved = GUIDE_REDIRECTS[params.slug];
+    if (moved) throw redirect({ href: moved, statusCode: 301 });
     const guide = getGuide(params.slug);
     if (!guide) throw notFound();
-    return { guide, product: getProduct(guide.productSlug) };
+    const related = [
+      ...GUIDES.filter((g) => g.slug !== guide.slug && g.productSlug === guide.productSlug),
+      ...GUIDES.filter((g) => g.slug !== guide.slug && g.productSlug !== guide.productSlug),
+    ].slice(0, 3);
+    return { guide, product: getProduct(guide.productSlug), related };
   },
   head: ({ loaderData }) => {
     const guide = loaderData?.guide;
     if (!guide) return { meta: [{ title: `Guider — ${SITE_NAME}` }] };
+    const title = `${guide.seoTitle ?? guide.title} | ${SITE_NAME}`;
+    const description = guide.seoDescription ?? guide.excerpt;
     return {
       meta: [
-        { title: `${guide.title} | ${SITE_NAME}` },
-        { name: "description", content: guide.excerpt },
+        { title },
+        { name: "description", content: description },
         { property: "og:type", content: "article" },
-        { property: "og:title", content: guide.title },
-        { property: "og:description", content: guide.excerpt },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/guider/${guide.slug}` }],
     };
@@ -48,16 +65,20 @@ export const Route = createFileRoute("/guider/$slug")({
 });
 
 function GuidePage() {
-  const { guide, product } = Route.useLoaderData()!;
+  const { guide, product, related } = Route.useLoaderData()!;
+  const url = `${SITE_URL}/guider/${guide.slug}`;
+  const updated = guide.updated ?? guide.published;
 
-  const jsonLd = {
+  const article = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: guide.title,
-    description: guide.excerpt,
+    headline: guide.seoTitle ?? guide.title,
+    description: guide.seoDescription ?? guide.excerpt,
     inLanguage: "sv-SE",
-    mainEntityOfPage: `${SITE_URL}/guider/${guide.slug}`,
+    mainEntityOfPage: url,
     image: siteImage,
+    datePublished: guide.published,
+    dateModified: updated,
     author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
     publisher: {
       "@type": "Organization",
@@ -65,33 +86,86 @@ function GuidePage() {
       logo: { "@type": "ImageObject", url: `${SITE_URL}/profil.jpg` },
     },
   };
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: SITE_NAME, item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Guider", item: `${SITE_URL}/guider` },
+      { "@type": "ListItem", position: 3, name: guide.title, item: url },
+    ],
+  };
+  const faq = guide.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: guide.faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
 
   return (
     <SiteFrame>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {[article, breadcrumbs, faq].filter(Boolean).map((data, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+        />
+      ))}
       <PageHero
         kicker={
           <>
             <Link to="/guider" className="hover:underline">
               Guider
             </Link>
-            <span className="text-pine-fg/60"> · {guide.minutes} min läsning</span>
+            <span className="text-pine-fg/60"> · {guideMinutes(guide)} min läsning</span>
           </>
         }
         title={guide.title}
         sub={guide.excerpt}
       />
       <article className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-14">
-        <div className="space-y-5">
+        <p className="text-sm text-muted">
+          Uppdaterad <time dateTime={updated}>{swedishDate(updated)}</time>
+        </p>
+        <div className="mt-6 space-y-5">
           {guide.body.map((p) => (
             <p key={p} className="text-lg leading-relaxed text-ink">
               {p}
             </p>
           ))}
         </div>
+        {guide.sections?.map((s) => (
+          <section key={s.h} className="mt-10">
+            <h2 className="font-display text-2xl tracking-tight sm:text-3xl">{s.h}</h2>
+            <div className="mt-4 space-y-5">
+              {s.p.map((p) => (
+                <p key={p} className="text-lg leading-relaxed text-ink">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </section>
+        ))}
+        {guide.faq?.length ? (
+          <section className="mt-12">
+            <h2 className="font-display text-2xl tracking-tight sm:text-3xl">Vanliga frågor</h2>
+            <div className="mt-4 divide-y divide-line rounded-2xl border border-line bg-paper">
+              {guide.faq.map((f) => (
+                <details key={f.q} className="group p-5">
+                  <summary className="cursor-pointer list-none font-semibold text-ink">
+                    {f.q}
+                  </summary>
+                  <p className="mt-2 leading-relaxed text-muted">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        ) : null}
         {product ? (
           <div className="mt-12 rounded-2xl bg-pine-deep p-6 text-pine-fg sm:p-8">
             <p className="text-xs font-bold tracking-[0.18em] text-sun uppercase">
@@ -101,7 +175,7 @@ function GuidePage() {
             <p className="mt-2 text-pine-fg/80">
               {product.short} Gratis utkast, {sek(product.priceKr)} för hela texten.
             </p>
-            <Button asChild className="mt-6" size="lg" variant="accent">
+            <Button asChild className="mt-6 h-auto min-h-12 whitespace-normal" size="lg" variant="accent">
               <Link to="/dokument/$slug" params={{ slug: product.slug }}>
                 Skriv {product.name.toLowerCase()}
               </Link>
@@ -112,6 +186,24 @@ function GuidePage() {
               </Link>
             ) : null}
           </div>
+        ) : null}
+        {related.length ? (
+          <section className="mt-14 border-t border-line pt-8">
+            <h2 className="font-display text-2xl tracking-tight">Läs också</h2>
+            <div className="mt-5 grid gap-3">
+              {related.map((g) => (
+                <Link
+                  key={g.slug}
+                  to="/guider/$slug"
+                  params={{ slug: g.slug }}
+                  className="rounded-2xl border border-line bg-paper p-5 transition-transform duration-200 hover:-translate-y-0.5"
+                >
+                  <p className="text-xs font-semibold text-clay">{guideMinutes(g)} min läsning</p>
+                  <h3 className="mt-1 font-display text-lg tracking-tight">{g.title}</h3>
+                </Link>
+              ))}
+            </div>
+          </section>
         ) : null}
       </article>
     </SiteFrame>

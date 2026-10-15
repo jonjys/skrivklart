@@ -21,7 +21,7 @@ export const Route = createFileRoute("/brev")({
   component: BrevPage,
   head: () => ({
     meta: [
-      { title: "Myndighetsbrev | Skrivklart" },
+      { title: "Förstå brev från Försäkringskassan, Skatteverket och Kronofogden | Skrivklart" },
       {
         name: "description",
         content:

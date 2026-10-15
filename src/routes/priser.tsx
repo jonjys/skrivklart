@@ -12,7 +12,7 @@ import {
   FAMILY_SLUG,
   PRODUCTS,
 } from "@/lib/catalog";
-import { productOffer } from "@/lib/schema";
+import { merchantReturnPolicy, productImages, productOffer } from "@/lib/schema";
 import { usePayMethods } from "@/lib/pay-methods";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { cn, sek } from "@/lib/utils";
@@ -40,8 +40,12 @@ const jsonLd = {
     "@type": "Product",
     name: `${SITE_NAME} ${b.name}`,
     description: b.short,
+    image: productImages,
     sku: b.slug,
     brand: { "@type": "Brand", name: SITE_NAME },
+    url: `${SITE_URL}/priser#${b.slug}`,
+    category: "Digital document",
+    hasMerchantReturnPolicy: merchantReturnPolicy,
     offers: productOffer(b.priceKr, `${SITE_URL}/priser#${b.slug}`),
   })),
 };

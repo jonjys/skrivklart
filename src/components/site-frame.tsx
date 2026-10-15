@@ -8,6 +8,9 @@ import { SupportWidget } from "./support-widget";
 export function SiteFrame({ children }: { children: ReactNode }) {
   const lang = useI18n((s) => s.lang);
   useEffect(() => {
+    if (!useI18n.persist.hasHydrated()) void useI18n.persist.rehydrate();
+  }, []);
+  useEffect(() => {
     applyDocumentLang(lang);
   }, [lang]);
 
