@@ -30,7 +30,7 @@ function OmPage() {
         <div className="space-y-4 rounded-2xl border-2 border-line bg-paper p-6 text-base leading-relaxed text-ink/85 sm:p-8">
           <p>
             De flesta fastnar inte för att de inte kan skriva. De fastnar för att texten ska vara
-            formell, svensk och omöjlig att ångra – och blanketten sitter i kroppen.
+            formell, svensk och omöjlig att ångra – och det är just då man är som tröttast.
           </p>
           <p>
             Skrivklart tar dina fakta och skriver utkastet. Du läser. Du ändrar. Du skickar. Vi är

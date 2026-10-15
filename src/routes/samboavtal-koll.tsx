@@ -26,7 +26,7 @@ const DESCRIPTION =
 const FAQ = [
   {
     q: "Behöver alla sambor ett samboavtal?",
-    a: "Nej. Men äger ni en bostad som skaffats för att ni ska bo tillsammans delas den lika vid en separation, oavsett vem som betalat. Har den ena lagt mer pengar är ett samboavtal det enda sättet att bestämma något annat i förväg.",
+    a: "Nej. Men äger ni en bostad som skaffats för att ni ska bo tillsammans är huvudregeln att den delas lika vid en separation, oavsett vem som betalat. Har den ena lagt mer pengar är ett samboavtal det enda sättet att bestämma något annat i förväg.",
   },
   {
     q: "Vad gäller utan samboavtal?",

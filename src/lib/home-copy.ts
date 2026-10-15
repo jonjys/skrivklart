@@ -68,7 +68,7 @@ const sv: HomeCopy = {
   faq: [
     {
       q: "Vad kostar det?",
-      a: "Utkastet är gratis. Hela texten kostar 59 kr för kortare brev och 99 kr för avtal och överklaganden. Familjepaketet med sju dokument kostar 149 kr. Inga prenumerationer.",
+      a: "Utkastet är gratis. Hela texten kostar 59 kr för de flesta brev och 99 kr för avtal, överklaganden, ARN-anmälan, personligt brev och CV. Familjepaketet med sju dokument kostar 149 kr. Inga prenumerationer.",
     },
     {
       q: "Är det juridisk rådgivning?",
@@ -80,7 +80,7 @@ const sv: HomeCopy = {
     },
     {
       q: "Vem ser det jag skriver?",
-      a: "Ingen. Utkastet sparas bara i din webbläsare, och du behöver inget konto. Betalningen går via Stripe.",
+      a: "Ingen människa hos oss läser det. Det du fyller i skickas till vår AI-leverantör för att skriva texten, och dokumentet sparas sedan bara i din webbläsare. Du behöver inget konto. Betalningen går via Stripe.",
     },
   ],
 };
@@ -112,10 +112,10 @@ const en: HomeCopy = {
   more: "All documents and prices",
   faq_h: "Common questions",
   faq: [
-    { q: "What does it cost?", a: "The draft is free. The full text is SEK 59 for shorter letters and SEK 99 for agreements and appeals. The Family Pack with seven documents is SEK 149. No subscriptions." },
+    { q: "What does it cost?", a: "The draft is free. The full text is SEK 59 for most letters and SEK 99 for agreements, appeals, ARN complaints, cover letters and CVs. The Family Pack with seven documents is SEK 149. No subscriptions." },
     { q: "Is this legal advice?", a: "No. Skrivklart writes drafts that you read, edit and send yourself. For custody disputes or large sums, talk to a lawyer or your municipality's family law office." },
     { q: "Can a child support agreement be enforced?", a: "Yes. If it is written and witnessed by two people, Kronofogden can enforce it if payments stop. Skrivklart's agreement has lines for two witnesses." },
-    { q: "Who sees what I write?", a: "No one. The draft is only saved in your browser and you don't need an account. Payment goes through Stripe." },
+    { q: "Who sees what I write?", a: "No person at Skrivklart reads it. What you type is sent to our AI provider to write the text, and the document is then kept only in your browser. No account needed. Payment goes through Stripe." },
   ],
 };
 
@@ -146,10 +146,10 @@ const ar: HomeCopy = {
   more: "كل الوثائق والأسعار",
   faq_h: "أسئلة شائعة",
   faq: [
-    { q: "كم يكلّف؟", a: "المسودة مجانية. النص الكامل 59 كرونة للرسائل القصيرة و99 كرونة للاتفاقات والاعتراضات. باقة العائلة بسبع وثائق بـ149 كرونة. بدون اشتراكات." },
+    { q: "كم يكلّف؟", a: "المسودة مجانية. النص الكامل 59 كرونة لمعظم الرسائل و99 كرونة للاتفاقات والاعتراضات وطلبات العمل. باقة العائلة بسبع وثائق بـ149 كرونة. بدون اشتراكات." },
     { q: "هل هذه استشارة قانونية؟", a: "لا. سكريفكلارت يكتب مسودات تقرئينها وتعدّلينها وترسلينها بنفسك. في نزاعات الحضانة أو المبالغ الكبيرة: تحدّثي مع محامٍ أو مع قسم شؤون الأسرة في بلديتك." },
     { q: "هل يمكن تحصيل اتفاق النفقة؟", a: "نعم، إذا كان مكتوباً وبحضور شاهدين يمكن لـ Kronofogden تحصيله إذا توقفت المدفوعات. اتفاق سكريفكلارت فيه سطران لشاهدين." },
-    { q: "من يرى ما أكتب؟", a: "لا أحد. المسودة تُحفظ في متصفحك فقط ولا تحتاجين حساباً. الدفع عبر Stripe." },
+    { q: "من يرى ما أكتب؟", a: "لا يقرؤه أي شخص لدينا. ما تكتبينه يُرسل إلى مزوّد الذكاء الاصطناعي لكتابة النص، ثم تُحفظ الوثيقة في متصفحك فقط. لا تحتاجين حساباً. الدفع عبر Stripe." },
   ],
 };
 

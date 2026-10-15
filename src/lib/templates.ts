@@ -188,9 +188,20 @@ ______________________          ______________________
 Hyresvärd (förstahand)          Hyresgäst`;
 }
 
+const MYNDIGHETER: Record<string, string> = {
+  forsakringskassan: "Försäkringskassan",
+  csn: "CSN",
+  skatteverket: "Skatteverket",
+  akassa: "A-kassan",
+  kommun: "Kommunen / socialtjänsten",
+};
+
 function overklagande(a: Record<string, string>) {
-  const mynd = val(a, "myndighet", "[myndighet]");
-  return `Överklagande av beslut
+  const key = a.myndighet?.trim() ?? "";
+  const mynd = MYNDIGHETER[key] ?? val(a, "myndighet", "[myndighet]");
+  // Försäkringskassan and a-kassan must reconsider their own decision before any appeal.
+  const omprovning = (key === "forsakringskassan" || key === "akassa") && a.steg !== "omprovat";
+  return `${omprovning ? "Begäran om omprövning av beslut" : "Överklagande av beslut"}
 
 Mottagare: ${mynd}
 Diarienummer: [diarienummer]
@@ -536,7 +547,7 @@ ${val(a, "betalning", "Beloppet betalas i förskott senast den [dag] varje måna
 Underhållet betalas från och med ${val(a, "start", "[datum]")} till dess att barnet fyller 18 år. Går barnet i skolan efter 18 års ålder betalas underhåll så länge skolgången pågår, dock längst till dess att barnet fyller 21 år.
 
 § 6 Övrigt
-${val(a, "ovrigt", "[t.ex. indexuppräkning, delning av kostnader för fritidsaktiviteter]")}
+${val(a, "ovrigt", "[t.ex. delning av kostnader för fritidsaktiviteter]")}
 
 § 7 Ändringar
 Ändringar av detta avtal ska göras skriftligt och undertecknas av båda föräldrarna.

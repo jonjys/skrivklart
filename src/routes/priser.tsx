@@ -19,7 +19,7 @@ import { cn, sek } from "@/lib/utils";
 
 const TITLE = "Priser – dokument från 59 kr, paket från 129 kr | Skrivklart";
 const DESCRIPTION =
-  "Kortare brev 59 kr, avtal och överklaganden 99 kr. Familjepaketet med sju dokument 149 kr. Allt i 30 dagar 199 kr. Ingen prenumeration, utkast gratis.";
+  "De flesta brev 59 kr. Avtal, överklaganden, ARN-anmälan, personligt brev och CV 99 kr. Familjepaketet med sju dokument 149 kr. Allt i 30 dagar 199 kr. Ingen prenumeration, utkast gratis.";
 
 export const Route = createFileRoute("/priser")({
   component: PriserPage,

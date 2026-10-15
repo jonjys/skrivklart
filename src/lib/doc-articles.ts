@@ -23,7 +23,7 @@ export const DOC_ARTICLES: Record<string, DocArticle> = {
         h: "Vad gäller om ni inte har ett samboavtal?",
         p: [
           "Sambolagen gäller automatiskt när två personer bor tillsammans i ett parförhållande med gemensamt hushåll. Ni behöver inte anmäla något.",
-          "Om ni separerar kan var och en begära bodelning. Då delas samboegendomen lika: den gemensamma bostaden och det bohag som ni skaffat för att använda tillsammans. Det spelar ingen roll vem som betalade eller vem som står på kontraktet.",
+          "Om ni separerar kan var och en begära bodelning. Då delas samboegendomen lika: den gemensamma bostaden och det bohag som ni skaffat för att använda tillsammans. Huvudregeln är att värdet delas lika, oavsett vem som betalade eller står på kontraktet. Har ni bott ihop kort tid kan bodelningen jämkas så att den som ägde mer får behålla mer, men det avgörs i efterhand och går inte att räkna med. Med ett samboavtal vet ni.",
           "Sådant som inte räknas som samboegendom delas inte, till exempel bil, sparpengar, aktier, fritidshus och saker som den ena hade innan ni flyttade ihop och som inte skaffades för gemensamt bruk.",
           "Bodelning måste begäras senast ett år efter att ni flyttat isär. Begär ingen bodelning behåller var och en sitt.",
         ],
