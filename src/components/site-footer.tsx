@@ -36,6 +36,9 @@ export function SiteFooter() {
           <Link to="/support" className="text-muted hover:text-ink">
             {t(lang, "nav_support")}
           </Link>
+          <Link to="/support" hash="kontakt" className="text-muted hover:text-ink">
+            Kontakt
+          </Link>
           <Link to="/om" className="text-muted hover:text-ink">
             {t(lang, "about")}
           </Link>

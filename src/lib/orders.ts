@@ -1,7 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getBundle, getSellable } from "./catalog";
+import { bundleCovers, getBundle, getProduct, getSellable } from "./catalog";
 import { getSql } from "./db";
 import { issuePass, paymentsLive } from "./pass";
+import { launchCodeActive } from "./site";
 import { uid } from "./utils";
 
 /** How long an unlock lasts in the buyer's browser. */
@@ -9,10 +10,21 @@ export function passDays(slug: string) {
   return getBundle(slug)?.days ?? 365;
 }
 
-function cancelPath(slug: string) {
+function docPath(slug: string) {
+  return slug === "myndighetsbrev" ? "/brev" : `/dokument/${slug}`;
+}
+
+/** The document the buyer was writing, when a bundle covers it. */
+function returnDoc(slug: string, returnTo: string | undefined) {
+  if (!returnTo || returnTo === slug || !getProduct(returnTo)) return undefined;
+  const bundle = getBundle(slug);
+  return bundle && bundleCovers(bundle, returnTo) ? returnTo : undefined;
+}
+
+function cancelPath(slug: string, returnTo: string | undefined) {
+  if (returnTo) return docPath(returnTo);
   if (getBundle(slug)) return "/priser";
-  if (slug === "myndighetsbrev") return "/brev";
-  return `/dokument/${slug}`;
+  return docPath(slug);
 }
 
 async function stripeCheckoutUrl(opts: {
@@ -21,14 +33,16 @@ async function stripeCheckoutUrl(opts: {
   priceKr: number;
   token: string;
   origin: string;
+  returnTo?: string;
 }) {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) return null;
   const body = new URLSearchParams();
   body.set("mode", "payment");
   // Stripe fills in {CHECKOUT_SESSION_ID}; /tack verifies it server side.
-  body.set("success_url", `${opts.origin}/tack?session_id={CHECKOUT_SESSION_ID}`);
-  body.set("cancel_url", `${opts.origin}${cancelPath(opts.slug)}`);
+  const back = opts.returnTo ? `&doc=${encodeURIComponent(opts.returnTo)}` : "";
+  body.set("success_url", `${opts.origin}/tack?session_id={CHECKOUT_SESSION_ID}${back}`);
+  body.set("cancel_url", `${opts.origin}${cancelPath(opts.slug, opts.returnTo)}`);
   body.set("client_reference_id", opts.token);
   // Prices live in the catalog, so a price change is a code change, not a dashboard chore.
   body.set("line_items[0][price_data][currency]", "sek");
@@ -37,8 +51,10 @@ async function stripeCheckoutUrl(opts: {
   body.set("line_items[0][quantity]", "1");
   body.set("metadata[slug]", opts.slug);
   body.set("metadata[token]", opts.token);
+  if (opts.returnTo) body.set("metadata[return]", opts.returnTo);
   body.set("payment_intent_data[description]", `Skrivklart – ${opts.name}`);
-  body.set("allow_promotion_codes", "true");
+  // An empty code field sends people off hunting for codes; show it only during a campaign.
+  if (launchCodeActive()) body.set("allow_promotion_codes", "true");
   // The Stripe account is shared (Nytto Labs); show Skrivklart's own name and colours.
   body.set("branding_settings[display_name]", "Skrivklart");
   body.set("branding_settings[background_color]", "#f3efe6");
@@ -64,17 +80,22 @@ async function stripeCheckoutUrl(opts: {
 }
 
 export const createOrder = createServerFn({ method: "POST" })
-  .validator((input: { slug: string; origin?: string }) => input)
+  .validator((input: { slug: string; origin?: string; returnTo?: string }) => ({
+    slug: String(input?.slug ?? ""),
+    origin: typeof input?.origin === "string" ? input.origin.slice(0, 200) : undefined,
+    returnTo: typeof input?.returnTo === "string" ? input.returnTo.slice(0, 60) : undefined,
+  }))
   .handler(async ({ data }) => {
     const item = getSellable(data.slug);
     if (!item) return { ok: false as const, error: "Okänt dokument." };
+    const returnTo = returnDoc(item.slug, data.returnTo);
 
     // Local preview without Stripe: unlock straight away so the flow can be tried.
     if (!paymentsLive()) {
       return {
         ok: true as const,
         checkoutUrl: null,
-        pass: await issuePass(item.slug, passDays(item.slug)),
+        pass: await issuePass(item.slug, Date.now() + passDays(item.slug) * 86_400_000),
       };
     }
 
@@ -99,6 +120,7 @@ export const createOrder = createServerFn({ method: "POST" })
           priceKr: item.priceKr,
           token,
           origin,
+          returnTo,
         });
       } catch {
         checkoutUrl = null;
@@ -130,7 +152,8 @@ export const verifyCheckout = createServerFn({ method: "POST" })
       status?: string;
       payment_status?: string;
       client_reference_id?: string | null;
-      metadata?: { slug?: string };
+      created?: number;
+      metadata?: { slug?: string; return?: string };
     };
     const slug = session.metadata?.slug ?? "";
     const paid =
@@ -157,13 +180,20 @@ export const verifyCheckout = createServerFn({ method: "POST" })
       }
     }
 
-    const days = passDays(slug);
+    // The unlock runs from the purchase, not from the latest visit to /tack, so an old
+    // or shared success link cannot extend a 30-day bundle forever.
+    const boughtAt = typeof session.created === "number" ? session.created * 1000 : Date.now();
+    const until = boughtAt + passDays(slug) * 86_400_000;
+    if (until < Date.now()) {
+      return { ok: false as const, error: "Det här köpet har gått ut. Köp igen för att låsa upp." };
+    }
     return {
       ok: true as const,
       slug,
       isBundle: Boolean(getBundle(slug)),
-      pass: await issuePass(slug, days),
-      until: Date.now() + days * 86_400_000,
+      pass: await issuePass(slug, until),
+      until,
+      doc: returnDoc(slug, session.metadata?.return),
     };
   });
 

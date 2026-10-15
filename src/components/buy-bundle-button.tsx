@@ -8,9 +8,10 @@ import { Button, type ButtonProps } from "./ui/button";
 
 export function BuyBundleButton({
   slug,
+  returnTo,
   children,
   ...props
-}: { slug: string; children: ReactNode } & Omit<ButtonProps, "onClick">) {
+}: { slug: string; returnTo?: string; children: ReactNode } & Omit<ButtonProps, "onClick">) {
   const unlockBundle = useSkrivklart((s) => s.unlockBundle);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -22,7 +23,7 @@ export function BuyBundleButton({
   async function buy() {
     if (!bundle) return;
     setBusy(true);
-    const result = await startCheckout(slug);
+    const result = await startCheckout(slug, returnTo);
     if (result.kind === "redirect") return;
     setBusy(false);
     if (result.kind === "error") {

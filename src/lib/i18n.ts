@@ -77,7 +77,7 @@ const dict = {
       "Nej. Skrivklart skriver utkast. Du läser, ändrar och ansvarar för det du skickar. För komplicerade fall: anlita en jurist.",
     faq2_q: "Vem ser det jag skriver?",
     faq2_a:
-      "Utkastet stannar i din webbläsare. Vi sparar inte innehållet i dokumentet. Betalningen går via Stripe.",
+      "Ingen människa hos oss läser det. Uppgifterna skickas till vår AI-leverantör för att skriva texten, och dokumentet sparas bara i din webbläsare. Betalningen går via Stripe.",
     faq3_q: "Tänk om texten är dålig?",
     faq3_a:
       "Läs utkastet först — det är gratis. Skriv om den kortare eller formellare efter köp. Ingen återbetalning när hela texten är upplåst.",
@@ -150,7 +150,7 @@ const dict = {
     faq1_a:
       "No. Skrivklart writes drafts. You read, edit and own what you send. For complicated cases: hire a lawyer.",
     faq2_q: "Who sees what I write?",
-    faq2_a: "The draft stays in your browser. We do not store the document. Payment goes through Stripe.",
+    faq2_a: "No person at Skrivklart reads it. Your details go to our AI provider to write the text, and the document is kept only in your browser. Payment goes through Stripe.",
     faq3_q: "What if the text is bad?",
     faq3_a:
       "Read the draft first — it is free. Rewrite shorter or more formal after purchase. No refund once the full text is unlocked.",
@@ -223,7 +223,7 @@ const dict = {
     faq1_a:
       "لا. سكريفكلارت يكتب مسودات. تقرأ وتعدّل وتتحمّل ما ترسله. للحالات المعقّدة: وكّل محامياً.",
     faq2_q: "من يرى ما أكتب؟",
-    faq2_a: "المسودة تبقى في متصفحك. لا نحفظ الوثيقة. الدفع عبر سترايب.",
+    faq2_a: "لا يقرؤه أي شخص لدينا. تُرسل البيانات إلى مزوّد الذكاء الاصطناعي لكتابة النص، وتُحفظ الوثيقة في متصفحك فقط. الدفع عبر سترايب.",
     faq3_q: "ماذا إن كان النص سيئاً؟",
     faq3_a:
       "اقرأ المسودة أولاً — إنها مجانية. أعد الكتابة بعد الشراء. لا استرجاع بعد فتح النص الكامل.",

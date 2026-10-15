@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { getSellable } from "@/lib/catalog";
 import { getSql } from "@/lib/db";
 
 export const Route = createFileRoute("/api/stripe/webhook")({
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/api/stripe/webhook")({
           return new Response("bad signature", { status: 400 });
         }
 
-        let event: { type?: string; data?: { object?: Record<string, unknown> } };
+        let event: { id?: string; type?: string; data?: { object?: Record<string, unknown> } };
         try {
           event = JSON.parse(raw) as typeof event;
         } catch {
@@ -58,6 +59,31 @@ export const Route = createFileRoute("/api/stripe/webhook")({
           } catch {
             /* db optional */
           }
+        }
+
+        // Tell the owner about every completed sale (payment_intent events would double it).
+        const paid =
+          type === "checkout.session.async_payment_succeeded" ||
+          (type === "checkout.session.completed" && obj.payment_status === "paid");
+        // The Stripe account is shared with other apps: only Skrivklart's own products count.
+        const item = getSellable(slug);
+        if (paid && item) {
+          const kr = typeof obj.amount_total === "number" ? Math.round(obj.amount_total / 100) : null;
+          const { notifyOwner } = await import("@/lib/notify.server");
+          await notifyOwner({
+            subject: `Ny försäljning: ${item.name}${kr !== null ? ` – ${kr} kr` : ""}`,
+            // Stripe may deliver the same event more than once.
+            idempotencyKey: `sale-${typeof obj.id === "string" ? obj.id : (event.id ?? token)}`,
+            text: [
+              `Någon har just köpt ${item.name} på skrivklart.se.`,
+              kr !== null ? `Belopp: ${kr} kr` : "",
+              `Tid: ${new Date().toLocaleString("sv-SE", { timeZone: "Europe/Stockholm" })}`,
+              "",
+              "Detaljer finns i Stripe.",
+            ]
+              .filter((l, i) => l || i > 2)
+              .join("\n"),
+          });
         }
 
         return Response.json({ received: true });

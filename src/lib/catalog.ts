@@ -8,6 +8,8 @@ export type Field = {
   hint?: string;
   required?: boolean;
   options?: { value: string; label: string }[];
+  /** Preselected value; the field then needs no answer from the visitor. */
+  defaultValue?: string;
 };
 
 export type Category = "familj" | "ekonomi" | "myndighet" | "bostad" | "jobb" | "avtal";
@@ -38,7 +40,7 @@ const TONE: Field = {
   label: "Ton",
   type: "select",
   placeholder: "Välj ton",
-  required: true,
+  defaultValue: "saklig",
   options: [
     { value: "saklig", label: "Saklig och rak" },
     { value: "varm", label: "Varm men professionell" },
@@ -50,7 +52,7 @@ export const PRODUCTS: DocProduct[] = [
   {
     slug: "underhallsavtal",
     name: "Avtal om underhållsbidrag",
-    short: "Belopp, datum och index – på papper, så att det går att driva in.",
+    short: "Belopp, betalningsdag och startdatum – bevittnat, så att det går att driva in via Kronofogden.",
     pitch:
       "Ett skriftligt avtal om underhåll för barnet. Bevittnat av två personer kan det drivas in via Kronofogden om pengarna uteblir.",
     priceKr: 99,
@@ -97,11 +99,11 @@ export const PRODUCTS: DocProduct[] = [
         id: "ovrigt",
         label: "Övrigt ni kommit överens om",
         type: "textarea",
-        placeholder: "Indexuppräkning, delning av fritidsaktiviteter, glasögon, tandställning…",
+        placeholder: "Delning av fritidsaktiviteter, glasögon, tandställning…",
       },
     ],
     extraPrompt:
-      "Skriv ett avtal om underhållsbidrag enligt föräldrabalkens 7 kap. Numrerade paragrafer: parter, barn, belopp per barn och månad, betalningsdag och betalningssätt, startdatum, att underhållet gäller till barnet fyller 18 år (eller längre om barnet går i skolan, upp till 21 år), indexuppräkning om det anges, övrigt. Avsluta med ort och datum, underskrift för båda föräldrarna, och två vittnesrader med namnförtydligande. Platshållare i [hakparentes]. Påminn inte i avtalet om juridisk rådgivning.",
+      "Skriv ett avtal om underhållsbidrag enligt föräldrabalkens 7 kap. Numrerade paragrafer: parter, barn, belopp per barn och månad, betalningsdag och betalningssätt, startdatum, att underhållet gäller till barnet fyller 18 år (eller längre om barnet går i skolan, upp till 21 år), övrigt. Skriv ingen egen indexklausul om kunden inte uttryckligen begär det; skriv i stället att beloppet ändras enligt lagen (1966:680) om ändring av vissa underhållsbidrag. Avsluta med ort och datum, underskrift för båda föräldrarna, och två vittnesrader med namnförtydligande. Platshållare i [hakparentes]. Påminn inte i avtalet om juridisk rådgivning.",
   },
   {
     slug: "umgangesavtal",
@@ -531,7 +533,7 @@ export const PRODUCTS: DocProduct[] = [
       TONE,
     ],
     extraPrompt:
-      "Skriv ett andrahandskontrakt på svenska med numrerade paragrafer: parter, objekt, period, hyra, skick, uppsägning, tvister. Platshållare i [hakparentes] där fakta saknas. Inte juridiskt ombud-språk, men formellt.",
+      "Skriv ett andrahandskontrakt på svenska med numrerade paragrafer: parter, objekt, period, hyra, skick, uppsägning, tvister. Ta med en paragraf om att hyresvärdens eller bostadsrättsföreningens samtycke till andrahandsuthyrningen finns (datum: [datum]) och att hyran är skälig. Platshållare i [hakparentes] där fakta saknas. Inte juridiskt ombud-språk, men formellt.",
   },
   {
     slug: "overklagande",
@@ -541,7 +543,7 @@ export const PRODUCTS: DocProduct[] = [
       "Du är arg och trött. Texten ska vara kall, precis och svår att avfärda. Inte ett känslobrev.",
     priceKr: 99,
     category: "myndighet",
-    outcome: "Ett komplett överklagande redo att skickas.",
+    outcome: "En komplett begäran om omprövning eller ett överklagande, redo att skickas.",
     fields: [
       {
         id: "myndighet",
@@ -579,10 +581,21 @@ export const PRODUCTS: DocProduct[] = [
         placeholder: "T.ex. att beslutet upphävs och ersättning beviljas.",
         required: true,
       },
+      {
+        id: "steg",
+        label: "Har beslutet redan omprövats?",
+        type: "select",
+        placeholder: "Välj",
+        defaultValue: "forsta",
+        options: [
+          { value: "forsta", label: "Nej, det är det första beslutet" },
+          { value: "omprovat", label: "Ja, det här är omprövningsbeslutet" },
+        ],
+      },
       TONE,
     ],
     extraPrompt:
-      "Skriv ett formellt överklagande. Struktur: rubrik, diarienummer-platshållare, bakgrund, grunder, bevisning, yrkande, underskrift. Sakligt. Inga utropstecken. Hänvisa till 'beslutet den [datum]'. Svenska myndighetssvenska, inte advokatjargong.",
+      "Skriv ett formellt brev som får beslutet ändrat. Välj dokumenttyp så här: Försäkringskassan och a-kassan måste först ompröva sina beslut. Gäller det Försäkringskassan eller a-kassan och beslutet INTE redan har omprövats: skriv en begäran om omprövning till myndigheten (inte till domstol), rubrik 'Begäran om omprövning av beslut den [datum]'. Har beslutet redan omprövats, eller gäller det en annan myndighet: skriv ett överklagande med rubriken 'Överklagande av beslut den [datum]', ställt till den domstol eller nämnd som anges i beslutet men skickat till den myndighet som fattade beslutet. Struktur: rubrik, ärende- eller diarienummer som platshållare, bakgrund, grunder, bevisning, yrkande, underskrift. Skriv inget om tidsfrister; fristen står i beslutet. Sakligt. Inga utropstecken. Svensk myndighetssvenska, inte advokatjargong.",
   },
   {
     slug: "myndighetsbrev",
@@ -724,6 +737,7 @@ export const PRODUCTS: DocProduct[] = [
         label: "Vad du vill att ARN ska besluta",
         type: "textarea",
         placeholder: "Pengarna tillbaka, prisavdrag, reparation…",
+        hint: "ARN prövar bara krav över en viss summa (750–3 000 kr beroende på område), tar en avgift på 150 kr och vill ha anmälan inom ett år från din första reklamation.",
         required: true,
       },
       TONE,

@@ -28,9 +28,11 @@ function IntegritetPage() {
             dokumenttexten i vår databas.
           </p>
           <p>
-            När du skriver ett utkast skickas dina formuläruppgifter till vår AI-leverantör (xAI)
-            för att producera texten. Skicka inte personnummer, bankuppgifter eller andras känsliga
-            data i formuläret.
+            När du skriver ett utkast, gör samboavtal-kollen, låter oss tolka ett brev eller
+            använder supportchatten skickas det du fyller i till vår AI-leverantör Anthropic
+            (Claude) för att skriva texten. Svarar den inte går det i stället till xAI (Grok). Båda
+            företagen finns i USA. Ingen människa hos oss läser texten. Skicka inte personnummer,
+            bankuppgifter eller andras känsliga data i formuläret.
           </p>
           <p>
             Betalning hanteras av Stripe. De får de uppgifter som krävs för att genomföra köpet. Vi
@@ -40,7 +42,10 @@ function IntegritetPage() {
             Vi loggar anonyma händelser (visning, utkast, köp) för att se vad som fungerar. Ingen
             reklamprofil, inga tredjepartspixlar i skrivläget.
           </p>
-          <p>Supportchatten skickar dina meddelanden till samma AI för att kunna svara.</p>
+          <p>
+            Skriver du till oss i kontaktformuläret skickas ditt meddelande och din e-postadress
+            till oss med e-posttjänsten Resend. Vi använder adressen bara för att svara dig.
+          </p>
           <p>
             Vi räknar sidvisningar med Vercel Web Analytics. Det sätter inga cookies och följer dig
             inte mellan sajter. Vi skickar bara sidans adress utan frågeparametrar, så inga

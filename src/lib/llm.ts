@@ -8,29 +8,46 @@ export type LlmEffort = "low" | "medium" | "high";
 
 const CLAUDE_MODEL = "claude-opus-5-5";
 
+// Thinking is always on for this model and shares max_tokens with the answer.
+const THINKING_HEADROOM: Record<LlmEffort, number> = { low: 2500, medium: 5000, high: 8000 };
+
 let client: Anthropic | null = null;
 function anthropic() {
   if (!process.env.ANTHROPIC_API_KEY) return null;
-  client ??= new Anthropic({ timeout: 90_000, maxRetries: 1 });
+  // No SDK retries: a retried timeout doubles the wait, and xAI and the templates are the retry.
+  client ??= new Anthropic({ maxRetries: 0 });
   return client;
 }
 
-async function viaClaude(system: string, messages: LlmMessage[], maxTokens: number, effort: LlmEffort) {
+async function viaClaude(
+  system: string,
+  messages: LlmMessage[],
+  maxTokens: number,
+  effort: LlmEffort,
+  timeoutMs: number,
+) {
   const c = anthropic();
   if (!c) return null;
   try {
-    const res = await c.beta.messages.create({
-      model: CLAUDE_MODEL,
-      // Thinking is always on for this model, so leave room for it on top of the answer.
-      max_tokens: maxTokens + 4000,
-      system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
-      messages,
-      output_config: { effort },
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
-    });
+    const res = await c.beta.messages.create(
+      {
+        model: CLAUDE_MODEL,
+        max_tokens: maxTokens + THINKING_HEADROOM[effort],
+        system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
+        messages,
+        output_config: { effort },
+        betas: ["server-side-fallback-2026-07-01"],
+        fallbacks: "default",
+      },
+      { timeout: timeoutMs },
+    );
     if (res.stop_reason === "refusal") {
       console.warn("[llm] claude refused");
+      return null;
+    }
+    if (res.stop_reason === "max_tokens") {
+      // A document cut off before the signature lines is worse than the template.
+      console.warn("[llm] claude truncated", res.usage?.output_tokens);
       return null;
     }
     const text = res.content
@@ -45,7 +62,7 @@ async function viaClaude(system: string, messages: LlmMessage[], maxTokens: numb
   }
 }
 
-async function viaXai(system: string, messages: LlmMessage[], maxTokens: number) {
+async function viaXai(system: string, messages: LlmMessage[], maxTokens: number, timeoutMs: number) {
   const apiKey = process.env.XAI_API_KEY;
   if (!apiKey) return null;
   try {
@@ -58,10 +75,15 @@ async function viaXai(system: string, messages: LlmMessage[], maxTokens: number)
         max_tokens: maxTokens,
         temperature: 0.3,
       }),
+      signal: AbortSignal.timeout(timeoutMs),
     });
     if (!res.ok) return null;
-    const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-    return body.choices?.[0]?.message?.content?.trim() || null;
+    const body = (await res.json()) as {
+      choices?: { message?: { content?: string }; finish_reason?: string }[];
+    };
+    const choice = body.choices?.[0];
+    if (choice?.finish_reason === "length") return null;
+    return choice?.message?.content?.trim() || null;
   } catch {
     return null;
   }
@@ -72,10 +94,14 @@ export async function complete(opts: {
   messages: LlmMessage[];
   maxTokens: number;
   effort?: LlmEffort;
+  /** Per-provider deadline. Keep the sum well under the function's maxDuration. */
+  timeoutMs?: number;
+  /** False skips the xAI fallback, for calls that must finish quickly. */
+  fallback?: boolean;
 }): Promise<string | null> {
   const effort = opts.effort ?? "low";
-  return (
-    (await viaClaude(opts.system, opts.messages, opts.maxTokens, effort)) ??
-    (await viaXai(opts.system, opts.messages, opts.maxTokens))
-  );
+  const timeoutMs = opts.timeoutMs ?? 60_000;
+  const claude = await viaClaude(opts.system, opts.messages, opts.maxTokens, effort, timeoutMs);
+  if (claude || opts.fallback === false) return claude;
+  return viaXai(opts.system, opts.messages, opts.maxTokens, Math.min(timeoutMs, 45_000));
 }

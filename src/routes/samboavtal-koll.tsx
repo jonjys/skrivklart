@@ -26,7 +26,7 @@ const DESCRIPTION =
 const FAQ = [
   {
     q: "Behöver alla sambor ett samboavtal?",
-    a: "Nej. Men äger ni en bostad som skaffats för att ni ska bo tillsammans delas den lika vid en separation, oavsett vem som betalat. Har den ena lagt mer pengar är ett samboavtal det enda sättet att bestämma något annat i förväg.",
+    a: "Nej. Men äger ni en bostad som skaffats för att ni ska bo tillsammans är huvudregeln att den delas lika vid en separation, oavsett vem som betalat. Har den ena lagt mer pengar är ett samboavtal det enda sättet att bestämma något annat i förväg.",
   },
   {
     q: "Vad gäller utan samboavtal?",
@@ -102,9 +102,13 @@ function SamboKollPage() {
   }
 
   function toAgreement() {
-    const prefill = samboPrefill(full);
-    setAnswers("samboavtal", { ...(existing ?? {}), ...prefill });
-    void navigate({ to: "/dokument/$slug", params: { slug: "samboavtal" } });
+    const prefill = samboPrefill(full, result?.include ?? []);
+    // Names and tone the visitor already typed win over the placeholders.
+    const keep = Object.fromEntries(
+      ["parter", "ton"].flatMap((k) => (existing?.[k]?.trim() ? [[k, existing[k]]] : [])),
+    );
+    setAnswers("samboavtal", { ...(existing ?? {}), ...prefill, ...keep });
+    void navigate({ to: "/dokument/$slug", params: { slug: "samboavtal" }, hash: "skriv" });
   }
 
   return (
@@ -239,7 +243,8 @@ function SamboKollPage() {
               <ArrowRight className="size-5" />
             </Button>
             <p className="mt-3 text-center text-sm text-subtle">
-              Gratis utkast med era svar ifyllda. Hela avtalet {sek(product.priceKr)}, inget konto.
+              Era svar och punkterna ovan följer med. Utkastet är gratis, hela avtalet{" "}
+              {sek(product.priceKr)}, inget konto.
             </p>
             <button
               type="button"

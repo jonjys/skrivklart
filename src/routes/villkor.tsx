@@ -24,8 +24,8 @@ function VillkorPage() {
       <article className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-14">
         <div className="space-y-4 rounded-2xl border-2 border-line bg-paper p-6 text-base leading-relaxed text-ink/85 sm:p-8">
           <p>
-            Skrivklart säljer AI-genererade textutkast på svenska. Tjänsten tillhandahålls av den
-            som driver sajten.
+            Skrivklart säljer AI-genererade textutkast på svenska. Frågor om ett köp: skriv till oss
+            i kontaktformuläret på supportsidan, så svarar en människa.
           </p>
           <p>
             Dokumenten är utkast. De är inte juridisk rådgivning, inte ett ombud, och inte en
@@ -42,7 +42,10 @@ function VillkorPage() {
             levereras hela dokumentet direkt i webbläsaren. Då upphör ångerrätten för digitalt
             innehåll. Ingen återbetalning för att du «inte blev nöjd» efter att du fått texten.
           </p>
-          <p>Gick pengarna men texten kom inte fram: skriv till support. Då tittar vi på det.</p>
+          <p>
+            Gick pengarna men texten kom inte fram: skriv till oss i kontaktformuläret på
+            supportsidan. Då löser vi det.
+          </p>
           <p>
             Vi kan stänga av missbruk, automatiserade anrop och uppenbara försök att kringgå
             betalning.

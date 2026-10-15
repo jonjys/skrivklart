@@ -80,13 +80,15 @@ export function SupportWidget() {
           </form>
         </div>
       ) : null}
+      {/* Icon-only on phones so it does not cover buttons and prices. */}
       <Button
         type="button"
-        className="ml-auto flex shadow-[var(--shadow-soft)]"
+        aria-label="Fråga Rådgivaren"
+        className="ml-auto flex size-12 rounded-full p-0 shadow-[var(--shadow-soft)] sm:h-11 sm:w-auto sm:rounded-lg sm:px-4"
         onClick={() => setOpen((v) => !v)}
       >
-        <MessageCircle className="size-4" />
-        Fråga
+        <MessageCircle className="size-5 sm:size-4" />
+        <span className="hidden sm:inline">Fråga</span>
       </Button>
     </div>
   );
