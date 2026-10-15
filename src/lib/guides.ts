@@ -1,10 +1,21 @@
 export type Guide = {
   slug: string;
+  /** H1 and card title. */
   title: string;
+  /** <title> when the H1 is not how people search; " | Skrivklart" is added. */
+  seoTitle?: string;
+  /** Meta description, 130–160 characters. Falls back to the excerpt. */
+  seoDescription?: string;
   excerpt: string;
   productSlug: string;
-  minutes: number;
+  /** First published, YYYY-MM-DD. */
+  published: string;
+  /** Last content change, YYYY-MM-DD, when later than `published`. */
+  updated?: string;
+  /** Opening paragraphs. */
   body: string[];
+  sections?: { h: string; p: string[] }[];
+  faq?: { q: string; a: string }[];
 };
 
 export const GUIDES: Guide[] = [
@@ -14,7 +25,8 @@ export const GUIDES: Guide[] = [
     excerpt:
       "Ett muntligt löfte om underhåll är svårt att driva in. Ett skriftligt, bevittnat avtal går att ta till Kronofogden.",
     productSlug: "underhallsavtal",
-    minutes: 4,
+    published: "2026-09-29",
+    updated: "2026-10-15",
     body: [
       "Underhållsbidrag är pengar som föräldern som inte bor med barnet betalar till barnets försörjning. Enligt föräldrabalken ska båda föräldrarna bidra efter sin förmåga, och skyldigheten gäller tills barnet fyller 18 år – eller längre, upp till 21 år, om barnet fortfarande går i skolan.",
       "Ni kan komma överens om beloppet själva. Försäkringskassan har en räknare på sin webbplats som ger ett rimligt utgångsläge utifrån inkomster, boende och barnets behov. Använd den innan ni skriver.",
@@ -29,7 +41,8 @@ export const GUIDES: Guide[] = [
     excerpt:
       "Tre vägar när pengarna uteblir: underhållsstöd från Försäkringskassan, Kronofogden eller ett nytt avtal.",
     productSlug: "underhallsavtal",
-    minutes: 4,
+    published: "2026-09-29",
+    updated: "2026-09-30",
     body: [
       "Om barnet bor hos dig och den andra föräldern inte betalar underhållsbidrag kan du ansöka om underhållsstöd hos Försäkringskassan. Då betalar Försäkringskassan ett fast belopp till dig, och kräver sedan den andra föräldern på pengarna. Du behöver inte driva det själv.",
       "Har ni redan ett skriftligt avtal som är bevittnat av två personer, eller en dom om underhåll, kan du vända dig direkt till Kronofogden och ansöka om verkställighet för det som inte betalats.",
@@ -43,7 +56,7 @@ export const GUIDES: Guide[] = [
     excerpt:
       "Veckoschema, lov, hämtning och hur ni ändrar saker. Och hur avtalet kan få samma verkan som en dom.",
     productSlug: "umgangesavtal",
-    minutes: 4,
+    published: "2026-09-29",
     body: [
       "Ett avtal om boende och umgänge handlar om barnets vardag: var barnet bor, när barnet träffar den andra föräldern, hur lov och högtider delas och vem som hämtar och lämnar.",
       "Var konkret. 'Varannan helg' blir tydligare som 'varannan helg från fredag kl. 16 till söndag kl. 18, med start vecka 45'. Skriv också hur ni meddelar ändringar och hur långt i förväg.",
@@ -57,7 +70,7 @@ export const GUIDES: Guide[] = [
     excerpt:
       "Ett konkret förslag med belopp och startdatum fungerar bättre än att vänta. Innan skulden går till Kronofogden.",
     productSlug: "avbetalningsplan",
-    minutes: 3,
+    published: "2026-09-29",
     body: [
       "Ett inkassokrav är inte ett beslut från en myndighet. Det är ett företag som vill ha betalt. De flesta går med på en avbetalningsplan om förslaget är rimligt och kommer i tid.",
       "Skriv vad skulden gäller, ärendenummer och vad du kan betala varje månad från ett visst datum. Hellre ett lägre belopp du klarar varje månad än ett högre du missar.",
@@ -72,7 +85,7 @@ export const GUIDES: Guide[] = [
     excerpt:
       "Försäkringskassan prövar sitt beslut igen om du begär det inom två månader. Fakta, inte känslor.",
     productSlug: "overklagande",
-    minutes: 3,
+    published: "2026-09-29",
     body: [
       "Är du inte nöjd med ett beslut från Försäkringskassan, till exempel om bostadsbidrag, underhållsstöd eller VAB, kan du begära omprövning. Det ska göras inom två månader från den dag du fick beslutet.",
       "Skriv vilket beslut det gäller, datum och ärendenummer, vad du vill att Försäkringskassan ska ändra och varför. Peka ut de uppgifter de missat eller tolkat fel, och bifoga det som visar det: hyresavtal, lönebesked, intyg.",
@@ -86,7 +99,7 @@ export const GUIDES: Guide[] = [
     excerpt:
       "Vad du söker, för vad och varför det är bråttom. Och varför du ska be om ett skriftligt beslut.",
     productSlug: "socialtjansten",
-    minutes: 3,
+    published: "2026-09-29",
     body: [
       "Ekonomiskt bistånd söker du hos socialtjänsten i kommunen där du bor. Ju tydligare ansökan, desto färre kompletteringar och desto snabbare beslut.",
       "Skriv vad du söker, för vilken månad och vilket belopp: hyra, el, mat, något specifikt för barnen. Lista bilagorna, till exempel hyresavi, kontoutdrag och beslut från Försäkringskassan.",
@@ -100,7 +113,7 @@ export const GUIDES: Guide[] = [
     excerpt:
       "Ledighet, extra stöd eller oro för ditt barn. Ämnesrad, fakta, vad du vill och när du vill ha svar.",
     productSlug: "skola-forskola",
-    minutes: 3,
+    published: "2026-09-29",
     body: [
       "Ett mejl till skolan blir oftast läst när det är kort och tydligt. Skriv barnets namn och klass eller avdelning i ämnesraden, och vad det gäller.",
       "Beskriv det som hänt med datum, utan att döma någon. Skriv sedan vad du vill: ett möte, att skolan utreder behovet av stöd, eller ett svar på en ansökan.",
@@ -113,7 +126,7 @@ export const GUIDES: Guide[] = [
     title: "Personligt brev som någon faktiskt läser",
     excerpt: "Skippa mallarna. Tre grejer rekryterare skummar efter – och hur du ger dem det.",
     productSlug: "personligt-brev",
-    minutes: 4,
+    published: "2026-08-26",
     body: [
       "Rekryterare läser inte brev. De skummar. Första meningen avgör om de går vidare till stycke två. Om stycke ett är 'jag söker härmed tjänsten som' är du redan borta.",
       "Öppna med något som bara du kan säga: en siffra, ett ansvar, ett problem du löst. Inte en känsla.",
@@ -122,24 +135,12 @@ export const GUIDES: Guide[] = [
     ],
   },
   {
-    slug: "overklaga-utan-att-skrika",
-    title: "Överklaga Försäkringskassan utan att skrika",
-    excerpt: "Myndigheter struntar i känslor. De struntar inte i fakta de missat.",
-    productSlug: "overklagande",
-    minutes: 5,
-    body: [
-      "Ett överklagande är inte ett brev till en vän. Det är en begäran att ett beslut ska ändras, med grunder.",
-      "Skriv vad beslutet säger, vilket datum, och vad du yrkar. Sen: vilka fakta som saknades eller tolkades fel. Punkt. Inte din livshistoria.",
-      "Bifoga det du hänvisar till. Om du inte har diarienummer, lämna en lucka och fyll i från beslutet.",
-      "Skicka i tid. Frist står i beslutet. En dag för sent och texten är värdelös oavsett hur bra den är.",
-    ],
-  },
-  {
     slug: "mall-overklagande-forsakringskassan",
     title: "Begära omprövning hos Försäkringskassan – mall och steg",
     excerpt: "Först omprövning hos Försäkringskassan, sedan förvaltningsrätten. Två månader på dig. Så skriver du begäran.",
     productSlug: "overklagande",
-    minutes: 5,
+    published: "2026-08-26",
+    updated: "2026-10-15",
     body: [
       "Steg 1 är inte förvaltningsrätten. Ett beslut från Försäkringskassan ska först omprövas: skriv rubriken 'Begäran om omprövning av beslut den [datum], ärendenummer [nr]' och skicka till Försäkringskassan. Först när du fått omprövningsbeslutet kan du överklaga till förvaltningsrätten, och då skickar du överklagandet till Försäkringskassan, som lämnar det vidare.",
       "1) Vad beslutet säger. En mening. 2) Vad du yrkar: att beslutet upphävs och att [ersättning/insats] beviljas. 3) Grunder: fakta som saknades, felaktig bedömning, läkarintyg de inte vägt in.",
@@ -148,24 +149,14 @@ export const GUIDES: Guide[] = [
     ],
   },
   {
-    slug: "samboavtal-innan-det-brinner",
-    title: "Samboavtal innan det brinner",
-    excerpt: "Inte romantiskt. Billigare än att bråka om soffan och insatsen.",
-    productSlug: "samboavtal",
-    minutes: 4,
-    body: [
-      "Sambolagen är inte samma sak som äktenskapsbalken. Bodelning gäller bara samboegendom: gemensam bostad och bohag ni skaffat för gemensamt bruk.",
-      "Ett samboavtal kan ta undan det, eller slå fast det. Poängen är att ni vet vad som gäller den dag någon av er vill det.",
-      "Skriv vem som äger bostaden, vem som lagt insats, vad som är enskilt. Underskrift av båda. Vittnen är inget lagkrav för samboavtal, men de gör det svårare att ifrågasätta underskrifterna i efterhand.",
-      "Det här är ett utkast, inte juridisk rådgivning. Har ni hus, bolag eller barn: visa en jurist innan ni skriver under.",
-    ],
-  },
-  {
     slug: "samboavtal-mall",
-    title: "Samboavtal mall – vad som måste med",
+    seoTitle: "Vad ska stå i ett samboavtal? Checklista punkt för punkt",
+    seoDescription: "Vad ett samboavtal måste innehålla: parter, bostad, bohag, vad som ska hållas utanför bodelningen och underskrifter. Checklista och gratis utkast.",
+    title: "Vad ska stå i ett samboavtal? Checklista",
     excerpt: "Parter, bostad, bohag, bodelning, underskrift. Resten är brus.",
     productSlug: "samboavtal",
-    minutes: 4,
+    published: "2026-08-26",
+    updated: "2026-10-15",
     body: [
       "Ett samboavtal behöver inte vara långt, men det måste vara skriftligt och underskrivet av er båda. Det behöver inte registreras någonstans.",
       "Börja med parterna: namn och personnummer på er båda, och datum då ni flyttade ihop eller ska flytta ihop.",
@@ -181,7 +172,7 @@ export const GUIDES: Guide[] = [
     title: "Samboavtal och bostadsrätt – så skyddar du din insats",
     excerpt: "Den ena betalade kontantinsatsen. Utan avtal delas värdet ändå lika.",
     productSlug: "samboavtal",
-    minutes: 5,
+    published: "2026-10-08",
     body: [
       "Den vanligaste anledningen till samboavtal är en bostadsrätt där den ena har betalat hela eller större delen av kontantinsatsen.",
       "Enligt sambolagen är en bostad som ni skaffat för att bo i tillsammans samboegendom. Det gäller även om bara den ena står som ägare och betalade allt. Om ni separerar och någon begär bodelning delas värdet lika efter avdrag för lånen.",
@@ -198,7 +189,7 @@ export const GUIDES: Guide[] = [
     title: "Samboavtal när ni har hus – vad som gäller och vad ni ska skriva",
     excerpt: "Ett hus ni köpt för att bo i tillsammans delas lika vid separation, oavsett vem som betalade. Om ni inte avtalar bort det.",
     productSlug: "samboavtal",
-    minutes: 4,
+    published: "2026-10-10",
     body: [
       "Ett hus som ni har köpt för att bo i tillsammans räknas som samboegendom enligt sambolagen. Det gäller även om bara den ena står på lagfarten och betalade kontantinsatsen.",
       "Om ni separerar och någon av er begär bodelning delas husets värde lika, efter avdrag för lånen som hör till huset. Det är den vanligaste överraskningen för den som tog med sig pengarna in i köpet.",
@@ -214,7 +205,8 @@ export const GUIDES: Guide[] = [
     title: "Separation utan samboavtal – det här händer med bostaden och bohaget",
     excerpt: "Vad som delas, vad som inte gör det, och varför fristen på ett år är viktig.",
     productSlug: "samboavtal",
-    minutes: 4,
+    published: "2026-10-10",
+    updated: "2026-10-15",
     body: [
       "Har ni inget samboavtal gäller sambolagen. Den delar bara samboegendom: den gemensamma bostaden och det bohag som ni skaffat för att använda tillsammans.",
       "Det som inte delas är bland annat bil, sparpengar, aktier, fritidshus och saker som bara den ena använder. Där behåller var och en sitt.",
@@ -228,10 +220,12 @@ export const GUIDES: Guide[] = [
 
   {
     slug: "hyresansokan-stockholm",
+    seoTitle: "Hyresansökan – så skriver du den så att hyresvärden svarar",
+    seoDescription: "Så skriver du en hyresansökan som sticker ut: vem du är, inkomst, referenser och varför just du. Gratis utkast, färdig text 59 kr.",
     title: "Hyresansökan i Stockholm som inte hamnar i högen",
     excerpt: "Värdar drunknar i 'vi är skötsamma'. Ge dem risk, inkomst och datum.",
     productSlug: "hyresansokan",
-    minutes: 3,
+    published: "2026-08-26",
     body: [
       "Värden vill veta tre saker: kan du betala, kommer du sköta lägenheten, kan du flytta när de vill.",
       "Skriv hushåll, ungefärlig inkomst, anställning, om du har referens, och när du kan tillträda. Husdjur i en mening, inte en uppsats.",
@@ -240,10 +234,12 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "reklamera-ratt",
+    seoTitle: "Reklamation – så reklamerar du en vara eller tjänst",
+    seoDescription: "Så reklamerar du rätt: vad du ska skriva, vilka frister som gäller enligt konsumentköplagen och vad du kan kräva. Gratis utkast, färdigt brev 59 kr.",
     title: "Reklamera så företaget inte kan låtsas att de inte förstått",
     excerpt: "Krav, frist, kvitto. Inte en recension.",
     productSlug: "reklamation",
-    minutes: 3,
+    published: "2026-08-26",
     body: [
       "Säg vad du köpt, när, vad som är fel, och vad du kräver: reparation, ny vara, prisavdrag eller häva köpet.",
       "Ge en frist. 14 dagar är begripligt. Skriv att du vänder dig vidare om de tiger.",
@@ -252,10 +248,12 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "lana-ut-till-en-van",
+    seoTitle: "Skuldebrev mellan vänner – så lånar du ut pengar tryggt",
+    seoDescription: "Ska du låna ut pengar till en vän? Så skriver du ett skuldebrev med belopp, ränta och återbetalning. Gratis utkast, färdigt skuldebrev 99 kr.",
     title: "När du lånar ut till en vän",
     excerpt: "Skuldebrevet är inte misstro. Det är hur vänskapen överlever beloppet.",
     productSlug: "skuldebrev",
-    minutes: 3,
+    published: "2026-08-26",
     body: [
       "Skriv belopp, om det är ränta eller inte, när det ska vara tillbaka, och vad som händer om det drar ut.",
       "Båda skriver under. En kopia var. Swish-historik är inte ett avtal.",
@@ -264,10 +262,12 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "konsultavtal-enskild-firma",
+    seoTitle: "Konsultavtal för enskild firma – vad avtalet ska innehålla",
+    seoDescription: "Vad ett konsultavtal för enskild firma ska innehålla: uppdrag, arvode, betalning, ansvar och uppsägning. Gratis utkast, färdigt avtal 99 kr.",
     title: "Konsultavtal för enskild firma",
     excerpt: "Uppdrag, arvode, IP. Innan du börjar i Slack.",
     productSlug: "konsultavtal",
-    minutes: 4,
+    published: "2026-08-26",
     body: [
       "Skriv vem som är uppdragsgivare och vem som är konsult, org.nr om ni har. Vad som ska levereras, när, var.",
       "Arvode: timme eller fast. När fakturan går. Dröjsmålsränta. Utlägg. F-skatt – du ansvarar för egna avgifter.",
@@ -277,10 +277,12 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "cv-profil-utan-floskler",
+    seoTitle: "CV-profil – exempel och hur du skriver den utan floskler",
+    seoDescription: "Så skriver du en CV-profil som rekryterare läser: kort, konkret och utan floskler. Exempel och gratis utkast på några minuter.",
     title: "CV-profil utan floskler",
     excerpt: "Fem rader som avgör om de läser erfarenheten.",
     productSlug: "cv-text",
-    minutes: 3,
+    published: "2026-08-26",
     body: [
       "Profilen är inte en sammanfattning av allt du gjort. Den är ett svar på 'varför just du till den här tjänsten'.",
       "Börja med roll + år + en konkret effekt. Inte 'driven lagspelare med öga för detaljer'.",
@@ -289,10 +291,12 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "uppsagning-mall",
+    seoTitle: "Uppsägningsbrev – mall för att säga upp dig själv",
+    seoDescription: "Så säger du upp dig skriftligt: datum, uppsägningstid, sista arbetsdag och begäran om arbetsgivarintyg. Gratis utkast, färdigt brev 59 kr.",
     title: "Mall: säga upp sig utan drama",
     excerpt: "Datum, tjänst, sista dag. HR behöver inte din livsberättelse.",
     productSlug: "uppsagning",
-    minutes: 3,
+    published: "2026-08-26",
     body: [
       "Ett uppsägningsbrev är ett meddelande, inte ett avskedstal. Skriv vem du är, vilken tjänst, och från vilket datum anställningen upphör.",
       "Kolla avtalet och lagen för uppsägningstid. Skriv den tid du räknar med, inte den du önskar.",
@@ -301,10 +305,13 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "arn-anmalan-steg",
+    seoTitle: "ARN-anmälan – så anmäler du till Allmänna reklamationsnämnden",
+    seoDescription: "Så anmäler du till ARN: när du kan, avgiften på 150 kr, beloppsgränser, ettårsfristen och vad anmälan ska innehålla. Gratis utkast.",
     title: "ARN-anmälan: när företaget sagt nej",
     excerpt: "Först reklamation. Sen nämnden. Inte tvärtom.",
     productSlug: "arn-anmalan",
-    minutes: 4,
+    published: "2026-08-26",
+    updated: "2026-10-15",
     body: [
       "ARN, Allmänna reklamationsnämnden, prövar tvister mellan konsument och företag. De vill se att du först har reklamerat till företaget och fått nej, eller inget svar alls.",
       "Kolla fyra saker innan du anmäler. Anmälan måste ha kommit in inom ett år från att du första gången klagade till företaget. Ditt krav måste nå upp till värdegränsen för området: 750 kr på till exempel allmänna området, elektronik och kläder, 1 500 kr för bland annat motor, möbler och resor, och 3 000 kr för bostad, bank och försäkring (se arn.se). ARN tar en avgift på 150 kr som inte betalas tillbaka. Och beslutet är en rekommendation – de flesta företag följer den, men den går inte att driva in hos Kronofogden.",
@@ -314,10 +321,12 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "fullmakt-nar-du-inte-kan-ga-sjalv",
+    seoTitle: "Fullmakt – mall och vad den ska innehålla",
+    seoDescription: "Så skriver du en fullmakt: vem som får göra vad, hur länge och när vittnen behövs. Gratis utkast, färdig fullmakt 59 kr.",
     title: "Fullmakt när du inte kan gå själv",
     excerpt: "Vem, vad, hur länge. Resten är vittnen om du vill vara extra tydlig.",
     productSlug: "fullmakt",
-    minutes: 3,
+    published: "2026-08-26",
     body: [
       "En fullmakt är en tillåtelse på papper. Ju snävare uppdrag, desto mindre kan den missbrukas.",
       "Skriv namn på båda, exakt vad den får göra, och ett slutdatum. 'Tills vidare' går, men datum är lugnare.",
@@ -326,6 +335,26 @@ export const GUIDES: Guide[] = [
   },
 ];
 
+/** Guides merged into another page; the old URL answers with a permanent redirect. */
+export const GUIDE_REDIRECTS: Record<string, string> = {
+  "samboavtal-innan-det-brinner": "/samboavtal-koll",
+  "overklaga-utan-att-skrika": "/guider/mall-overklagande-forsakringskassan",
+};
+
 export function getGuide(slug: string) {
   return GUIDES.find((g) => g.slug === slug);
+}
+
+/** Every word a reader sees in the guide. */
+export function guideText(g: Guide) {
+  return [
+    ...g.body,
+    ...(g.sections ?? []).flatMap((s) => [s.h, ...s.p]),
+    ...(g.faq ?? []).flatMap((f) => [f.q, f.a]),
+  ].join(" ");
+}
+
+/** Reading time at ~200 words a minute, at least one minute. */
+export function guideMinutes(g: Guide) {
+  return Math.max(1, Math.round(guideText(g).split(/\s+/).filter(Boolean).length / 200));
 }

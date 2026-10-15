@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
-import { GUIDES } from "@/lib/guides";
+import { GUIDES, guideMinutes } from "@/lib/guides";
 
 export const Route = createFileRoute("/guider/")({
   component: GuiderIndex,
@@ -35,7 +35,7 @@ function GuiderIndex() {
               params={{ slug: g.slug }}
               className="block rounded-2xl border-2 border-line bg-paper p-6 transition-[transform,border-color] duration-200 hover:-translate-y-0.5 hover:border-pine"
             >
-              <p className="text-xs font-semibold text-clay">{g.minutes} min läsning</p>
+              <p className="text-xs font-semibold text-clay">{guideMinutes(g)} min läsning</p>
               <h2 className="mt-1 font-display text-2xl tracking-tight">{g.title}</h2>
               <p className="mt-2 text-sm text-muted">{g.excerpt}</p>
             </Link>

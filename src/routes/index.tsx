@@ -120,9 +120,13 @@ function Home() {
           className="pointer-events-none absolute -top-48 -right-32 size-[34rem] rounded-full bg-clay/25 blur-3xl"
         />
         <div className="relative mx-auto max-w-5xl px-4 pt-12 pb-14 sm:px-6 sm:pt-20 sm:pb-20">
-          <p className="text-sm font-semibold text-sun">{c.kicker}</p>
-          <h1 className="mt-3 font-display text-[2.8rem] leading-[0.98] tracking-tight sm:text-7xl">
-            {c.hero_a} <span className="text-sun">{c.hero_b}</span>
+          <h1 className="font-display tracking-tight">
+            <span className="block font-sans text-sm leading-normal font-semibold tracking-normal text-sun">
+              {c.kicker}
+            </span>
+            <span className="mt-3 block text-[2.8rem] leading-[0.98] sm:text-7xl">
+              {c.hero_a} <span className="text-sun">{c.hero_b}</span>
+            </span>
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-pine-fg/80 sm:text-xl">{c.hero_sub}</p>
 

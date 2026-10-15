@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { Generator } from "@/components/generator";
@@ -6,7 +6,7 @@ import { HeroChip, PageHero } from "@/components/page-hero";
 import { SiteFrame } from "@/components/site-frame";
 import { BUNDLES, CATEGORIES, getProduct } from "@/lib/catalog";
 import { recordEvent } from "@/lib/ai";
-import { GUIDES } from "@/lib/guides";
+import { GUIDES, guideMinutes } from "@/lib/guides";
 import { getDocArticle } from "@/lib/doc-articles";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { productJsonLd, siteImage } from "@/lib/schema";
@@ -14,6 +14,8 @@ import { sek } from "@/lib/utils";
 
 export const Route = createFileRoute("/dokument/$slug")({
   loader: ({ params }) => {
+    // The letter explainer lives on its own page; the catalog slug is only its product id.
+    if (params.slug === "myndighetsbrev") throw redirect({ href: "/brev", statusCode: 301 });
     const product = getProduct(params.slug);
     if (!product) throw notFound();
     return product;
@@ -60,7 +62,7 @@ function DokumentPage() {
   const product = Route.useLoaderData()!;
   const category = CATEGORIES.find((c) => c.id === product.category);
   const bundle = BUNDLES.find((b) => b.includes !== "all" && b.includes.includes(product.slug));
-  const guides = GUIDES.filter((g) => g.productSlug === product.slug).slice(0, 3);
+  const guides = GUIDES.filter((g) => g.productSlug === product.slug).slice(0, 6);
   const article = getDocArticle(product.slug);
 
   useEffect(() => {
@@ -196,7 +198,7 @@ function DokumentPage() {
                   params={{ slug: g.slug }}
                   className="rounded-2xl border border-line bg-paper p-5 transition-transform duration-200 hover:-translate-y-0.5"
                 >
-                  <p className="text-xs font-semibold text-clay">{g.minutes} min</p>
+                  <p className="text-xs font-semibold text-clay">{guideMinutes(g)} min läsning</p>
                   <h3 className="mt-2 font-display text-lg tracking-tight">{g.title}</h3>
                 </Link>
               ))}

@@ -245,7 +245,9 @@ export const useI18n = create<I18nState>()(
       lang: "sv",
       setLang: (lang) => set({ lang }),
     }),
-    { name: "skrivklart-lang" },
+    // The server always renders Swedish; the saved language is read after hydration so the
+    // first client render matches the server HTML.
+    { name: "skrivklart-lang", skipHydration: true },
   ),
 );
 

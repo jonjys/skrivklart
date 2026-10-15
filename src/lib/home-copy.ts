@@ -41,7 +41,7 @@ const sv: HomeCopy = {
   title: "Brev och avtal för ensamstående föräldrar – från 59 kr | Skrivklart",
   description:
     "Avtal om underhållsbidrag, överklagande till Försäkringskassan, avbetalningsplan, brev till skolan och socialtjänsten. Gratis utkast, hela texten från 59 kr. Inget konto.",
-  kicker: "För dig som sköter allt själv",
+  kicker: "Brev och avtal för ensamstående föräldrar",
   hero_a: "Du bär allt.",
   hero_b: "Vi skriver breven.",
   hero_sub: "Välj vad det gäller, svara på några frågor och få ett färdigt brev. Gratis att läsa.",
@@ -87,7 +87,7 @@ const sv: HomeCopy = {
 
 const en: HomeCopy = {
   ...sv,
-  kicker: "For people handling everything alone",
+  kicker: "Letters and agreements for single parents in Sweden",
   hero_a: "You carry it all.",
   hero_b: "We write the letters.",
   hero_sub: "Pick your situation, answer a few questions, get a finished letter in Swedish. Free to read.",
@@ -121,7 +121,7 @@ const en: HomeCopy = {
 
 const ar: HomeCopy = {
   ...sv,
-  kicker: "لمن يتولّى كل شيء وحده",
+  kicker: "رسائل واتفاقيات للآباء والأمهات المنفردين في السويد",
   hero_a: "أنتِ تحملين كل شيء.",
   hero_b: "ونحن نكتب الرسائل.",
   hero_sub: "اختاري موضوعك، أجيبي عن بضعة أسئلة، واحصلي على رسالة جاهزة بالسويدية. القراءة مجانية.",
