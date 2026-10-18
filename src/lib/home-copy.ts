@@ -41,10 +41,10 @@ const sv: HomeCopy = {
   title: "Brev och avtal för ensamstående föräldrar – från 59 kr | Skrivklart",
   description:
     "Avtal om underhållsbidrag, överklagande till Försäkringskassan, avbetalningsplan, brev till skolan och socialtjänsten. Gratis utkast, hela texten från 59 kr. Inget konto.",
-  kicker: "Brev och avtal för ensamstående föräldrar",
-  hero_a: "Du bär allt.",
-  hero_b: "Vi skriver breven.",
-  hero_sub: "Välj vad det gäller, svara på några frågor och få ett färdigt brev. Gratis att läsa.",
+  kicker: "För ensamstående föräldrar",
+  hero_a: "Brev och avtal,",
+  hero_b: "färdiga på några minuter.",
+  hero_sub: "Underhåll, Försäkringskassan, skolan, inkasso eller samboavtal. Svara på några frågor och läs utkastet gratis.",
   pick: "Vad behöver du hjälp med?",
   sit: {
     underhall: "Den andra föräldern betalar inte underhåll",
@@ -87,10 +87,10 @@ const sv: HomeCopy = {
 
 const en: HomeCopy = {
   ...sv,
-  kicker: "Letters and agreements for single parents in Sweden",
-  hero_a: "You carry it all.",
-  hero_b: "We write the letters.",
-  hero_sub: "Pick your situation, answer a few questions, get a finished letter in Swedish. Free to read.",
+  kicker: "For single parents in Sweden",
+  hero_a: "Letters and agreements,",
+  hero_b: "ready in a few minutes.",
+  hero_sub: "Child support, Försäkringskassan, school, debt collectors or a cohabitation agreement. Answer a few questions and read the draft for free. The letter is written in Swedish.",
   pick: "What do you need help with?",
   sit: {
     underhall: "The other parent isn't paying support",
@@ -121,9 +121,9 @@ const en: HomeCopy = {
 
 const ar: HomeCopy = {
   ...sv,
-  kicker: "رسائل واتفاقيات للآباء والأمهات المنفردين في السويد",
-  hero_a: "أنتِ تحملين كل شيء.",
-  hero_b: "ونحن نكتب الرسائل.",
+  kicker: "للآباء والأمهات المنفردين في السويد",
+  hero_a: "رسائل واتفاقيات",
+  hero_b: "جاهزة خلال دقائق.",
   hero_sub: "اختاري موضوعك، أجيبي عن بضعة أسئلة، واحصلي على رسالة جاهزة بالسويدية. القراءة مجانية.",
   pick: "بماذا تحتاجين المساعدة؟",
   sit: {
