@@ -137,7 +137,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "mall-overklagande-forsakringskassan",
     title: "Begära omprövning hos Försäkringskassan – mall och steg",
-    excerpt: "Först omprövning hos Försäkringskassan, sedan förvaltningsrätten. Två månader på dig. Så skriver du begäran.",
+    excerpt:
+      "Först omprövning hos Försäkringskassan, sedan förvaltningsrätten. Två månader på dig. Så skriver du begäran.",
     productSlug: "overklagande",
     published: "2026-08-26",
     updated: "2026-10-15",
@@ -151,7 +152,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "samboavtal-mall",
     seoTitle: "Vad ska stå i ett samboavtal? Checklista punkt för punkt",
-    seoDescription: "Vad ett samboavtal måste innehålla: parter, bostad, bohag, vad som ska hållas utanför bodelningen och underskrifter. Checklista och gratis utkast.",
+    seoDescription:
+      "Vad ett samboavtal måste innehålla: parter, bostad, bohag, vad som ska hållas utanför bodelningen och underskrifter. Checklista och gratis utkast.",
     title: "Vad ska stå i ett samboavtal? Checklista",
     excerpt: "Parter, bostad, bohag, bodelning, underskrift. Resten är brus.",
     productSlug: "samboavtal",
@@ -187,7 +189,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "samboavtal-hus",
     title: "Samboavtal när ni har hus – vad som gäller och vad ni ska skriva",
-    excerpt: "Ett hus ni köpt för att bo i tillsammans delas lika vid separation, oavsett vem som betalade. Om ni inte avtalar bort det.",
+    excerpt:
+      "Ett hus ni köpt för att bo i tillsammans delas lika vid separation, oavsett vem som betalade. Om ni inte avtalar bort det.",
     productSlug: "samboavtal",
     published: "2026-10-10",
     body: [
@@ -221,7 +224,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "hyresansokan-stockholm",
     seoTitle: "Hyresansökan – så skriver du den så att hyresvärden svarar",
-    seoDescription: "Så skriver du en hyresansökan som sticker ut: vem du är, inkomst, referenser och varför just du. Gratis utkast, färdig text 59 kr.",
+    seoDescription:
+      "Så skriver du en hyresansökan som sticker ut: vem du är, inkomst, referenser och varför just du. Gratis utkast, färdig text 59 kr.",
     title: "Hyresansökan i Stockholm som inte hamnar i högen",
     excerpt: "Värdar drunknar i 'vi är skötsamma'. Ge dem risk, inkomst och datum.",
     productSlug: "hyresansokan",
@@ -235,7 +239,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "reklamera-ratt",
     seoTitle: "Reklamation – så reklamerar du en vara eller tjänst",
-    seoDescription: "Så reklamerar du rätt: vad du ska skriva, vilka frister som gäller enligt konsumentköplagen och vad du kan kräva. Gratis utkast, färdigt brev 59 kr.",
+    seoDescription:
+      "Så reklamerar du rätt: vad du ska skriva, vilka frister som gäller enligt konsumentköplagen och vad du kan kräva. Gratis utkast, färdigt brev 59 kr.",
     title: "Reklamera så företaget inte kan låtsas att de inte förstått",
     excerpt: "Krav, frist, kvitto. Inte en recension.",
     productSlug: "reklamation",
@@ -249,7 +254,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "lana-ut-till-en-van",
     seoTitle: "Skuldebrev mellan vänner – så lånar du ut pengar tryggt",
-    seoDescription: "Ska du låna ut pengar till en vän? Så skriver du ett skuldebrev med belopp, ränta och återbetalning. Gratis utkast, färdigt skuldebrev 99 kr.",
+    seoDescription:
+      "Ska du låna ut pengar till en vän? Så skriver du ett skuldebrev med belopp, ränta och återbetalning. Gratis utkast, färdigt skuldebrev 99 kr.",
     title: "När du lånar ut till en vän",
     excerpt: "Skuldebrevet är inte misstro. Det är hur vänskapen överlever beloppet.",
     productSlug: "skuldebrev",
@@ -263,7 +269,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "konsultavtal-enskild-firma",
     seoTitle: "Konsultavtal för enskild firma – vad avtalet ska innehålla",
-    seoDescription: "Vad ett konsultavtal för enskild firma ska innehålla: uppdrag, arvode, betalning, ansvar och uppsägning. Gratis utkast, färdigt avtal 99 kr.",
+    seoDescription:
+      "Vad ett konsultavtal för enskild firma ska innehålla: uppdrag, arvode, betalning, ansvar och uppsägning. Gratis utkast, färdigt avtal 99 kr.",
     title: "Konsultavtal för enskild firma",
     excerpt: "Uppdrag, arvode, IP. Innan du börjar i Slack.",
     productSlug: "konsultavtal",
@@ -278,7 +285,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "cv-profil-utan-floskler",
     seoTitle: "CV-profil – exempel och hur du skriver den utan floskler",
-    seoDescription: "Så skriver du en CV-profil som rekryterare läser: kort, konkret och utan floskler. Exempel och gratis utkast på några minuter.",
+    seoDescription:
+      "Så skriver du en CV-profil som rekryterare läser: kort, konkret och utan floskler. Exempel och gratis utkast på några minuter.",
     title: "CV-profil utan floskler",
     excerpt: "Fem rader som avgör om de läser erfarenheten.",
     productSlug: "cv-text",
@@ -292,7 +300,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "uppsagning-mall",
     seoTitle: "Uppsägningsbrev – mall för att säga upp dig själv",
-    seoDescription: "Så säger du upp dig skriftligt: datum, uppsägningstid, sista arbetsdag och begäran om arbetsgivarintyg. Gratis utkast, färdigt brev 59 kr.",
+    seoDescription:
+      "Så säger du upp dig skriftligt: datum, uppsägningstid, sista arbetsdag och begäran om arbetsgivarintyg. Gratis utkast, färdigt brev 59 kr.",
     title: "Mall: säga upp sig utan drama",
     excerpt: "Datum, tjänst, sista dag. HR behöver inte din livsberättelse.",
     productSlug: "uppsagning",
@@ -306,7 +315,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "arn-anmalan-steg",
     seoTitle: "ARN-anmälan – så anmäler du till Allmänna reklamationsnämnden",
-    seoDescription: "Så anmäler du till ARN: när du kan, avgiften på 150 kr, beloppsgränser, ettårsfristen och vad anmälan ska innehålla. Gratis utkast.",
+    seoDescription:
+      "Så anmäler du till ARN: när du kan, avgiften på 150 kr, beloppsgränser, ettårsfristen och vad anmälan ska innehålla. Gratis utkast.",
     title: "ARN-anmälan: när företaget sagt nej",
     excerpt: "Först reklamation. Sen nämnden. Inte tvärtom.",
     productSlug: "arn-anmalan",
@@ -314,7 +324,7 @@ export const GUIDES: Guide[] = [
     updated: "2026-10-15",
     body: [
       "ARN, Allmänna reklamationsnämnden, prövar tvister mellan konsument och företag. De vill se att du först har reklamerat till företaget och fått nej, eller inget svar alls.",
-      "Kolla fyra saker innan du anmäler. Anmälan måste ha kommit in inom ett år från att du första gången klagade till företaget. Ditt krav måste nå upp till värdegränsen för området: 750 kr på till exempel allmänna området, elektronik och kläder, 1 500 kr för bland annat motor, möbler och resor, och 3 000 kr för bostad, bank och försäkring (se arn.se). ARN tar en avgift på 150 kr som inte betalas tillbaka. Och beslutet är en rekommendation – de flesta företag följer den, men den går inte att driva in hos Kronofogden.",
+      "Kolla fyra saker innan du anmäler. Anmälan måste ha kommit in inom ett år från att du första gången klagade till företaget. Ditt krav måste nå upp till värdegränsen för området: 750 kr på till exempel allmänna området, elektronik och kläder, 1 500 kr för bland annat motor, möbler och resor, och 3 000 kr för bostad, bank och försäkring (se arn.se). ARN tar en avgift på 150 kr som inte betalas tillbaka. Och beslutet är en rekommendation – de flesta företag följer den, men den går inte att driva in hos Kronofogden.",
       "Skriv parter, vad du köpt och när, vad som är fel, vad du har krävt av företaget och vad de svarat, och vad du vill att ARN ska besluta. Bifoga kvitto, bilder och företagets svar.",
       "Håll känslor utanför. Nämnden läser yrkandet och bevisen, inte din recension av kundtjänsten.",
     ],
@@ -322,7 +332,8 @@ export const GUIDES: Guide[] = [
   {
     slug: "fullmakt-nar-du-inte-kan-ga-sjalv",
     seoTitle: "Fullmakt – mall och vad den ska innehålla",
-    seoDescription: "Så skriver du en fullmakt: vem som får göra vad, hur länge och när vittnen behövs. Gratis utkast, färdig fullmakt 59 kr.",
+    seoDescription:
+      "Så skriver du en fullmakt: vem som får göra vad, hur länge och när vittnen behövs. Gratis utkast, färdig fullmakt 59 kr.",
     title: "Fullmakt när du inte kan gå själv",
     excerpt: "Vem, vad, hur länge. Resten är vittnen om du vill vara extra tydlig.",
     productSlug: "fullmakt",
@@ -331,6 +342,199 @@ export const GUIDES: Guide[] = [
       "En fullmakt är en tillåtelse på papper. Ju snävare uppdrag, desto mindre kan den missbrukas.",
       "Skriv namn på båda, exakt vad den får göra, och ett slutdatum. 'Tills vidare' går, men datum är lugnare.",
       "Bank och mäklare kan kräva original och vittnen. Fråga dem innan du skriver, så du inte får göra om.",
+    ],
+  },
+  {
+    slug: "skuldebrev-olika-kontantinsats",
+    title: "Skuldebrev vid olika kontantinsats – räkneexempel, ränta och samboavtal",
+    seoTitle: "Skuldebrev för kontantinsats – räkneexempel för sambor",
+    seoDescription:
+      "Betalar ni olika mycket i kontantinsats? Så räknar ni ut skuldebrevet, med exempel vid vinst, förlust och bodelning – och därför behövs ett samboavtal.",
+    excerpt:
+      "Den ena betalar mer av kontantinsatsen. Skuldebrevet ger pengarna tillbaka, men vid en bodelning bara fullt ut om ni också har ett samboavtal.",
+    productSlug: "skuldebrev",
+    published: "2026-10-20",
+    body: [
+      "Betalar ni olika mycket i kontantinsats men vill äga bostaden till hälften var, skriver den som betalat mindre ett skuldebrev till den andra på halva mellanskillnaden. Betalar A 400 000 kronor och B 100 000 blir skulden 150 000, och då har ni satt in 250 000 var. Skulden betalas tillbaka när ni säljer eller flyttar isär.",
+      "Skuldebrevet gäller även utan samboavtal. Men begär någon av er bodelning efter en separation får den som är skyldig dra av skulden innan värdet delas lika, och då kan den som lånade ut förlora upp till hälften av pengarna. Skriv därför samtidigt ett samboavtal om att bostaden inte ska ingå i en bodelning.",
+    ],
+    sections: [
+      {
+        h: "Ägarandelar eller skuldebrev?",
+        p: [
+          "Det ena sättet är olika ägarandelar i köpekontraktet, till exempel 56/44. Den som betalade mer äger mer och får mer av både vinst och förlust.",
+          "Det andra är att äga lika och skriva ett skuldebrev på halva mellanskillnaden, så att ni har satt in lika mycket var. Den som betalade mer får tillbaka ett bestämt belopp, oavsett hur priserna går. Resten av vinsten eller förlusten delar ni lika.",
+          "Båda sätten har samma svaghet. En bostad som ni skaffat för att bo i tillsammans är samboegendom, och vid en bodelning delas dess värde efter avdrag för skulder lika, oavsett ägarandelar. Kombinera därför skuldebrevet eller ägarandelarna med ett samboavtal om att bostaden inte ska ingå i en bodelning.",
+        ],
+      },
+      {
+        h: "Räkneexempel: 400 000 mot 100 000 kronor",
+        p: [
+          "Ni köper en bostadsrätt för 2 500 000 kronor. A betalar 400 000 i kontantinsats och B 100 000. Bolånet är 2 000 000 och ni står för hälften var. Ni vill äga lika, så B lånar 150 000 av A och skriver ett skuldebrev.",
+          "Om ni säljer för 2 750 000, alltså 10 procent mer, återstår 750 000 efter bolånet, 375 000 var. B betalar sin skuld, så A får 525 000 och B 225 000. Båda har tjänat 125 000.",
+          "Om ni i stället säljer för 2 250 000, alltså 10 procent mindre, återstår 250 000 efter bolånet, 125 000 var. B ska ändå betala 150 000 till A. A får 275 000, medan B får inget och måste skjuta till 25 000. Båda har förlorat 125 000.",
+          "Med ägarandelar i stället blir A:s andel 56 procent och B:s 44 procent, räknat på kontantinsatsen plus halva bolånet var. Vid vinsten får A 540 000 och B 210 000. Vid förlusten får A 260 000, medan B får inget och måste skjuta till 10 000. Exemplet bortser från amortering, mäklararvode och skatt.",
+        ],
+      },
+      {
+        h: "Vad händer med skuldebrevet utan samboavtal?",
+        p: [
+          "Begär någon av er bodelning inom ett år efter att ni flyttat isär räknas samboegendomen ihop och delas som huvudregel lika. Enligt 13 § sambolagen får var och en först dra av sina skulder från sin del av samboegendomen. B får alltså dra av skulden till A, eftersom lånet hör till bostaden. A:s fordran räknas inte in, eftersom den inte är samboegendom.",
+          "Med bostaden värd 2 750 000 är A:s halva värd 375 000 efter bolånet. B:s halva är värd 225 000 efter bolånet och skulden till A. Tillsammans blir det 600 000, alltså 300 000 var. A får 300 000 i bodelningen och sedan 150 000 från B, totalt 450 000 i stället för 525 000. A har i praktiken fått stå för halva skulden.",
+          "Ett samboavtal om att bostaden inte ska ingå i en bodelning stänger den vägen. Då gäller ägarandelarna och skuldebrevet som ni skrev dem. Ett oskäligt villkor kan jämkas, så låt avtalet spegla vad var och en faktiskt har betalat.",
+          "Om någon av er dör får bara den som lever kvar begära bodelning, och det ska ske senast vid bouppteckningen. Den efterlevande har också rätt att få ut minst två prisbasbelopp ur samboegendomen, om den räcker. Dör A kan B alltså begära bodelning och dra av skulden, så att A:s arvingar får mindre. Ett samboavtal om bostaden gäller även då.",
+        ],
+      },
+      {
+        h: "Ränta eller räntefritt?",
+        p: [
+          "Räntefritt är det enklaste. Står det ingenting om ränta i skuldebrevet löper ingen ränta innan skulden ska betalas, enligt räntelagen. Vill den som betalade mer få del av bostadens värdeökning är olika ägarandelar enklare än ränta.",
+          "Med fast ränta, till exempel 2 procent på 150 000, betalar B 3 000 kronor om året. A deklarerar räntan och anger B:s namn, personnummer och hur stor skulden var vid årsskiftet. Skatten är 30 procent, alltså 900 kronor. B kan inte göra ränteavdrag, eftersom lån utan säkerhet, till exempel lån från en privatperson, inte ger något avdrag från och med 2026.",
+          "Betalas skulden för sent får långivaren kräva dröjsmålsränta. Om ni inte avtalat något annat är den Riksbankens referensränta plus åtta procentenheter. Står det ett bestämt datum i skuldebrevet löper räntan från det datumet. Ska skulden betalas när bostaden säljs, eller saknas förfallodag, löper räntan först 30 dagar efter att långivaren skickat ett krav på ett bestämt belopp med besked om att dröjsmålsränta annars tas ut.",
+        ],
+      },
+      {
+        h: "Vad ska stå i skuldebrevet?",
+        p: [
+          "Namn och personnummer på er båda och vem som lånar ut till vem. Beloppet i kronor, inte 'hälften av kontantinsatsen', och att lånet gäller kontantinsatsen för bostaden, med adress och föreningens namn eller fastighetsbeteckning om det är ett hus. Datum då pengarna betalades.",
+          "När skulden ska betalas, till exempel när bostaden säljs, när samboförhållandet upphör eller senast ett visst datum, det som inträffar först. Står det ingen förfallodag kan långivaren kräva pengarna när som helst.",
+          "Ränta eller räntefritt, att B får betala av i förväg och att skulden gäller fullt ut även om bostaden säljs med förlust. Sist ort, datum och underskrift. Lagen ställer inga formkrav. Den som lånar skriver under, gärna ni båda. Vittnen krävs inte men kan hjälpa om ni blir oense. Långivaren sparar originalet.",
+          "Skriv under skuldebrevet och samboavtalet samma dag, helst före tillträdet. På Skrivklart fyller du i parter, belopp, ränta och återbetalning, till exempel att lånet gäller kontantinsatsen och ska betalas när bostaden säljs. Utkastet är gratis och hela skuldebrevet kostar 99 kronor. Samboavtalet är ett eget dokument.",
+        ],
+      },
+      {
+        h: "När ni amorterar eller bor ihop länge",
+        p: [
+          "Betalar den ena mer av bolånet eller en renovering uppstår en ny mellanskillnad som skuldebrevet inte täcker. Skriv då ett tillägg som ni båda undertecknar, och anteckna varje avbetalning B gör.",
+          "En skuld preskriberas, alltså går inte längre att kräva, tio år efter att lånet gavs, även om den inte ska betalas förrän ni säljer. Preskriptionen avbryts om B betalar ränta eller amortering eller erkänner skulden, eller om B får ett skriftligt krav eller en skriftlig påminnelse från A. Då börjar tio nya år. Enklast är att B skriver under en kort bekräftelse på skulden med några års mellanrum. Skickar du i stället en påminnelse, se till att du kan visa att B har fått den.",
+          "Gäller det stora belopp, låt en jurist läsa avtalen. Det här är inte juridisk rådgivning.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hur stort ska skuldebrevet vara?",
+        a: "Ska ni äga lika och betala bolånet lika blir skulden halva mellanskillnaden mellan era insatser. Betalar den ena hela kontantinsatsen blir skulden hälften av den. Skriv beloppet i kronor, så att det inte blir tvist om vad ni menade.",
+      },
+      {
+        q: "Räcker det med ett samboavtal?",
+        a: "Nej, inte om ni äger bostaden till hälften var. Blir det ingen bodelning behåller var och en sin halva, och då får den som betalade mer inte tillbaka något extra. Ni behöver också ett skuldebrev eller olika ägarandelar.",
+      },
+      {
+        q: "Kan vi skriva skuldebrevet i efterhand?",
+        a: "Ja, om ni båda är överens om att pengarna var ett lån. Skriv när pengarna betalades och vilket datum ni skriver under. Ett skuldebrev i efterhand räknas som att den som lånat erkänner skulden, och då börjar en ny preskriptionstid på tio år.",
+      },
+      {
+        q: "Kan vi låna kontantinsatsen av föräldrar mot skuldebrev?",
+        a: "Ja. Står föräldern inte som ägare skriver den som lånar ett skuldebrev till föräldern. Sedan den 1 april 2026 får ett nytt bolån vara högst 90 procent av bostadens marknadsvärde, mot 85 procent tidigare, så minst 10 procent måste komma från annat håll. Är pengarna en gåva skriver ni ett gåvobrev i stället.",
+      },
+      {
+        q: "Vad händer med skuldebrevet om vi gifter oss?",
+        a: "Skuldebrevet gäller, men samboavtalet slutar spela roll, eftersom ingen sambobodelning görs när ni gifter er. I ett äktenskap är allt ni äger giftorättsgods, även A:s fordran på B, och vid en bodelning delas allt lika efter avdrag för skulder. Då tar fordran och skulden ut varandra. Vill ni att skuldebrevet ska hålla behöver ni ett äktenskapsförord som gör både bostaden och fordran till enskild egendom. Det ska vara skriftligt, daterat och undertecknat av er båda och registreras hos Skatteverket, som tar 275 kronor. Skrivs det före vigseln gäller det från vigseln om Skatteverket får det inom en månad efter vigseln, annars från den dag det kommer in.",
+      },
+      {
+        q: "Vad gör jag om den andra inte betalar?",
+        a: "Skicka först ett skriftligt krav med belopp och sista betalningsdag. Betalas det ändå inte, och har skulden förfallit enligt skuldebrevet, kan du ansöka om betalningsföreläggande hos Kronofogden. Ansökan kostar 300 kronor. Säger den andra att skulden inte stämmer kan du begära att domstolen prövar saken.",
+      },
+    ],
+  },
+  {
+    slug: "aterkrav-forsakringskassan",
+    title: "Återkrav från Försäkringskassan – så begär du eftergift och sänkt sanktionsavgift",
+    seoTitle: "Återkrav från Försäkringskassan – omprövning och eftergift",
+    seoDescription:
+      "Fått återkrav från Försäkringskassan? Så svarar du på utredningen, begär omprövning eller eftergift, ber om lägre sanktionsavgift och delar upp skulden.",
+    excerpt:
+      "Svara på utredningen, begär omprövning eller eftergift och be om lägre sanktionsavgift. Så gör du när Försäkringskassan kräver tillbaka pengar.",
+    productSlug: "overklagande",
+    published: "2026-10-20",
+    body: [
+      "Ett återkrav betyder att Försäkringskassan har beslutat att du ska betala tillbaka pengar som betalats ut fel eller med för högt belopp. Du kan begära omprövning inom två månader, be att slippa betala hela eller delar av beloppet (eftergift) och ansöka om avbetalningsplan inom 30 dagar från beslutet. Sedan 1 juli 2026 kan du dessutom få betala en sanktionsavgift på 25 procent av beloppet, minst 2 368 kronor för beslut 2026.",
+      "Som regel är du bara återbetalningsskyldig om du själv orsakat felet eller borde ha förstått att du fick för mycket. Undantag är bostadsbidrag och underhållsstöd, som kan krävas tillbaka även utan eget fel.",
+    ],
+    sections: [
+      {
+        h: "Måste jag betala tillbaka om felet var Försäkringskassans?",
+        p: [
+          "Oftast inte. För sjukpenning, föräldrapenning, vab, barnbidrag och de flesta andra ersättningar krävs att du lämnat felaktiga uppgifter, inte anmält en ändring, eller insåg eller rimligen borde ha insett att beloppet var fel. Räknade Försäkringskassan fel utan att du kunde märka det ska du inte betala tillbaka.",
+          "Bostadsbidrag och underhållsstöd är undantag. Där krävs det som betalats ut för mycket tillbaka även om du gjort allt rätt, till exempel när bostadsbidraget stäms av och årsinkomsten blev högre än du räknade med. Skillnader under 1 200 kronor krävs inte tillbaka, men på större belopp tillkommer en avgift som räknas fram med statslåneräntan. Den är inte samma sak som sanktionsavgiften nedan.",
+          "Läs motiveringen i beslutet noga. Saknas en tydlig förklaring till varför utbetalningen var fel, skriv det i din begäran om omprövning. Den bristen fanns i över hälften av de återkrav som Inspektionen för socialförsäkringen granskade 2025.",
+        ],
+      },
+      {
+        h: "Vad är den nya sanktionsavgiften?",
+        p: [
+          "Från 1 juli 2026 ska Försäkringskassan också besluta om en sanktionsavgift för den som orsakat en felaktig utbetalning genom en felaktig uppgift eller en ändring som inte anmälts. Det gäller även ärliga misstag, och även bostadsbidrag och underhållsstöd om du orsakat felet. En inkomstuppskattning som du hade fog för är dock inte en felaktig uppgift. Har du lämnat fel uppgifter medvetet eller av grov vårdslöshet kan du dessutom få bidragsspärr: ingen rätt till en eller flera ersättningar under minst tre månader och högst tre år.",
+          "Avgiften är 25 procent av det du ska betala tillbaka, men minst 4 procent av prisbasbeloppet: 2 368 kronor för beslut 2026 och 2 384 kronor för beslut 2027. Ska du betala tillbaka 6 000 kronor i föräldrapenning blir avgiften alltså inte 1 500 utan 2 368 kronor, totalt 8 368 kronor om den inte sätts ned. Efterges återkravet helt blir det ingen avgift. Efterges det delvis räknas avgiften på resten, men aldrig under minimibeloppet.",
+          "Det som avgör är när du lämnade uppgiften, eller när det du skulle ha anmält hände, inte när pengarna betalades ut. Låg det före 1 juli 2026 blir det ingen avgift. Ingen avgift heller om Försäkringskassan eller till exempel en arbetsgivare orsakade felet, eller om du själv rättade uppgiften eller anmälde ändringen innan du fått veta att Försäkringskassan utreder saken. En rättelse efter det räcker inte, så anmäl direkt på Mina sidor eller per telefon om du ser att du fått för mycket.",
+          "Avgiften ska sättas ned helt eller delvis om det är oskäligt att ta ut hela beloppet, särskilt om felet kan antas bero på din ålder, hälsa eller liknande, om avgiften inte står i rimlig proportion till felet, eller om det gått oskäligt lång tid sedan du fick yttra dig om avgiften utan att det beror på dig. Försäkringskassan nämner själv kognitiva svårigheter och att ett barn kan drabbas.",
+        ],
+      },
+      {
+        h: "Hur svarar jag på utredningen innan beslutet?",
+        p: [
+          "Innan beslutet skickar Försäkringskassan utredningen till dig, och du får säga till om något inte stämmer. Svara inom tiden i brevet. Inget är beslutat än, så här har du störst chans att påverka.",
+          "Rätta faktafel med datum och belopp. Förklara varför felet inte var ditt, eller varför du inte kunde förstå att du fick för mycket. Beskriv också din ekonomi: inkomst, hyra, fasta utgifter, skulder och hur många barn som bor hos dig. Försäkringskassan prövar om du helt eller delvis kan slippa betala tillbaka, men bara utifrån det de känner till. Gäller det något från 1 juli 2026, be också om att sanktionsavgiften inte tas ut eller sätts ned.",
+        ],
+      },
+      {
+        h: "Vad krävs för att få eftergift?",
+        p: [
+          "Försäkringskassan får efterge ett återkrav helt eller delvis om det finns särskilda skäl. Det är en samlad bedömning av betalningsförmåga, hälsa, social situation och hur stort beloppet är. Att du inte förstod att pengarna var fel kan också vägas in, och för underhållsstöd har domstol godtagit som skäl att felet var Försäkringskassans.",
+          "Frågan avgörs i återkravsbeslutet, så be om eftergift när du svarar på utredningen eller i begäran om omprövning. Senare kan skulden bara efterges om det är uppenbart oskäligt att kräva betalning, till exempel vid allvarlig sjukdom och mycket svag ekonomi, och det beslutet går inte att överklaga.",
+          "För bostadsbidrag är kraven snävare. Alla uppgifter du lämnade måste ha varit rätt, du ska ha anmält ändringar under året eller haft en godtagbar anledning att inte göra det, och du ska sakna förmåga att betala tillbaka även på längre sikt.",
+          "Bifoga lönebesked, hyresavi, kontoutdrag, skulder hos Kronofogden och läkarintyg. Räkna ut vad som blir kvar varje månad efter hyra, mat och barnens kostnader, och skriv summan i brevet.",
+        ],
+      },
+      {
+        h: "Hur överklagar jag ett återkrav?",
+        p: [
+          "Begär omprövning hos Försäkringskassan, på blankett 7024 eller i ett eget brev, inom två månader från den dag du fick beslutet. Ändrar de inte beslutet kan du överklaga till förvaltningsrätten, också inom två månader. Överklagandet skickar du till Försäkringskassan.",
+          "Skriv vilket beslut det gäller, vad som är fel och vad du vill uppnå: att återkravet upphävs, att det efterges helt eller delvis, eller att sanktionsavgiften sätts ned. Avgiften är ett eget beslut, så begär omprövning av båda inom två månader om du vill ändra båda. Ändras återkravet slutligt ska Försäkringskassan också ompröva avgiften. Med Skrivklarts Överklagande för 99 kronor svarar du på några frågor om beslutet och får en saklig begäran om omprövning, eller ett överklagande om beslutet redan har omprövats.",
+          "En omprövning stoppar inte dröjsmålsräntan, så betala senast på förfallodagen om du kan, eller ansök om avbetalningsplan. Ändras beslutet får du tillbaka pengarna.",
+        ],
+      },
+      {
+        h: "Hur fungerar avbetalningsplan och ränta?",
+        p: [
+          "När beslutet har kommit har du 30 dagar att betala, med avi eller genom avdrag på en ersättning du får, eller att ansöka om avbetalningsplan på Mina sidor, per telefon eller med blankett 6850. Ansöker du före förfallodagen slipper du uppläggningsavgiften.",
+          "En avbetalningsplan är ingen rättighet utan en överenskommelse. En plan på högst tolv månader som du söker på Mina sidor godkänns i regel automatiskt, medan längre tid, upp till 24 månader, bara beviljas i undantagsfall. Du väljer inte själv månadsbeloppet. Varje avi kostar 15 kronor och en påminnelse 60 kronor.",
+          "Räntan på en avbetalningsplan är statens utlåningsränta plus två procentenheter, lägre än dröjsmålsräntan du annars får betala om du missar förfallodagen.",
+        ],
+      },
+      {
+        h: "Vad händer om jag inte kan betala alls?",
+        p: [
+          "Om du inte betalar och inte har ansökt om avbetalningsplan får du en påminnelse. Sedan går skulden till Kronofogden som ett så kallat allmänt mål.",
+          "Hör av dig till Försäkringskassan före förfallodagen om du inte kan betala, och be om eftergift om ekonomin inte räcker. Kommunens budget- och skuldrådgivning hjälper dig gratis. Har skulden gått till Kronofogden bedömer de din betalningsförmåga innan de beslutar om utmätning.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hur lång tid har jag på mig att överklaga ett återkrav?",
+        a: "Begäran om omprövning ska ha kommit in till Försäkringskassan inom två månader från den dag du fick beslutet. Efter omprövningen har du två månader till på dig att överklaga till förvaltningsrätten.",
+      },
+      {
+        q: "Kan jag slippa sanktionsavgiften om jag gjorde ett ärligt misstag?",
+        a: "Inte automatiskt. Avgiften gäller även misstag, men tas inte ut om uppgiften lämnades, eller det du borde ha anmält hände, före 1 juli 2026, om Försäkringskassan orsakade felet eller om du rättade det innan de börjat utreda. Den ska också sättas ned om det är oskäligt att ta ut hela beloppet.",
+      },
+      {
+        q: "Blir jag polisanmäld?",
+        a: "Inte för ett ärligt misstag. Bidragsbrott kräver att du lämnat fel uppgifter medvetet eller av grov oaktsamhet. Sedan 1 juli 2026 polisanmäler Försäkringskassan, när en sanktionsavgift kan tas ut i stället, bara vid misstanke om grovt bidragsbrott eller om det finns särskilda skäl.",
+      },
+      {
+        q: "Varför är återkravet högre än det jag fick in på kontot?",
+        a: "Gäller det en skattepliktig ersättning, som sjukpenning eller föräldrapenning, betalar du tillbaka beloppet före skatt, eftersom Försäkringskassan redan betalat in skatten till Skatteverket. Skatten får du tillbaka via din egen beskattning: Försäkringskassan rättar din inkomstuppgift, och gäller det ett tidigare år omprövar Skatteverket normalt slutskattebeskedet automatiskt. Gäller det i år räknas det med i nästa deklaration.",
+      },
+      {
+        q: "Får jag betalningsanmärkning för ett återkrav från Försäkringskassan?",
+        a: "Inte så länge du betalar eller följer en avbetalningsplan. Går skulden till Kronofogden får du först en chans att betala eller invända. Först om du inte betalar då kan det bli en betalningsanmärkning.",
+      },
+      {
+        q: "Ändras reglerna för bostadsbidrag 2027?",
+        a: "Ja. Från 1 januari 2027 räknas bostadsbidraget på månadsinkomst i stället för årsinkomst, vilket ska ge färre återkrav. Har du redan bostadsbidrag gäller det först när din period tar slut och du ansöker igen. Tid före 2027, och månader 2027 som ett tidigare beslut gäller, stäms av enligt de gamla reglerna. Egenföretagare och den som har inkomst från utlandet påverkas inte.",
+      },
     ],
   },
 ];
