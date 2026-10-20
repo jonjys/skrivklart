@@ -38,9 +38,10 @@ function VillkorPage() {
             den här webbläsaren. Alla köp är engångsbetalningar, inga prenumerationer.
           </p>
           <p>
-            Utkastet är gratis. Där ser du om texten duger innan du betalar. När du betalar
-            levereras hela dokumentet direkt i webbläsaren. Då upphör ångerrätten för digitalt
-            innehåll. Ingen återbetalning för att du «inte blev nöjd» efter att du fått texten.
+            Förhandsvisningen är gratis. I kassan begär du uttryckligen att det digitala
+            innehållet levereras direkt och bekräftar att ångerrätten då upphör när leveransen
+            påbörjas. Utan detta samtycke slutförs inte köpet. Din rätt att reklamera fel i
+            tjänsten eller innehållet påverkas inte.
           </p>
           <p>
             Gick pengarna men texten kom inte fram: skriv till oss i kontaktformuläret på

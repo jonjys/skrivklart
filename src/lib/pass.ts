@@ -1,4 +1,5 @@
-import { bundleCovers, getBundle } from "./catalog";
+import { bundleCovers, getBundle } from "./catalog.ts";
+import { paymentPreviewAllowed } from "./payment-policy.ts";
 
 /**
  * Stateless unlock passes. After Stripe confirms a Checkout Session the server
@@ -63,7 +64,8 @@ export type SealPurpose = "brev" | "doc";
 
 async function aesKey(secret: string, purpose: SealPurpose) {
   // "brev" keeps the original derivation so letters sealed before purposes existed still open.
-  const label = purpose === "brev" ? `skrivklart-seal:${secret}` : `skrivklart-seal:${purpose}:${secret}`;
+  const label =
+    purpose === "brev" ? `skrivklart-seal:${secret}` : `skrivklart-seal:${purpose}:${secret}`;
   const raw = await crypto.subtle.digest("SHA-256", enc.encode(label));
   return crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["encrypt", "decrypt"]);
 }
@@ -71,7 +73,10 @@ async function aesKey(secret: string, purpose: SealPurpose) {
 /** Signs an unlock for `slug` that stops working at `expiresAt` (ms since epoch). */
 export async function issuePass(slug: string, expiresAt: number) {
   const secret = signingSecret();
-  if (!secret || !stripeKey()) return "dev";
+  if (!secret || !stripeKey()) {
+    if (paymentPreviewAllowed(process.env)) return "dev";
+    throw new Error("Payments are not configured");
+  }
   const body = b64url(enc.encode(JSON.stringify({ s: slug, e: expiresAt })));
   const sig = await crypto.subtle.sign("HMAC", await hmacKey(secret), enc.encode(body));
   return `${body}.${b64url(new Uint8Array(sig))}`;
@@ -79,7 +84,7 @@ export async function issuePass(slug: string, expiresAt: number) {
 
 /** True when `pass` pays for `slug`, directly or through a bundle. */
 export async function passCovers(pass: string | undefined, slug: string) {
-  if (!stripeKey()) return true;
+  if (!stripeKey()) return paymentPreviewAllowed(process.env);
   if (!pass) return false;
   const parts = pass.split(".");
   // Exactly body.signature in base64url: no extra segments, padding or whitespace, so one
@@ -89,7 +94,12 @@ export async function passCovers(pass: string | undefined, slug: string) {
   try {
     let ok = false;
     for (const secret of readingSecrets()) {
-      ok = await crypto.subtle.verify("HMAC", await hmacKey(secret), fromB64url(sig), enc.encode(body));
+      ok = await crypto.subtle.verify(
+        "HMAC",
+        await hmacKey(secret),
+        fromB64url(sig),
+        enc.encode(body),
+      );
       if (ok) break;
     }
     if (!ok) return false;
@@ -112,9 +122,16 @@ export function passId(pass: string | undefined) {
 export async function seal(value: unknown, purpose: SealPurpose) {
   const json = enc.encode(JSON.stringify(value));
   const secret = signingSecret();
-  if (!secret || !stripeKey()) return `dev.${b64url(json)}`;
+  if (!secret || !stripeKey()) {
+    if (paymentPreviewAllowed(process.env)) return `dev.${b64url(json)}`;
+    throw new Error("Payments are not configured");
+  }
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await aesKey(secret, purpose), json);
+  const ct = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    await aesKey(secret, purpose),
+    json,
+  );
   return `${b64url(iv)}.${b64url(new Uint8Array(ct))}`;
 }
 
@@ -122,6 +139,7 @@ export async function unseal<T>(sealed: string, purpose: SealPurpose): Promise<T
   const [a, b] = sealed.split(".");
   if (!a || !b) return null;
   if (!stripeKey()) {
+    if (!paymentPreviewAllowed(process.env)) return null;
     try {
       return a === "dev" ? (JSON.parse(dec.decode(fromB64url(b))) as T) : null;
     } catch {
