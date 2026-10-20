@@ -75,8 +75,8 @@ export function Generator({ product }: { product: DocProduct }) {
   const upsell = BUNDLES.find((b) => b.includes !== "all" && b.includes.includes(product.slug));
 
   const missing = useMemo(() => {
-    return product.fields.filter((f) => f.required && !(answers[f.id]?.trim() || f.defaultValue));
-  }, [product.fields, answers]);
+    return product.fields.filter((f) => f.required && !(draft?.answers[f.id]?.trim() || f.defaultValue));
+  }, [product.fields, draft?.answers]);
 
   function patch(id: string, value: string) {
     setAnswers(product.slug, { ...answers, [id]: value });
@@ -424,8 +424,8 @@ export function Generator({ product }: { product: DocProduct }) {
                 </div>
               ) : null}
               <p className="mt-4 text-[0.7rem] leading-relaxed text-subtle">
-                Digitalt innehåll som levereras direkt. Genom att låsa upp samtycker du till att
-                ångerrätten upphör när texten visas.
+                Digitalt innehåll som levereras direkt. I kassan bekräftar du leveransen och
+                att ångerrätten då upphör. Rätten att reklamera fel påverkas inte.
               </p>
             </div>
           ) : null}

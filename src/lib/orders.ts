@@ -2,7 +2,14 @@ import { createServerFn } from "@tanstack/react-start";
 import { bundleCovers, getBundle, getProduct, getSellable } from "./catalog";
 import { getSql } from "./db";
 import { issuePass, paymentsLive } from "./pass";
-import { launchCodeActive } from "./site";
+import { launchCodeActive, SITE_URL } from "./site";
+import { allow } from "./limits.server";
+import {
+  checkoutExpiry,
+  paidSkrivklartCheckout,
+  paymentPreviewAllowed,
+  type CheckoutSession,
+} from "./payment-policy";
 import { uid } from "./utils";
 
 /** How long an unlock lasts in the buyer's browser. */
@@ -50,7 +57,14 @@ async function stripeCheckoutUrl(opts: {
   body.set("line_items[0][price_data][product_data][name]", `Skrivklart – ${opts.name}`);
   body.set("line_items[0][quantity]", "1");
   body.set("metadata[slug]", opts.slug);
+  body.set("metadata[app]", "skrivklart");
   body.set("metadata[token]", opts.token);
+  body.set("metadata[consent_version]", "2026-10-20");
+  body.set("consent_collection[terms_of_service]", "required");
+  body.set(
+    "custom_text[terms_of_service_acceptance][message]",
+    `Jag godkänner [köpvillkoren](${SITE_URL}/villkor) och begär att det digitala innehållet levereras direkt. Jag förstår att ångerrätten då upphör. Rätten att reklamera fel påverkas inte.`,
+  );
   if (opts.returnTo) body.set("metadata[return]", opts.returnTo);
   body.set("payment_intent_data[description]", `Skrivklart – ${opts.name}`);
   // An empty code field sends people off hunting for codes; show it only during a campaign.
@@ -70,6 +84,7 @@ async function stripeCheckoutUrl(opts: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body,
+    signal: AbortSignal.timeout(15_000),
   });
   if (!res.ok) {
     console.error("stripe checkout failed", res.status, await res.text().catch(() => ""));
@@ -92,12 +107,21 @@ export const createOrder = createServerFn({ method: "POST" })
 
     // Local preview without Stripe: unlock straight away so the flow can be tried.
     if (!paymentsLive()) {
+      if (!paymentPreviewAllowed(process.env)) {
+        return {
+          ok: false as const,
+          error: "Betalningen är tillfälligt otillgänglig. Försök igen senare.",
+        };
+      }
       return {
         ok: true as const,
         checkoutUrl: null,
         pass: await issuePass(item.slug, Date.now() + passDays(item.slug) * 86_400_000),
       };
     }
+
+    if (!allow("checkout"))
+      return { ok: false as const, error: "För många betalningsförsök. Försök igen senare." };
 
     const token = uid();
     try {
@@ -110,7 +134,8 @@ export const createOrder = createServerFn({ method: "POST" })
       /* orders table is bookkeeping only */
     }
 
-    const origin = (data.origin ?? "").replace(/\/$/, "");
+    // Never redirect a paid session or its recovery reference to a client-supplied host.
+    const origin = SITE_URL;
     let checkoutUrl: string | null = null;
     if (origin.startsWith("http")) {
       try {
@@ -137,28 +162,24 @@ export const createOrder = createServerFn({ method: "POST" })
 
 /** Confirms a Checkout Session with Stripe and hands back a signed unlock pass. */
 export const verifyCheckout = createServerFn({ method: "POST" })
-  .validator((input: { sessionId: string }) => input)
+  .validator((input: { sessionId: string }) => ({
+    sessionId: typeof input?.sessionId === "string" ? input.sessionId.slice(0, 256) : "",
+  }))
   .handler(async ({ data }) => {
     const key = process.env.STRIPE_SECRET_KEY;
     if (!key || !/^cs_[A-Za-z0-9_]+$/.test(data.sessionId)) {
       return { ok: false as const, error: "Ogiltig betalning." };
     }
+    if (!allow("verify"))
+      return { ok: false as const, error: "För många försök. Vänta en stund och ladda om sidan." };
     const res = await fetch(
       `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(data.sessionId)}`,
-      { headers: { Authorization: `Bearer ${key}` } },
+      { headers: { Authorization: `Bearer ${key}` }, signal: AbortSignal.timeout(10_000) },
     );
     if (!res.ok) return { ok: false as const, error: "Kunde inte hitta betalningen." };
-    const session = (await res.json()) as {
-      status?: string;
-      payment_status?: string;
-      client_reference_id?: string | null;
-      created?: number;
-      metadata?: { slug?: string; return?: string };
-    };
+    const session = (await res.json()) as CheckoutSession;
     const slug = session.metadata?.slug ?? "";
-    const paid =
-      session.status === "complete" &&
-      (session.payment_status === "paid" || session.payment_status === "no_payment_required");
+    const paid = paidSkrivklartCheckout(session);
     if (!paid || !getSellable(slug)) {
       return { ok: false as const, error: "Betalningen är inte klar ännu." };
     }
@@ -182,9 +203,8 @@ export const verifyCheckout = createServerFn({ method: "POST" })
 
     // The unlock runs from the purchase, not from the latest visit to /tack, so an old
     // or shared success link cannot extend a 30-day bundle forever.
-    const boughtAt = typeof session.created === "number" ? session.created * 1000 : Date.now();
-    const until = boughtAt + passDays(slug) * 86_400_000;
-    if (until < Date.now()) {
+    const until = checkoutExpiry(session.created, passDays(slug));
+    if (until === null) {
       return { ok: false as const, error: "Det här köpet har gått ut. Köp igen för att låsa upp." };
     }
     return {
@@ -196,4 +216,3 @@ export const verifyCheckout = createServerFn({ method: "POST" })
       doc: returnDoc(slug, session.metadata?.return),
     };
   });
-

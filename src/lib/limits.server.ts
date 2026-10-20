@@ -56,6 +56,8 @@ export function clientIp() {
 type Rule = { perHour: number; perDay: number; globalPerDay: number };
 
 const RULES = {
+  checkout: { perHour: 20, perDay: 80, globalPerDay: 2000 },
+  verify: { perHour: 120, perDay: 500, globalPerDay: 10000 },
   preview: { perHour: 8, perDay: 25, globalPerDay: 400 },
   full: { perHour: 10, perDay: 30, globalPerDay: 400 },
   rewrite: { perHour: 10, perDay: 30, globalPerDay: 300 },
