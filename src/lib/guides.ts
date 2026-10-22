@@ -537,6 +537,110 @@ export const GUIDES: Guide[] = [
       },
     ],
   },
+  {
+    slug: "kan-inte-betala-hyran",
+    title: "Kan inte betala hyran? Så räddar du lägenheten",
+    seoTitle: "Kan inte betala hyran? Så undviker du att bli vräkt",
+    seoDescription:
+      "När hyran är sen, när du kan sägas upp och hur treveckorsfristen fungerar. Så ber du om avbetalningsplan och så kan socialtjänsten betala hyresskulden.",
+    excerpt:
+      "En vecka, tre veckor, Kronofogden. Så ser fristerna ut, och så använder du dem: avbetalningsplan till hyresvärden och ansökan till socialtjänsten.",
+    productSlug: "avbetalningsplan",
+    published: "2026-10-22",
+    body: [
+      "Kan du inte betala hyran ska du kontakta hyresvärden direkt och föreslå en avbetalningsplan skriftligt. Räcker pengarna inte alls kan du ansöka om ekonomiskt bistånd för hyran hos socialtjänsten i din kommun. Kontraktet är i fara först när hyran är mer än en vecka sen, och även efter en uppsägning kan du få bo kvar om skulden betalas inom tre veckor.",
+      "Reglerna gäller när du hyr en hyresrätt: av ett bostadsbolag, av kommunen eller i andra hand av någon som själv har hyresrätt. Hyr du av en privatperson som äger bostaden, med ett avtal från den 1 juli 2026 eller senare, gäller andra regler. Det står längre ner.",
+      "Vänta inte. Både hyresvärden och socialtjänsten kan göra mer ju tidigare de får veta. Kronofogden ger samma råd: kontakta hyresvärden direkt, och måste du välja mellan räkningar, betala hyran först.",
+    ],
+    sections: [
+      {
+        h: "Vad händer om man inte betalar hyran?",
+        p: [
+          "Hyran ska vara betald senast sista vardagen före den månad den gäller, om inget senare datum står i avtalet. Är den mer än en vecka sen räknas hyresrätten som förverkad, och hyresvärden får säga upp avtalet så att det upphör direkt. Hyresrätten är dock inte förverkad om förseningen är av ringa betydelse, men räkna inte med det.",
+          "Ett exempel. Decemberhyran 2026 ska vara betald måndagen den 30 november. Är den obetald när måndagen den 7 december har gått, får hyresvärden säga upp dig. Några dagars försening påverkar inte kontraktet.",
+          "Betalar du innan hyresvärden har sagt upp avtalet kan du inte förlora lägenheten för just den förseningen. Men är du sen gång på gång kan hyresvärden säga upp avtalet med vanlig uppsägningstid, och hyresnämnden får avgöra om du ska få bo kvar.",
+        ],
+      },
+      {
+        h: "Avbetalningsplan för hyran: så ber du om den",
+        p: [
+          "Hör av dig till hyresvärden så tidigt du kan, helst före förfallodagen. Hyresvärden måste inte gå med på en avbetalningsplan, men ett konkret förslag i tid är lätt att säga ja till.",
+          "Skriv förslaget: vilken hyra det gäller, hur stor skulden är, hur mycket extra du betalar varje månad och från vilket datum. Be om ett skriftligt svar, och be hyresvärden att inte säga upp avtalet så länge du följer planen.",
+          "Ett räkneexempel. Hyran är 8 400 kr och du har missat decemberhyran. Du betalar januarihyran som vanligt och lägger till 1 400 kr varje månad. Efter sex månader är skulden borta (6 x 1 400 kr = 8 400 kr). Välj ett belopp du säkert klarar. En plan som spricker gör läget sämre.",
+          "Hos Skrivklart fyller du i skulden, ditt förslag och kort varför, ser utkastet gratis och betalar 59 kr för hela brevet. Brevet ber hyresvärden om skriftlig bekräftelse, om att inga nya avgifter läggs på under planen och om att vänta med att gå vidare till Kronofogden.",
+        ],
+      },
+      {
+        h: "Kan socialtjänsten betala hyran?",
+        p: [
+          "Ja, men inte automatiskt. Du måste ansöka, och socialtjänsten prövar din situation. Enligt Socialstyrelsens allmänna råd bör socialtjänsten ge bistånd till en hyresskuld om det annars kan få allvarliga sociala konsekvenser, som att du förlorar bostaden.",
+          "Finns det barn i hushållet ska barnets bästa i första hand beaktas, enligt 3 kap. 1 § socialtjänstlagen. Skriv det i ansökan.",
+          "Ansök skriftligt och skriv överst vilket datum lägenheten är i fara. Bifoga hyresavin, uppsägningen och kontoutdrag. Be om prövning enligt 12 kap. 1 § socialtjänstlagen, som före juli 2025 hette 4 kap. 1 §, och om ett skriftligt beslut. Ett avslag enligt den paragrafen kan överklagas till förvaltningsrätten, men inte ett beslut om bistånd utöver det enligt 12 kap. 2 §. Mer om ansökan står i vår guide om ekonomiskt bistånd.",
+          "Har du pengar som inte går att få fram snabbt kan socialtjänsten ge bistånd mot återbetalning, eller hjälpa dig att få till en avbetalningsplan. Kolla också bostadsbidrag från Försäkringskassan, för barnfamiljer och unga under 29 år med låg inkomst, eller bostadstillägg från Pensionsmyndigheten om du har låg pension.",
+        ],
+      },
+      {
+        h: "Om socialtjänsten säger att hyran är för hög",
+        p: [
+          "Ibland godkänns bara en del av hyran, för att den anses för hög. Enligt Socialstyrelsens allmänna råd bör den faktiska hyran i regel godtas om behovet är kortvarigt, högst tre månader i följd.",
+          "Annars bör hyran ändå godkännas under en övergångstid, och så länge du aktivt letar något billigare. Spara dina bostadsansökningar.",
+          "Socialtjänsten bör också väga in skäl mot att flytta, till exempel att barnen skulle behöva byta skola, eller att arbetslöshet eller en betalningsanmärkning gör det svårt att få ett nytt kontrakt. Skriv in det som gäller dig.",
+        ],
+      },
+      {
+        h: "Har hyresvärden sagt upp dig? Du har tre veckor",
+        p: [
+          "Säger hyresvärden upp avtalet för obetald hyra ska du få en underrättelse om att du kan få tillbaka hyresrätten genom att betala, och hyresvärden ska meddela socialtjänsten (i lagen kallad socialnämnden). Betalar du inom tre veckor får du bo kvar. Fristen börjar först när underrättelsen har delgetts dig, alltså lämnats formellt, och socialtjänsten har fått meddelandet.",
+          "Ett exempel. Delges du underrättelsen måndagen den 14 december 2026, och socialtjänsten har fått sitt meddelande, ska skulden vara betald senast måndagen den 4 januari 2027. Betalar du via banken räknas betalningen som gjord när banken tog emot ditt betalningsuppdrag. Spara kvittot.",
+          "Det räcker också att socialtjänsten inom samma tre veckor skriftligen åtar sig att betala hyran. Skicka därför ansökan samma dag, med fristens datum överst. Är du redan medlem i Hyresgästföreningen kan du också få juridisk hjälp där.",
+          "Var du sjuk eller hade ett liknande oförutsett hinder kan du ändå få bo kvar om du betalar så snart det går, dock senast när frågan om avhysning avgörs första gången. Lita inte på det undantaget.",
+        ],
+      },
+      {
+        h: "Vad händer när hyresvärden går till Kronofogden?",
+        p: [
+          "Efter de tre veckorna hänger det på att hyresvärden går med på en lösning. Annars kan hyresvärden ansöka hos Kronofogden om att du ska vräkas. Hyresvärden får inte själv byta lås eller ställa ut dina saker. Bara Kronofogden får genomföra en vräkning.",
+          "Bekräfta så fort du kan att du har fått brevet från Kronofogden. Det betyder inte att du håller med. Är kravet fel, till exempel för att du betalade inom fristen, måste du bestrida det skriftligt inom tiden som står i brevet. Annars beslutar Kronofogden att du ska flytta, och beslutet kan ge en betalningsanmärkning. Inom en månad från beslutet kan du ansöka om återvinning, så att domstolen prövar saken.",
+          "Ska beslutet genomföras får du ett brev med dag och tid, och samma uppgift går till socialtjänsten. Ibland kan Kronofogden ge dig mer tid. Kostnaden betalar du själv. Dina saker magasineras i högst tre månader på din bekostnad, sedan kastas eller säljs det du inte har hämtat. Husdjur som är kvar omhändertas och riskerar att avlivas. Går vräkningen inte att stoppa är det billigare att flytta själv före dagen.",
+        ],
+      },
+      {
+        h: "Hyr du av en privatperson? Nya regler sedan 1 juli 2026",
+        p: [
+          "Den 1 juli 2026 ersattes lagen om uthyrning av egen bostad från 2013 av en ny privatuthyrningslag. Den gäller när en privatperson hyr ut en bostad som hen äger, till exempel en bostadsrätt eller ett hus. Den gäller inte andrahandsuthyrning av en hyresrätt, fritidsboende eller den som regelmässigt hyr ut fler än två bostäder utöver rum i det egna hemmet.",
+          "Har ditt avtal ingåtts den 1 juli 2026 eller senare får hyresvärden säga upp det så att det upphör direkt, om hyran är mer än två veckor sen. Det finns ingen treveckorsfrist, och hyresvärden måste inte meddela socialtjänsten. Är du uppsagd hjälper det inte att betala i efterhand, och hyresvärden kan kräva skadestånd.",
+          "Det som skyddar dig är att betala före uppsägningen. Då får avtalet inte sägas upp på den grunden. Uppsägningen räknas som gjord när den har skickats till e-postadressen du har uppgett för avtalet, eller när ett rekommenderat brev har lämnats in på posten, även om du inte har läst den.",
+          "Kontakta därför socialtjänsten redan när du ser att hyran inte går ihop. Avtal som ingicks före den 1 juli 2026 följer de tidigare reglerna, alltså enveckasregeln och treveckorsfristen ovan.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Vad händer om jag är två dagar sen med hyran?",
+        a: "Med en vanlig hyresrätt händer inget med kontraktet förrän hyran är mer än en vecka sen. Betala så fort du kan.",
+      },
+      {
+        q: "Kan socialen betala min hyra?",
+        a: "Ja, efter en ansökan. Socialtjänsten prövar först om du kan betala själv eller få pengarna på annat sätt, till exempel genom bostadsbidrag.",
+      },
+      {
+        q: "Kan vi bli vräkta fast vi har barn?",
+        a: "Ja. Men enligt Socialstyrelsen är det särskilt viktigt att socialtjänsten alltid tar personlig kontakt med familjen när barn berörs. Vänta inte på det, kontakta dem själv.",
+      },
+      {
+        q: "Måste hyresvärden gå med på en avbetalningsplan?",
+        a: "Nej. Men ett rimligt förslag i tid gör det lättare att säga ja. Få planen bekräftad skriftligt.",
+      },
+      {
+        q: "Vad är nödbistånd?",
+        a: "Ordet finns inte i socialtjänstlagen, men används om ekonomiskt bistånd i en akut situation. Skriv tydligt i ansökan att det är akut och vilket datum det gäller.",
+      },
+      {
+        q: "Hamnar en hyresskuld hos Kronofogden?",
+        a: "Det kan den. Ett beslut om betalning eller vräkning kan ge en betalningsanmärkning, som gör det svårare att få ett nytt kontrakt. Kommunens budget- och skuldrådgivning är gratis och har sekretess.",
+      },
+    ],
+  },
 ];
 
 /** Guides merged into another page; the old URL answers with a permanent redirect. */

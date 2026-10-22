@@ -500,6 +500,100 @@ export const DOC_ARTICLES: Record<string, DocArticle> = {
       },
     ],
   },
+  socialtjansten: {
+    seoTitle: "Brev till socialtjänsten – försörjningsstöd (59 kr) | Skrivklart",
+    seoDescription:
+      "Skriv till socialtjänsten: ansökan om försörjningsstöd, komplettering eller akut behov, och hur du överklagar. Gratis utkast, färdigt brev för 59 kr.",
+    intro:
+      "Ekonomiskt bistånd söker du hos socialtjänsten i kommunen där du bor. Ett tydligt brev gör det lättare för handläggaren att förstå ditt läge och svårare att missa något. Här är vad som gäller för försörjningsstöd, vad brevet ska innehålla, vad du gör när det är akut och hur du överklagar ett beslut. Gäller det en orosanmälan om ett barn är det något annat. Kontakta då socialtjänsten i kommunen där barnet bor.",
+    sections: [
+      {
+        h: "Vad är ekonomiskt bistånd och försörjningsstöd?",
+        p: [
+          "Ekonomiskt bistånd är kommunens stöd när du inte kan klara din försörjning på något annat sätt. Rätten till bistånd står i socialtjänstlagen, och hjälpen ska ge en skälig levnadsnivå.",
+          "Biståndet har två delar. Försörjningsstöd gäller de vanliga kostnaderna varje månad: en riksnorm för mat, kläder och skor, fritid, förbrukningsvaror, hälsa och hygien samt dagstidning och telefon, plus rimliga kostnader för boende, hushållsel, hemförsäkring, arbetsresor, fackavgift och a-kassa. Den andra delen gäller enstaka behov, till exempel tandvård, glasögon, medicin, umgänge med barn eller flytt.",
+          "Du ska först försöka klara dig själv. I regel kan du inte få bistånd så länge du har pengar på banken eller andra tillgångar. Du ska också först söka andra ersättningar som bostadsbidrag, underhållsstöd, sjukpenning eller föräldrapenning. Kan du arbeta ska du söka jobb och delta i de insatser som kommunen eller Arbetsförmedlingen erbjuder. Det kallas att stå till arbetsmarknadens förfogande. Bor du med make eller sambo räknas hushållets inkomster och kostnader ihop.",
+          "Riksnormen för 2026 är 5 220 kr i månaden för en ensamstående vuxen och 8 510 kr för sammanboende, plus belopp för barn. Boende, el och de andra kostnaderna läggs till, och hushållets inkomster dras av. Socialstyrelsen har en provberäkning på sin webbplats som ger en fingervisning. Det är ändå kommunens bedömning av just ditt hushåll som avgör.",
+        ],
+      },
+      {
+        h: "Vad ska stå i brevet till socialtjänsten?",
+        p: [
+          "Söker du för första gången, ring socialtjänstens mottagning. I många kommuner börjar det så, ofta följt av ett besök, innan du kan söka i e-tjänsten eller på blankett. Finns det en blankett eller e-tjänst, använd den. Ett eget brev är bra när läget behöver förklaras, när du kompletterar en ansökan, när något är bråttom eller när du vill be om ett möte.",
+          "Börja med ditt namn, personnummer, adress och telefonnummer, och diarienummer om du har ett. Beskriv sedan hushållet kort: vilka som bor hos dig, barnens åldrar, vilka inkomster ni har och vad som har förändrats.",
+          "Skriv exakt vad du söker, för vilken månad och hur mycket. ”Hyra för december, 7 400 kr” är tydligare än ”hjälp med hyran”. I många kommuner söker man försörjningsstöd en månad i taget. Räkna upp bilagorna, till exempel hyresavi, kontoutdrag, lönebesked och beslut från Försäkringskassan.",
+          "Avsluta med att du ber om ett skriftligt beslut. Skriv sakligt och utan att be om ursäkt. Spara en kopia av allt du skickar och skriv upp datumet.",
+          "Här på sidan fyller du i vad det gäller, ditt läge, vad du söker och vilka bilagor du har. Du ser ett utkast direkt, gratis. Hela brevet, med rubrik, plats för diarienummer, bilageförteckning och begäran om skriftligt beslut, kostar 59 kr. Inget konto.",
+        ],
+      },
+      {
+        h: "När det är akut: hyra, mat eller el",
+        p: [
+          "Har du inte pengar till mat, ska elen stängas av eller förfaller hyran inom några dagar? Skriv det överst i brevet, med datum. Ring också socialtjänsten samma dag, eftersom ett brev kan bli liggande innan någon hinner läsa det.",
+          "Kommunen har det yttersta ansvaret för att den som behöver hjälp får det. Är du tillfälligt i en annan kommun när något akut händer, är det den kommunen som ansvarar för den akuta hjälpen.",
+          "Har du fått en uppsägning för obetald hyra kan du oftast få bo kvar om skulden betalas inom tre veckor. Fristen räknas från att du fick beskedet om att du kan få tillbaka bostaden genom att betala, som oftast kommer tillsammans med uppsägningen. Hyresvärden ska som regel också meddela socialtjänsten. Ett viktigt undantag: hyr du av en privatperson och avtalet började gälla den 1 juli 2026 eller senare, behöver hyresvärden inte meddela socialtjänsten, och du kan inte få tillbaka bostaden genom att betala i efterhand. Kontakta socialtjänsten direkt och bifoga uppsägningen.",
+          "Gäller det el, bifoga brevet där det står när elen stängs av och hur mycket som är obetalt.",
+        ],
+      },
+      {
+        h: "Be om ett skriftligt beslut",
+        p: [
+          "Du har rätt att ansöka och att få ett beslut. Får du helt eller delvis avslag ska beslutet vara skriftligt och motiverat. Enligt förvaltningslagen ska du alltid få beslutet skriftligt om du ber om det.",
+          "Beslutet ska visa vad du har fått och inte fått, vilka skäl socialtjänsten har haft och hur du överklagar. Får du bara ett nej i telefon eller på ett möte, skriv och be om ett skriftligt beslut. Utan beslut finns inget att överklaga.",
+          "Du har rätt att läsa det som finns i ditt ärende. Står något fel i socialtjänstens anteckningar, säg det, så ska det antecknas. Du får också ta med en person som stöd eller låta någon vara ditt ombud.",
+        ],
+      },
+      {
+        h: "Så överklagar du socialtjänstens beslut",
+        p: [
+          "Beslut om ekonomiskt bistånd enligt socialtjänstlagen kan överklagas till förvaltningsrätten. Det gäller också beslut om att neka eller sätta ned försörjningsstödet för att du inte deltagit i en aktivitet. Läs beslutet först. Där står hur du överklagar.",
+          "Överklagandet ska ha kommit in inom tre veckor från den dag du fick del av beslutet. Skicka det till kommunen som fattade beslutet, inte till domstolen. Kommunen kontrollerar att det kommit in i tid och skickar det vidare till förvaltningsrätten.",
+          "Det finns ingen blankett. Skriv vilket beslut du överklagar med datum och diarienummer, hur du vill att det ändras och varför du anser att det är fel. Bifoga det som visar det, och skriv dina kontaktuppgifter. Förvaltningsrätten tar inte ut någon avgift.",
+          "Du kan söka bistånd för nästa månad medan överklagandet prövas. Förvaltningsrättens dom kan i sin tur överklagas till kammarrätten, men där krävs prövningstillstånd. För själva överklagandet finns ett eget dokument här på Skrivklart. Skrivklart ger ett skarpt utkast, inte juridisk rådgivning.",
+        ],
+      },
+      {
+        h: "Nytt från juli 2026: aktivitetskrav och läkarintyg",
+        p: [
+          "Sedan den 1 juli 2026 finns ett aktivitetskrav i socialtjänstlagen. Har du haft försörjningsstöd i minst tre månader i följd ska socialtjänsten som huvudregel begära att du deltar i aktiviteter som för dig närmare arbete eller studier. Kommunerna måste ställa kravet från och med försörjningsstödet för oktober 2026. Socialtjänsten får ställa ett krav redan tidigare, men då för kortare tid, och även det kravet måste du följa.",
+          "Kravet får vara högst 40 timmar i veckan och ska utgå från vad du klarar. Finns det barn i hushållet som är under åtta år, eller äldre men ännu inte har avslutat första skolåret, minskas tiden med tio timmar i veckan. Barnet behöver inte vara ditt eget. Aktiviteterna ska också anpassas efter när det finns förskola eller fritids.",
+          "Vissa omfattas inte av kravet: den som är under 18 år eller är 18–20 år och går i grund- eller gymnasieskolan, den som arbetar, går ett program hos Arbetsförmedlingen eller läser sfi på heltid, den som har nått riktåldern för pension och den som är föräldraledig med ett barn under ett år. Har du sjukpenning, sjukersättning eller aktivitetsersättning gäller undantaget i den omfattning du har ersättningen.",
+          "Avböjer du en aktivitet eller uteblir utan godtagbart skäl ska försörjningsstödet nekas eller sättas ned. Godtagbara skäl kan vara sjukdom, vård av sjukt barn eller en kallelse från en annan myndighet. Tackar du nej till en aktivitet för att du är sjuk krävs läkarintyg, oavsett hur länge du är sjuk. Uteblir du från en aktivitet som du redan går på krävs läkarintyg om du är sjuk mer än sju dagar i följd. Socialtjänsten kan begära intyg tidigare om det finns särskilda skäl.",
+          "Från den 1 januari 2027 ändras riksnormen. Dagstidning och telefon ersätts av internet och telefoni, och försörjningsstödet begränsas för hushåll med fler än tre hemmavarande barn och skolungdomar under 21 år. Fråga din handläggare vad det betyder för er.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hur lång tid har jag på mig att överklaga socialtjänstens beslut?",
+        a: "Tre veckor från den dag du fick del av beslutet. Skicka överklagandet till kommunen som fattade beslutet. Kommunen skickar det vidare till förvaltningsrätten.",
+      },
+      {
+        q: "Måste jag använda kommunens blankett?",
+        a: "Finns det en blankett eller e-tjänst, använd den. Söker du för första gången börjar det i många kommuner med ett samtal till socialtjänstens mottagning. Ett eget brev kan du lägga till för att förklara läget, komplettera ansökan eller visa att något är akut.",
+      },
+      {
+        q: "Kan socialtjänsten säga nej utan ett skriftligt beslut?",
+        a: "Du har rätt att få din ansökan prövad och att få ett beslut. Ett helt eller delvis avslag ska vara skriftligt och motiverat. Har du bara fått ett muntligt nej, be skriftligt om ett beslut.",
+      },
+      {
+        q: "Hur lång tid tar det att få beslut om försörjningsstöd?",
+        a: "Det finns ingen fast tidsgräns, men ansökan ska handläggas skyndsamt. Är det akut, säg det direkt. Har ärendet inte avgjorts inom sex månader kan du enligt förvaltningslagen skriftligen begära att kommunen avgör det.",
+      },
+      {
+        q: "Måste jag söka bostadsbidrag och underhållsstöd först?",
+        a: "Ja. Du ska först söka de ersättningar du kan ha rätt till, till exempel bostadsbidrag, underhållsstöd, sjukpenning eller föräldrapenning. Bifoga beslutet, eller visa att du har sökt.",
+      },
+      {
+        q: "Kostar det något att överklaga till förvaltningsrätten?",
+        a: "Nej. Förvaltningsrätten tar inte ut någon avgift. Anlitar du ett ombud, till exempel en advokat, betalar du det själv.",
+      },
+      {
+        q: "Vilka misstag är vanligast i en ansökan om ekonomiskt bistånd?",
+        a: "Att skriva för allmänt, att glömma bilagor, att inte ha sökt andra ersättningar först och att missa fristen för överklagande. Skriv vad du söker, för vilken månad och hur mycket, och spara en kopia av allt du skickar.",
+      },
+    ],
+  },
 };
 
 export function getDocArticle(slug: string): DocArticle | undefined {
