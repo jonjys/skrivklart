@@ -24,8 +24,12 @@ export const Route = createFileRoute("/dokument/$slug")({
     const product = loaderData;
     if (!product) return { meta: [{ title: `Dokument — ${SITE_NAME}` }] };
     const article = getDocArticle(product.slug);
-    const title = article?.seoTitle ?? `${product.name} – mall och färdig text, ${product.priceKr} kr | ${SITE_NAME}`;
-    const description = article?.seoDescription ?? `${product.pitch} Gratis utkast, hela texten ${sek(product.priceKr)}. Inget konto.`;
+    const title =
+      article?.seoTitle ??
+      `${product.name} – mall och färdig text, ${product.priceKr} kr | ${SITE_NAME}`;
+    const description =
+      article?.seoDescription ??
+      `${product.pitch} Gratis utkast, hela texten ${sek(product.priceKr)}. Inget konto.`;
     return {
       meta: [
         { title },
@@ -123,12 +127,12 @@ function DokumentPage() {
             {category ? <span className="text-pine-fg/60"> / {category.label}</span> : null}
           </nav>
         }
-        title={product.name}
+        title={article?.heading ?? product.name}
         sub={product.pitch}
       >
         <div className="flex flex-wrap gap-2">
           <HeroChip strong>{sek(product.priceKr)} för hela texten</HeroChip>
-          {["Gratis utkast", "Inget konto", "Klart på en minut"].map((chip) => (
+          {["Gratis förhandsvisning", "Inget konto", "Klart på en minut"].map((chip) => (
             <HeroChip key={chip}>
               <Check className="size-3.5 text-sun" />
               {chip}
@@ -151,7 +155,9 @@ function DokumentPage() {
           >
             <span>
               <span className="block font-semibold">Osäkra på om ni behöver samboavtal?</span>
-              <span className="block text-sm text-muted">Gör den gratis samboavtal-kollen – fem frågor, svar direkt.</span>
+              <span className="block text-sm text-muted">
+                Gör den gratis samboavtal-kollen – fem frågor, svar direkt.
+              </span>
             </span>
             <ArrowRight className="size-5 shrink-0 text-clay" />
           </Link>
@@ -162,6 +168,11 @@ function DokumentPage() {
 
         {article ? (
           <article className="mx-auto mt-16 max-w-3xl border-t border-line pt-10">
+            {article.updated ? (
+              <p className="mb-4 text-sm text-muted">
+                Uppdaterad <time dateTime={article.updated}>{article.updated}</time>
+              </p>
+            ) : null}
             <p className="text-lg leading-relaxed">{article.intro}</p>
             {article.sections.map((section) => (
               <section key={section.h} className="mt-10">
@@ -173,6 +184,20 @@ function DokumentPage() {
                 ))}
               </section>
             ))}
+            {article.sources?.length ? (
+              <section className="mt-10">
+                <h2 className="font-display text-2xl">Källor</h2>
+                <ul className="mt-3 space-y-2">
+                  {article.sources.map((source) => (
+                    <li key={source.url}>
+                      <a className="text-clay underline" href={source.url}>
+                        {source.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
             <section className="mt-12">
               <h2 className="font-display text-2xl tracking-tight">Vanliga frågor</h2>
               <div className="mt-4 divide-y divide-line rounded-2xl border border-line bg-paper">

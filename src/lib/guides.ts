@@ -16,6 +16,8 @@ export type Guide = {
   body: string[];
   sections?: { h: string; p: string[] }[];
   faq?: { q: string; a: string }[];
+  sources?: { label: string; url: string }[];
+  template?: { title: string; text: string };
 };
 
 export const GUIDES: Guide[] = [
@@ -136,17 +138,84 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "mall-overklagande-forsakringskassan",
-    title: "Begära omprövning hos Försäkringskassan – mall och steg",
+    title: "Överklaga Försäkringskassan – mall och steg för steg",
+    seoTitle: "Överklaga Försäkringskassan – mall och omprövning",
+    seoDescription:
+      "Hur överklagar man Försäkringskassan? Läs om omprövning, tvåmånadersfristen och vad brevet ska innehålla. Gratis exempelmall och hjälp att skriva.",
     excerpt:
-      "Först omprövning hos Försäkringskassan, sedan förvaltningsrätten. Två månader på dig. Så skriver du begäran.",
+      "Fått ett beslut du tycker är fel? Här finns en exempelmall och en väg från omprövning hos Försäkringskassan till överklagande till förvaltningsrätten.",
     productSlug: "overklagande",
     published: "2026-08-26",
-    updated: "2026-10-15",
+    updated: "2026-10-23",
     body: [
-      "Steg 1 är inte förvaltningsrätten. Ett beslut från Försäkringskassan ska först omprövas: skriv rubriken 'Begäran om omprövning av beslut den [datum], ärendenummer [nr]' och skicka till Försäkringskassan. Först när du fått omprövningsbeslutet kan du överklaga till förvaltningsrätten, och då skickar du överklagandet till Försäkringskassan, som lämnar det vidare.",
-      "1) Vad beslutet säger. En mening. 2) Vad du yrkar: att beslutet upphävs och att [ersättning/insats] beviljas. 3) Grunder: fakta som saknades, felaktig bedömning, läkarintyg de inte vägt in.",
-      "Håll känslor utanför. 'Jag är förtvivlad' flyttar inget. 'Läkarintyg 12 mars anger nedsättning 75 %, vilket inte nämns i beslutet' gör det.",
-      "Både begäran om omprövning och ett senare överklagande ska ha kommit in till Försäkringskassan inom två månader från den dag du fick beslutet. Andra myndigheter har ofta kortare tid, till exempel tre veckor – kolla alltid fristen i ditt beslut. Behåll en kopia. Det här är ett utkast, inte juridisk rådgivning.",
+      "Vill du skriva en överklagan till Försäkringskassan? Börja med att kontrollera om du har ett första beslut eller ett omprövningsbeslut. Det avgör vilket steg som kommer nu.",
+      "Den här guiden hjälper dig att strukturera brevet. Skrivklart är en fristående skrivtjänst, inte Försäkringskassan eller ett juridiskt ombud. Du granskar och skickar själv din text.",
+    ],
+    sections: [
+      {
+        h: "Hur överklagar man Försäkringskassans beslut?",
+        p: [
+          "Begär först omprövning skriftligt hos Försäkringskassan. Använd deras blankett 7024 eller skriv ett eget brev. Har du redan fått ett omprövningsbeslut kan du överklaga det till förvaltningsrätten. Överklagandet ska ändå skickas till Försäkringskassan, som lämnar det vidare.",
+        ],
+      },
+      {
+        h: "Hur lång tid har jag på mig?",
+        p: [
+          "Din begäran om omprövning måste komma in inom två månader från att du tog del av beslutet. Ett senare överklagande måste komma in inom två månader från att du tog del av omprövningsbeslutet. Kontrollera instruktionerna i ditt beslut.",
+          "Skriv upp när du tog del av beslutet och planera in tid för att samla underlagen. Spara en kopia av brevet och dokumentera när du skickar det.",
+        ],
+      },
+      {
+        h: "Vad ska stå i en överklagan till Försäkringskassan?",
+        p: [
+          "Ange beslutets datum, ersättningen det gäller, önskad ändring och dina skäl. Ta med namn, personnummer och kontaktuppgifter. Följ adressen och instruktionerna i beslutet.",
+          "Gör en liten arbetslista: beslutets motivering, vad du invänder mot och vilken bilaga som stöder varje invändning. Ge bilagorna tydliga namn så att läsaren hittar rätt.",
+        ],
+      },
+      {
+        h: "Skriv tydliga skäl: koppla varje invändning till ett underlag",
+        p: [
+          "Skriv till exempel: ”I beslutet anges [uppgift]. Jag anser att den uppgiften är fel eftersom [förklaring]. Det framgår av [bilaga och datum].” Fyll bara i sådant som faktiskt stämmer i ditt ärende.",
+          "Undvik färdiga argument som inte gäller dig. Ett kort, konkret stycke om just ditt beslut är mer användbart än en lång text med allmänna invändningar. Du behöver inte skriva hårt eller använda svåra ord för att vara tydlig.",
+        ],
+      },
+      {
+        h: "Kontrollera mallen innan du skickar",
+        p: [
+          "Ersätt alla hakparenteser. Kontrollera att datum, belopp och bilagor stämmer med dina egna handlingar. Läs sedan brevet som om du inte kände till ärendet: framgår det vad du vill få ändrat och varför?",
+          "Mallen nedan visar en struktur, inte en bedömning av om du har rätt till ersättning. Anpassa den efter beslutets instruktioner.",
+        ],
+      },
+      {
+        h: "Vill du ha hjälp att formulera brevet?",
+        p: [
+          "Du kan använda exempeltexten på sidan själv. I Skrivklarts formulär beskriver du beslutet och dina skäl och anger om beslutet redan har omprövats. Början av den genererade texten visas gratis; hela texten kostar 99 kr. Du väljer själv om du vill köpa den.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Är överklagan och överklagande samma sak?",
+        a: "Överklagan används ofta i vardagligt språk. Myndigheter använder vanligtvis överklagande. Kontrollera framför allt vilket beslut du har och vilket steg instruktionerna beskriver.",
+      },
+      {
+        q: "Finns det en gratis mall för att överklaga Försäkringskassan?",
+        a: "Ja, exempeltexten på den här sidan är fri att använda och anpassa. Försäkringskassan har också en egen blankett för begäran om omprövning. Skrivklarts hjälp att generera en hel text är en separat betaltjänst.",
+      },
+      {
+        q: "Kan jag använda samma text för sjukpenning och bostadsbidrag?",
+        a: "Du kan återanvända strukturen, men skälen och bilagorna måste handla om ditt eget beslut. Kopiera inte någon annans medicinska eller ekonomiska uppgifter.",
+      },
+    ],
+    template: {
+      title: "Exempelmall: begäran om omprövning",
+      text: "Till Försäkringskassan\n\nBegäran om omprövning\nBeslut: [datum, ersättning och ärendenummer]\n\nJag begär att beslutet ändras så att [den ändring du vill ha].\n\nMina skäl\nI beslutet anges [motiveringen du invänder mot]. Jag anser att detta är fel eftersom [dina konkreta skäl]. Som stöd bifogar jag [underlag och vad det visar].\n\nBilagor\n1. [Namn och datum]\n2. [Namn och datum]\n\n[Namn och personnummer]\n[Adress, telefon och mejl]\n[Ort och datum]",
+    },
+    sources: [
+      {
+        label: "Försäkringskassan: omprövning och överklagande",
+        url: "https://www.forsakringskassan.se/om-forsakringskassan/nar-du-tycker-att-forsakringskassan-har-gjort-fel",
+      },
     ],
   },
   {
@@ -657,6 +726,7 @@ export function getGuide(slug: string) {
 export function guideText(g: Guide) {
   return [
     ...g.body,
+    ...(g.template ? [g.template.title, g.template.text] : []),
     ...(g.sections ?? []).flatMap((s) => [s.h, ...s.p]),
     ...(g.faq ?? []).flatMap((f) => [f.q, f.a]),
   ].join(" ");

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PRODUCTS } from "@/lib/catalog";
 import { GUIDES } from "@/lib/guides";
+import { getDocArticle } from "@/lib/doc-articles";
 import { SITE_URL } from "@/lib/site";
 
 /** Generated from the catalog and guides so new pages are never missing. */
@@ -14,7 +15,7 @@ const STATIC: Entry[] = [
   ["/brev", "0.9", "weekly"],
   ["/samboavtal-koll", "0.9", "monthly"],
   ["/dokument", "0.9", "weekly"],
-  ["/guider", "0.8", "weekly"],
+  ["/guider", "0.8", "weekly", "2026-10-23"],
   ["/support", "0.4", "monthly"],
   ["/om", "0.3", "yearly"],
   ["/villkor", "0.2", "yearly"],
@@ -24,9 +25,12 @@ const STATIC: Entry[] = [
 function sitemap() {
   const urls: Entry[] = [
     ...STATIC,
-    ...PRODUCTS.filter((p) => p.slug !== "myndighetsbrev").map(
-      (p): Entry => [`/dokument/${p.slug}`, p.category === "familj" || p.category === "ekonomi" ? "0.9" : "0.7", "monthly"],
-    ),
+    ...PRODUCTS.filter((p) => p.slug !== "myndighetsbrev").map((p): Entry => [
+      `/dokument/${p.slug}`,
+      p.category === "familj" || p.category === "ekonomi" ? "0.9" : "0.7",
+      "monthly",
+      getDocArticle(p.slug)?.updated,
+    ]),
     ...GUIDES.map((g): Entry => [`/guider/${g.slug}`, "0.7", "monthly", g.updated ?? g.published]),
   ];
   const body = urls

@@ -4,6 +4,9 @@
  * Plain facts, no legal advice.
  */
 export type DocArticle = {
+  heading?: string;
+  updated?: string;
+  sources?: { label: string; url: string }[];
   seoTitle: string;
   seoDescription: string;
   intro: string;
@@ -13,9 +16,17 @@ export type DocArticle = {
 
 export const DOC_ARTICLES: Record<string, DocArticle> = {
   samboavtal: {
-    seoTitle: "Samboavtal – mall och färdigt avtal på några minuter (99 kr) | Skrivklart",
+    heading: "Samboavtal – skriv ert avtal online",
+    updated: "2026-10-23",
+    sources: [
+      {
+        label: "Sambolagen, särskilt 9 § om samboavtal",
+        url: "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/sambolag-2003376_sfs-2003-376/",
+      },
+    ],
+    seoTitle: "Samboavtal online – skapa avtal för 99 kr | Skrivklart",
     seoDescription:
-      "Skriv ert samboavtal online: bostad, bostadsrätt, bohag och vad som gäller vid separation. Gratis utkast, färdigt avtal för 99 kr. Ingen registrering behövs.",
+      "Skapa samboavtal för bostadsrätt, hus och bohag. Svara på frågor och förhandsgranska början gratis. Hela avtalstexten 99 kr. Inget konto behövs.",
     intro:
       "Ett samboavtal bestämmer vad som händer med bostaden och bohaget om ni flyttar isär. Utan avtal gäller sambolagen, och den delar ofta på saker som ni själva tycker att den ena äger. Här är vad som gäller, vad avtalet ska innehålla och hur ni skriver det.",
     sections: [
@@ -23,7 +34,7 @@ export const DOC_ARTICLES: Record<string, DocArticle> = {
         h: "Vad gäller om ni inte har ett samboavtal?",
         p: [
           "Sambolagen gäller automatiskt när två personer bor tillsammans i ett parförhållande med gemensamt hushåll. Ni behöver inte anmäla något.",
-          "Om ni separerar kan var och en begära bodelning. Då delas samboegendomen lika: den gemensamma bostaden och det bohag som ni skaffat för att använda tillsammans. Huvudregeln är att värdet delas lika, oavsett vem som betalade eller står på kontraktet. Har ni bott ihop kort tid kan bodelningen jämkas så att den som ägde mer får behålla mer, men det avgörs i efterhand och går inte att räkna med. Med ett samboavtal vet ni.",
+          "Om ni separerar kan var och en begära bodelning. Då delas samboegendomen lika: den gemensamma bostaden och det bohag som ni skaffat för att använda tillsammans. Huvudregeln är att värdet delas lika, oavsett vem som betalade eller står på kontraktet. Har ni bott ihop kort tid kan bodelningen jämkas så att den som ägde mer får behålla mer, men det avgörs i efterhand och går inte att räkna med. Ett samboavtal kan undanta egendom från bodelning, men oskäliga villkor kan jämkas.",
           "Sådant som inte räknas som samboegendom delas inte, till exempel bil, sparpengar, aktier, fritidshus och saker som den ena hade innan ni flyttade ihop och som inte skaffades för gemensamt bruk.",
           "Bodelning måste begäras senast ett år efter att ni flyttat isär. Begär ingen bodelning behåller var och en sitt.",
         ],
@@ -303,7 +314,9 @@ export const DOC_ARTICLES: Record<string, DocArticle> = {
     ],
   },
   overklagande: {
-    seoTitle: "Överklaga Försäkringskassan – mall och frister | Skrivklart",
+    heading: "Skriv en begäran om omprövning eller ett överklagande",
+    updated: "2026-10-23",
+    seoTitle: "Skriv överklagande eller omprövning – 99 kr | Skrivklart",
     seoDescription:
       "Begär omprövning eller överklaga beslut från Försäkringskassan, a-kassan, CSN eller kommunen. Frister, vad du ska skriva, gratis utkast. Hela texten 99 kr.",
     intro:

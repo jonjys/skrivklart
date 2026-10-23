@@ -41,6 +41,9 @@ export const Route = createFileRoute("/guider/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: `${SITE_URL}/guider/${guide.slug}` },
+        { property: "og:image", content: siteImage },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/guider/${guide.slug}` }],
     };
@@ -132,6 +135,30 @@ function GuidePage() {
         <p className="text-sm text-muted">
           Uppdaterad <time dateTime={updated}>{swedishDate(updated)}</time>
         </p>
+        {guide.sections?.length ? (
+          <nav
+            aria-label="Innehåll i guiden"
+            className="mt-6 rounded-2xl border border-line bg-paper p-5"
+          >
+            <p className="font-semibold">I den här guiden</p>
+            <ul className="mt-3 space-y-2">
+              {guide.sections.map((section, index) => (
+                <li key={section.h}>
+                  <a className="text-clay underline" href={`#avsnitt-${index + 1}`}>
+                    {section.h}
+                  </a>
+                </li>
+              ))}
+              {guide.template ? (
+                <li>
+                  <a className="text-clay underline" href="#exempelmall">
+                    Gratis exempelmall
+                  </a>
+                </li>
+              ) : null}
+            </ul>
+          </nav>
+        ) : null}
         <div className="mt-6 space-y-5">
           {guide.body.map((p) => (
             <p key={p} className="text-lg leading-relaxed text-ink">
@@ -139,8 +166,8 @@ function GuidePage() {
             </p>
           ))}
         </div>
-        {guide.sections?.map((s) => (
-          <section key={s.h} className="mt-10">
+        {guide.sections?.map((s, index) => (
+          <section key={s.h} id={`avsnitt-${index + 1}`} className="mt-10 scroll-mt-24">
             <h2 className="font-display text-2xl tracking-tight sm:text-3xl">{s.h}</h2>
             <div className="mt-4 space-y-5">
               {s.p.map((p) => (
@@ -151,6 +178,31 @@ function GuidePage() {
             </div>
           </section>
         ))}
+        {guide.template ? (
+          <section id="exempelmall" className="mt-10 scroll-mt-24">
+            <h2 className="font-display text-2xl tracking-tight">{guide.template.title}</h2>
+            <p className="mt-3 text-muted">
+              Kopiera texten och ersätt hakparenteserna med dina egna uppgifter.
+            </p>
+            <pre className="mt-4 whitespace-pre-wrap break-words rounded-2xl border border-line bg-paper p-5 font-sans text-base leading-relaxed">
+              {guide.template.text}
+            </pre>
+          </section>
+        ) : null}
+        {guide.sources?.length ? (
+          <section className="mt-10" aria-label="Källor">
+            <h2 className="font-display text-2xl">Källor och vidare läsning</h2>
+            <ul className="mt-3 space-y-2">
+              {guide.sources.map((source) => (
+                <li key={source.url}>
+                  <a href={source.url} className="text-clay underline">
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
         {guide.faq?.length ? (
           <section className="mt-12">
             <h2 className="font-display text-2xl tracking-tight sm:text-3xl">Vanliga frågor</h2>
@@ -173,15 +225,23 @@ function GuidePage() {
             </p>
             <p className="mt-2 font-display text-3xl tracking-tight">{product.name}</p>
             <p className="mt-2 text-pine-fg/80">
-              {product.short} Gratis utkast, {sek(product.priceKr)} för hela texten.
+              {product.short} Förhandsgranska början gratis, {sek(product.priceKr)} för hela texten.
             </p>
-            <Button asChild className="mt-6 h-auto min-h-12 whitespace-normal" size="lg" variant="accent">
+            <Button
+              asChild
+              className="mt-6 h-auto min-h-12 whitespace-normal"
+              size="lg"
+              variant="accent"
+            >
               <Link to="/dokument/$slug" params={{ slug: product.slug }}>
                 Skriv {product.name.toLowerCase()}
               </Link>
             </Button>
             {product.slug === "samboavtal" ? (
-              <Link to="/samboavtal-koll" className="mt-4 block text-sm text-pine-fg/80 underline hover:text-pine-fg">
+              <Link
+                to="/samboavtal-koll"
+                className="mt-4 block text-sm text-pine-fg/80 underline hover:text-pine-fg"
+              >
                 Osäkra? Gör den gratis samboavtal-kollen först
               </Link>
             ) : null}
