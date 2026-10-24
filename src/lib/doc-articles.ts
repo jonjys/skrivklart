@@ -607,6 +607,1103 @@ export const DOC_ARTICLES: Record<string, DocArticle> = {
       },
     ],
   },
+  andrahandskontrakt: {
+    seoTitle: "Andrahandskontrakt – mall och nya regler 2026 | Skrivklart",
+    seoDescription:
+      "Andrahandskontrakt för hyresrätt, bostadsrätt eller hus enligt reglerna från 1 juli 2026: hyra, uppsägning och samtycke. Färdigt kontrakt för 99 kr.",
+    intro:
+      "Ett andrahandskontrakt är avtalet mellan den som hyr ut sin bostad och den som flyttar in. Det visar vilken bostad det gäller, hur länge uthyrningen pågår, vad hyran är och hur avtalet sägs upp. Reglerna skiljer sig mellan hyresrätt och bostadsrätt eller hus. Sedan den 1 juli 2026 gäller dessutom en ny lag när privatpersoner hyr ut: privatuthyrningslagen. Här är vad som gäller och vad kontraktet ska innehålla, oavsett om du hyr ut eller ska flytta in.",
+    sections: [
+      {
+        h: "Hyresrätt eller bostadsrätt – vilka regler gäller?",
+        p: [
+          "Hyr du ut en hyresrätt gäller hyreslagen, alltså 12 kapitlet i jordabalken. Du blir hyresvärd för den som flyttar in. Mot fastighetsägaren är det fortfarande du som ansvarar för att hyran blir betald och för skador och störningar.",
+          "Hyr du som privatperson ut en bostadsrätt, ett hus eller en ägarlägenhet gäller i stället privatuthyrningslagen. Den gäller avtal som har ingåtts från och med den 1 juli 2026, även muntliga avtal.",
+          "Avtal som ingicks före det datumet följer den gamla lagen om uthyrning av egen bostad. Där kan hyran prövas mot dina kostnader för bostaden. Den som hyr har en månads uppsägningstid, och du som hyr ut kan säga upp med tre månader, även ett tidsbestämt avtal.",
+          "Privatuthyrningslagen gäller inte om du regelmässigt hyr ut fler än två bostäder utöver ditt eget hem. Då gäller hyreslagen även för en bostadsrätt.",
+        ],
+      },
+      {
+        h: "Samtycke från hyresvärden eller föreningen",
+        p: [
+          "För att hyra ut en hyresrätt i andra hand behöver du hyresvärdens samtycke. Säger hyresvärden nej kan du ansöka om tillstånd hos hyresnämnden. Ansökan ska vara skriftlig och kostar inget.",
+          "Hyresnämnden ger tillstånd om du har beaktansvärda skäl. Det kan till exempel vara sjukdom, ålder, tillfälligt arbete eller studier på annan ort, en längre utlandsvistelse eller att du ska provbo som sambo. Dessutom krävs att hyresvärden inte har ett godtagbart skäl att säga nej och att hyran inte är för hög.",
+          "Tillståndet gäller en viss tid, i regel högst ett år åt gången. Sedan kan du ansöka igen. Lagen har ingen fast gräns för hur länge du får hyra ut i andra hand.",
+          "För en bostadsrätt är det föreningens styrelse som ska säga ja. Säger styrelsen nej kan hyresnämnden ge tillstånd. Där är kravet lägre än för en hyresrätt. Det räcker att du har ett godtagbart skäl, till exempel att du hyr ut till en närstående, arbetar eller studerar på annan ort eller provbor som sambo, och att föreningen inte har ett godtagbart skäl att säga nej. Även det tillståndet gäller en viss tid.",
+          "Föreningen får ta ut en avgift för andrahandsuthyrning om stadgarna tillåter det. Avgiften får vara högst tio procent av prisbasbeloppet per lägenhet och år, alltså 5 920 kr under 2026. Hyr du ut en del av året räknas taket per månad. Äger du ett hus eller en ägarlägenhet behöver du inte fråga någon om lov.",
+          "Be om samtycket skriftligt och spara det. Det gäller bara för den person och den period som du har fått ja till. Hyr du ut en hyresrätt utan samtycke kan du bli uppsagd och förlora lägenheten, även om du redan har avslutat uthyrningen. Tar du dessutom ut för hög hyra kan det vara ett brott. Även en bostadsrättsförening kan säga upp dig, men där får du först en chans att rätta till det.",
+        ],
+      },
+      {
+        h: "Hur hög får hyran vara?",
+        p: [
+          "Hyresrätt: Hyran får inte vara högre än den hyra du själv betalar. Hyr du ut möblerat får du lägga på högst 15 procent av din hyra för möbler och utrustning. El, internet och liknande får bara kosta vad det faktiskt kostar dig. Hyr du ut en del av lägenheten gäller motsvarande del av hyran.",
+          "Har den som hyr betalat för mycket kan hen ansöka hos hyresnämnden och få tillbaka det, med ränta, för upp till två år före ansökan. Ansökan ska komma in senast tre månader efter att hen har flyttat. En för hög hyra kan dessutom göra att du förlorar ditt eget kontrakt.",
+          "Bostadsrätt och hus: Enligt privatuthyrningslagen kommer ni överens om hyran. Är den väsentligt högre än vad som i allmänhet tas ut för liknande bostäder som hyrs ut privat, kan den som hyr be hyresnämnden sätta ned den. En sänkning gäller i regel från den dag ansökan kom in till hyresnämnden. Det som har betalats för mycket sedan dess ska betalas tillbaka med ränta. Har den som hyr ut förhalat en förhandling kan nämnden bestämma att sänkningen ska gälla från en tidigare tidpunkt.",
+          "Ni får avtala att till exempel el, värme, kyla, varmvatten och vatten betalas efter förbrukning, och att hyran följer ett index, till exempel KPI. En indexhöjning ska meddelas skriftligt och gäller tidigast efter en månad. Den gamla hyran måste också ha gällt i minst ett år.",
+          "Ta aldrig betalt för själva kontraktet, utöver hyran. För en hyresrätt är det ett brott att begära, avtala om eller ta emot en sådan ersättning, och du kan dessutom förlora ditt eget kontrakt. Även den som betalar för ett kontrakt kan dömas för brott, utom i ringa fall.",
+        ],
+      },
+      {
+        h: "Uppsägningstid och hur länge kontraktet gäller",
+        p: [
+          "Ett andrahandskontrakt gäller antingen tills vidare eller för en bestämd tid. Skriv in vilket det är: startdatum, och slutdatum om kontraktet är tidsbestämt. Säg alltid upp skriftligt och spara en kopia.",
+          "Hyresrätt: Ett kontrakt som gäller tills vidare sägs upp med tre månaders uppsägningstid, till ett månadsskifte. Den som hyr i andra hand får alltid säga upp med tre månader, även om kontraktet gäller en bestämd tid.",
+          "Ett vanligt misstag gäller tidsbestämda kontrakt på en hyresrätt. Har uthyrningen pågått mer än nio månader i följd upphör kontraktet inte av sig självt när tiden är slut. Du måste säga upp det skriftligt senast tre månader före slutdatumet. Gör du inte det fortsätter det att gälla, i regel tills vidare.",
+          "Bostadsrätt och hus enligt privatuthyrningslagen: Ett tidsbestämt kontrakt upphör när tiden är slut, utan uppsägning. Den som hyr kan ändå säga upp det i förtid, med tre månaders uppsägningstid till ett månadsskifte. Ett kontrakt som gäller tills vidare kan ni båda säga upp på samma sätt.",
+          "Du som hyr ut kan inte säga upp ett tidsbestämt kontrakt i förtid, om inte den som hyr bryter mot sina skyldigheter, till exempel betalar hyran mer än två veckor för sent. Har hyran betalats innan du säger upp, eller är förseelsen ringa, får du inte säga upp avtalet. Uppsägningen ska vara skriftlig.",
+        ],
+      },
+      {
+        h: "Besittningsskydd och avstående",
+        p: [
+          "Besittningsskydd betyder att den som hyr har rätt att bo kvar trots att hyresvärden säger upp kontraktet. Vill hyresvärden ändå att hyresgästen flyttar är det hyresnämnden som avgör.",
+          "Hyr någon din hyresrätt i andra hand får hen besittningsskydd mot dig när uthyrningen har pågått längre än två år i följd. Mot fastighetsägaren får den som hyr i andra hand aldrig besittningsskydd. Upphör förstahandskontraktet, till exempel för att du blir uppsagd, måste även den som hyr i andra hand flytta.",
+          "Kan uthyrningen bli längre än två år, skriv en överenskommelse om avstående från besittningsskydd. Den ska vara ett eget dokument, inte en punkt i kontraktet, och den ingår alltså inte i kontraktet du skriver här. Du behöver inte hyresnämndens godkännande om överenskommelsen gäller högst fyra år från inflyttningen och du själv ska flytta tillbaka. I andra fall kan den behöva godkännas av hyresnämnden.",
+          "Hyr du ut en bostadsrätt eller ett hus enligt privatuthyrningslagen har den som hyr inget besittningsskydd. Då behövs ingen sådan överenskommelse.",
+        ],
+      },
+      {
+        h: "Det här ska stå i andrahandskontraktet",
+        p: [
+          "Namn, personnummer och kontaktuppgifter för dig som hyr ut och för den som hyr. Adress, lägenhetsnummer och storlek, och om bostaden hyrs ut möblerad. Hyr du ut möblerat, gör en inventarielista och bifoga den. Skriv upp skador och brister vid inflyttningen, gärna med foton.",
+          "Hyrestiden: tills vidare, eller start- och slutdatum. Hyran per månad, när och hur den ska betalas och vad som ingår, till exempel el och internet. Om ni har en deposition: beloppet och när den ska betalas tillbaka. Lagen sätter ingen gräns för hur stor den får vara, men en eller två månadshyror är vanligt. Uppsägningstiden, och att uppsägning ska ske skriftligt.",
+          "Regler om husdjur och rökning, och att den som hyr inte får hyra ut vidare. Att hyresvärdens eller föreningens samtycke finns, med datum, gärna som bilaga. Ska du själv flytta in, be att få se samtycket innan du betalar hyra eller deposition. Ort, datum och underskrift från er båda. Ett muntligt avtal gäller också, men båda har rätt att kräva att det skrivs ned.",
+          "Fyll i fälten ovan med parter, bostad, hyra och period. Du ser början av kontraktet direkt, gratis. Hela kontraktet kostar 99 kr, med numrerade paragrafer om parter, bostad, hyrestid, hyra, skick, uppsägning, samtycke och tvister. Läs igenom det och ändra det som inte stämmer för er. Skriv ut två exemplar, skriv under båda och behåll var sitt. Skrivklart ger ett skarpt utkast, inte juridisk rådgivning.",
+          "Ska den som flyttar in bo där längre än ett år, eller har hen ingen annan bostad att flytta tillbaka till, ska hen anmäla flytten till Skatteverket senast en vecka efter flytten.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Får jag hyra ut min hyresrätt i andra hand?",
+        a: "Ja, om hyresvärden säger ja. Säger hyresvärden nej kan hyresnämnden ge tillstånd för en viss tid, om du har ett beaktansvärt skäl, till exempel tillfälligt arbete eller studier på annan ort. Utan samtycke riskerar du att förlora lägenheten.",
+      },
+      {
+        q: "Gäller ett andrahandskontrakt utan hyresvärdens godkännande?",
+        a: "Ja, avtalet mellan er gäller ändå. Men den som hyr ut riskerar att bli uppsagd, och då måste den som hyr i andra hand också flytta.",
+      },
+      {
+        q: "Hur mycket får jag ta i hyra för en hyresrätt i andra hand?",
+        a: "Högst samma hyra som du själv betalar. För möbler får du lägga på högst 15 procent av din hyra, och el eller internet får bara kosta vad det kostar dig. Den som har betalat för mycket kan kräva tillbaka det via hyresnämnden.",
+      },
+      {
+        q: "Vilken uppsägningstid gäller för ett andrahandskontrakt?",
+        a: "Oftast tre månader, till ett månadsskifte. Den som hyr kan alltid säga upp med tre månader, även ett tidsbestämt kontrakt. Gäller det en bostadsrätt eller ett hus och avtalet ingicks före den 1 juli 2026 har den som hyr en månads uppsägningstid, och den som hyr ut tre månader, även om kontraktet är tidsbestämt.",
+      },
+      {
+        q: "Får den som hyr i andra hand besittningsskydd?",
+        a: "I en hyresrätt får hen besittningsskydd mot dig när uthyrningen har pågått längre än två år i följd, om ni inte har skrivit en separat överenskommelse om avstående. I en bostadsrätt eller ett hus som en privatperson hyr ut enligt privatuthyrningslagen finns inget besittningsskydd. Hyr du regelmässigt ut fler än två bostäder gäller i stället hyreslagen.",
+      },
+      {
+        q: "Kan jag få bostadsbidrag om jag hyr i andra hand?",
+        a: "Ja, om du har barn som bor hos dig eller är under 29 år och uppfyller villkoren om inkomst. Du behöver i regel vara folkbokförd i bostaden. Försäkringskassan vill då se ditt andrahandskontrakt och ett aktuellt dokument från hyresvärden, föreningen eller hyresnämnden som visar att uthyrningen är godkänd och för vilken period.",
+      },
+      {
+        q: "Behöver jag tillstånd för att ha en inneboende?",
+        a: "Nej, inte om du själv bor kvar och det håller sig inom rimliga gränser, till exempel inte fler boende än lägenheten är gjord för. Bor du inte där själv räknas det som andrahandsuthyrning, och då behövs samtycke.",
+      },
+      {
+        q: "Måste jag betala skatt när jag hyr ut i andra hand?",
+        a: "Bara om du går med överskott. Du får göra ett schablonavdrag på högst 40 000 kr per bostad och år. Äger ni bostaden tillsammans delar ni på avdraget. För en hyresrätt får du också dra av den del av din hyra som gäller den uthyrda delen och tiden, och för en bostadsrätt gäller samma sak för avgiften till föreningen. För ett hus eller en ägarlägenhet drar du i stället av 20 procent av hyresintäkten. Överskottet tas upp som kapitalinkomst i deklarationen och beskattas med 30 procent.",
+      },
+    ],
+  },
+  "arn-anmalan": {
+    seoTitle: "Anmäla till ARN – mall för din ARN-anmälan (99 kr) | Skrivklart",
+    seoDescription:
+      "Text till din ARN-anmälan: beloppsgränser, ettårsfristen, avgiften på 150 kr och handläggningstiden 2026. Gratis utkast, hela texten för 99 kr.",
+    intro:
+      "ARN, Allmänna reklamationsnämnden, är dit du vänder dig när du har klagat till ett företag och fått nej, eller inget svar alls. Nämnden prövar tvisten och ger en rekommendation om hur den bör lösas. Nedan går vi igenom vad som gäller 2026: när du kan anmäla, beloppsgränserna, tidsfristen, avgiften, vad anmälan ska innehålla och hur lång tid det tar.",
+    sections: [
+      {
+        h: "När kan du anmäla till ARN?",
+        p: [
+          "ARN är en statlig myndighet som prövar tvister mellan konsumenter och företag. Allt sköts skriftligt, och du behöver inget ombud.",
+          "Grundkraven är tre. Du köpte varan eller tjänsten av ett företag, för privat bruk. Du har först klagat till företaget. Och företaget har sagt helt eller delvis nej, eller inte svarat fast det haft rimlig tid på sig. ARN skriver att företaget bör ha svarat inom fyra veckor. Dessutom måste företaget rikta sig till den svenska marknaden eller ha tillräcklig anknytning till Sverige. Det är bra att veta om du har handlat från en utländsk webbutik. Kravet måste också nå upp till värdegränsen och anmälan komma in i tid. Mer om det nedan.",
+          "ARN prövar inte köp mellan privatpersoner. Nämnden prövar inte heller tvister om hälso- och sjukvård, även fakturor för sådan vård, köp av hus, tomt eller annan fastighet, köp eller upplåtelse av bostadsrätt eller tomträtt, kontrollavgifter för parkering eller tjänster från advokater. Tvister om hyra av lägenhet eller arrende prövas bara om de gäller ett krav på pengar.",
+          "ARN prövar inte heller tvister som handläggs i eller redan har avgjorts av en domstol, Kronofogden eller hyres- och arrendenämnden, eller tvister som en annan godkänd tvistlösningsnämnd kan pröva. Har företaget gått i konkurs prövar ARN inte ärendet.",
+        ],
+      },
+      {
+        h: "Beloppsgränser: hur stort måste ditt krav vara?",
+        p: [
+          "ARN prövar bara krav som är minst en viss summa, en så kallad värdegräns. Gränserna höjdes den 1 augusti 2025 och finns i tre nivåer: 750, 1 500 och 3 000 kr. Tidigare var de 500, 1 000 och 2 000 kr.",
+          "750 kr gäller för de flesta köp: elektronik, skor, kläder och textil, tvätt, el- och gasavtal, spel och lotterier och allmänna tvister som abonnemang, cyklar, frisör och flytt. Samma gräns gäller när du kräver ersättning enligt reglerna om resenärers rättigheter, till exempel för en inställd eller försenad flygning, tågresa, bussresa, båtresa eller resa med kollektivtrafiken. Kravet riktas då mot transportföretaget.",
+          "1 500 kr gäller motor, möbler och övriga resor, till exempel paketresor. 3 000 kr gäller bank, försäkring, bostad och båt. Till bostad räknas till exempel hantverkare i hemmet, kök, fönster, värmepumpar och husbyggen. Med båt menas tvister om själva båten, inte båtresor.",
+          "Det är värdet av det du kräver som räknas, inte vad du betalade. Köpte du en jacka för 2 000 kr och kräver 500 kr i prisavdrag ligger kravet under gränsen. Avgiften till ARN räknas inte in. Krav på ersättning för oro eller besvär räknas inte heller in.",
+        ],
+      },
+      {
+        h: "Tidsfrist: ett år från första reklamationen, inte sex månader",
+        p: [
+          "Anmälan måste ha kommit in till ARN inom ett år från att du första gången klagade till företaget. Det gäller även om företaget aldrig svarade. Det är dagen ARN tar emot anmälan som räknas.",
+          "Du kan ha läst att du har sex månader på dig från att företaget sagt nej. Den regeln fanns i ARN:s tidigare instruktion, som slutade gälla 2016. I dag räknas tiden från din första reklamation, inte från företagets nej. Drar företaget ut på svaret kan en stor del av året gå innan du ens fått nej. Vänta inte på att de ska ändra sig.",
+          "För bank- och försäkringsärenden finns ett undantag. Har bolagets egen klagomålshantering, till exempel hos en kundombudsman, tagit så lång tid att mer än ett år har gått, kan ARN ändå pröva ärendet. Då ska du anmäla inom två månader från att kundombudsmannen eller motsvarande första gången fattade beslut.",
+          "Själva reklamationen har egna frister. Gäller det en vara räknas en reklamation inom två månader från att du märkte felet alltid som gjord i tid. Företaget ansvarar för fel som visar sig inom tre år från att du fick varan.",
+        ],
+      },
+      {
+        h: "Är det gratis att anmäla till ARN?",
+        p: [
+          "Nej, inte längre. Sedan den 1 augusti 2024 kostar en anmälan 150 kr. Gör du anmälan på webben betalar du när du skickar in. Med pappersblanketten får du ett inbetalningskort. Avgiften betalas inte tillbaka, inte ens om ARN avvisar ärendet. Betalar du inte avgiften prövas inte ärendet.",
+          "Du kan kräva att företaget ersätter dig för avgiften. Skriv det med i ditt yrkande, alltså det du vill att ARN ska besluta. Får du rätt kan nämnden rekommendera att företaget ersätter dig för de 150 kronorna, men bara om du har begärt det.",
+          "Det är fortfarande ett billigt sätt att få en tvist prövad. I tingsrätten är ansökningsavgiften 900 kr för mindre krav, och där kan du dessutom få betala en del av motpartens kostnader om du förlorar.",
+        ],
+      },
+      {
+        h: "Det här ska stå i anmälan",
+        p: [
+          "Anmälan måste göras i ARN:s webbformulär på arn.se eller på deras pappersblankett. Ett vanligt mejl eller brev räcker inte. Det du skriver läser både nämnden och företaget, och allt du skickar in blir allmän handling.",
+          "Här på Skrivklart fyller du i fälten ovan: företaget, köpet, vad som hänt och vad du vill att ARN ska besluta. Du ser ett utkast direkt, gratis. Hela texten, med parter, avtalet, händelseförlopp, yrkande och en lista över bilagor, kostar 99 kr. Sedan för du själv över texten till ARN:s formulär, bifogar dina underlag och skickar in. Anmälan skickas inte in åt dig, och ARN:s avgift på 150 kr ingår inte i priset.",
+          "Skriv händelseförloppet i datumordning. Vad du köpte, när, för hur mycket och ordernummer. Vad som är fel och när du märkte det. När och hur du reklamerade, och vad företaget svarade. Ta med företagets namn, kontaktuppgifter och gärna organisationsnummer, så att ARN kan skicka anmälan vidare.",
+          "Yrkandet är det viktigaste. Skriv exakt vad du vill att ARN ska besluta och med vilket belopp: pengarna tillbaka, prisavdrag, reparation eller ersättning för en viss kostnad. Förklara hur du räknat fram summan. Ett krav som ”jag vill ha rätt” går inte att besluta om. ARN kan bara ge dig rätt till ersättning för ekonomisk skada, till exempel en reparation du fått betala. Ersättning för oro, besvär eller din egen tid går inte att få. Utöver avgiften kan du inte heller få ersättning för vad ärendet kostar dig, som ombud eller hjälp att skriva anmälan.",
+          "Bifoga kopior av kvitto eller orderbekräftelse, bilder på felet, din reklamation och företagets svar. Behåll originalen själv. ARN tar inte emot länkar som bevis, så ta en skärmbild i stället. Välj ut det som visar felet och ditt krav. Skickar du för mycket eller rörigt underlag kan ARN låta bli att pröva ärendet. Du kan inte anmäla anonymt.",
+        ],
+      },
+      {
+        h: "Hur lång tid tar det och vad händer sedan?",
+        p: [
+          "En jurist på ARN går igenom anmälan och hör av sig om något saknas. Sedan får företaget läsa den och svara, och du får kommentera svaret. Svarar inte företaget i tid avgör ARN ärendet utifrån det du har skickat in.",
+          "Enligt ARN är en normal handläggningstid ungefär sex månader. Men ARN har fått in ovanligt många ärenden och skriver att det kan ta längre tid. Första halvåret 2026 kom det in 16 291 ärenden, jämfört med 10 316 samma period 2025. Det går inte att få förtur.",
+          "Beslutet är en rekommendation om hur tvisten bör lösas. Det kan inte överklagas och går inte att driva in hos Kronofogden. Beror beslutet på ett klart förbiseende eller misstag från ARN kan du skriftligen begära omprövning inom fyra veckor från beslutet.",
+          "De flesta företag följer beslutet. Under 2025 följde företagen ARN:s rekommendation i 76 procent av de ärenden där konsumenten fått helt eller delvis rätt. Företag som inte följer den kan hamna på tidningen Råd & Röns svarta lista.",
+          "Har du fått helt eller delvis rätt skickar ARN en fråga till dig om företaget har följt rekommendationen. Du har en månad på dig att svara. Svarar du att företaget inte har följt den får företaget två veckor på sig att svara.",
+          "Följer företaget inte beslutet kan du gå vidare själv. Gäller kravet pengar kan du ansöka om betalningsföreläggande hos Kronofogden, vilket kostar 300 kr. Bestrider företaget kan ärendet gå vidare till tingsrätten, och då betalar du bara mellanskillnaden upp till tingsrättens avgift. Du kan också lämna in en stämningsansökan direkt till tingsrätten. Är kravet högst ett halvt prisbasbelopp, 29 600 kr år 2026, blir det ett förenklat tvistemål med lägre avgift och begränsad kostnadsrisk.",
+          "Det här är allmän information, inte juridisk rådgivning.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Kostar det något att anmäla till ARN?",
+        a: "Ja. Sedan den 1 augusti 2024 kostar en anmälan 150 kr. Avgiften betalas inte tillbaka, men om du har begärt det i anmälan kan ARN rekommendera att företaget ersätter dig om du får rätt.",
+      },
+      {
+        q: "Hur lång tid har jag på mig att anmäla till ARN?",
+        a: "Anmälan ska ha kommit in inom ett år från att du första gången klagade till företaget. Den gamla regeln om sex månader efter företagets nej gäller inte längre.",
+      },
+      {
+        q: "Hur lång tid tar det innan ARN fattar beslut?",
+        a: "ARN anger en normal handläggningstid på ungefär sex månader, men skriver att det just nu kan ta längre tid eftersom nämnden har fått in ovanligt många ärenden. Det går inte att få förtur.",
+      },
+      {
+        q: "Vilka beloppsgränser gäller hos ARN?",
+        a: "750 kr för de flesta områden, till exempel elektronik, kläder, skor, allmänna tvister och krav enligt reglerna om resenärers rättigheter, som ersättning för ett inställt eller försenat flyg eller tåg. 1 500 kr för motor, möbler och övriga resor, till exempel paketresor. 3 000 kr för bank, försäkring, bostad och båt. Det är värdet av ditt krav som räknas, inte vad varan kostade.",
+      },
+      {
+        q: "Måste företaget följa ARN:s beslut?",
+        a: "Nej. Beslutet är en rekommendation, men de flesta företag följer det. Företag som inte gör det kan hamna på Råd & Röns svarta lista. Vill du ändå ha pengarna kan du ansöka om betalningsföreläggande hos Kronofogden eller gå till tingsrätten.",
+      },
+      {
+        q: "Varför kan ARN avvisa en anmälan?",
+        a: "ARN kan avvisa eller låta bli att pröva en anmälan om du inte först har klagat till företaget, om kravet är under värdegränsen, om anmälan kom in mer än ett år efter din första reklamation, om avgiften inte är betald eller om kompletteringar inte kommer in i tid. Det gäller också om företaget har gått i konkurs, om tvisten redan prövas i domstol eller hos Kronofogden, om den gäller ett område som ARN inte prövar eller om ärendet är så omfattande eller rörigt att det inte går att pröva skriftligt.",
+      },
+      {
+        q: "Kan jag få hjälp med anmälan?",
+        a: "Ja. Många kommuner har en konsumentvägledare som kostnadsfritt kan hjälpa dig i kontakten med företaget och ibland också med anmälan till ARN. Vill du ha hjälp med själva texten kan du fylla i fälten ovan och få ett utkast direkt.",
+      },
+    ],
+  },
+  betalningspaminelse: {
+    seoTitle: "Betalningspåminnelse – mall och regler (59 kr) | Skrivklart",
+    seoDescription:
+      "Kunden har inte betalat? Skriv en saklig betalningspåminnelse och se vad som gäller för påminnelseavgift och ränta. Se början gratis, färdig påminnelse 59 kr.",
+    intro:
+      "En betalningspåminnelse är ett kort, sakligt brev till den som inte har betalat en faktura i tid. Ofta räcker det för att pengarna ska komma. Här är vad som gäller för påminnelseavgift och dröjsmålsränta, vad påminnelsen ska innehålla och vad du gör om kunden ändå inte betalar.",
+    sections: [
+      {
+        h: "När ska du skicka en betalningspåminnelse?",
+        p: [
+          "Skicka påminnelsen när förfallodagen har passerat och pengarna inte har kommit. Vänta gärna ett par bankdagar, så att du inte påminner om något som redan är betalt.",
+          "Lagen kräver ingen påminnelse innan du går vidare till inkasso. Men ofta har kunden bara missat fakturan, och då räcker ett sakligt brev.",
+          "En påminnelse är inte ett inkassokrav. Du får ange ett nytt sista datum och skriva att fakturan lämnas över till inkasso, till exempel till ett inkassoföretag, om den inte betalas. Enligt inkassolagen räknas just det inte som en inkassoåtgärd. Skriver du om andra åtgärder, som Kronofogden, gäller strängare regler.",
+          "Du kan skicka en betalningspåminnelse även som privatperson, till exempel om någon inte har betalat för något du sålt eller inte har betalat tillbaka ett lån.",
+        ],
+      },
+      {
+        h: "Påminnelseavgift: högst 60 kr, och bara om det är avtalat",
+        p: [
+          "Du får ta ut en påminnelseavgift bara om ni kom överens om det senast när skulden uppstod, till exempel i avtalet, offerten eller villkoren som kunden godkände. Att skriva in avgiften först i påminnelsen räcker inte.",
+          "Avgiften får vara högst 60 kronor, om det inte finns särskilda skäl. Konsumentverket skriver att ett företag bara får ta ut en påminnelseavgift en gång. Ta alltså inte ut en ny avgift för varje påminnelse om samma faktura. Ränta får inte räknas på avgiften.",
+          "Säljer du som företag till ett annat företag eller en myndighet gäller en egen regel. Har du rätt till dröjsmålsränta har du också rätt till en förseningsersättning på 450 kronor. Påminnelseavgift och inkassoavgift ryms då inom de 450 kronorna och kan inte tas ut ovanpå.",
+        ],
+      },
+      {
+        h: "Dröjsmålsränta: referensräntan plus 8 procentenheter",
+        p: [
+          "Har ni inte avtalat om någon annan ränta gäller räntelagen. Dröjsmålsräntan är då Riksbankens referensränta plus 8 procentenheter per år. Referensräntan bestäms för ett halvår i taget. Från 1 juli till 31 december 2026 är den 2 procent, så dröjsmålsräntan är 10 procent. Den 1 januari 2027 kan den ändras. Fortsätter förseningen in i nästa år, kontrollera den aktuella siffran hos Riksbanken.",
+          "Var sista betalningsdagen bestämd i förväg, till exempel i avtalet eller i villkoren före köpet, räknas ränta från den dagen. Säljer du till en privatperson räknas ett datum som du skriver först på fakturan oftast inte som bestämt i förväg. Då börjar räntan löpa 30 dagar efter att du skickat en faktura eller ett krav på ett bestämt belopp där det står att ränta tas ut vid sen betalning. Mellan företag, och när ett företag kräver en myndighet på betalning, behöver det inte stå.",
+          "Ett räkneexempel: 5 000 kr som betalas 30 dagar för sent, med 10 procents ränta, blir 5 000 × 0,10 × 30 / 365. Det är ungefär 41 kr. Räntan räknas på fakturabeloppet, inte på avgifter.",
+          "Har kunden inte kunnat betala på grund av sjukdom, arbetslöshet eller något liknande som hen inte kunnat påverka, kan räntan sättas ned om full ränta vore oskälig.",
+        ],
+      },
+      {
+        h: "Det här ska stå i påminnelsen",
+        p: [
+          "Ditt namn eller företagsnamn och hur du nås. Kundens namn. Fakturanummer, fakturadatum, vad fakturan gällde och den förfallodag som har passerat.",
+          "Det obetalda beloppet. Påminnelseavgift och ränta på egna rader, och bara om du har rätt att ta ut dem.",
+          "Ett nytt sista datum och hur kunden betalar: bankgiro, kontonummer eller Swish, och vilken referens som ska anges så att betalningen går att koppla till fakturan.",
+          "En mening om att kunden kan höra av sig om något är fel med fakturan, och vad som händer annars, till exempel att den lämnas till inkasso.",
+        ],
+      },
+      {
+        h: "Exempel på betalningspåminnelse",
+        p: [
+          "Så här kan en kort påminnelse se ut. Byt ut det som står inom hakparentes.",
+          "Betalningspåminnelse",
+          "Hej [kundens namn]. Vi har inte fått betalt för faktura [nummer] på [belopp] kr, som skulle ha betalats senast [förfallodag].",
+          "Betala senast [nytt datum] till [bankgiro eller Swish] och ange fakturanumret.",
+          "Har du redan betalat kan du bortse från påminnelsen. Är något fel med fakturan, hör av dig till [telefon eller e-post].",
+          "Med vänlig hälsning, [ditt namn eller företag]",
+        ],
+      },
+      {
+        h: "Så skriver du påminnelsen här",
+        p: [
+          "Fyll i fälten ovan: vem du är, kunden, fakturan och nytt sista datum. Du ser början av påminnelsen direkt, gratis. Hela påminnelsen, klar att skicka, kostar 59 kr. Inget konto behövs.",
+          "Betaluppgifterna står som platshållare som du fyller i själv. Skrivklart räknar inte ut påminnelseavgift eller ränta och skriver inget om inkasso. Ska det vara med, lägg till det i texten innan du skickar. Texten är inte juridisk rådgivning.",
+        ],
+      },
+      {
+        h: "Vanliga misstag",
+        p: [
+          "Att ta ut påminnelseavgift som aldrig avtalades. Kunden behöver inte betala den, och det blir lätt en onödig diskussion om 60 kronor.",
+          "Att kalla påminnelsen för inkassokrav, eller hota med Kronofogden och betalningsanmärkning. Enligt Finansinspektionens regler får rubriken ”Inkassokrav” bara användas på ett krav som uppfyller inkassolagens regler. Ett inkassokrav ger i sig ingen betalningsanmärkning. Skriv bara det du faktiskt tänker göra.",
+          "Att räkna ränta från fel dag, eller på hela summan inklusive avgifter.",
+          "Att glömma betaluppgifter och referens. Spara också en kopia av allt du skickar, med datum.",
+          "Att vänta för länge. Tio år efter att en skuld uppstod går den inte längre att kräva in, den preskriberas. Har ett företag sålt en vara eller tjänst till en privatperson för privat bruk gäller tre år. När kunden har fått ett skriftligt krav, till exempel en påminnelse, börjar en ny period löpa. Det är mottagandet som räknas. Är tiden nära att gå ut, skicka kravet så att du kan visa att det kom fram, och spara beviset.",
+        ],
+      },
+      {
+        h: "Om kunden ändå inte betalar: inkassokrav och Kronofogden",
+        p: [
+          "Nästa steg är ett inkassokrav. Är det din egen faktura kan du skicka inkassokravet själv. Tillstånd från Finansinspektionen behövs bara för den som driver in skulder åt någon annan eller skulder som köpts upp för indrivning. Vänta tills sista datumet i påminnelsen har passerat.",
+          "Ett inkassokrav ska vara skriftligt och tydligt ange ditt namn och vad skulden gäller. Själva skulden, räntan och avgifterna ska stå var för sig. För räntan anger du upplupen ränta, räntesats, period och det belopp räntan räknats på, och om den räknats enligt räntelagen eller enligt avtal. Enligt Finansinspektionens föreskrifter ska kravet också innehålla kundens namn, dina fullständiga kontaktuppgifter, utskriftsdatum, vart betalning och invändningar ska skickas och vilka åtgärder som kan bli aktuella om kunden inte betalar. För ett korrekt inkassokrav får du ta ut högst 180 kronor.",
+          "Kunden ska få skälig tid att betala eller invända. Finansinspektionen rekommenderar minst åtta dagar från att kravet skickas med vanlig post och minst sex dagar med digital post, alltså en digital brevlåda och inte vanlig e-post. Kunden bör alltid få minst fyra bankdagar från att hen kan antas ha fått kravet, och längre tid runt storhelger. Skicka inte inkassokravet som mejl eller sms. Det avråder Finansinspektionen från.",
+          "Betalar kunden ändå inte kan du ansöka om betalningsföreläggande hos Kronofogden, alltså ett sätt att få ett beslut om att kunden ska betala. Ansökan kostar 300 kronor, och avgiften kan du kräva tillbaka av den som är skyldig. Driver du företag ska kunden enligt inkassolagen först ha fått ett inkassokrav, och betaltiden i kravet ska ha gått ut.",
+          "Säger kunden emot med ett sakligt skäl, till exempel att arbetet inte blev gjort, är det en tvist. Enligt Finansinspektionens regler ska man då inte ansöka om betalningsföreläggande. Bestrider kunden hos Kronofogden kan du välja att låta tingsrätten pröva saken. Det kostar en tilläggsavgift: 600 kronor om kravet är under ett halvt prisbasbelopp (29 600 kronor 2026), annars 2 500 kronor. Förlorar du kan du få betala den andra partens rättegångskostnader, men i mål om mindre belopp, så kallade småmål, är den ersättningen begränsad.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hur mycket får påminnelseavgiften vara?",
+        a: "Högst 60 kronor, och bara om ni avtalade om avgiften senast när skulden uppstod. Enligt Konsumentverket får ett företag bara ta ut den en gång.",
+      },
+      {
+        q: "Hur räknar jag ut dröjsmålsränta?",
+        a: "Om inget annat är avtalat är räntan referensräntan plus 8 procentenheter per år. Räkna fakturabeloppet gånger räntesatsen gånger antal dagar för sent, delat med 365. Från 1 juli till 31 december 2026 är dröjsmålsräntan 10 procent. Den 1 januari 2027 kan den ändras.",
+      },
+      {
+        q: "Hur lång tid ska kunden få på sig efter påminnelsen?",
+        a: "Lagen sätter ingen fast tid för en påminnelse. Minst åtta dagar är rimligt. Det är också den tid Finansinspektionen anger för ett inkassokrav som skickas med vanlig post.",
+      },
+      {
+        q: "Måste jag skicka en påminnelse innan inkasso?",
+        a: "Nej, det finns inget sådant krav i lag. Men har du skickat en påminnelse med ett sista datum ska du vänta tills det har passerat innan du skickar ett inkassokrav.",
+      },
+      {
+        q: "Kan jag skicka påminnelsen med mejl?",
+        a: "Ja, mejl går bra för en påminnelse. Skicka till en adress du vet att kunden använder och spara mejlet med datum. Ett inkassokrav ska du däremot inte skicka med mejl.",
+      },
+      {
+        q: "Får jag skicka ett inkassokrav själv?",
+        a: "Ja. För din egen faktura behövs inget tillstånd. Kravet måste vara skriftligt och uppfylla inkassolagens regler, och då får du ta ut högst 180 kronor för det.",
+      },
+      {
+        q: "Kan jag ta ut 450 kr i förseningsersättning?",
+        a: "Bara om du säljer som företag till ett annat företag eller en myndighet och har rätt till dröjsmålsränta. Lagen ger ingen rätt till förseningsersättning från en privatperson.",
+      },
+      {
+        q: "Avbryter en betalningspåminnelse preskriptionen?",
+        a: "Ja. När kunden har fått ett skriftligt krav börjar en ny preskriptionstid löpa. Det är mottagandet som räknas, så spara bevis på att kravet kom fram. Den nya tiden är tre år om ett företag kräver en privatperson på betalt för en vara eller tjänst, annars tio år.",
+      },
+      {
+        q: "Jag har själv fått en betalningspåminnelse. Vad gör jag?",
+        a: "Stämmer fakturan, betala före det nya datumet. Stämmer den inte, säg emot skriftligt till företaget och spara en kopia. Kan du inte betala allt på en gång, föreslå en avbetalningsplan innan det går till inkasso.",
+      },
+    ],
+  },
+  fullmakt: {
+    seoTitle: "Fullmakt – mall, vittnen och återkallelse (59 kr) | Skrivklart",
+    seoDescription:
+      "Fullmakt steg för steg: vad som ska stå, när vittnen behövs och hur du återkallar den. Se början gratis, hela fullmakten kostar 59 kr. Inget konto.",
+    intro:
+      "En fullmakt ger någon annan rätt att göra en bestämd sak åt dig, oftast på papper. Det kan vara att sköta ett bankärende, att ha kontakt med Försäkringskassan eller att hämta en försändelse hos ett utlämningsställe som vill ha en skriftlig fullmakt. Hos PostNord behövs ingen fullmakt för att hämta ett paket åt dig. Den som hämtar visar sin egen legitimation och din. Det finns ingen blankett som gäller överallt. Nedan ser du vad fullmakten ska innehålla, vad posten, banken och myndigheter brukar kräva och när du behöver en framtidsfullmakt i stället.",
+    sections: [
+      {
+        h: "Vad är en fullmakt och när behöver du en?",
+        p: [
+          "Med en fullmakt får någon annan göra något i ditt namn. Den personen kallas fullmaktshavare eller ombud. Det hen gör inom fullmaktens gränser gäller som om du hade gjort det själv. Det står i avtalslagen.",
+          "En fullmakt kan gälla en enda sak vid ett tillfälle. Den kan också gälla flera saker under en längre tid, till exempel att sköta kontakten med en myndighet medan du är sjuk.",
+          "För det mesta kräver lagen ingen särskild form. Ett viktigt undantag är köp, byte eller gåva av fastighet. Då måste fullmakten vara skriftlig, och det ska uttryckligen stå i den att ombudet får sälja eller köpa fastigheten. Lantmäteriet vill som huvudregel ha fullmakten i original när lagfarten söks. I praktiken är det ändå banken, posten eller myndigheten som ska godta fullmakten som bestämmer vad som räcker. Skriftligt är nästan alltid säkrast.",
+        ],
+      },
+      {
+        h: "Det här ska stå i fullmakten",
+        p: [
+          "Skriv ditt namn och personnummer, och samma uppgifter för den som får fullmakten.",
+          "Skriv exakt vad hen får göra. ”Skriva under hyresavtalet för lägenheten på …” är tydligare än ”sköta mina ärenden”. Får hen ta emot pengar eller skriva under avtal åt dig, skriv det uttryckligen.",
+          "Skriv hur länge fullmakten gäller: ett slutdatum eller ”tills vidare”. Lagen kräver inget slutdatum, och utan datum gäller fullmakten tills du återkallar den. Skriv också om ombudet får lämna över uppdraget till någon annan. Hos en myndighet får ombudet det bara om det står i fullmakten.",
+          "Avsluta med ort, datum och din underskrift. En vanlig fullmakt behöver inga vittnen enligt lag, men banker kräver det ofta. Två vittnen gör det också svårare att ifrågasätta underskriften senare. Välj vuxna vittnen som inte är den som får fullmakten.",
+        ],
+      },
+      {
+        h: "Hämta paket eller post åt någon",
+        p: [
+          "Hos PostNord behövs ingen fullmakt för att hämta en försändelse åt dig, till exempel när du är hemma med ett sjukt barn. Den som hämtar visar sin egen legitimation och din. Är det ett rekommenderat brev ska ni båda skriva under.",
+          "Vill du ändå ge någon fullmakt hos PostNord, till exempel för att du saknar giltig legitimation, måste den skrivas på PostNords egen blankett. Den lämnas in personligen hos PostNord en vecka innan den ska börja gälla. Den gäller när PostNord har bekräftat registreringen med brev, och i högst fem år. Med den kan ombudet hämta och kvittera dina brev och paket, även rekommenderade. En fullmakt som du skriver själv gäller inte hos PostNord.",
+          "Har avsändaren valt att försändelsen bara får lämnas ut till dig personligen hjälper ingen fullmakt. Det står på avin om försändelsen bara får lämnas ut till dig.",
+          "För många paket är det enklast att dela avin eller paketboxnyckeln i PostNords app med den som ska hämta. Andra fraktbolag och utlämningsställen har egna regler. Läs avin, och fråga utlämningsstället om de vill ha en skriftlig fullmakt.",
+        ],
+      },
+      {
+        h: "Fullmakt för bank, Försäkringskassan och Skatteverket",
+        p: [
+          "Banker har ofta egna fullmaktsblanketter, och många kräver att fullmakten är bevittnad. Kontakta banken först och fråga vad de godtar. En fullmakt ger aldrig rätt att använda ditt BankID, dina kort eller dina koder. De är personliga och får inte lånas ut, inte ens till någon i familjen.",
+          "Hos Försäkringskassan måste ett ombud ha fullmakt, till exempel för att begära omprövning åt dig. Du kan använda blanketten Fullmakt för ombud (5607), skriva en egen fullmakt eller lämna fullmakten muntligt via kundtjänst på 0771-524 524. Enligt förvaltningslagen ska en fullmakt till ett ombud hos en myndighet innehålla ombudets namn och vad uppdraget omfattar.",
+          "Ska någon deklarera åt dig digitalt registrerar du hen som deklarationsombud hos Skatteverket, i e-tjänsten Ombud och behörigheter eller med blankett SKV 4809. Via e-tjänsten gäller det direkt. Med pappersblanketten börjar det gälla 14 dagar efter att Skatteverket har handlagt ansökan.",
+        ],
+      },
+      {
+        h: "Framtidsfullmakt eller vanlig fullmakt?",
+        p: [
+          "En vanlig fullmakt är till för när du själv kan bestämma och följa det som görs. En framtidsfullmakt börjar gälla först när du på grund av sjukdom, till exempel demens, varaktigt och i huvudsak inte längre kan ha hand om dina angelägenheter. Det är den som har fullmakten som bedömer när det har hänt. Tingsrätten prövar det bara om det står i fullmakten att domstol ska göra det, eller om fullmaktshavaren själv begär det.",
+          "En framtidsfullmakt har strikta formkrav. Du måste ha fyllt 18 år och kunna ha hand om dina angelägenheter när du skriver den. Den ska vara skriftlig, och det ska stå att det är en framtidsfullmakt, vem som får den och vilka angelägenheter den gäller. Du skriver under, eller intygar att det är din underskrift, inför två vittnen som är där samtidigt och vet att det är en framtidsfullmakt. Vittnena skriver sedan under fullmakten. Sedan 1 juli 2026 får du och vittnena också skriva under elektroniskt, med en så kallad avancerad elektronisk underskrift.",
+          "Den som får fullmakten får inte vara vittne. Det får inte heller din make eller sambo, dina syskon eller släktingar i rakt led, som föräldrar, barn och barnbarn. Samma sak gäller svärföräldrar, svärbarn, styvföräldrar och styvbarn. Vittnena måste ha fyllt 15 år och förstå vad det innebär att bevittna.",
+          "Fullmakten du skriver här är en vanlig fullmakt, inte en framtidsfullmakt. Om det är uppenbart att du inte längre kan sköta din ekonomi, och ingen framtidsfullmakt, god man eller förvaltare redan har hand om samma frågor, kan dina närmaste anhöriga i en bestämd turordning få sköta vardagliga ekonomiska saker, som att betala räkningar. Det kallas anhörigbehörighet. Den räcker inte för att sälja en bostad eller ge bort pengar.",
+        ],
+      },
+      {
+        h: "Så skriver du fullmakten här",
+        p: [
+          "Fyll i fälten ovan: vem som ger fullmakten, vem som får den, vad hen får göra och hur länge. Början av fullmakten ser du direkt, gratis. Hos Skrivklart kostar hela fullmakten 59 kr, med uppdragets gränser, giltighetstid, hur den återkallas, underskriftsrad och plats för vittnen. Du behöver inget konto.",
+          "Skriv ut, fyll i det som står inom hakparentes och skriv under. Ge originalet till den som ska använda fullmakten och spara en kopia själv. Det är ett färdigt underlag, inte juridisk rådgivning.",
+          "Vill du ta tillbaka fullmakten, be om originalet och förstör det. Den som har fullmakten är skyldig att lämna tillbaka den när du ber om det. Har du berättat för en bank eller någon annan att personen har fullmakt, meddela dem också att den inte gäller längre.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Behöver en fullmakt bevittnas?",
+        a: "Nej, inte en vanlig fullmakt. Lagen kräver inga vittnen, men banker kräver det ofta. Välj då vuxna vittnen som inte är den som får fullmakten. En framtidsfullmakt måste däremot skrivas under inför två vittnen.",
+      },
+      {
+        q: "Hur länge gäller en fullmakt?",
+        a: "Så länge som står i den. Står inget slutdatum gäller den tills du återkallar den. Den upphör inte heller automatiskt om du dör. Enligt avtalslagen gäller den som huvudregel även efter dödsfallet, tills dödsboet återkallar den.",
+      },
+      {
+        q: "Hur återkallar jag en fullmakt?",
+        a: "Ta tillbaka originalet och förstör det. Har du meddelat en bank eller myndighet om fullmakten, säg till dem att den är återkallad. Har originalet kommit bort, eller får du inte tillbaka det, kan du ansöka hos tingsrätten där du bor om att fullmakten förklaras kraftlös. Beslutet kungörs i Post- och Inrikes Tidningar.",
+      },
+      {
+        q: "Kan någon hämta ut mitt paket åt mig?",
+        a: "Ja. Hos PostNord behövs ingen fullmakt. Den som hämtar visar sin egen och din legitimation, eller så delar du avin i PostNords app. För rekommenderade brev ska ni båda skriva under, om du inte har registrerat en fullmakt på PostNords egen blankett. Försändelser med personlig utlämning lämnas bara ut till dig.",
+      },
+      {
+        q: "Kan jag använda fullmakten på apoteket?",
+        a: "Nej, för apoteksärenden finns en särskild fullmakt. Den registreras i Läkemedelskollen, som du når via 1177, eller med E-hälsomyndighetens blankett på ett apotek. Ombudet måste godkänna den, och den gäller i högst fyra år.",
+      },
+      {
+        q: "Vad är skillnaden mellan generalfullmakt och specialfullmakt?",
+        a: "En generalfullmakt ger någon rätt att sköta många av dina ärenden. Den räcker ändå inte för allt. Ska ombudet sälja eller köpa en fastighet måste det stå uttryckligen i fullmakten, och banker vill ofta att du använder deras egna blanketter. En specialfullmakt gäller en bestämd sak, till exempel att sälja en bil. Den är lättare för banken eller myndigheten att bedöma och svårare att missbruka.",
+      },
+      {
+        q: "Måste jag använda Försäkringskassans blankett?",
+        a: "Nej. Du kan använda blanketten Fullmakt för ombud (5607), men du får också skriva en egen fullmakt eller lämna den muntligt via kundtjänst. Den ska visa ombudets namn och vad ombudet får göra.",
+      },
+      {
+        q: "Räcker en vanlig fullmakt om jag blir sjuk eller dement?",
+        a: "Det är osäkert. Lagen säger inte tydligt om en vanlig fullmakt fortsätter att gälla när du inte längre kan fatta egna beslut, och banken kan sluta godta den. Du kan då inte heller kontrollera eller återkalla den. Vill du vara säker på att någon kan sköta dina saker då, skriv en framtidsfullmakt med två vittnen.",
+      },
+    ],
+  },
+  hyresansokan: {
+    seoTitle: "Hyresansökan – personligt brev till hyresvärd | Skrivklart",
+    seoDescription:
+      "Skriv en hyresansökan som hyresvärden läser: inkomst, referenser och varför just du. Se början gratis, färdigt brev för 59 kr. Inget konto.",
+    intro:
+      "En hyresansökan är brevet du skickar när du söker en lägenhet hos ett bostadsbolag eller en privatperson som hyr ut. Ofta kallas det personligt brev till hyresvärden. Brevet ska visa att du kan betala hyran, att du sköter ditt boende och när du kan flytta in. Ska du vända dig till hyresnämnden är det en annan sak, med nämndens egna blanketter. Här är vad värdar brukar kräva, vad de inte får göra och hur du skriver ett brev som blir läst.",
+    sections: [
+      {
+        h: "När behöver du skriva en hyresansökan?",
+        p: [
+          "Söker du via en kommunal bostadskö avgör oftast kötiden vem som får erbjudandet. Där ändrar ett brev inte din plats. Du behöver däremot kunna visa att du uppfyller värdens villkor, till exempel med intyg om inkomst.",
+          "Brevet gör mest skillnad när värden väljer själv. Det gäller privata hyresvärdar med egen intresseanmälan, lägenheter i andra hand och privatpersoner som hyr ut sin bostadsrätt eller sitt hus. Där kan många svara på samma annons, och ett tydligt brev gör att värden minns dig.",
+          "Varje hyresvärd bestämmer själv vilka krav som gäller. Därför kan villkoren skilja sig mycket mellan två lägenheter i samma område. Läs villkoren i annonsen innan du skriver.",
+        ],
+      },
+      {
+        h: "Vad kräver hyresvärden? Inkomst, kreditupplysning och referenser",
+        p: [
+          "Inkomst. De flesta större bostadsbolag har ett inkomstkrav. Ett vanligt krav är att din inkomst före skatt ska vara minst tre gånger hyran. Är hyran 8 000 kr i månaden blir kravet 24 000 kr i månaden före skatt. En del värdar, bland annat de kommunala bolagen i Stockholm, räknar i stället på hur mycket du har kvar att leva på när hyran är betald, ofta utifrån Kronofogdens normalbelopp.",
+          "Vilka inkomster som räknas skiljer sig åt. En del värdar godtar a-kassa, sjukpenning, pension, bostadsbidrag, barnbidrag, underhållsstöd och försörjningsstöd. Andra är mer restriktiva. Många vill också se att anställningen eller inkomsten håller minst sex månader framåt. Har du eget företag kan värden kräva att det har funnits minst ett år och att du kan visa inkomsten. Studerar du räknar en del värdar studiebidraget, och studentbostäder har egna villkor som utgår från studierna i stället för lönen.",
+          "Kreditupplysning. Nästan alla bostadsbolag tar en kreditupplysning. Det är tillåtet när du har sökt en bostad hos värden, eftersom värden då kan ha ett legitimt behov av att bedöma din ekonomi. Du ska få en kopia av upplysningen, så att du ser vem som frågade och vad som lämnades ut.",
+          "Referenser och intyg. Många kontaktar din nuvarande eller förra hyresvärd för att höra om hyran betalats i tid och om boendet skötts. Räkna också med att visa anställningsavtal eller ett anställningsintyg från arbetsgivaren och dina senaste lönespecifikationer. Ha dem klara innan du söker.",
+        ],
+      },
+      {
+        h: "Om du har betalningsanmärkning eller inte når inkomstkravet",
+        p: [
+          "Många värdar säger nej till sökande med betalningsanmärkningar eller skulder hos Kronofogden. Det är ändå inte alltid stopp. Det kan bero på vad skulden gäller, hur stor den är och hur gammal den är. Hos de kommunala bostadsbolagen i Stockholm kan du godkännas trots en skuld hos Kronofogden, om du har betalat enligt en plan, haft löneutmätning eller skuldsanering i minst sex månader utan avbrott och inte fått nya anmärkningar. En hyresskuld måste vara betald innan ansökan prövas, och skulder från tidigare boende godtas inte.",
+          "En betalningsanmärkning finns kvar i tre år för en privatperson, även om du har betalat skulden. Har du betalat, skriv det kort i brevet. Det är bättre att värden får veta det av dig än från kreditupplysningen.",
+          "Når du inte upp till inkomstkravet kan du fråga om värden godtar en borgensman eller en deposition. Fråga också din kommun om kommunal hyresgaranti. Då går kommunen i borgen för hyran, om du har ekonomi för ett eget boende men ändå har svårt att få kontrakt, till exempel för att du är projektanställd. Alla kommuner erbjuder det inte. Men sedan den 1 september 2026 måste kommunen ställa en hyresgaranti för en barnfamilj som bor i kommunen och behöver garantin för att få en permanent hyresrätt med besittningsskydd. Om kommunen får betala hyran åt dig kan du bli skyldig att betala tillbaka pengarna.",
+          "Är du ensamstående förälder, skriv alla inkomster hushållet har, även barnbidrag, underhållsstöd eller underhållsbidrag och bostadsbidrag, om värden räknar dem.",
+        ],
+      },
+      {
+        h: "Personligt brev till hyresvärden: det här ska stå med",
+        p: [
+          "Vilka som ska bo i lägenheten: antal vuxna och barn, och om ni har husdjur. Skriv det rakt ut. Det kommer fram ändå när ni skriver kontrakt.",
+          "Vad du jobbar med, vilken typ av anställning du har och ungefär vad hushållet har i inkomst per månad. En siffra säger mer än orden ”stabil ekonomi”.",
+          "Varför just den här lägenheten: läget, storleken, avståndet till jobb eller skola. En mening som visar att du har läst annonsen räcker.",
+          "Varför du är en trygg hyresgäst. Skriv hur länge du har bott där du bor nu, att hyran har betalats i tid, vem som kan lämna referens och hur länge du räknar med att bo kvar. Avsluta med när du kan flytta in och hur värden når dig.",
+          "Så kan det låta: ”Hej, jag heter [namn] och söker tvåan på [gatan]. Jag arbetar som undersköterska på [arbetsplats], fast anställd sedan 2021, och tjänar 29 000 kr i månaden före skatt. Vi är två vuxna och en katt. Jag har hyrt min nuvarande lägenhet i fyra år och alltid betalat i tid, och min hyresvärd [namn, telefon] kan lämna referens. Vi kan flytta in den 1 december.”",
+          "Vanliga misstag är samma brev till alla annonser, långa förklaringar om varför ni måste flytta och ord som ”skötsam” utan något som visar det. Ett brev på en sida räcker.",
+        ],
+      },
+      {
+        h: "Vad hyresvärden inte får göra, och hur du undviker bedrägerier",
+        p: [
+          "En hyresvärd får inte välja bort dig av skäl som har samband med etnisk tillhörighet, religion eller annan trosuppfattning, kön, könsöverskridande identitet eller uttryck, sexuell läggning, funktionsnedsättning eller ålder. Det kan gälla även en privatperson som annonserar ut sin bostad till allmänheten. Uthyrning inom privat- och familjelivet, till exempel till en vän eller släkting, omfattas däremot inte. Åldersgränser, till exempel för ungdoms- och seniorbostäder, kan vara tillåtna om de har ett berättigat syfte och är lämpliga och nödvändiga för att nå det syftet. Tror du att du har blivit diskriminerad kan du anmäla det till Diskrimineringsombudsmannen, DO.",
+          "Det är brottsligt att ta betalt för ett hyreskontrakt, och det är också brottsligt att betala för ett. Den som säljer ett kontrakt kan dömas till fängelse i upp till två år, och upp till fyra år om brottet är grovt. Den som köper kan dömas till böter eller fängelse. Den som har köpt ett svartkontrakt riskerar dessutom att förlora lägenheten.",
+          "Bedragare lägger ut lägenheter med bra läge och rimlig hyra, ofta i andra hand, och ber om flera månadshyror i förskott eller som deposition. Polisen råder: betala aldrig innan du har sett lägenheten och kontraktet är påskrivet. Be om legitimation, kontrollera med fastighetsägaren att den som hyr ut verkligen har lägenheten och betala inte via anonyma betaltjänster.",
+          "Skicka inte kopia på pass eller körkort till någon du inte har kunnat kontrollera. Betala heller ingen avgift för att någon ska förmedla en lägenhet till dig. Det är förbjudet, utom för yrkesmässiga bostadsförmedlingar, och de får bara ta en begränsad avgift om du faktiskt får ett kontrakt.",
+        ],
+      },
+      {
+        h: "Så skriver du din hyresansökan här",
+        p: [
+          "Här på Skrivklart fyller du i fälten ovan: Lägenheten, Vem ska bo där, Varför just den och Varför du är en säker hyresgäst. Skriv inkomsten under Vem ska bo där och när du kan flytta in under Varför just den, annars blir det en tom plats i brevet. Du ser början av brevet direkt, gratis. Hela brevet kostar 59 kr, en gång. Inget konto.",
+          "Det som brevet inte vet, till exempel namn, telefonnummer och e-post, står inom [hakparentes]. Fyll i allt sådant, läs igenom och ändra det som inte stämmer. Det ska låta som du, och allt som står i brevet ska du kunna visa om värden frågar.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hur mycket måste jag tjäna för att få hyra en lägenhet?",
+        a: "Det bestämmer varje hyresvärd. Ett vanligt krav är att inkomsten före skatt är minst tre gånger hyran. Andra värdar räknar på hur mycket du har kvar att leva på efter hyran, och några har inget inkomstkrav alls. Kraven står oftast i annonsen.",
+      },
+      {
+        q: "Räknas försörjningsstöd och underhållsstöd som inkomst?",
+        a: "Det beror på värden. En del, till exempel de kommunala bostadsbolagen i Stockholm, räknar studiebidrag, bostadsbidrag, barnbidrag, underhållsbidrag, a-kassa och försörjningsstöd från Stockholms kommun. Andra godtar bara lön och pension. Fråga innan du söker, och skriv i brevet vilka inkomster hushållet har.",
+      },
+      {
+        q: "Får hyresvärden ta en kreditupplysning på mig?",
+        a: "Ja. En hyresvärd kan ha ett legitimt behov av en kreditupplysning när du söker bostad hos den. Du ska få en kopia från kreditupplysningsföretaget. Tror du att någon har tagit en upplysning utan skäl kan du kontakta kreditupplysningsföretaget, som ska utreda det.",
+      },
+      {
+        q: "Kan jag få en lägenhet om jag har betalningsanmärkning?",
+        a: "Ibland. Många värdar säger nej, men en del gör en egen bedömning av vad skulden gäller och hur stor den är. En betalningsanmärkning finns kvar i tre år för en privatperson. Fråga om värden godtar en borgensman eller en deposition.",
+      },
+      {
+        q: "Hur långt ska ett personligt brev till hyresvärden vara?",
+        a: "En sida räcker, ungefär 200 till 400 ord. Värden ska snabbt kunna se vilka ni är, vad ni har för inkomst, varför ni är trygga hyresgäster och när ni kan flytta in.",
+      },
+      {
+        q: "Vad ska jag tänka på om jag hyr i andra hand?",
+        a: "Den som hyr ut en hyresrätt i andra hand behöver tillstånd från sin hyresvärd eller från hyresnämnden. För en bostadsrätt krävs i stället samtycke från bostadsrättsföreningens styrelse, eller tillstånd från hyresnämnden om styrelsen har sagt nej. Be att få se tillståndet. Kräv ett skriftligt kontrakt, och se till att en eventuell deposition står i det. Hyr du av en privatperson som äger bostaden, till exempel en bostadsrätt eller ett hus, gäller sedan den 1 juli 2026 privatuthyrningslagen, och du har rätt att kräva att avtalet skrivs ner. Hyresgästföreningen råder att depositionen inte ska vara mer än ett par månadshyror.",
+      },
+      {
+        q: "Vad händer efter att jag har skickat ansökan?",
+        a: "Värden hör av sig till de sökande den vill gå vidare med. Ofta blir det visning, kreditupplysning och kontroll av intyg och referenser. Får du lägenheten skriver ni hyreskontrakt. Läs det innan du skriver under och spara en kopia. Flytten anmäler du till Skatteverket senast en vecka efter att du har flyttat in.",
+      },
+    ],
+  },
+  klagomal: {
+    seoTitle: "Skriva klagomål – mall för klagomålsbrev, 59 kr | Skrivklart",
+    seoDescription:
+      "Skriv ett klagomål till företag, myndighet, kommun eller vården, med kronologi, tydligt krav och bilagor. Se början gratis, färdigt klagomålsbrev för 59 kr.",
+    intro:
+      "I ett klagomål berättar du vad som har hänt, vad du vill ha och när du vill ha svar. Det kan gå till ett företag, en myndighet, kommunen eller vården. Här får du veta vart du skickar det, vad det ska innehålla och vad du kan göra om svaret inte räcker.",
+    sections: [
+      {
+        h: "Klagomål, reklamation eller överklagande?",
+        p: [
+          "Ett klagomål handlar om hur du har blivit behandlad, eller om något som har gått snett. Det kan vara ett dåligt bemötande, ett ärende som står still, ett löfte som inte hölls eller något som hände i vården. Du berättar vad som hänt och säger vad du vill.",
+          "Är det fel på en vara eller tjänst som du har köpt är det en reklamation. Den har egna regler. Reklamerar du inom två månader från att du upptäckte felet är du alltid i tid. För varor gäller rätten att reklamera fel som visar sig inom tre år från köpet. För det finns en egen mall här: Reklamation.",
+          "Är du missnöjd med ett beslut, till exempel ett avslag på ett bidrag, ska du begära omprövning eller överklaga. Ett klagomål ändrar inte beslutet, och tiden för att överklaga går ändå. Hur lång tid du har står i beslutet. Ofta är det tre veckor. Hos Försäkringskassan är det två månader.",
+          "Ibland behövs båda. Du överklagar beslutet och skriver ett separat klagomål om hur ärendet sköttes.",
+        ],
+      },
+      {
+        h: "Så klagar du på ett företag",
+        p: [
+          "Skriv till kundtjänst. Ring eller chatta gärna, men skicka också något skriftligt: ett mejl, ett kontaktformulär eller ett brev. Det går att visa upp i efterhand. Spara en kopia av det du skickar och av svaret.",
+          "Räcker inte svaret kan du be att ärendet går vidare till en chef eller till företagets klagomålsansvariga. Banker och försäkringsbolag har i regel en klagomålsansvarig som utreder om bolaget har gjort fel. Konsumenternas Bank- och finansbyrå och Konsumenternas Försäkringsbyrå ger gratis vägledning.",
+          "Skriv när du vill ha svar, till exempel inom 14 dagar. Gäller det något du har köpt och har du ett krav, till exempel pengar tillbaka, kan du anmäla till Allmänna reklamationsnämnden (ARN). Det gäller om företaget säger nej eller inte har svarat inom skälig tid. ARN räknar med ungefär fyra veckor. Anmälan ska komma in inom ett år från att du första gången klagade hos företaget.",
+          "Anmälan till ARN kostar 150 kr. Kravet måste vara värt minst ett visst belopp, till exempel 750 kr för de flesta varor och 3 000 kr för bank och försäkring. ARN prövar inte krav som bara gäller bemötande eller en ursäkt. Beslutet är en rekommendation, inte en dom, och det tar ofta omkring sex månader. För anmälan finns en egen mall: ARN-anmälan.",
+          "Gratis råd får du hos Konsumentverket. Där förklarar de vad som gäller, men de kontaktar inte företaget åt dig. Kommunens konsumentvägledare, om din kommun har en, kan ofta ge mer personligt stöd, till exempel hjälp med en reklamation eller en anmälan till ARN.",
+        ],
+      },
+      {
+        h: "Klagomål på en myndighet eller kommunen",
+        p: [
+          "Börja hos myndigheten själv. Skriv till din handläggare eller till myndighetens funktion för synpunkter och klagomål, och ange ditt ärendenummer. Enligt förvaltningslagen ska myndigheten hjälpa dig och sköta ärendet så enkelt och snabbt som möjligt. Det kan du hänvisa till i brevet.",
+          "Står ditt ärende still? Har du ansökt om något och inte fått beslut inom sex månader får du skriftligen begära att myndigheten avgör ärendet. Myndigheten ska då inom fyra veckor antingen fatta beslut eller avslå din begäran i ett särskilt beslut. Ett sådant avslag går att överklaga.",
+          "Gäller det skolan, börja med läraren eller rektorn. Löser det sig inte skickar du ett skriftligt klagomål till huvudmannen. Det är kommunen, eller för en friskola det företag, den stiftelse eller den styrelse som driver skolan. Skolinspektionen tar i regel emot ditt ärende först när huvudmannen har fått klagomålet.",
+          "Gäller det socialtjänsten, till exempel hemtjänst, äldreboende eller försörjningsstöd, eller stöd enligt LSS, klagar du först hos kommunen. Du kan också lämna uppgifter till IVO genom Berätta för IVO. Du får bara en bekräftelse på att uppgifterna kommit in, men IVO använder dem i sin tillsyn.",
+          "Rättar myndigheten inte till det kan du anmäla till JO, Riksdagens ombudsmän. JO granskar statliga och kommunala myndigheter och kan kritisera dem. JO kan inte ändra ett beslut och prövar inte skadestånd. JO utreder normalt inte sådant som ligger mer än två år tillbaka.",
+        ],
+      },
+      {
+        h: "Klagomål på vården: vårdgivaren, patientnämnden och IVO",
+        p: [
+          "Klaga först där du fick vård, hos mottagningen eller vårdgivaren. Enligt patientsäkerhetslagen ska vårdgivaren svara snarast. Svaret ska förklara vad som hänt och, när det behövs, vad vården gör för att det inte ska hända igen. Socialstyrelsen anger att verksamheten bör bekräfta direkt att klagomålet kommit in och svara inom fyra veckor. Är patienten under 18 år bör svaret komma snabbare.",
+          "Vill du inte ta kontakten själv kan patientnämnden i din region hjälpa dig. Det kostar inget. Patientnämnden utreder inte och avgör inte vem som har rätt, men hjälper dig att få svar från vården. Den hjälper också till med tandvård som regionen bedriver eller betalar för.",
+          "Är du fortfarande inte nöjd kan du lämna ett klagomål till IVO, Inspektionen för vård och omsorg. Du ska först ha vänt dig till vårdgivaren eller patientnämnden. IVO utreder bara de allvarligaste fallen, till exempel en skada som inte går över, ett dödsfall, något som hänt under psykiatrisk tvångsvård eller när vården allvarligt har kört över dig. IVO utreder i regel inte händelser som ligger mer än två år tillbaka, så vänta inte för länge. Inom ungefär en månad får du besked om IVO ska utreda. Själva utredningen tar lång tid, enligt IVO i genomsnitt omkring 23 månader just nu.",
+          "Ett klagomål till vården, patientnämnden eller IVO ger ingen ersättning. Har du skadats i vården gör du en patientskadeanmälan. Gäller det vård som regionen driver eller betalar för skickar du den till Löf, regionernas ömsesidiga försäkringsbolag. Gäller det annan vård, fråga vårdgivaren vilken patientförsäkring som gäller. Anmälan ska göras inom tio år från att skadan orsakades, alltså från behandlingen eller händelsen och inte från när du märkte skadan. Vänta inte med anmälan.",
+        ],
+      },
+      {
+        h: "Det här ska stå i ett klagomålsbrev",
+        p: [
+          "Rubrik och referens: ordet klagomål och vad det gäller. Lägg till ärendenummer, ordernummer eller kundnummer.",
+          "Vem du är: namn, adress och hur du nås. Personnummer bara om mottagaren behöver det för att hitta ditt ärende.",
+          "Vad som har hänt, i datumordning. Ett datum per händelse, vem du pratade med och vad som sades. Skriv det du vet, inte vad du tror att någon tänkte.",
+          "Vad du vill: ett tydligt krav. Det kan vara ett skriftligt svar, en rättelse, ett beslut, en ursäkt eller ersättning med ett belopp. Skriv också när du vill ha svar.",
+          "Bilagor: en lista över kopiorna som du skickar med, till exempel kvitton, beslut, mejl och bilder. Skicka kopior och behåll originalen.",
+          "Ett kort exempel: Klagomål, ordernummer 12345. Den 3 september ringde jag er kundtjänst om att paketet inte kommit. Den 10 september lovade ni att skicka ett nytt, men inget har kommit. Jag vill att ni senast den 15 oktober skickar varan eller betalar tillbaka 450 kr. Bilagor: orderbekräftelse, mejl från 10 september.",
+        ],
+      },
+      {
+        h: "Så skriver du klagomålet här",
+        p: [
+          "Ett klagomål som är långt och argt och saknar krav leder sällan någonstans. Ta en sak per brev. Skriv lugnt, även om du är arg. Den som läser ska förstå ärendet utan att ha pratat med dig.",
+          "Fyll i fälten ovan: vem brevet ska till, vad som har hänt och vad du vill. Skriv i fältet om vad du vill också när du vill ha svar, till exempel inom 14 dagar. Början av brevet ser du direkt, gratis. Hela klagomålsbrevet med kronologi, tydligt krav och plats för bilagor kostar 59 kr. Inget konto.",
+          "Läs igenom brevet och fyll i allt som står inom [hakparentes], till exempel ärendenummer, datum och bilagor. Skicka det sedan skriftligt. Spara en kopia och skriv upp när du skickade det. Skrivklart ger ett färdigt utkast, inte juridisk rådgivning.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hur skriver man ett klagomål till ett företag?",
+        a: "Skriv till kundtjänst eller till företagets klagomålsansvariga. Berätta kort vad som hänt, i datumordning, och säg vad du vill ha och när du vill ha svar. Skicka det skriftligt och spara en kopia. Gäller det ett köp och säger företaget nej kan du anmäla till ARN. Det kostar 150 kr, kravet måste vara värt minst ett visst belopp och anmälan ska göras inom ett år från att du första gången klagade.",
+      },
+      {
+        q: "Hur lång tid har de på sig att svara?",
+        a: "För företag finns i regel ingen fast svarstid i lag, så skriv själv när du vill ha svar. Bankens klagomålsansvariga bör normalt svara inom 14 dagar. Vården bör enligt Socialstyrelsen svara inom fyra veckor. Har en myndighet inte avgjort din ansökan inom sex månader kan du skriftligen begära att den gör det. Inom fyra veckor ska den då antingen fatta beslut eller avslå din begäran i ett beslut som går att överklaga.",
+      },
+      {
+        q: "Var klagar man på vården?",
+        a: "Först hos vårdgivaren där du fick vård. Patientnämnden i din region kan hjälpa dig att få svar, och det kostar inget. Gäller det en allvarlig händelse, som en bestående skada eller ett dödsfall, kan du lämna ett klagomål till IVO när vården har fått svara. IVO utreder i regel inte händelser som ligger mer än två år tillbaka. Vill du ha ersättning för en skada gör du en patientskadeanmälan. För vård som regionen driver eller betalar för skickar du den till Löf. Gäller det annan vård, fråga vårdgivaren vilken patientförsäkring som gäller.",
+      },
+      {
+        q: "Kan andra läsa mitt klagomål?",
+        a: "Det du skickar till en myndighet eller kommun blir i regel en allmän handling som vem som helst kan begära ut, om inte uppgifterna skyddas av sekretess. Ett klagomål till IVO har lågt sekretesskydd. Enligt IVO kan uppgifterna lämnas ut till medier och allmänhet. Skriv det som behövs för ärendet, men inte mer än nödvändigt om din hälsa eller din familj.",
+      },
+      {
+        q: "Kan jag klaga anonymt?",
+        a: "Ett företag eller en myndighet behöver veta vem du är för att kunna hantera ditt ärende. JO utreder normalt inte anonyma anmälningar. Om socialtjänst, LSS och vård kan du lämna uppgifter anonymt genom Berätta för IVO. Du får ingen återkoppling, och utan kontaktuppgifter får du inte heller någon bekräftelse på att uppgifterna kommit in.",
+      },
+      {
+        q: "Kan jag få ersättning?",
+        a: "Skriv hur mycket du vill ha och hur du har räknat fram beloppet. Ett företag kan gå med på kravet. Gäller det ett köp kan ARN pröva det, om kravet är värt minst ARN:s lägsta belopp. ARN:s beslut är en rekommendation och inte bindande. JO och IVO beslutar inte om ersättning. Gäller kravet ett felaktigt beslut av en statlig myndighet, eller att den inte har beslutat, prövar Justitiekanslern det. Andra skadeståndskrav prövar ofta myndigheten själv, till exempel Försäkringskassan, Skatteverket eller CSN. Krav mot en kommun eller region skickar du till kommunen eller regionen. Skador i vården ersätts genom patientförsäkringen.",
+      },
+      {
+        q: "Kan jag klaga på min hyresvärd?",
+        a: "Ja. Anmäl felet skriftligt till hyresvärden, beskriv det, ta bilder och spara en kopia. Dra inte av på hyran på egen hand. Rättas felet inte till kan du ansöka hos hyresnämnden. Den kan besluta att hyresvärden ska åtgärda bristen.",
+      },
+      {
+        q: "Kan jag klaga på en granne som stör?",
+        a: "Ja. Skriv till hyresvärden, eller till styrelsen om du bor i bostadsrätt. Skriv upp datum, tider och vad som hände. Hyresvärden ska då uppmana grannen att sluta störa. Spara en kopia av det du skickar.",
+      },
+    ],
+  },
+  "personligt-brev": {
+    seoTitle: "Personligt brev – exempel, mall och tips (99 kr) | Skrivklart",
+    seoDescription:
+      "Så långt ska brevet vara, så börjar och avslutar du, exempel och tips utan erfarenhet. Se början av ditt brev gratis, hela brevet 99 kr. Inget konto.",
+    intro:
+      "I ett personligt brev förklarar du varför du söker just det här jobbet och varför du passar. Cv:t visar vad du har gjort. Brevet visar hur du tänker och arbetar. Här får du veta hur långt brevet ska vara, hur du börjar och hur du avslutar. Du får också ett exempel att utgå från och tips för dig som har lite eller ingen erfarenhet.",
+    sections: [
+      {
+        h: "Vad är ett personligt brev, och behövs det alltid?",
+        p: [
+          "Ett personligt brev skickas tillsammans med cv:t när du söker jobb. De två ska komplettera varandra. Cv:t listar jobb, utbildning och datum. Brevet förklarar varför du söker och ger exempel på hur du arbetar. Skriv inte samma sak två gånger.",
+          "Alla arbetsgivare ber inte om ett brev. En del använder urvalsfrågor i stället, som du svarar på direkt i ansökan. Svara då ordentligt på varje fråga. Skriv inte ”se cv” eller ”se personligt brev”, för då kan rekryteraren missa just det hen letar efter.",
+          "Ber annonsen om ett personligt brev ska du skicka ett. Står det ingenting kan ett kort brev ändå hjälpa, till exempel när du byter bransch eller när cv:t inte visar varför du passar.",
+        ],
+      },
+      {
+        h: "Hur långt ska brevet vara, och vad ska stå i det?",
+        p: [
+          "Högst en A4-sida. Det är Arbetsförmedlingens råd, och rekryterare lägger ofta bara någon minut på varje ansökan. Det blir tre eller fyra korta stycken med luft emellan, ofta runt 300 till 400 ord.",
+          "Högst upp skriver du ditt namn, telefonnummer, e-post, ort och datum. Skriv gärna tjänstens namn som rubrik, till exempel ”Ansökan: kundtjänstmedarbetare”. Står det en kontaktperson i annonsen kan du börja med ”Hej [förnamn],”. Annars räcker ”Hej,” eller så går du direkt på första meningen.",
+          "Sedan kommer själva brevet. Först vilket jobb du söker och varför du passar. Därefter ett eller två konkreta exempel från jobb, skola eller fritid som visar det som annonsen efterfrågar. Sist en mening om varför du vill till just den här arbetsplatsen.",
+          "Avsluta med att du gärna berättar mer, till exempel ”Jag berättar gärna mer på en intervju.” Skriv sedan ”Med vänliga hälsningar” och ditt namn. Hoppa över krystade fraser som ”i hopp om ett positivt besked”.",
+          "Spara brevet som pdf eller Word, så att det går att läsa i arbetsgivarens system. Ska du klistra in texten i ett formulär, kontrollera att styckena syns ordentligt innan du skickar.",
+        ],
+      },
+      {
+        h: "Så börjar du brevet",
+        p: [
+          "Rekryteraren läser ofta många ansökningar och bestämmer sig snabbt. Börja därför med det som säger mest om dig och jobbet, inte med en artig inledning.",
+          "Du kan börja med något du har gjort som liknar jobbet: ”I tre år har jag tagit hand om kunder i kassan på en matbutik, och nu vill jag göra det i er kundtjänst.” Eller med något i annonsen som du känner igen dig i: ”Ni söker någon som håller ordning när mycket händer samtidigt. Så ser mina dagar som barnskötare ut.” Eller med varför du byter: ”Efter tio år som undersköterska vet jag hur man lugnar en orolig människa. Nu vill jag använda det i ett nytt yrke.”",
+          "Undvik att börja med egenskaper som ”stresstålig” eller ”driven”. Sådana ord står i nästan alla brev och säger lite. Visa i stället med ett exempel.",
+        ],
+      },
+      {
+        h: "Exempel på ett personligt brev",
+        p: [
+          "Här är ett kort exempel för en tjänst som kundtjänstmedarbetare. Byt ut det som inte stämmer för dig. Det viktiga är strukturen, inte orden.",
+          "Inledning: ”De senaste fyra åren har jag rett ut problem åt kunder varje dag i butik. Nu vill jag göra det i er kundtjänst, och därför söker jag jobbet som kundtjänstmedarbetare hos [företag].”",
+          "Exempel: ”På [butik] var det jag som tog hand om reklamationer och missnöjda kunder. Jag har lärt mig att lyssna klart innan jag svarar och att alltid säga när kunden får besked. Jag lärde också upp nya kollegor i kassasystemet.”",
+          "Varför just dem, och avslutning: ”I annonsen skriver ni att ni vill korta svarstiderna i chatten. I butiken svarade jag också på kundernas mejl, så jag är van att skriva korta och tydliga svar. Jag berättar gärna mer på en intervju. Med vänliga hälsningar, [Ditt namn]”",
+        ],
+      },
+      {
+        h: "Personligt brev utan erfarenhet",
+        p: [
+          "Även om du aldrig har haft ett jobb, eller har varit borta från arbetslivet länge, har du erfarenhet som räknas. Arbetsförmedlingen lyfter fram skolprojekt, praktik, ideellt arbete och uppdrag i föreningar. Det kan vara att du har tränat ett barnlag, suttit i elevrådet eller skött kassan i en förening.",
+          "Visa egenskaper med exempel. ”Jag är ansvarsfull” säger lite. ”Jag hade hand om nycklarna och låste upp hallen före varje träning i två år” säger mer. Så här kan en inledning se ut för ett första jobb: ”Jag har inte haft ett jobb än, men i två år har jag tränat ett fotbollslag med tolv tioåringar. Jag vet hur det är att ansvara för att alla kommer i tid och att ingen blir utanför. Det vill jag ta med mig till jobbet som butiksbiträde hos [företag].”",
+          "Du behöver inte uppfylla alla krav i annonsen. Skriv det du har och hur du ska lära dig det som saknas, till exempel en kurs som du har börjat. Skriv inte att du kan något som du inte kan. Det brukar märkas på intervjun.",
+          "Du behöver inte heller förklara varje lucka i cv:t eller skriva om barn, hälsa eller familj. Enligt föräldraledighetslagen får en arbetsgivare inte missgynna den som söker jobb av skäl som har samband med föräldraledighet. Det gäller även ledighet för vård av sjukt barn. Undantaget är om den olika behandlingen är en nödvändig följd av själva ledigheten. Det skyddet gäller föräldraledighet, inte hälsa i allmänhet. Diskrimineringslagen skyddar dessutom mot missgynnande som har samband med bland annat kön och funktionsnedsättning.",
+        ],
+      },
+      {
+        h: "Vanliga misstag och när brevet är skickat",
+        p: [
+          "Ett vanligt misstag är ett brev som kunde ha skickats till vilket företag som helst. Ändra åtminstone inledningen och stycket om arbetsplatsen för varje annons, och kontrollera att det står rätt företag och rätt tjänst. Ett annat misstag är för många detaljer. Välj de exempel som passar annonsen och stryk resten.",
+          "Står det i annonsen att urvalet sker löpande kan tjänsten tillsättas före sista ansökningsdag. Skicka då så tidigt du kan.",
+          "Är du arbetslös och inskriven hos Arbetsförmedlingen ska du redovisa jobbet i din aktivitetsrapport. Det gäller också om du till exempel praktiserar eller arbetstränar. Rapporten lämnar du mellan den 1 och den 14 varje månad, för månaden innan. Spara brevet eller en bekräftelse på att du har sökt jobbet i minst tre månader, eftersom Arbetsförmedlingen ibland gör kontroller.",
+        ],
+      },
+      {
+        h: "Skriv ditt brev här",
+        p: [
+          "Här på sidan fyller du i tjänsten, arbetsgivaren, din bakgrund och varför du söker, och väljer ton. Inom en minut ser du början av brevet, gratis. Hela brevet hos Skrivklart, ungefär en A4-sida och klart att klistra in, kostar 99 kr. Inget konto behövs. Vill du ha det kortare eller mer formellt kan du låta skriva om det utan att betala mer. Behöver du också en cv-profil och en LinkedIn-text ingår alla tre i Jobbpaketet för 129 kr.",
+          "Arbetsförmedlingen påpekar att många arbetsgivare använder rekryteringssystem med AI-stöd och att helt AI-skrivna texter kan sorteras bort. Läs därför igenom brevet, fyll i det som står inom [hakparentes], lägg till telefonnummer och e-post högst upp och ändra det som inte låter som du.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Hur långt ska ett personligt brev vara?",
+        a: "Högst en A4-sida, det råder Arbetsförmedlingen. Tre eller fyra korta stycken brukar räcka, ofta runt 300 till 400 ord.",
+      },
+      {
+        q: "Hur börjar man ett personligt brev?",
+        a: "Skriv vilket jobb du söker och varför du passar, gärna med något konkret som du har gjort. Undvik att börja med att du härmed söker tjänsten eller med en rad egenskaper.",
+      },
+      {
+        q: "Hur avslutar man ett personligt brev?",
+        a: "Med en kort mening om att du gärna träffar dem och berättar mer, till exempel ”Jag berättar gärna mer på en intervju.” Skriv sedan ”Med vänliga hälsningar” och ditt namn. Telefon och e-post står redan högst upp.",
+      },
+      {
+        q: "Vad skriver man i ett personligt brev utan erfarenhet?",
+        a: "Skriv om skola, praktik, ideellt arbete, föreningsliv eller annat där du har tagit ansvar. Ge ett kort exempel och skriv vad du vill lära dig i jobbet.",
+      },
+      {
+        q: "Måste man skicka ett personligt brev om annonsen inte ber om det?",
+        a: "Nej. Har annonsen urvalsfrågor är det viktigaste att du svarar ordentligt på dem. Ett kort brev kan ändå hjälpa när cv:t inte visar varför du söker.",
+      },
+      {
+        q: "Måste jag berätta att jag har barn eller har varit föräldraledig?",
+        a: "Nej, det behöver inte stå i brevet. En arbetsgivare får inte missgynna den som söker jobb av skäl som har samband med föräldraledighet. Att välja bort någon för att hon är gravid räknas som diskriminering på grund av kön.",
+      },
+      {
+        q: "Kan jag använda samma personliga brev till flera jobb?",
+        a: "Grunden kan vara densamma, men anpassa inledningen och stycket om arbetsplatsen efter varje annons. Kontrollera alltid att det står rätt företagsnamn.",
+      },
+      {
+        q: "Ska brevet skickas som pdf eller Word?",
+        a: "Båda fungerar. Arbetsförmedlingen rekommenderar pdf eller Word så att brevet går att läsa korrekt. Texten du får här klistrar du in i Word eller Google Dokument. Vill du ha en pdf väljer du Skriv ut och sedan Spara som pdf. Ber annonsen dig klistra in texten i ett formulär gör du det i stället.",
+      },
+    ],
+  },
+  reklamation: {
+    seoTitle: "Reklamation – mall för vara och tjänst (59 kr) | Skrivklart",
+    seoDescription:
+      "Reklamera en felaktig vara eller tjänst: 3 år för varor, säg till helst inom 2 månader och se vad du kan kräva. Gratis utkast, färdigt brev för 59 kr.",
+    intro:
+      "En reklamation är ett meddelande till företaget om att det du köpt är felaktigt och vad du vill att de gör åt det. Har du köpt av ett företag har du ett starkt skydd. Konsumentköplagen gäller för varor och konsumenttjänstlagen för hantverk och reparationer. Här ser du vilka tider som gäller, vad du kan kräva och vad som ska stå i brevet.",
+    sections: [
+      {
+        h: "Hur länge kan du reklamera? Tre år enligt konsumentköplagen",
+        p: [
+          "Köper du en vara av ett företag gäller konsumentköplagen. Företaget ansvarar för fel som fanns när du fick varan och som visar sig inom tre år. Det gäller både nya och begagnade varor. Köper du begagnat på offentlig auktion bedöms felet dock utifrån utropspriset, och då har du inte rätt till prisavdrag.",
+          "Felet behöver inte märkas direkt. En vara kan ha haft ett fel från början, även om det visar sig först efter en tid. Har du själv orsakat felet, till exempel genom att använda varan på fel sätt, räknas det däremot inte som fel. Det gör inte heller normalt slitage.",
+          "Garantin är något annat. Den är frivillig och kommer ofta från tillverkaren. Har garantin gått ut kan du ändå reklamera enligt lagen, så länge det har gått mindre än tre år sedan du fick varan.",
+          "Köper du av en privatperson gäller köplagen i stället. Där är skyddet svagare, och den yttersta gränsen är två år från att du fick varan. ARN prövar bara tvister med företag, och brevet här är skrivet för köp från företag. Men om ett företag förmedlar köpet åt en privatperson, till exempel en butik som säljer begagnat i kommission, gäller konsumentköplagen. Då ansvarar både säljaren och företaget.",
+        ],
+      },
+      {
+        h: "Skälig tid: skriv inom två månader",
+        p: [
+          "Du ska säga till inom skälig tid från att du märkte felet, eller borde ha märkt det. Skriver du inom två månader från att du upptäckte felet räknas det alltid som i tid.",
+          "Väntar du längre kan du förlora rätten att kräva något. Skriv hellre direkt, även om du inte vet vad felet beror på. Det räcker att du beskriver vad som är fel.",
+          "Visar sig felet strax innan tre år har gått kan du fortfarande reklamera. Du måste då reklamera senast två månader efter att de tre åren har gått.",
+        ],
+      },
+      {
+        h: "Fel inom två år: företaget måste bevisa att det inte är deras ansvar",
+        p: [
+          "Visar sig ett fel inom två år från att du fick varan räknas det som ett fel som företaget ansvarar för. Vill företaget slippa ansvaret måste de visa att felet beror på något annat, till exempel att varan har tappats.",
+          "Regeln gäller inte när den inte passar varan eller felet, till exempel färskvaror som bara håller några dagar. Har du köpt ett levande djur gäller regeln bara fel som visar sig inom sex månader. För digitalt innehåll, till exempel en app eller ett spel du laddat ner, gäller den i ett år.",
+          "Du behöver fortfarande kunna visa att varan faktiskt är felaktig, till exempel med bilder eller film. Företaget måste däremot bevisa att felet inte fanns från början.",
+          "Efter två år är det du som behöver visa att felet fanns redan när du fick varan. Då kan ett utlåtande från någon sakkunnig behövas.",
+          "Reklamerar du inom två år, eller medan garantin gäller, bör du normalt inte behöva betala för att företaget undersöker felet. Efter två år får företaget bara ta betalt om felet visar sig inte vara deras ansvar, om du fick veta avgiften i förväg och om den är rimlig.",
+        ],
+      },
+      {
+        h: "Vad kan du kräva av företaget?",
+        p: [
+          "I första hand kan du kräva att felet lagas eller att du får en ny vara. Du får välja. Blir ditt val orimligt dyrt jämfört med det andra får företaget oftast välja det billigare. Det ska ske inom skälig tid och utan kostnad för dig, och företaget betalar frakten.",
+          "Prisavdrag eller hävning blir aktuellt om felet inte går att åtgärda, om reparationen drar ut på tiden eller misslyckas, eller om felet är allvarligt. Häva betyder att du lämnar tillbaka varan och får pengarna tillbaka, på samma sätt som du betalade. Du behöver inte nöja dig med ett tillgodokvitto eller presentkort. Har du haft stor nytta av varan innan du hävde köpet kan företaget ibland göra ett avdrag för det, ett så kallat nyttoavdrag. Är felet litet, och företaget kan visa det, får du inte häva köpet.",
+          "Företaget har i regel rätt att först försöka laga eller byta, även om du hellre vill ha pengarna tillbaka. Skriv det du vill ha, men räkna med att det kan sluta med en reparation.",
+          "Har du inte betalat än får du hålla inne så mycket som behövs för att täcka ditt krav. Har du köpt på faktura eller avbetalning, meddela både företaget och kreditgivaren. Du kan också kräva ersättning för kostnader som felet orsakat, till exempel resor och frakt, men inte för besväret. Vill du ha med det i brevet, skriv kostnaderna och beloppen i fältet om felet.",
+        ],
+      },
+      {
+        h: "Fel på en tjänst: konsumenttjänstlagen",
+        p: [
+          "Har du anlitat ett företag för att reparera, renovera, måla, städa eller förvara något gäller konsumenttjänstlagen. Den gäller arbete på saker, byggnader och mark. Tjänster på människor, som frisör, omfattas inte av lagen. Du kan ändå reklamera, och lagens regler används ofta som vägledning.",
+          "Tidsreglerna liknar dem för varor. Klaga inom skälig tid. Inom två månader från att du märkte felet är alltid i tid. Den yttersta gränsen är tre år efter att arbetet blev klart. För arbete på hus, mark och andra fasta saker är den tio år.",
+          "Du kan först kräva att företaget rättar till felet utan kostnad för dig. Erbjuder sig företaget direkt att rätta till felet har det i regel rätt att göra det. Gör de inte det inom skälig tid får du göra prisavdrag. Avdraget ska som regel motsvara vad det kostar att få felet åtgärdat av någon annan.",
+          "Häva avtalet kan du om felet är så allvarligt att tjänsten i praktiken inte är till nytta för dig, eller om företaget har försökt rätta till felet flera gånger utan att lyckas.",
+          "Regeln om att företaget måste bevisa att felet inte fanns från början gäller köp av varor. Vid tjänster behöver du i regel själv kunna visa att arbetet är felaktigt, till exempel med bilder eller ett utlåtande från en besiktningsman.",
+        ],
+      },
+      {
+        h: "Mall: det här ska stå i reklamationen",
+        p: [
+          "Vad du köpt, när och av vem, med pris och ordernummer. Vad som är fel, när du upptäckte det och vad du redan har sagt till företaget. Bifoga bilder och kvitto, orderbekräftelse eller kontoutdrag.",
+          "Vad du kräver: reparation, ny vara, prisavdrag eller att köpet hävs. Brevet ber företaget svara inom 14 dagar. Det är ingen lagregel, men det visar att du menar allvar. Din reklamation gäller även om företaget inte svarar.",
+          "Skicka skriftligt, gärna med mejl, och spara en kopia. Har ni pratat i telefon, skicka ett mejl efteråt om vad ni kom fram till. Säger företaget nej kan du anmäla till Allmänna reklamationsnämnden (ARN). Hör de inte av sig alls, vänta ändå ungefär fyra veckor innan du anmäler. Gratis hjälp på vägen får du av kommunens konsumentvägledning, om din kommun har en. Finns företaget i ett annat EU-land kan Konsument Europa hjälpa dig.",
+          "Fyll i fälten ovan: företaget, vad du köpte och när, felet och vad du kräver. Du ser ett utkast direkt, gratis. Hela brevet kostar 59 kr. Inget konto. Byt ut det som står inom hakparentes, läs igenom och skicka. Skrivklart skriver brevet men ger inte juridisk rådgivning.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Måste jag ha kvar kvittot för att reklamera?",
+        a: "Nej. Ingen lag kräver kvitto. Ett kontoutdrag eller en orderbekräftelse kan räcka, men du måste kunna visa när du köpte, av vem och till vilket pris.",
+      },
+      {
+        q: "Butiken säger att jag ska kontakta tillverkaren. Stämmer det?",
+        a: "Nej. Enligt lagen kan du alltid ställa krav mot företaget som sålde varan till dig. Finns en garanti från tillverkaren kan du välja att använda den, men du måste inte.",
+      },
+      {
+        q: "Garantin har gått ut. Kan jag ändå reklamera?",
+        a: "Ja, om det har gått mindre än tre år sedan du fick varan och felet fanns från början. Garantin är frivillig och kommer utöver din reklamationsrätt.",
+      },
+      {
+        q: "Är ångerrätt och reklamation samma sak?",
+        a: "Nej. Ångerrätten gäller när du handlat på distans, till exempel på nätet, eller vid hemförsäljning. Då har du oftast 14 dagar på dig att ångra köpet, även om inget är fel. Reklamation gäller när varan eller tjänsten är felaktig.",
+      },
+      {
+        q: "Hur lång tid får en reparation ta?",
+        a: "Den ska ske inom skälig tid. Det bedöms från fall till fall, efter vilket fel det är och hur mycket du behöver varan. Konsumentverket skriver att du kan få räkna med någon eller några veckor. Drar det ut för länge kan du ha rätt till prisavdrag eller att häva köpet.",
+      },
+      {
+        q: "Vad gör jag om företaget säger nej?",
+        a: "Du kan anmäla till Allmänna reklamationsnämnden, ARN. Företaget ska ha sagt nej eller inte svarat. ARN skriver att ett företag bör ha svarat inom fyra veckor. Anmälan ska komma in inom ett år från att du först klagade och kostar 150 kr. Avgiften betalas inte tillbaka, men får du helt eller delvis rätt kan du begära att företaget ersätter den. Det måste du begära i anmälan eller under ärendet. Ditt krav måste också vara över en minsta summa, som skiljer sig mellan olika områden. Handläggningen tar normalt omkring sex månader, men ARN skriver att det just nu kan ta längre tid. Beslutet är en rekommendation. Du kan också gå till domstol.",
+      },
+      {
+        q: "Kan jag reklamera om företaget har gått i konkurs?",
+        a: "Ibland. Har säljaren gått i konkurs, lagt ner eller går inte att nå kan du rikta kravet mot ett företag tidigare i ledet som sålt varan vidare, till exempel grossisten eller importören. Säg till dem inom skälig tid. Har du betalat med kreditkort, på faktura eller avbetalning kan du ofta också ställa samma krav mot kreditgivaren.",
+      },
+    ],
+  },
+  "skola-forskola": {
+    seoTitle: "Brev till skola eller förskola – ledighet, stöd | Skrivklart",
+    seoDescription:
+      "Ansök om ledighet, be om stöd, be skolan utreda en kränkning eller klaga hos rektorn – i skola eller förskola. Se början gratis, hela brevet 59 kr.",
+    intro:
+      "Ett brev eller mejl till rektorn, mentorn eller förskolan blir oftast läst och besvarat när det är kort och sakligt och säger vad du vill ha. Här går vi igenom de vanligaste ärendena: att ansöka om ledighet, anmäla kränkningar, be om särskilt stöd, ta upp frånvaro och ändra tider i förskolan. Du får veta vad skolan måste göra när ditt brev har kommit fram, vilka tidsfrister som gäller och vart du vänder dig om inget händer.",
+    sections: [
+      {
+        h: "Ansöka om ledighet från skolan",
+        p: [
+          "I grundskolan och förskoleklassen är det rektorn som beslutar om ledighet. Ett barn kan få kortare ledighet för enskilda angelägenheter. Enligt förarbetena till skollagen menas med det upp till tio dagar. Rektorn kan låta någon annan besluta om sådan ledighet, så ibland är det mentorn som svarar. Ledighet längre än tio dagar kräver synnerliga skäl, alltså mycket starka skäl. Det beslutet fattar alltid rektorn själv.",
+          "Ditt barn har ingen rätt till ledighet, inte heller till tio dagar om året. Rektorn väger samman hur länge barnet blir borta, hur det går i skolan, om barnet kan ta igen det som missas och hur viktig ledigheten är för barnet. Förarbetena nämner vissa resor, familjehögtider och religiösa högtider som exempel. En vanlig semesterresa räknas sällan som synnerliga skäl. Många skolor är restriktiva med ledighet.",
+          "Skriv barnets namn och klass, vilka datum det gäller, varför ni behöver ledigt och hur barnet ska ta igen skolarbetet. Skicka ansökan i god tid. Många skolor har en egen blankett eller e-tjänst, så titta på skolans webbplats först. Har ni gemensam vårdnad vill skolan oftast att båda vårdnadshavarna skriver under. Förskolan omfattas inte av skolplikten, så där behöver du inte söka ledighet. I förskoleklassen gäller däremot skolplikt och samma regler som i skolan.",
+          "Ett nej till ledighet kan inte överklagas till Skolväsendets överklagandenämnd. Tar du ändå barnet ur skolan räknas frånvaron normalt som ogiltig. En statlig utredning ser över reglerna. Den tittar bland annat på en övre gräns för hur lång ledighet rektorn får bevilja och på en möjlig avgift för föräldrar som tar barnet ur skolan utan beviljad ledighet. Utredningen ska vara klar senast den 31 mars 2027. Tills något nytt beslutas gäller reglerna ovan.",
+        ],
+      },
+      {
+        h: "Anmäla kränkning eller mobbning",
+        p: [
+          "Kränkande behandling är när någon kränker ett barns värdighet, till exempel genom att hota, håna eller frysa ut. Det kan vara en annan elev eller någon i personalen. All personal i skolan och förskolan ska aktivt uppmärksamma och motverka kränkande behandling och trakasserier och se till att det som händer blir hanterat. Det gäller även om det bara har hänt en gång.",
+          "Sedan den 1 augusti 2026 gäller nya regler för vad som ska anmälas vidare. Personalen ska informera rektorn när ett barn anser sig ha blivit utsatt för allvarlig eller upprepad kränkande behandling. Det är personalen som bedömer om det är allvarligt eller upprepat. Upprepat betyder att det har hänt mer än en gång. Kränkningar från någon i personalen ska alltid rapporteras. Rektorn ska anmäla till huvudmannen, alltså kommunen eller den som driver en fristående skola. Huvudmannen ska skyndsamt utreda vad som har hänt och vidta de åtgärder som skäligen krävs för att det inte ska hända igen.",
+          "Därför spelar det roll vad du skriver. Räkna upp varje händelse med datum, vad som hände, var det hände och vad ditt barn har berättat. Har det hänt flera gånger, skriv det. Skriv också om det kan vara ett brott, om flera barn har varit inblandade, om de som kränkt är betydligt äldre eller om ditt barn har svårt att skydda sig, till exempel på grund av en funktionsnedsättning. Sådant kan göra att kränkningen räknas som allvarlig. Be skolan utreda och svara skriftligt om vilka åtgärder den vidtar och när den följer upp.",
+          "Skolan får inte straffa ditt barn för att barnet har berättat eller varit med i en utredning. Varje förskola och skola ska varje år göra en plan mot kränkande behandling, och du kan be att få läsa den. Handlar det om trakasserier eller sexuella trakasserier som har att göra med till exempel kön, etnisk tillhörighet, religion eller funktionsnedsättning gäller också diskrimineringslagen. Då måste skolan alltid utreda, även om det bara har hänt en gång, och du kan anmäla till Diskrimineringsombudsmannen. Gäller det våld eller hot kan du polisanmäla. I skolan är rektorn dessutom skyldig att polisanmäla när en elev misstänks för ett brott i samband med skolan, om inte starka skäl talar emot det.",
+        ],
+      },
+      {
+        h: "Be om särskilt stöd och åtgärdsprogram",
+        p: [
+          "Finns det risk att ditt barn inte når de kunskaper som minst krävs, ska skolan ge extra anpassningar i den vanliga undervisningen. Det är mindre insatser som lärarna kan göra utan något formellt beslut. Räcker det inte, eller finns det redan från början skäl att tro att extra anpassningar inte räcker, ska det anmälas till rektorn. Rektorn ska då se till att behovet av särskilt stöd utreds skyndsamt. Det gäller också när barnet har andra svårigheter i skolan, till exempel psykisk ohälsa, svårt i samspelet med andra eller upprepad frånvaro.",
+          "Du kan själv be skolan utreda. Beskriv vad du ser hemma, vad lärarna har sagt och vad som redan har provats, och be om ett möte. Det du berättar ska tas på allvar, men det är rektorn som beslutar om utredningen. Ditt barn behöver ingen diagnos. En diagnos får aldrig vara ett villkor för stöd i skolan. Skolan behöver inte ditt medgivande för att utreda behovet, men en psykologisk eller medicinsk utredning får inte göras om vårdnadshavarna inte går med på det.",
+          "Visar utredningen att barnet behöver särskilt stöd ska rektorn besluta om ett åtgärdsprogram. Det är ett skriftligt beslut om vilket stöd barnet behöver, hur det ska ges, när det följs upp och vem som ansvarar. Ni ska få vara med när programmet tas fram, men ni kan inte kräva en viss insats. Behövs inget särskilt stöd ska rektorn i stället besluta att inget åtgärdsprogram ska göras.",
+          "Beslutet om åtgärdsprogram kan överklagas till Skolväsendets överklagandenämnd. Det gäller också ett beslut att inte göra något program och ett beslut att avsluta det. Överklagandet ska ha kommit in inom tre veckor från att ni fick del av beslutet. Det skickas till den som fattade beslutet, inte direkt till nämnden. Har ni gemensam vårdnad behöver ni i regel båda stå bakom överklagandet. Nämnden kan fastställa eller upphäva beslutet, men den bestämmer inte själv vilket stöd barnet ska få. Extra anpassningar kan inte överklagas.",
+          "Reglerna om extra anpassningar och särskilt stöd i skolan ändras den 1 juli 2028. Då ersätts extra anpassningar bland annat av stödundervisning i svenska och matematik. Fram till dess gäller det som står här. I förskolan finns inga åtgärdsprogram, men rektorn ska se till att ett barn som behöver särskilt stöd får det, och ni ska få vara med och utforma stödet. De reglerna ändras inte.",
+        ],
+      },
+      {
+        h: "Skolfrånvaro: när barnet inte kommer till skolan",
+        p: [
+          "Är ditt barn sjukt eller borta av något annat skäl ska du anmäla det till skolan så snart som möjligt, på det sätt som skolan har bestämt. Är barnet borta utan giltigt skäl ska rektorn se till att du får veta det samma dag.",
+          "Har barnet upprepad eller längre frånvaro ska rektorn se till att frånvaron utreds skyndsamt. Det gäller även giltig frånvaro, till exempel när barnet är sjukanmält. Utredningen görs tillsammans med barnet, dig och elevhälsan och ska visa varför barnet är borta. Det finns ingen fast gräns för hur många dagar det ska vara. Finns det tecken på att barnet behöver särskilt stöd ska det också utredas.",
+          "Frånvaro kan ha orsaker i skolan, till exempel otrygghet, kränkningar eller att barnet inte får det stöd det behöver. Skriv vad du ser, vad barnet säger och vad ni redan har provat. Be om en frånvaroutredning och ett möte med elevhälsan. Som vårdnadshavare ansvarar du för att barnet går i skolan. Kommunen kan i sista hand förelägga dig att se till att det sker, med vite. Det betyder att du kan behöva betala en summa pengar om du inte gör det kommunen kräver. Det får kommunen bara göra om frånvaron beror på att du inte har gjort det du ska. Ett brev där du ber skolan om hjälp visar vad du har gjort.",
+          "I gymnasiet kan skolan rapportera ogiltig frånvaro till CSN. Är frånvaron upprepad och mer än fyra timmar under en månad kan studiebidraget dras in. CSN meddelar då Försäkringskassan, som kan dra in till exempel bostadsbidrag och flerbarnstillägg.",
+        ],
+      },
+      {
+        h: "Förskolan: schema, tider och klagomål",
+        p: [
+          "Förskolans chef heter rektor sedan 2019. Det är rektorn du skriver till om schema, stöd, oro och klagomål. Vardagsfrågor tar du med personalen på avdelningen. Reglerna om kränkande behandling och om klagomål gäller i förskolan precis som i skolan.",
+          "Från ett års ålder ska barn erbjudas förskola i den omfattning som behövs för att föräldrarna arbetar eller studerar. Det gäller också om barnet har ett eget behov på grund av familjens situation eller behöver särskilt stöd i sin utveckling. Är du arbetslös, eller föräldraledig med ett syskon, ska barnet erbjudas minst tre timmar om dagen eller 15 timmar i veckan. Från hösten det år barnet fyller tre år ska alla barn erbjudas minst 525 timmar om året, och de timmarna är avgiftsfria.",
+          "Kommunen behöver inte erbjuda förskola på kvällar, nätter och helger. Den ska dock sträva efter att ordna omsorg på sådana tider när föräldrarnas arbete kräver det. Ändras din situation, till exempel när du får nytt jobb, nya arbetstider eller börjar studera, behöver du oftast lämna ett nytt schema. Skriv i god tid vilka tider barnet behöver och från vilket datum, och be om skriftligt besked. Hur schemat lämnas in bestäms lokalt, och många kommuner har en e-tjänst för det. Behöver barnet mer tid än du har fått, skriv till rektorn och förklara varför.",
+        ],
+      },
+      {
+        h: "Om du inte får svar",
+        p: [
+          "Skriv till den som kan besluta: mentorn för vardagsfrågor och rektorn för ledighet, stöd och kränkningar. Skicka som mejl, eller klistra in texten i skolans blankett eller e-tjänst om den har en. Be om svar till ett visst datum och spara en kopia av allt du skickar.",
+          "Händer inget, vänd dig till huvudmannen. För kommunala skolor och förskolor är det kommunen. För fristående är det den som driver verksamheten, till exempel ett bolag, en förening eller en stiftelse. Huvudmannen ska bekräfta att klagomålet har kommit in, utreda det skyndsamt och återkoppla till dig. Huvudmannen ska också ha skriftliga rutiner för klagomål och se till att de är kända.",
+          "Blir det ändå inte bättre kan du lämna uppgifter till Skolinspektionen. Skolinspektionen vill att du först har klagat hos huvudmannen och att huvudmannen har fått en chans att rätta till det, och den startar inte alltid en granskning. Uppgifter om kränkningar lämnar du till Barn- och elevombudet (BEO), som är en del av Skolinspektionen. BEO läser alla uppgifter men startar inte alltid en utredning. När BEO utreder granskar BEO om huvudmannen har gjort det lagen kräver. Hittar BEO brister kan de kräva att huvudmannen åtgärdar dem, och i vissa fall kan BEO kräva skadestånd för barnets räkning. Går ditt barn i en fristående förskola vänder du dig till kommunen, inte till Skolinspektionen. Gäller det kränkande behandling kan du ändå lämna uppgifter till BEO.",
+          "Här på sidan väljer du vad ärendet gäller: ledighet, extra stöd, oro eller kränkning, eller schema och omsorgstid. Gäller det frånvaro eller ett klagomål väljer du Annat. Sedan fyller du i vem brevet ska till, barnets namn och klass eller avdelning och vad som har hänt, och väljer ton. Du ser början av brevet direkt, gratis. Hela brevet kostar 59 kr. Det har ämnesrad, händelserna i datumordning, vad du begär och ett datum för svar. Inget konto behövs. Skrivklart hjälper dig att formulera brevet, men det är inte juridisk rådgivning.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Har mitt barn rätt till tio dagars ledighet om året?",
+        a: "Nej. Det finns ingen rätt till ledighet. Rektorn får bevilja kortare ledighet efter en samlad bedömning av barnets skolsituation. Enligt förarbetena menas med kortare ledighet upp till tio dagar. Längre ledighet kräver synnerliga skäl, och en vanlig semesterresa räknas sällan dit.",
+      },
+      {
+        q: "Måste båda vårdnadshavarna skriva under ledighetsansökan?",
+        a: "Har ni gemensam vårdnad vill skolan oftast att båda skriver under. Många skolor har en egen blankett eller e-tjänst för det. Är det svårt att få den andra förälderns underskrift, kontakta skolan och fråga hur ni ska göra.",
+      },
+      {
+        q: "Kan man överklaga ett nej till ledighet?",
+        a: "Nej, inte till Skolväsendets överklagandenämnd. Ledighet är inte ett av de beslut som kan överklagas dit. Har du nya skäl kan du skriva till rektorn igen och förklara.",
+      },
+      {
+        q: "Måste skolan utreda när mitt barn blir kränkt?",
+        a: "Inte alltid. Personalen ska alltid ta tag i det som har hänt. Sedan den 1 augusti 2026 ska personalen informera rektorn om allvarliga eller upprepade kränkningar, och alltid om kränkningar från personal. Det är personalen som bedömer om det är allvarligt eller upprepat. Huvudmannen ska då utreda skyndsamt och vidta åtgärder. Trakasserier och sexuella trakasserier, till exempel kopplade till kön, etnisk tillhörighet eller funktionsnedsättning, måste skolan alltid utreda, även om det bara har hänt en gång. Skriv därför ner varje tillfälle med datum.",
+      },
+      {
+        q: "Måste mitt barn ha en diagnos för att få särskilt stöd?",
+        a: "Nej. En diagnos får aldrig vara ett villkor för stöd i skolan. Det som avgör är vilket behov barnet har i skolan.",
+      },
+      {
+        q: "Hur lång tid har jag på mig att överklaga ett åtgärdsprogram?",
+        a: "Tre veckor från den dag ni fick del av beslutet. Skicka överklagandet till den som fattade beslutet, oftast skolan. Kommer det in i tid skickas det vidare till Skolväsendets överklagandenämnd. Nämnden kan fastställa eller upphäva beslutet, men bestämmer inte själv vilket stöd barnet ska få.",
+      },
+      {
+        q: "Hur mycket frånvaro krävs innan skolan måste göra något?",
+        a: "Det finns ingen fast gräns. Vid upprepad eller längre frånvaro ska rektorn se till att den utreds skyndsamt, även när barnet är sjukanmält. Du kan själv be om en frånvaroutredning.",
+      },
+      {
+        q: "Hur många timmar förskola får mitt barn om jag är arbetslös eller föräldraledig?",
+        a: "Minst tre timmar om dagen eller 15 timmar i veckan, från ett års ålder. För föräldralediga gäller det om du är ledig med ett syskon. Från hösten det år barnet fyller tre år ska alla barn erbjudas minst 525 avgiftsfria timmar om året.",
+      },
+    ],
+  },
+  skuldebrev: {
+    seoTitle: "Skuldebrev – mall för lån mellan privatpersoner | Skrivklart",
+    seoDescription:
+      "Skriv ett skuldebrev när du lånar ut till en vän eller släkting: belopp, ränta, återbetalning och försening. Se början gratis, hela för 99 kr. Inget konto.",
+    intro:
+      "Ett skuldebrev, ibland kallat revers, är ett skriftligt löfte från den som lånar att betala tillbaka. Det visar tydligt vad ni har kommit överens om, och det är ditt bästa bevis om pengarna inte kommer tillbaka. Nedan går vi igenom vad som gäller när du lånar ut pengar till en vän eller någon i familjen: vad skuldebrevet ska innehålla, ränta, preskription och vad du gör om lånet inte betalas.",
+    sections: [
+      {
+        h: "Behövs ett skuldebrev när man lånar ut till en vän?",
+        p: [
+          "Det finns inga formkrav för lån mellan privatpersoner. Ett lån som ni bara har pratat om gäller också. Problemet kommer om ni blir oense. Då är det du som lånat ut som måste kunna visa att det var ett lån och vad ni bestämde.",
+          "En Swish eller en banköverföring visar att pengar har skickats, men inte varför. Utan något skriftligt kan det bli ord mot ord om det var ett lån, en gåva eller betalning för något annat.",
+          "Konsumentkreditlagen gäller när ett företag lånar ut till en konsument, eller när ett företag förmedlar lånet som ombud för långivaren. Den 20 november 2026 ersätts den av en ny konsumentkreditlag med samma grundregel. Lånar du själv ut till en vän, ett syskon eller ditt vuxna barn bestämmer ni villkoren själva. Just därför behöver de stå på papper.",
+        ],
+      },
+      {
+        h: "Enkelt eller löpande skuldebrev?",
+        p: [
+          "Ett enkelt skuldebrev är ställt till en namngiven person, till exempel ”till Anna Svensson”. Skriv alltid ut långivarens namn. Ett skuldebrev där det inte framgår vem som ska få betalt räknas som löpande. Papperet är ett bevis på skulden. Kommer det bort finns skulden kvar, men den blir svårare att bevisa.",
+          "Ett löpande skuldebrev är ställt till ”innehavaren” eller till ”Anna Svensson eller order”. Då är det papperet i sig som är värt pengarna. Den som har det i sin hand antas ha rätt att få betalt. Den som betalar hela skulden har rätt att samtidigt få tillbaka originalet. Även ett enkelt skuldebrev kan säljas vidare, men då får den nya ägaren aldrig bättre rätt än du hade. Med ett löpande skuldebrev kan köparen få bättre rätt.",
+          "För låntagaren är ett löpande skuldebrev mer riskabelt. Säljs det vidare till någon som inte känner till era mellanhavanden kan låntagaren bli tvungen att betala den nya ägaren, till exempel om hen redan har betalat hela lånet till dig utan att få tillbaka originalet.",
+          "Och för dig som lånar ut: tappar du bort ett löpande skuldebrev måste du ansöka hos Kronofogden om att det dödas, alltså förklaras ogiltigt, innan du kan driva in skulden. Det kostar en avgift och tar minst ett år, eftersom Kronofogden först kungör förlusten och ger den som har papperet tid att höra av sig.",
+          "Mellan vänner och familj räcker nästan alltid ett enkelt skuldebrev.",
+        ],
+      },
+      {
+        h: "Det här ska stå i skuldebrevet",
+        p: [
+          "Namn, personnummer och adress för den som lånar ut och den som lånar. Beloppet, gärna i både siffror och bokstäver. Datum när pengarna betalades ut och hur, till exempel överföring till ett visst konto.",
+          "Om lånet har ränta eller är räntefritt. Hur det ska betalas tillbaka: ett datum för hela beloppet, eller delbetalningar med belopp och datum. Står det ingen förfallodag måste låntagaren betala när du begär det.",
+          "Vad som gäller vid försening, och eventuell säkerhet. Sist ort, datum och låntagarens underskrift. Underskriften visar att låntagaren har tagit på sig skulden och gör skuldebrevet till ett starkt bevis. Du som lånar ut behåller originalet och låntagaren får en kopia.",
+          "Ge kvitto på varje inbetalning. När allt är betalt lämnar du tillbaka originalet till låntagaren, eller skriver ”Skulden är betald i sin helhet” med datum och din underskrift på det.",
+          "Hos Skrivklart fyller du i vilka ni är, beloppet och villkoren, och får ett enkelt skuldebrev. Början av texten ser du direkt, gratis. Hela skuldebrevet, med paragrafer om belopp, ränta, återbetalning, försening och underskrift, kostar 99 kr. Skrivklart skriver texten åt dig, men det är inte juridisk rådgivning. Gäller det stora belopp eller säkerhet i en bostad, låt en jurist läsa igenom.",
+        ],
+      },
+      {
+        h: "Ränta på lån mellan privatpersoner",
+        p: [
+          "Ni bestämmer själva om lånet ska ha ränta och hur hög den ska vara. Skriver ni ingenting om ränta är lånet räntefritt fram till förfallodagen.",
+          "Betalas lånet inte i tid gäller räntelagens dröjsmålsränta, om ni inte har avtalat något annat. Den är Riksbankens referensränta plus åtta procentenheter. Med en bestämd förfallodag räknas räntan från den dagen. Utan förfallodag räknas den från 30 dagar efter att du skickat ett krav på ett bestämt belopp, där det står att du tar ut dröjsmålsränta om pengarna inte betalas. Ränta tas aldrig ut för tiden innan kravet har nått låntagaren.",
+          "Håll räntan rimlig. Enligt avtalslagen kan en domstol jämka, alltså ändra eller stryka, ett oskäligt villkor. Har någon utnyttjat den andras trångmål, oförstånd, lättsinne eller beroende ställning för att få en förmån som står i uppenbart missförhållande till vad hen själv ger, gäller avtalet inte mot den som drabbats.",
+          "Får du ränta tar du själv upp den i din deklaration, i punkt 7.2 (Ränteinkomster, utdelningar m.m.). Skatten är 30 procent. Under övriga upplysningar skriver du låntagarens namn och personnummer, hur mycket ränta du har fått och hur stor skulden var den 31 december.",
+          "Den som lånar får inget avdrag för ränta som betalas från och med 2026. Avdrag ges bara för vissa lån från banker och andra godkända kreditgivare, så ett lån från en privatperson ger inget avdrag, inte ens om låntagaren har lämnat säkerhet.",
+        ],
+      },
+      {
+        h: "Om lånet inte betalas tillbaka",
+        p: [
+          "Börja med en skriftlig påminnelse. Skriv belopp, vad det gäller, ett sista datum att betala och att du tar ut dröjsmålsränta om pengarna inte kommer. Ett sms eller mejl fungerar. Men preskriptionen avbryts bara om låntagaren faktiskt har fått påminnelsen, och det är du som måste kunna visa det. Spara meddelandet och helst ett svar från låntagaren, eller skicka ett rekommenderat brev med mottagningsbevis.",
+          "Betalar låntagaren ändå inte kan du ansöka om betalningsföreläggande hos Kronofogden. Det fungerar lika bra mot en vän som mot ett företag. Avgiften är 300 kronor, och den kan du kräva tillbaka av låntagaren. I ansökan beskriver du lånet: belopp, när du lånade ut, vad som har betalats tillbaka, när lånet skulle vara betalt och vad som återstår.",
+          "Kronofogden skickar kravet till låntagaren. Säger hen inte emot beslutar Kronofogden att skulden ska betalas, och du kan begära att den drivs in. Säger låntagaren emot kan du begära att ärendet går vidare till tingsrätten. Gäller det högst 29 600 kronor (ett halvt prisbasbelopp 2026) blir det ett förenklat tvistemål, där den som förlorar bara behöver betala en liten del av motpartens kostnader. I tingsrätten är skuldebrevet ditt viktigaste bevis.",
+        ],
+      },
+      {
+        h: "Preskription: skulden gäller i tio år",
+        p: [
+          "En skuld mellan privatpersoner preskriberas efter tio år. Tiden räknas från när skulden uppstod, alltså normalt när du lånade ut pengarna, inte från förfallodagen. Den kortare tiden på tre år gäller bara när ett företag har sålt något till en konsument.",
+          "Preskriptionen avbryts om låntagaren betalar ränta eller amortering, lovar att betala eller på annat sätt erkänner skulden. Den avbryts också om låntagaren får ett skriftligt krav eller en påminnelse från dig, eller om du gör skulden gällande hos Kronofogden eller i domstol. Efter ett erkännande, krav eller en påminnelse börjar en ny tioårsperiod samma dag. Går du via Kronofogden eller domstol börjar den nya perioden när ärendet är avslutat, men bara om låntagaren har fått del av det.",
+          "Betalar låntagaren regelbundet avbryts preskriptionen vid varje betalning. Har det gått länge utan betalningar, skicka en skriftlig påminnelse innan tio år har gått och se till att du kan visa att låntagaren har fått den, till exempel genom ett svar från hen eller ett mottagningsbevis. När skulden väl är preskriberad kan du inte längre kräva betalning.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Måste ett skuldebrev bevittnas?",
+        a: "Nej. Det finns inga formkrav på skuldebrev. Vittnen kan ändå göra det svårare att senare påstå att underskriften inte är äkta.",
+      },
+      {
+        q: "Räcker det att låntagaren skriver under?",
+        a: "Ja. Låntagarens underskrift visar att hen har tagit på sig skulden. Underskriften kan vara på papper eller digital, till exempel med BankID via en signeringstjänst. Låt gärna båda skriva under, så syns det att ni är överens om villkoren.",
+      },
+      {
+        q: "Kan man skriva ett skuldebrev i efterhand?",
+        a: "Ja. Skriv när och hur pengarna betalades ut. När låntagaren skriver under erkänner hen samtidigt skulden, och då börjar preskriptionstiden om, förutsatt att skulden inte redan hunnit preskriberas.",
+      },
+      {
+        q: "Måste jag ta ut ränta när jag lånar ut till familjen?",
+        a: "Nej. Ni bestämmer själva. Skriv ut att lånet är räntefritt, så blir det inte oklart. Betalas lånet för sent gäller ändå räntelagens dröjsmålsränta, om ni inte har skrivit något annat.",
+      },
+      {
+        q: "Ska jag skriva skuldebrev när jag lånar ut till mitt barn?",
+        a: "Ja, om pengarna ska betalas tillbaka. En gåva från förälder till barn räknas som förskott på arv om inget annat sägs. Med ett skuldebrev är det tydligt att det är ett lån, och skulden finns kvar även om du skulle dö innan den är betald.",
+      },
+      {
+        q: "Hur länge gäller en skuld till en privatperson?",
+        a: "Tio år från att du lånade ut pengarna. Varje betalning, erkännande eller skriftlig påminnelse som låntagaren har fått gör att en ny tioårsperiod börjar.",
+      },
+      {
+        q: "Vad händer med lånet om låntagaren dör?",
+        a: "Skulden finns kvar och ska betalas av dödsboet innan arvet delas ut. Arvingarna ärver inte skulden, och räcker inte dödsboets tillgångar behöver de inte betala med egna pengar. Kontakta dödsbodelägarna eller den som gör bouppteckningen och visa skuldebrevet, så att skulden tas upp i bouppteckningen.",
+      },
+      {
+        q: "Gäller ett lån utan skuldebrev?",
+        a: "Ja, även ett muntligt lån gäller. Men blir ni oense är det du som lånat ut som måste visa att det var ett lån och inte en gåva. Ett skuldebrev gör det enkelt.",
+      },
+    ],
+  },
+  uppsagning: {
+    seoTitle: "Uppsägningsbrev – mall och uppsägningstid | Skrivklart",
+    seoDescription:
+      "Säg upp dig med ett kort, tydligt brev. Uppsägningstid enligt LAS, provanställning, arbetsgivarintyg och a-kassa. Se början gratis, hela brevet 59 kr.",
+    intro:
+      "Ett uppsägningsbrev är ett kort besked till din arbetsgivare om att du slutar. Det behöver inte vara långt, men det ska vara tydligt: vilken tjänst det gäller, när du säger upp dig och vilken dag du räknar med att sluta. Nedan går vi igenom uppsägningstiden enligt lagen, vad som gäller under provanställning och vad du ska be om innan du går.",
+    sections: [
+      {
+        h: "Måste man säga upp sig skriftligt?",
+        p: [
+          "Nej, inte enligt lagen. Lagen om anställningsskydd (LAS) kräver skrift bara när det är arbetsgivaren som säger upp. Säger du upp dig själv gäller uppsägningen även om du gör det muntligt, i ett mejl eller i ett sms. Kolla ändå att ditt anställningsavtal eller kollektivavtal inte kräver skriftlig uppsägning.",
+          "Skriv ändå. Uppsägningstiden räknas från dagen arbetsgivaren fick din uppsägning. Blir ni oense om datumet senare är det du som behöver visa när det skedde, och ett daterat mejl eller brev gör det enkelt.",
+          "Berätta gärna för din chef först. Skicka sedan brevet till chefen och HR samma dag, och be om en skriftlig bekräftelse på att de har fått det.",
+          "Tänk efter innan du skickar. En uppsägning är i regel bindande när arbetsgivaren har fått den, och vill du ångra dig behöver arbetsgivaren normalt gå med på det. Ett undantag: sa du upp dig i hastigt mod, till exempel under ett bråk, och tar tillbaka det direkt, kan uppsägningen sakna verkan om arbetsgivaren förstod eller borde ha förstått att du inte menade allvar. Ta i så fall tillbaka den skriftligt så fort du kan, helst samma dag, och kontakta facket.",
+        ],
+      },
+      {
+        h: "Hur lång är uppsägningstiden enligt LAS?",
+        p: [
+          "Säger du upp dig från en tillsvidareanställning är uppsägningstiden enligt LAS minst en månad, oavsett hur länge du har jobbat. De längre tiderna i lagen, upp till sex månader, gäller bara när arbetsgivaren säger upp dig. Har du företagsledande ställning, till exempel som vd, gäller i stället det som står i ditt avtal.",
+          "Har arbetsplatsen kollektivavtal kan uppsägningstiden vara en annan, ofta mellan en och tre månader. Ibland står en längre tid i anställningsavtalet. Läs båda, eller fråga facket eller HR, innan du skriver vilken dag du slutar.",
+          "Under uppsägningstiden jobbar du som vanligt och får lön. Vill du sluta tidigare behöver arbetsgivaren gå med på det, så få det gärna skriftligt. Går du innan uppsägningstiden är slut utan en sådan överenskommelse kan du bli skyldig att betala skadestånd. Enligt många kollektivavtal får arbetsgivaren också hålla inne lön för de dagar du inte arbetar.",
+          "Ett undantag: har arbetsgivaren allvarligt brutit mot sina skyldigheter mot dig, till exempel genom att inte betala ut lön trots påminnelser, får du lämna anställningen direkt. Räcker skälet inte kan du bli skadeståndsskyldig, så prata med facket eller en jurist innan du gör det.",
+        ],
+      },
+      {
+        h: "Säga upp sig under provanställning eller visstid",
+        p: [
+          "En provanställning får vara högst sex månader. Om inget annat har avtalats får du avbryta den innan prövotiden är slut, och LAS kräver då ingen uppsägningstid från dig.",
+          "Många kollektivavtal har ändå en uppsägningstid under provanställningen, ofta 14 dagar eller en månad. Kolla vad som gäller på din arbetsplats.",
+          "Vill du inte fortsätta när prövotiden är slut räcker det enligt LAS att du säger det senast sista dagen. Kollektivavtalet kan kräva besked tidigare, till exempel 14 dagar innan. Säger ingen av er något blir provanställningen automatiskt en tillsvidareanställning.",
+          "En tidsbegränsad anställning, till exempel ett vikariat, slutar av sig själv när perioden är slut. Den går i regel inte att säga upp i förtid, om inte anställningsavtalet eller kollektivavtalet säger att den får sägas upp. Många kollektivavtal tillåter det, till exempel med 14 dagars besked. Läs båda innan du skriver.",
+          "Är du timanställd och jobbar pass för pass behöver du i regel bara jobba de pass du redan har tackat ja till. Sedan kan du tacka nej till nya.",
+        ],
+      },
+      {
+        h: "Det här ska stå i uppsägningsbrevet",
+        p: [
+          "Skriv ditt namn, din tjänst och att du säger upp dig, och sätt dagens datum överst. Lämnar du brevet på papper, skriv under det.",
+          "Skriv vilken dag du räknar med är din sista anställningsdag. Är du osäker, skriv att du slutar enligt gällande uppsägningstid och be arbetsgivaren bekräfta datumet.",
+          "Be om en skriftlig bekräftelse på att uppsägningen har kommit fram, och om ett arbetsgivarintyg. Vill du också ha besked om slutlön och semesterersättning kan du lägga till en mening om det. Du behöver inte skriva varför du slutar.",
+          "Fyll i fälten ovan med arbetsgivare, tjänst och sista dag, och välj ton. Vill du nämna varför du slutar räcker en mening, men det är valfritt. Du ser början av brevet direkt, gratis, och hela brevet kostar 59 kr. Ditt namn och dina kontaktuppgifter fyller du i där brevet har hakparenteser. Skrivklart skriver brevet åt dig men ger inte juridisk rådgivning.",
+        ],
+      },
+      {
+        h: "Arbetsgivarintyg, slutlön och semesterersättning",
+        p: [
+          "Arbetsgivarintyget behövs om du söker ersättning från a-kassan. Där står bland annat hur länge du har jobbat och varför anställningen tog slut. Be om det redan i uppsägningsbrevet, även om du har ett nytt jobb på gång.",
+          "Arbetsgivaren ska lämna de uppgifter a-kassan behöver, och intyget ska vara gratis. Det skickas oftast digitalt via arbetsgivarintyg.nu, som är a-kassornas egen tjänst. Sedan oktober 2025 hämtar a-kassan inkomstuppgifterna från Skatteverket, men intyget behövs fortfarande.",
+          "Semester som du har tjänat in men inte tagit ut ska betalas ut som semesterersättning, senast en månad efter att anställningen har upphört.",
+          "Har du fått betald semester i förskott minskas din semesterersättning i regel med det beloppet när du själv säger upp dig. Det gäller inte om förskottet betalades ut mer än fem år innan du slutar, eller om du slutar på grund av sjukdom eller för att arbetsgivaren allvarligt har brustit i sina skyldigheter, till exempel inte betalat lön.",
+        ],
+      },
+      {
+        h: "Om du inte har ett nytt jobb",
+        p: [
+          "Säger du upp dig själv utan giltig anledning stängs du av från a-kassan i 45 ersättningsdagar, ungefär nio veckor, räknat från dagen du slutade. Dagar du jobbar under den tiden räknas in. Hade du högst 10 dagar kvar av anställningen blir avstängningen 20 ersättningsdagar. Regeln finns i den nya lagen om arbetslöshetsförsäkring som gäller sedan oktober 2025.",
+          "Har du inkomstförsäkring via facket gäller den oftast inte heller när du säger upp dig själv. Läs villkoren innan du skickar brevet.",
+          "Giltig anledning kan till exempel vara att du inte har fått ut din lön, eller att du av hälsoskäl inte kan fortsätta i ditt arbete eller i något annat arbete hos arbetsgivaren. Att du inte trivs räcker oftast inte.",
+          "Det är du som behöver visa skälet. Gäller det hälsan krävs ett läkarintyg som är utfärdat innan anställningen upphör, så skaffa det innan du säger upp dig. Spara också lönebesked och mejl.",
+          "Skriv in dig hos Arbetsförmedlingen redan första dagen du är arbetslös. A-kassan prövar din rätt till ersättning från den dagen. Det skyddar också din SGI, som styr hur mycket du får från Försäkringskassan om du blir sjuk, vabbar eller är föräldraledig.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Kan man säga upp sig via mejl eller sms?",
+        a: "Ja. LAS har inget formkrav när du själv säger upp dig, men kolla att ditt anställningsavtal eller kollektivavtal inte kräver skriftlig uppsägning. Mejl är bra, eftersom det syns vilken dag du skickade det. Be om en bekräftelse på att uppsägningen har kommit fram.",
+      },
+      {
+        q: "Hur lång uppsägningstid har jag om jag säger upp mig själv?",
+        a: "En månad enligt LAS, oavsett hur länge du har jobbat. Kollektivavtalet kan ange en annan tid, och ibland står en längre tid i anställningsavtalet. Kolla båda.",
+      },
+      {
+        q: "Måste jag skriva varför jag slutar?",
+        a: "Nej. Du behöver inte ange något skäl. Slutar du av ett skäl som a-kassan kan godta, till exempel utebliven lön, är det däremot bra att ha det dokumenterat.",
+      },
+      {
+        q: "Kan jag ångra min uppsägning?",
+        a: "I regel bara om arbetsgivaren går med på det. Har du sagt upp dig i hastigt mod, till exempel under ett bråk, och tar tillbaka det direkt kan uppsägningen sakna verkan om arbetsgivaren borde ha förstått att du inte menade allvar. Säg till skriftligt så fort du kan, helst samma dag.",
+      },
+      {
+        q: "Hur säger jag upp mig under en provanställning?",
+        a: "Om inget annat har avtalats kan du avbryta provanställningen utan uppsägningstid. Kollektivavtalet kan ha en kort uppsägningstid, ofta 14 dagar eller en månad. Skriv ett kort besked med datum, och tänk på att a-kassan kan stänga av dig även när du lämnar en provanställning.",
+      },
+      {
+        q: "Vad är skillnaden mellan arbetsgivarintyg och tjänstgöringsintyg?",
+        a: "Arbetsgivarintyget är till för a-kassan och visar hur länge du har jobbat och varför du slutade. Ett tjänstgöringsintyg visar när du jobbade och vad du gjorde. Ett arbetsbetyg innehåller också ett omdöme om hur du har skött jobbet. Båda är till för framtida arbetsgivare. Det finns ingen lagstadgad rätt till betyg, men kollektivavtal kan ge rätt till det, och det räknas som god sed att arbetsgivaren skriver ett om du ber om det.",
+      },
+      {
+        q: "När ska jag lämna in uppsägningen?",
+        a: "Räkna bakåt från dagen du vill sluta. Med en månads uppsägningstid behöver arbetsgivaren ha fått uppsägningen minst en månad innan. Får arbetsgivaren den den 15 oktober blir sista dagen i regel den 15 november, inte vid nästa månadsskifte. Kollektivavtalet kan ha andra regler. Har du ett nytt jobb, kolla startdatumet innan du säger upp dig.",
+      },
+      {
+        q: "Får arbetsgivaren lägga min semester på uppsägningstiden?",
+        a: "Inte utan att du går med på det. Semester som du inte hinner ta ut får du i stället betalt för som semesterersättning.",
+      },
+      {
+        q: "Kan jag säga upp mig när jag är sjukskriven eller föräldraledig?",
+        a: "Ja. Uppsägningstiden börjar som vanligt när arbetsgivaren har fått din uppsägning. Har du inget nytt jobb, skriv in dig hos Arbetsförmedlingen första dagen efter att anställningen har tagit slut, så att du behåller din SGI.",
+      },
+    ],
+  },
 };
 
 export function getDocArticle(slug: string): DocArticle | undefined {
